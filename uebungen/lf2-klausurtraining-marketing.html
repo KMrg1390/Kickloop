@@ -1,0 +1,520 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Marketing-Training</title>
+<meta name="description" content="Übungen mit Selbstkontrolle zu Werbung, Marketingmix, AIDA, Kaufmotiven und Verkaufsgespräch zur Vorbereitung auf die Klausur.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Hubballi&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: eine Spalte wie ein Übungsheft, oben Themen-Reiter, darunter die Runde mit Fragekarten */
+:root{
+  --paper:#F5F6F3; --card:#FFFFFF; --line:#D5D9D6; --ink:#1F2A33; --ink2:#51606B;
+  --tag:#F2C94C; --tag-ink:#2B2200; --teal:#1F6F78; --teal-ink:#FFFFFF; --teal-soft:#E1EFF0;
+  --ok:#2E7D4F; --ok-soft:#E4F2E9; --bad:#B3412F; --bad-soft:#F8E6E2;
+  --t1:#1F6F78; --t2:#B8611A; --t3:#6B4FA0; --t4:#1F2A33; --t5:#2E7D4F; --t6:#A23E5A;
+  --p1:#2F6DB5; --p2:#C9701E; --p3:#2E8A57; --p4:#7A4FB0;
+  --ad-bg:#14181B; --ad-ink:#F5F6F3; --ad-hi:#D7F20A; --ad-mark:#F2C94C; --ad-mark-ink:#2B2200;
+  --display:"Barlow Condensed","Arial Narrow",Arial,sans-serif; --body:"Hubballi","Segoe UI",Arial,sans-serif; --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  color-scheme:dark; --paper:#161C21; --card:#1F272D; --line:#34414A; --ink:#EEF1EF; --ink2:#AAB6BD;
+  --tag:#E3B93C; --tag-ink:#2B2200; --teal:#5DB3BC; --teal-ink:#0E1A1C; --teal-soft:#1D3337;
+  --ok:#6CC592; --ok-soft:#1C3325; --bad:#EE8B78; --bad-soft:#3A2420;
+  --t1:#5DB3BC; --t2:#E59A55; --t3:#A88BDB; --t4:#EEF1EF; --t5:#6CC592; --t6:#E88AA4;
+  --p1:#79A9E3; --p2:#E59A55; --p3:#6CC592; --p4:#B596E6;
+  --ad-bg:#0C0F11; --ad-ink:#F5F6F3; --ad-hi:#D7F20A;
+}}
+:root[data-theme="dark"]{
+  color-scheme:dark; --paper:#161C21; --card:#1F272D; --line:#34414A; --ink:#EEF1EF; --ink2:#AAB6BD;
+  --tag:#E3B93C; --tag-ink:#2B2200; --teal:#5DB3BC; --teal-ink:#0E1A1C; --teal-soft:#1D3337;
+  --ok:#6CC592; --ok-soft:#1C3325; --bad:#EE8B78; --bad-soft:#3A2420;
+  --t1:#5DB3BC; --t2:#E59A55; --t3:#A88BDB; --t4:#EEF1EF; --t5:#6CC592; --t6:#E88AA4;
+  --p1:#79A9E3; --p2:#E59A55; --p3:#6CC592; --p4:#B596E6;
+  --ad-bg:#0C0F11; --ad-ink:#F5F6F3; --ad-hi:#D7F20A;
+}
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:18px;line-height:1.45;margin:0;padding-inline:16px;padding-block:0 48px}
+.wrap{max-width:860px;margin-inline:auto;display:grid;gap:20px}
+h1,h2,h3{font-family:var(--display);font-weight:700;letter-spacing:.01em;text-wrap:balance;margin:0}
+h1{font-size:clamp(2.1rem,6vw,3rem);line-height:1}
+h2{font-size:1.9rem;line-height:1.05}
+header{padding-top:28px;display:grid;gap:8px}
+.lead{margin:0;color:var(--ink2);max-width:62ch}
+.tag{display:inline-flex;align-items:center;gap:6px;background:var(--tag);color:var(--tag-ink);font-family:var(--display);font-weight:700;font-size:.95rem;letter-spacing:.06em;text-transform:uppercase;padding:3px 10px 3px 14px;border-radius:3px 12px 12px 3px;justify-self:start}
+.tag::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--paper)}
+
+/* Navigation */
+nav{display:grid;gap:12px}
+.group{display:grid;gap:6px}
+.glabel{font-family:var(--display);font-weight:700;font-size:.92rem;letter-spacing:.08em;text-transform:uppercase;color:var(--gc)}
+.rounds{display:flex;flex-wrap:wrap;gap:8px}
+.rbtn{font-family:var(--display);font-weight:600;font-size:1.05rem;letter-spacing:.02em;border:1.5px solid var(--line);border-left:5px solid var(--gc);background:var(--card);color:var(--ink);border-radius:6px;padding:6px 12px;cursor:pointer;display:flex;gap:8px;align-items:center}
+.rbtn[aria-pressed="true"]{border-color:var(--ink);border-left-color:var(--gc);background:var(--ink);color:var(--paper)}
+.rbtn .sc{font-family:var(--mono);font-size:.78rem;opacity:.85}
+.rbtn .sc.full{color:var(--ok)}
+.rbtn[aria-pressed="true"] .sc.full{color:inherit}
+
+/* Runde */
+.round{display:grid;gap:14px}
+.rhead{display:grid;gap:6px;border-top:4px solid var(--gc);padding-top:12px}
+.box{background:var(--teal-soft);border-radius:8px;padding:12px 16px;font-size:1rem;display:grid;gap:6px}
+.box b{font-family:var(--display);letter-spacing:.02em;font-size:1.05rem}
+details.help{border:1px dashed var(--line);border-radius:8px;padding:8px 14px;background:var(--card)}
+details.help summary{cursor:pointer;font-family:var(--display);font-weight:600;font-size:1.05rem;letter-spacing:.02em}
+details.help ul{margin:8px 0 4px;padding-left:20px}
+.q{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:14px 16px;display:grid;gap:10px;min-width:0}
+.q.ok{border-color:var(--ok);background:var(--ok-soft)}
+.q.no{border-color:var(--bad)}
+.qn{font-family:var(--display);font-weight:600;color:var(--ink2);font-size:.9rem;letter-spacing:.08em;text-transform:uppercase}
+.qt{font-size:1.08rem}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opt{display:flex;gap:8px;align-items:center;border:1px solid var(--line);border-radius:6px;padding:6px 12px;background:var(--card);cursor:pointer}
+.opt input{accent-color:var(--teal);margin:0}
+select,input[type=text],textarea{font:inherit;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:6px;padding:6px 10px;max-width:100%}
+textarea{width:100%;min-height:96px;resize:vertical}
+.row{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center}
+.row label{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.lab{font-family:var(--display);font-weight:600;letter-spacing:.03em;color:var(--ink2)}
+.fb{font-size:.98rem}
+.fb.good{color:var(--ok)} .fb.bad{color:var(--bad)}
+.fb b{font-family:var(--display);letter-spacing:.02em}
+.err{color:var(--bad);font-size:.95rem}
+.btn{font-family:var(--display);font-weight:700;font-size:1.1rem;letter-spacing:.03em;border:0;border-radius:6px;padding:8px 18px;cursor:pointer;background:var(--teal);color:var(--teal-ink)}
+.btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
+.btn.small{font-size:1rem;padding:6px 14px}
+.btn:focus-visible,.rbtn:focus-visible,.opt:focus-within,select:focus-visible,input:focus-visible,textarea:focus-visible,.card:focus-visible,summary:focus-visible{outline:3px solid var(--tag);outline-offset:2px}
+.bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.meter{flex:1;min-width:140px;height:10px;background:var(--line);border-radius:5px;overflow:hidden}
+.meter i{display:block;height:100%;background:var(--ok);transition:width .3s}
+.sol{border-left:4px solid var(--ok);background:var(--ok-soft);padding:10px 14px;border-radius:0 6px 6px 0;display:grid;gap:8px}
+.sol p{margin:0}
+.chk{display:grid;gap:4px}
+.chk label{display:flex;gap:8px;align-items:flex-start}
+.chk input{margin-top:5px;accent-color:var(--ok)}
+.pts{font-family:var(--mono);font-size:.85rem;color:var(--ink2)}
+
+/* P-Farben in Erklärungen */
+.p1{color:var(--p1);font-weight:700}.p2{color:var(--p2);font-weight:700}.p3{color:var(--p3);font-weight:700}.p4{color:var(--p4);font-weight:700}
+
+/* Anzeige */
+.ad{background:var(--ad-bg);color:var(--ad-ink);border-radius:10px;padding:22px 20px;display:grid;gap:14px;max-width:520px;width:100%;justify-self:center;position:relative}
+.ad .mk{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--ad-mark);color:var(--ad-mark-ink);font-family:var(--mono);font-size:.9rem;flex:none}
+.ad .part{display:flex;gap:12px;align-items:flex-start}
+.ad .big{font-family:var(--display);font-weight:700;font-size:clamp(2.6rem,10vw,3.8rem);line-height:.9;color:var(--ad-hi);letter-spacing:.01em}
+.ad svg{width:84px;height:auto;flex:none}
+.ad .facts{display:flex;flex-wrap:wrap;gap:8px}
+.ad .facts span{border:1.5px solid var(--ad-hi);border-radius:20px;padding:2px 12px;font-family:var(--display);font-weight:600;font-size:1.1rem;letter-spacing:.02em}
+.ad .feel{font-style:italic;font-size:1.15rem}
+.ad .addr{font-family:var(--display);font-weight:600;font-size:1.1rem;letter-spacing:.02em;border-top:1px solid #3A4248;padding-top:10px}
+.ad .brand{font-family:var(--display);font-weight:700;font-size:1.6rem;letter-spacing:.04em}
+
+/* Lernkarten */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+.card{min-height:132px;border:1px solid var(--line);border-top:4px solid var(--gc);border-radius:8px;background:var(--card);color:var(--ink);padding:14px;cursor:pointer;text-align:left;font:inherit;display:grid;align-content:start;gap:6px}
+.card .ct{font-family:var(--display);font-weight:700;font-size:1.35rem;letter-spacing:.01em}
+.card .cs{font-family:var(--display);font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink2)}
+.card[aria-pressed="true"]{background:var(--teal-soft)}
+.card .back{font-size:1rem}
+footer{color:var(--ink2);font-size:.85rem}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap">
+  <header>
+    <span class="tag">Klausurtraining · Lernfeld 2</span>
+    <h1>Marketing-Training</h1>
+    <p class="lead">Übe für die Klausur: Werbemittel und Werbeträger, Marketingmix, AIDA, Kaufmotive und Verkaufsgespräch. Wähle eine Runde und beantworte alle Fragen. Klicke dann auf <b>Prüfen</b>. Du siehst sofort, was richtig ist, und eine kurze Erklärung. Bei jedem Neustart kommen die Fragen in einer neuen Reihenfolge.</p>
+  </header>
+  <nav id="nav" aria-label="Runden"></nav>
+  <main class="round" id="round"></main>
+  <footer>Alle Geschäfte, Namen und Preise in den Aufgaben sind Beispiele für den Unterricht. Dein Stand bleibt nur in diesem Browser gespeichert.</footer>
+</div>
+
+<script>
+const TOPICS = {
+  1:{name:"Werbemittel und Werbeträger", c:"var(--t1)"},
+  2:{name:"Marketingmix", c:"var(--t2)"},
+  3:{name:"AIDA", c:"var(--t3)"},
+  5:{name:"Kaufmotive", c:"var(--t5)"},
+  6:{name:"Verkaufsgespräch", c:"var(--t6)"},
+  4:{name:"Alles zusammen", c:"var(--t4)"}
+};
+const MT = ["Werbemittel","Werbeträger"];
+const P4 = ["Produktpolitik (Product)","Preispolitik (Price)","Distributionspolitik (Place)","Kommunikationspolitik (Promotion)"];
+const AIDA = ["Attention (Aufmerksamkeit)","Interest (Interesse)","Desire (Wunsch)","Action (Handlung)"];
+const REIZ = ["körperlicher Reiz","Gefühls-Reiz","Überraschungs-Reiz"];
+const GRUND = ["sachlicher Grund","Gefühls-Grund"];
+const KM = ["Gewinn","Ansehen","Geselligkeit","Neugier","Gesundheit","gutes Gewissen","Sicherheit","Bequemlichkeit"];
+const PH = ["Begrüßung","Kundenwunsch ermitteln","Ware präsentieren","Preis nennen","Einwand behandeln","Kaufentscheidung","Ergänzungsangebot und Service","Verabschiedung"];
+
+const ROUNDS = [
+ { id:"w1", topic:1, t:"Mittel oder Träger?", kind:"sel", opts:MT, shuffle:true,
+   intro:"Ist das ein Werbemittel oder ein Werbeträger? Wähle aus.",
+   help:["<b>Werbemittel</b> = die Werbung selbst. Frage: <i>Was</i> sehe oder höre ich?","<b>Werbeträger</b> = das Medium, das die Werbung zu den Menschen bringt. Frage: <i>Wo</i> sehe oder höre ich die Werbung?","Trick: Kann man etwas <i>auf</i> oder <i>in</i> diesem Ding zeigen? Dann ist es meistens ein Werbeträger."],
+   qs:[
+    {q:"der Katalog", a:0, why:"Der Katalog zeigt Bilder, Texte und Preise. Er ist die Werbung selbst."},
+    {q:"das Taxi", a:1, why:"Auf dem Taxi kann ein Werbeschild sein. Das Taxi trägt die Werbung durch die Stadt."},
+    {q:"der Werbebrief", a:0, why:"Der Brief enthält die Werbebotschaft."},
+    {q:"der Einkaufswagen", a:1, why:"Am Einkaufswagen hängt ein Werbeschild. Der Wagen trägt die Werbung."},
+    {q:"der Werbespot in einem Podcast", a:0, why:"Den Spot hört man. Er ist die Werbung selbst."},
+    {q:"die Bushaltestelle", a:1, why:"An der Bushaltestelle hängt ein Plakat. Sie trägt die Werbung."},
+    {q:"das Schaufenster", a:1, why:"Im Schaufenster zeigt ein Laden seine Werbung."},
+    {q:"die Schaufensterdekoration", a:0, why:"Die Dekoration ist gestaltet und zeigt die Waren. Sie ist die Werbung selbst."},
+    {q:"die Musik-App Spotify", a:1, why:"In der App laufen Werbespots. Die App bringt sie zu den Menschen."},
+    {q:"das Gutscheinheft", a:0, why:"Das Heft mit Gutscheinen ist die gestaltete Werbung."},
+    {q:"die Bande im Fußballstadion", a:1, why:"Auf der Bande läuft Werbung. Die Bande trägt sie."},
+    {q:"der Kinospot", a:0, why:"Der Spot ist ein Werbefilm. Er läuft auf der Kinoleinwand (Werbeträger)."}]},
+ { id:"w2", topic:1, t:"Werbung im Alltag", kind:"pair", shuffle:true,
+   intro:"Lies die Situation. Was ist das Werbemittel? Was ist der Werbeträger? Wähle zweimal aus. Eine Antwort passt gar nicht.",
+   help:["Zuerst fragen: <i>Was</i> sehe oder höre ich? → Werbemittel.","Dann fragen: <i>Wo</i> sehe oder höre ich es? → Werbeträger.","Das Produkt selbst (z. B. die Pizza) ist weder Werbemittel noch Werbeträger."],
+   qs:[
+    {q:"Zwischen zwei Songs auf Spotify hört Lina 30 Sekunden Werbung für ein Konzert.", o:["der Audiospot","die Musik-App Spotify","das Konzert"], m:0, tr:1, why:"Den Audiospot hört Lina (Werbemittel). Spotify bringt ihn zu ihr (Werbeträger)."},
+    {q:"Auf den Bildschirmen in der U-Bahn läuft ein kurzer Werbefilm für einen Lieferdienst.", o:["der Lieferdienst","der Bildschirm in der U-Bahn","der Werbefilm"], m:2, tr:1, why:"Der Werbefilm ist die Werbung. Der Bildschirm in der U-Bahn zeigt ihn."},
+    {q:"Ein Taxi fährt durch Kreuzberg. Auf dem Dach steht ein Schild mit Werbung für eine Pizzeria.", o:["das Taxi","das Werbeschild","die Pizza"], m:1, tr:0, why:"Das Werbeschild ist die Werbung. Das Taxi trägt es."},
+    {q:"Auf der Rückseite eines Kassenbons steht ein Gutschein von einer Autowaschanlage.", o:["der Gutschein","die Autowaschanlage","der Kassenbon"], m:0, tr:2, why:"Der Gutschein ist die Werbung. Der Kassenbon trägt sie."},
+    {q:"Ein Gamer streamt auf Twitch. Im Bild ist ein Banner von einem Hersteller für Gaming-Stühle.", o:["die Streaming-Plattform Twitch","der Gaming-Stuhl","das Werbebanner"], m:2, tr:0, why:"Das Banner ist die Werbung. Twitch bringt den Stream mit dem Banner zu den Zuschauern."},
+    {q:"In den Briefkästen in Wedding liegt ein Flyer von einem neuen Döner-Imbiss.", o:["der Flyer","der Döner","der Briefkasten"], m:0, tr:2, why:"Der Flyer ist die Werbung. Der Briefkasten bringt ihn zu den Menschen."}]},
+ { id:"w3", topic:1, t:"Zielgruppe und Streuverlust", kind:"mc", shuffle:true,
+   intro:"Welche Antwort passt am besten? Denke an Zielgruppe, Reichweite, Streuverlust und Kosten.",
+   help:["<b>Zielgruppe:</b> die Menschen, die das Produkt kaufen sollen.","<b>Reichweite:</b> Wie viele Menschen sehen oder hören die Werbung?","<b>Streuverlust:</b> Die Werbung erreicht auch Menschen, die nicht zur Zielgruppe gehören. Dafür bezahlt das Unternehmen umsonst."],
+   qs:[
+    {q:"Ein Pflegedienst in Spandau sucht neue Kundinnen und Kunden ab 75 Jahren. Welcher Werbeträger passt am besten?", o:["die Lokalzeitung in Spandau","TikTok","eine Plakatwand am Alexanderplatz","die Streaming-Plattform Twitch"], a:0, why:"Ältere Menschen lesen häufiger Zeitung. Die Lokalzeitung erreicht genau die Menschen in Spandau."},
+    {q:"Eine Nachhilfeschule in Marzahn will Jugendliche aus der 9. und 10. Klasse erreichen. Was passt am besten?", o:["bezahlte Instagram-Werbung für 14 bis 17 Jahre in Marzahn","eine Anzeige in einer Zeitschrift für Seniorinnen und Senioren","ein Fernsehspot in ganz Deutschland","ein Plakat am Flughafen BER"], a:0, why:"Die Werbung erreicht nur Jugendliche in Marzahn. So gibt es wenig Streuverlust."},
+    {q:"Was bedeutet Streuverlust?", o:["Die Werbung erreicht Menschen, die nicht zur Zielgruppe gehören.","Die Werbung kostet mehr als geplant.","Das Plakat wird vom Wind weggeweht.","Die Werbung hat zu wenige Farben."], a:0, why:"Das Unternehmen bezahlt auch für Menschen, die das Produkt nie kaufen werden."},
+    {q:"Ein Laden für Babykleidung wirbt. Wo ist der Streuverlust am größten?", o:["Fernsehspot am Abend für alle Zuschauer","Anzeige in einer Zeitschrift für Eltern","Flyer im Wartezimmer einer Kinderarztpraxis","Instagram-Werbung nur für werdende Eltern"], a:0, why:"Den Fernsehspot sehen sehr viele Menschen ohne Baby. Sie gehören nicht zur Zielgruppe."},
+    {q:"Plakat A sehen jeden Tag 8.000 Menschen. Plakat B sehen jeden Tag 2.000 Menschen. Welche Aussage stimmt?", o:["Plakat A hat die größere Reichweite.","Plakat B hat die größere Reichweite.","Plakat A hat sicher weniger Streuverlust.","Beide Plakate haben die gleiche Reichweite."], a:0, why:"Reichweite = Wie viele Menschen sehen die Werbung? Mehr Menschen heißt aber nicht automatisch: weniger Streuverlust."},
+    {q:"Eine Autowerkstatt in Lichtenberg hat nur 300 € für Werbung. Sie will Menschen aus der Nachbarschaft erreichen. Was ist die beste Wahl?", o:["Flyer in Briefkästen rund um die Werkstatt (250 €)","ein Fernsehspot (20.000 €)","Plakate in ganz Berlin (3.000 €)","eine Anzeige in einer Zeitschrift für ganz Deutschland (5.000 €)"], a:0, why:"Nur die Flyer passen ins Budget. Sie erreichen genau die Nachbarschaft."}]},
+
+ { id:"m1", topic:2, t:"Welches P?", kind:"sel", opts:P4, shuffle:true,
+   intro:"Zu welchem Instrument des Marketingmix gehört die Maßnahme? Wähle aus.",
+   help:["<span class='p1'>Product</span>: Was bieten wir an? (Sortiment, Qualität, Marke, Verpackung, Service, Garantie)","<span class='p2'>Price</span>: Was kostet es? (Preis, Rabatt, Skonto, Sonderangebot, Zahlung)","<span class='p3'>Place</span>: Wie kommt das Produkt zur Kundschaft? (Laden, Online-Shop, Lieferung)","<span class='p4'>Promotion</span>: Wie erfahren die Menschen davon? (Werbung, Gewinnspiel, Gratisprobe, Sponsoring, Öffentlichkeitsarbeit)"],
+   qs:[
+    {q:"Ein Handyhersteller gibt jetzt 3 Jahre Garantie.", a:0, why:"Garantie und Service gehören zum Produkt."},
+    {q:"Ein Fitnessstudio senkt den Beitrag für Auszubildende auf 24,90 € im Monat.", a:1, why:"Es geht um den Preis."},
+    {q:"Eine Drogeriekette eröffnet eine neue Filiale im Hauptbahnhof.", a:2, why:"Ein neuer Verkaufsort: So kommt die Ware zur Kundschaft."},
+    {q:"Eine Eisdiele verteilt am Samstag kostenlose Probierkugeln.", a:3, why:"Eine Gratisprobe ist eine Verkaufsaktion. Sie macht das Produkt bekannt."},
+    {q:"Ein Elektromarkt bietet Ratenzahlung an: 12 Monate ohne Zinsen.", a:1, why:"Wie die Kundschaft bezahlt, gehört zur Preispolitik."},
+    {q:"Ein Pizza-Lieferdienst liefert jetzt auch nach Pankow.", a:2, why:"Lieferung und Liefergebiet gehören zur Distribution."},
+    {q:"Eine Brauerei bezahlt die Bühne beim Stadtfest. Ihr Logo hängt über der Bühne.", a:3, why:"Das ist Sponsoring. Es gehört zur Kommunikationspolitik."},
+    {q:"Ein Shampoo gibt es jetzt auch in einer Nachfüllpackung.", a:0, why:"Die Verpackung gehört zum Produkt."},
+    {q:"Ein Online-Shop gibt 3 % Skonto bei Zahlung innerhalb von 10 Tagen.", a:1, why:"Skonto ist ein Preisnachlass. Das ist Preispolitik."},
+    {q:"Ein Spielzeughersteller verkauft seine Produkte jetzt auch über Amazon.", a:2, why:"Ein neuer Verkaufsweg: Distributionspolitik."},
+    {q:"In der Zeitung steht ein Bericht: Ein Autohaus spendet 5.000 € an eine Schule.", a:3, why:"Das ist Öffentlichkeitsarbeit. Sie gehört zur Kommunikationspolitik."},
+    {q:"Ein Hersteller bringt neue Kopfhörer mit längerem Akku auf den Markt.", a:0, why:"Ein neues Produkt mit besserer Qualität: Produktpolitik."}]},
+ { id:"m2", topic:2, t:"Den Mix verstehen", kind:"mc", shuffle:true,
+   intro:"Welche Antwort ist richtig? Hier geht es um Fachbegriffe und darum, ob der Mix zusammenpasst.",
+   help:["Die vier P heißen auf Deutsch: Produktpolitik, Preispolitik, Distributionspolitik, Kommunikationspolitik.","Die vier Instrumente müssen zusammenpassen. Ändert ein Unternehmen eins, muss es die anderen drei prüfen."],
+   qs:[
+    {q:"Was ist der Marketingmix?", o:["Ein Unternehmen plant alle vier Marketinginstrumente zusammen.","Ein Unternehmen mischt verschiedene Produkte in einer Packung.","Ein anderes Wort für Werbung.","Die Preisliste eines Unternehmens."], a:0, why:"Product, Price, Place und Promotion zusammen geplant = Marketingmix."},
+    {q:"Welcher deutsche Fachbegriff gehört zu „Promotion“?", o:["Kommunikationspolitik","Produktpolitik","Distributionspolitik","Preispolitik"], a:0, why:"Promotion = Kommunikationspolitik: Wie erfahren die Menschen davon?"},
+    {q:"Was bedeutet das Wort „Distribution“?", o:["Verteilung","Verpackung","Werbung","Rabatt"], a:0, why:"Distributionspolitik: Wie wird das Produkt verteilt, also wie kommt es zur Kundschaft?"},
+    {q:"Zu welchem P gehört die Leitfrage „Was bieten wir an?“", o:["Product","Price","Place","Promotion"], a:0, why:"Product fragt: Was bieten wir an?"},
+    {q:"Eine Luxusuhr für 4.000 € wird in einem 1-Euro-Laden verkauft. Welches Instrument passt nicht zum Rest?", o:["Place: der Verkaufsort","Price: der Preis","Product: die Uhr","Nichts, alles passt."], a:0, why:"Der 1-Euro-Laden passt nicht zu einem teuren Luxusprodukt. Kundinnen würden der Uhr nicht vertrauen."},
+    {q:"Ein Bio-Laden verkauft gesunde Lebensmittel. In seiner Werbung zeigt er Burger und Pommes. Was passt nicht zusammen?", o:["Promotion und Product","Price und Place","Place und Product","Nichts, alles passt."], a:0, why:"Die Werbung (Promotion) passt nicht zum Angebot (Product). Das wirkt nicht glaubwürdig."},
+    {q:"Ein Unternehmen senkt den Preis für sein Produkt stark. Was sollte es danach tun?", o:["Die anderen drei Instrumente prüfen.","Nichts, der Preis ist allein wichtig.","Sofort die Werbung beenden.","Den Laden schließen."], a:0, why:"Ändert man ein Instrument, muss man die anderen drei prüfen. Passt z. B. die Werbung noch?"},
+    {q:"Welche Maßnahme gehört NICHT zur Kommunikationspolitik?", o:["ein Rabatt von 20 %","ein Gewinnspiel","ein Sponsoring für einen Sportverein","ein Plakat"], a:0, why:"Ein Rabatt gehört zur Preispolitik."}]},
+
+ { id:"a1", topic:3, t:"Welche Stufe?", kind:"sel", opts:AIDA, shuffle:true,
+   intro:"Zu welcher Stufe der AIDA-Formel gehört das Beispiel? Wähle aus.",
+   help:["<b>Attention:</b> Die Werbung fällt auf (Farben, Größe, Ton, Überraschung).","<b>Interest:</b> Die Person will mehr wissen (Geschichte, Frage, Erklärung).","<b>Desire:</b> Die Person will das Produkt haben (Gründe: Preis, Qualität, Gefühl, Image).","<b>Action:</b> Die Person soll etwas tun (kaufen, bestellen, vorbeikommen; Logo, Adresse, QR-Code)."],
+   qs:[
+    {q:"Ein Plakat zeigt ein riesiges rotes Wort: „STOPP!“", a:0, why:"Große Buchstaben und eine kräftige Farbe fallen auf."},
+    {q:"Ein Spot beginnt mit drei Sekunden Stille und einem schwarzen Bild.", a:0, why:"Das erwartet niemand. Man schaut hin."},
+    {q:"Ein Video fragt: „Weißt du, wie viel Zucker in deinem Getränk ist?“", a:1, why:"Eine Frage macht neugierig. Man will die Antwort wissen."},
+    {q:"Ein Video zeigt Schritt für Schritt, wie ein Saugroboter eine Wohnung putzt.", a:1, why:"Die Werbung zeigt und erklärt das Produkt."},
+    {q:"„Testsieger: Note 1,4 bei der Stiftung Warentest“", a:2, why:"Gute Qualität ist ein sachlicher Grund, das Produkt zu wollen."},
+    {q:"„Mit diesen Kopfhörern bist du der Star auf jeder Party.“", a:2, why:"Ein Gefühls-Grund: Das Produkt bekommt ein Image."},
+    {q:"„Bestell bis Sonntag auf www.kiezsocken.de!“", a:3, why:"Die Person soll jetzt handeln. Es gibt eine Internetseite und Zeitdruck."},
+    {q:"Am Ende des Spots erscheinen das Logo und ein QR-Code mit „Scan mich!“.", a:3, why:"Logo und QR-Code zeigen, was man tun soll."},
+    {q:"Ein Spot erzählt: Ein Azubi verschläft am ersten Arbeitstag. Was passiert jetzt?", a:1, why:"Eine kleine Geschichte. Man will wissen, wie sie weitergeht."},
+    {q:"„Kostenlose Rücksendung innerhalb von 100 Tagen“", a:2, why:"Ein sachlicher Grund: Man hat kein Risiko."},
+    {q:"Ein Mann im Anzug springt in ein Becken voller bunter Bälle.", a:0, why:"Ein Überraschungs-Reiz. Das sieht verrückt aus und fällt auf."},
+    {q:"„Filiale Karl-Marx-Straße 12 · heute bis 22 Uhr geöffnet“", a:3, why:"Adresse und Öffnungszeit: Die Person weiß, wohin sie gehen soll."}]},
+ { id:"a2", topic:3, t:"Reize und Gründe", kind:"sel", shuffle:true,
+   intro:"Welcher Reiz ist das (Attention)? Welcher Grund ist das (Desire)? Wähle aus.",
+   help:["<b>Körperlicher Reiz:</b> spricht Augen und Ohren an (grell, groß, laut, blinkend).","<b>Gefühls-Reiz:</b> löst ein Gefühl aus (Tiere, Kinder, Liebe, Traurigkeit).","<b>Überraschungs-Reiz:</b> etwas, das man nicht erwartet (lustig, verrückt, schockierend).","<b>Sachlicher Grund:</b> spricht den Verstand an (Preis, Qualität, Zahlen).","<b>Gefühls-Grund:</b> spricht das Herz an (cool, beliebt, erfolgreich sein)."],
+   qs:[
+    {q:"Ein Licht blinkt schnell in Pink.", o:REIZ, a:0, why:"Augen reagieren auf grelles, blinkendes Licht."},
+    {q:"Ein Opa tanzt Breakdance auf dem Marktplatz.", o:REIZ, a:2, why:"Das erwartet niemand."},
+    {q:"Eine Mutter umarmt ihr Kind am Flughafen.", o:REIZ, a:1, why:"Die Szene löst ein warmes Gefühl aus."},
+    {q:"Riesige Buchstaben gehen über eine ganze Hauswand.", o:REIZ, a:0, why:"Größe spricht die Augen an."},
+    {q:"Ein Pinguin steht mitten in der Wüste.", o:REIZ, a:2, why:"Ein Pinguin in der Wüste ist unerwartet."},
+    {q:"Ein trauriger Hund wartet im Regen vor der Tür.", o:REIZ, a:1, why:"Man hat Mitleid. Das ist ein Gefühl."},
+    {q:"„Der Akku hält 40 Stunden.“", o:GRUND, a:0, why:"Eine Zahl und eine Information: Das spricht den Verstand an."},
+    {q:"„Mit diesem Parfum fühlst du dich unwiderstehlich.“", o:GRUND, a:1, why:"Es geht um ein Gefühl, nicht um Fakten."},
+    {q:"„Heute 30 % günstiger.“", o:GRUND, a:0, why:"Ein günstiger Preis ist ein sachlicher Grund."},
+    {q:"„Wer diese Jacke trägt, gehört dazu.“", o:GRUND, a:1, why:"Das Produkt bekommt ein Image: dazugehören, beliebt sein."}]},
+ { id:"a3", topic:3, t:"Eine Anzeige untersuchen", kind:"sel", opts:AIDA, shuffle:false,
+   intro:"Sieh dir die Anzeige von FixIt Kiez an. Zu welcher AIDA-Stufe gehört jedes nummerierte Feld? Beantworte danach die zwei Fragen.",
+   box:"AD",
+   help:["Lies die Anzeige von oben nach unten. Die meisten Anzeigen folgen der Reihenfolge A – I – D – A.","Desire kann sachlich (Zahlen, Preis, Garantie) oder gefühlsbetont sein."],
+   qs:[
+    {q:"Feld 1: das kaputte Display und das riesige Wort „KRACKS.“", a:0, why:"Großes Bild, große neongelbe Schrift: Das fällt zuerst auf."},
+    {q:"Feld 2: „Handy runtergefallen? So läuft es bei uns: abgeben, Kaffee trinken, abholen.“", a:1, why:"Eine Frage und eine Erklärung, wie die Reparatur läuft. Das macht neugierig."},
+    {q:"Feld 3: „In 60 Minuten fertig · ab 49 € · 6 Monate Garantie“", a:2, why:"Zeit, Preis und Garantie sind Gründe, die Reparatur zu wollen."},
+    {q:"Feld 4: „Endlich wieder ohne Risse durch den Kiez.“", a:2, why:"Ein Gefühls-Grund: sich wieder gut fühlen mit dem Handy."},
+    {q:"Feld 5: Name, Adresse, Öffnungszeiten und „Ohne Termin vorbeikommen!“", a:3, why:"Hier steht, was man tun soll und wohin man gehen soll."},
+    {q:"Welche Art von Gründen nennt Feld 3?", o:["sachliche Gründe","Gefühls-Gründe","gar keine Gründe"], a:0, why:"Zahlen zu Zeit, Preis und Garantie sprechen den Verstand an."},
+    {q:"Feld 5 wird aus der Anzeige gelöscht. Was ist dann das Problem?", o:["Niemand weiß, wo und wie man die Reparatur bekommt.","Niemand bemerkt die Anzeige.","Niemand versteht, was das Produkt ist.","Die Anzeige wird zu teuer."], a:0, why:"Ohne Action fehlt der letzte Schritt: Name, Adresse und Aufforderung."}]},
+
+ { id:"v1", topic:5, t:"Welches Kaufmotiv?", kind:"sel", opts:KM, shuffle:true,
+   intro:"Warum kauft die Person? Wähle das Kaufmotiv.",
+   help:["<b>Gewinn:</b> Geld sparen, Schnäppchen.","<b>Ansehen:</b> etwas Besonderes sein, bewundert werden.","<b>Geselligkeit:</b> etwas mit anderen erleben.","<b>Neugier:</b> Neues entdecken und ausprobieren.","<b>Gesundheit:</b> gesund und fit bleiben.","<b>Gutes Gewissen:</b> gut für Umwelt und Menschen.","<b>Sicherheit:</b> kein Risiko, Garantie, Original.","<b>Bequemlichkeit:</b> einfach, schnell, wenig Mühe."],
+   qs:[
+    {q:"„Mein Zahnarzt hat mir diese Zahnbürste empfohlen. Sie putzt gründlicher.“", a:4, why:"Es geht um gesunde Zähne."},
+    {q:"„Im Ausverkauf habe ich die Jacke für die Hälfte bekommen.“", a:0, why:"Geld gespart: Gewinn."},
+    {q:"„An dieser Uhr sehen alle, dass ich es geschafft habe.“", a:1, why:"Die Person will bewundert werden."},
+    {q:"„Wir buchen einen Escape-Room für die ganze Klasse.“", a:2, why:"Gemeinsam etwas erleben."},
+    {q:"„Limo mit Gurkengeschmack? Das muss ich probieren!“", a:3, why:"Etwas Neues ausprobieren."},
+    {q:"„Das T-Shirt ist aus Bio-Baumwolle, und die Näherinnen bekommen faire Löhne.“", a:5, why:"Gut für Umwelt und Menschen."},
+    {q:"„Das Fahrradschloss hat die Testnote ‚sehr gut‘. Diebe haben keine Chance.“", a:6, why:"Kein Risiko: Das Rad ist sicher."},
+    {q:"„Ich bestelle das Essen per App. Kochen ist mir zu viel Arbeit.“", a:7, why:"Wenig Mühe: Bequemlichkeit."},
+    {q:"„Ich esse Obst statt Chips, weil ich fit bleiben will.“", a:4, why:"Fit bleiben: Gesundheit."},
+    {q:"„Der Drucker bestellt die Tinte automatisch nach.“", a:7, why:"Man muss an nichts denken."},
+    {q:"„Diese Kopfhörer hat sonst niemand in meiner Klasse.“", a:1, why:"Etwas Besonderes haben: Ansehen."},
+    {q:"„Zwei Pizzen zum Preis von einer!“", a:0, why:"Ein Schnäppchen: Gewinn."}]},
+ { id:"v2", topic:5, t:"Das passende Argument", kind:"mc", shuffle:true,
+   intro:"Was sagt die Kundin oder der Kunde? Wähle das Verkaufsargument, das am besten passt.",
+   help:["Frage dich zuerst: Welches Kaufmotiv hat die Person?","Dann wähle das Argument, das genau dieses Motiv anspricht."],
+   qs:[
+    {q:"Kunde im Handyladen: „Ich habe Angst, dass das Handy schnell kaputtgeht.“", o:["„Sie bekommen drei Jahre Garantie. Geht etwas kaputt, reparieren wir es kostenlos.“","„Dieses Modell hat sonst kaum jemand.“","„Heute gibt es 10 % Rabatt.“","„Wir liefern es Ihnen nach Hause.“"], a:0, why:"Er will kein Risiko: Sicherheit."},
+    {q:"Kundin im Sportladen: „Ich suche etwas, das ich mit meinen Freundinnen zusammen machen kann.“", o:["„Zu diesem Volleyball gibt es ein Netz für den Park. Damit spielt ihr zu sechst.“","„Der Ball ist aus recyceltem Material.“","„Der Ball ist heute günstiger.“","„Den Ball liefern wir morgen.“"], a:0, why:"Gemeinsam etwas erleben: Geselligkeit."},
+    {q:"Kunde im Modegeschäft: „Die Jacke soll in der Klasse auffallen.“", o:["„Die Farbe gibt es nur bei uns. So eine Jacke hat sonst keiner.“","„Die Jacke ist wasserdicht.“","„Die Jacke ist aus Bio-Baumwolle.“","„Sie können online bestellen.“"], a:0, why:"Auffallen: Ansehen."},
+    {q:"Kundin im Elektromarkt: „Mein Geld ist gerade knapp.“", o:["„Das Vorjahresmodell kostet 30 % weniger und kann fast das Gleiche.“","„Das neueste Modell ist gerade gekommen.“","„Mit diesem Modell staunen Ihre Freunde.“","„Das Gerät ist sehr leise.“"], a:0, why:"Geld sparen: Gewinn."},
+    {q:"Kunde im Supermarkt: „Ich achte beim Einkaufen auf die Umwelt.“", o:["„Die Flasche besteht zu 100 % aus recyceltem Plastik.“","„Heute gibt es zwei Flaschen zum Preis von einer.“","„Diese Sorte ist ganz neu.“","„Die Flasche ist sehr leicht.“"], a:0, why:"Umwelt: gutes Gewissen."},
+    {q:"Kundin in der Drogerie: „Ich habe wenig Zeit zum Einkaufen.“", o:["„Bestellen Sie online, wir liefern morgen zu Ihnen nach Hause.“","„Diese Creme ist ganz neu.“","„Die Creme ist vegan.“","„Die Creme ist im Angebot.“"], a:0, why:"Wenig Mühe: Bequemlichkeit."}]},
+ { id:"g1", topic:6, t:"Welche Phase?", kind:"sel", opts:PH, shuffle:true,
+   intro:"Eine Verkäuferin im Fahrradladen sagt diese Sätze. Zu welcher Phase des Verkaufsgesprächs gehört der Satz?",
+   help:["Die acht Phasen: Begrüßung · Kundenwunsch ermitteln · Ware präsentieren · Preis nennen · Einwand behandeln · Kaufentscheidung · Ergänzungsangebot und Service · Verabschiedung."],
+   qs:[
+    {q:"„Hallo, herzlich willkommen im Radladen! Kann ich Ihnen helfen?“", a:0, why:"Freundlich grüßen und Hilfe anbieten."},
+    {q:"„Wofür möchten Sie das Rad nutzen: für die Stadt oder für lange Touren?“", a:1, why:"Eine offene Frage nach dem Wunsch."},
+    {q:"„Setzen Sie sich ruhig drauf und fahren Sie eine Runde auf dem Hof.“", a:2, why:"Die Kundin probiert die Ware aus."},
+    {q:"„Sie bekommen ein leichtes Rad mit sieben Gängen für 549 Euro, und der erste Service ist inklusive.“", a:3, why:"Vorteil – Preis – Vorteil."},
+    {q:"„Ich verstehe, dass Ihnen das Gewicht wichtig ist. Heben Sie das Rad mal an: Der Rahmen ist sehr leicht.“", a:4, why:"Verständnis zeigen und mit einem Vorteil antworten."},
+    {q:"„Das Rad passt also zu Ihrer Größe und zu Ihrem Weg zur Arbeit. Möchten Sie es nehmen?“", a:5, why:"Vorteile zusammenfassen und freundlich fragen."},
+    {q:"„Zu diesem Rad empfehle ich Ihnen ein gutes Schloss.“", a:6, why:"Ein passendes Zusatzangebot."},
+    {q:"„Wir liefern das Rad auch kostenlos zu Ihnen nach Hause.“", a:6, why:"Das ist ein Service."},
+    {q:"„Vielen Dank für Ihren Einkauf. Viel Spaß mit dem neuen Rad!“", a:7, why:"Danken und freundlich verabschieden."},
+    {q:"„Welche Rahmenfarbe gefällt Ihnen besser?“", a:1, why:"Die Verkäuferin fragt nach dem Wunsch."}]},
+ { id:"g2", topic:6, t:"Gut beraten?", kind:"mc", shuffle:true,
+   intro:"Was ist die beste Reaktion der Verkäuferin oder des Verkäufers?",
+   help:["Offene Fragen, nicht zu viele auf einmal.","Zuerst eine Ware aus der mittleren Preisklasse zeigen.","Preis zwischen zwei Vorteilen nennen, nie „billig“ sagen.","Bei Einwänden nicht widersprechen. Keinen Druck machen."],
+   qs:[
+    {q:"Ein Kunde kommt in den Laden. Du räumst gerade Ware ins Regal. Was tust du?", o:["Ich höre auf, sehe ihn an und grüße freundlich.","Ich räume erst fertig ein.","Ich rufe: „Moment!“","Ich warte, bis er mich anspricht."], a:0, why:"Begrüßung: Der Kunde soll sich willkommen fühlen."},
+    {q:"Eine Kundin sagt: „Ich suche ein Handy.“ Welche Frage ist am besten?", o:["„Wofür nutzen Sie Ihr Handy am meisten?“","„Welche Marke, welche Farbe, wie viel Speicher, welcher Preis?“","„Wollen Sie das teuerste?“","„Haben Sie schon eins?“"], a:0, why:"Eine offene Frage. Die Kundin erzählt, was sie braucht."},
+    {q:"Es gibt drei Modelle: 199 €, 449 € und 1.199 €. Welches zeigst du zuerst?", o:["das Modell für 449 €","das Modell für 1.199 €","das Modell für 199 €","alle drei gleichzeitig"], a:0, why:"Mittlere Preisklasse zuerst: So merkst du, ob der Preis passt."},
+    {q:"Wie nennst du den Preis eines Staubsaugers?", o:["„Er saugt auch Tierhaare gründlich, kostet 249 Euro und ist sehr leise.“","„249 Euro.“","„Er ist leider ziemlich teuer: 249 Euro.“","„Billig ist er nicht.“"], a:0, why:"Vorteil – Preis – Vorteil."},
+    {q:"Eine Kundin zögert lange. Was sagst du?", o:["„Lassen Sie sich ruhig Zeit. Soll ich die Vorteile noch einmal zusammenfassen?“","„Ich habe nicht ewig Zeit.“","„Morgen ist er sicher weg.“","„Nehmen Sie ihn doch einfach.“"], a:0, why:"Kaufentscheidung ohne Druck."},
+    {q:"Ein Kunde hat einen Laptop gekauft. Welches Zusatzangebot passt am besten?", o:["eine Schutzhülle für den Laptop","eine Kaffeemaschine","drei Handyhüllen","ein Toaster"], a:0, why:"Das Zusatzangebot muss zum Kauf passen."}]},
+
+ { id:"k1", topic:4, t:"Probeklausur: Café Kiezbohne", kind:"mixed", shuffle:false,
+   intro:"Lies den Fall. Beantworte zuerst die Auswahlfragen. Schreibe dann die Antworten auf die offenen Fragen. Nach dem Prüfen siehst du eine Musterlösung. Hake ab, was du geschrieben hast.",
+   box:"<b>Der Fall: Café Kiezbohne</b><span>Jana Weber hat ein kleines Café in der Müllerstraße 40 in Berlin-Wedding. Ab Montag verkauft sie Bubble Tea to go. Die Zielgruppe sind Jugendliche von 14 bis 20 Jahren. Die Schule um die Ecke hat 900 Schülerinnen und Schüler.</span><span>Jana plant: drei Sorten, darunter die neue Sorte Mango-Matcha · Preis 4,50 €, mit Schülerausweis 3,90 € · Verkauf im Café und Lieferung über eine Liefer-App · am Eröffnungstag ein Gratis-Becher für die ersten 50 Gäste · ein Plakat an der Bushaltestelle vor der Schule · kurze Videos auf TikTok.</span>",
+   help:["Werbemittel = Was? · Werbeträger = Wo?","Vier P: Product, Price, Place, Promotion.","AIDA: Attention, Interest, Desire, Action."],
+   qs:[
+    {k:"sel", o:P4, q:"Mit Schülerausweis kostet der Bubble Tea 3,90 €. Welches P ist das?", a:1, why:"Ein besonderer Preis für eine Gruppe: Preispolitik."},
+    {k:"sel", o:P4, q:"Jana entwickelt die neue Sorte Mango-Matcha. Welches P ist das?", a:0, why:"Eine neue Sorte gehört zum Sortiment: Produktpolitik."},
+    {k:"sel", o:P4, q:"Der Bubble Tea wird auch über eine Liefer-App verkauft. Welches P ist das?", a:2, why:"Ein Verkaufsweg und Lieferung: Distributionspolitik."},
+    {k:"sel", o:P4, q:"Die ersten 50 Gäste bekommen einen Gratis-Becher. Welches P ist das?", a:3, why:"Eine Verkaufsaktion: Kommunikationspolitik."},
+    {k:"pair", o:["die Bushaltestelle","das Plakat","der Bubble Tea"], m:1, tr:0, q:"Das Plakat an der Bushaltestelle: Was ist das Werbemittel, was der Werbeträger?", why:"Das Plakat ist die Werbung (Werbemittel). Die Bushaltestelle trägt sie (Werbeträger)."},
+    {k:"mc", q:"Ein Verlag bietet Jana eine Anzeige in der Zeitung „Wedding aktiv 60+“ an. Was ist das Problem?", o:["Großer Streuverlust: Die Leserinnen und Leser gehören kaum zur Zielgruppe.","Die Reichweite ist zu klein für ganz Deutschland.","Eine Anzeige ist kein Werbemittel.","Zeitungen dürfen keine Werbung für Getränke drucken."], a:0, why:"Die Zeitung lesen vor allem Menschen über 60. Jana bezahlt für viele, die keinen Bubble Tea kaufen."},
+    {k:"sel", o:AIDA, q:"Das TikTok-Video beginnt mit einem Becher, der in Zeitlupe explodiert. Welche Stufe?", a:0, why:"Ein Überraschungs-Reiz am Anfang: Attention."},
+    {k:"sel", o:AIDA, q:"Am Ende des Videos steht: „Komm vorbei: Müllerstraße 40 · ab Montag!“ Welche Stufe?", a:3, why:"Adresse und Aufforderung: Action."},
+    {k:"open", q:"Erkläre den Unterschied zwischen Werbemittel und Werbeträger. Nenne zu beiden ein Beispiel aus dem Fall.",
+      sol:"Das Werbemittel ist die gestaltete Werbung selbst, zum Beispiel das Plakat oder das TikTok-Video. Der Werbeträger ist das Medium, das die Werbung zu den Menschen bringt, zum Beispiel die Bushaltestelle oder TikTok.",
+      check:["Werbemittel richtig erklärt (die Werbung selbst / Was?)","Werbeträger richtig erklärt (bringt die Werbung zu den Menschen / Wo?)","je ein passendes Beispiel aus dem Fall"]},
+    {k:"open", q:"Beurteile: Soll Jana das Plakat an der Bushaltestelle vor der Schule buchen? Begründe mit den Fachbegriffen Zielgruppe und Streuverlust.",
+      sol:"Ja, das Plakat ist eine gute Wahl. An der Bushaltestelle vor der Schule warten jeden Tag viele Jugendliche. Das ist genau Janas Zielgruppe. Deshalb ist der Streuverlust klein. Außerdem ist die Schule nah am Café, die Jugendlichen können also direkt vorbeikommen.",
+      check:["klare Entscheidung (ja oder nein)","Fachbegriff Zielgruppe richtig verwendet","Fachbegriff Streuverlust richtig verwendet","Begründung mit Bezug zum Fall (Schule, Jugendliche, Nähe)"]},
+    {k:"open", q:"Erkläre, warum die vier Instrumente des Marketingmix zusammenpassen müssen. Nenne ein Beispiel aus dem Fall.",
+      sol:"Die vier Instrumente müssen zusammenpassen, sonst wirkt das Angebot nicht glaubwürdig oder niemand kauft. Bei der Kiezbohne passt alles zur Zielgruppe Jugendliche: ein trendiges Produkt (Bubble Tea), ein Schülerpreis, ein Café nah an der Schule und Werbung auf TikTok. Würde Jana nur in der Seniorenzeitung werben, würde die Werbung nicht zum Produkt und zur Zielgruppe passen.",
+      check:["Grund genannt (sonst nicht glaubwürdig / niemand kauft)","mindestens zwei P aus dem Fall genannt","Beispiel zeigt, wie sie zusammenpassen oder nicht passen"]},
+    {k:"open", q:"Plane ein TikTok-Video für die Kiezbohne nach der AIDA-Formel. Schreibe zu jeder Stufe einen Satz.",
+      sol:"Attention: Ein Becher explodiert in Zeitlupe, laute Musik. · Interest: Man sieht, wie der Mango-Matcha-Tee gemischt wird: „Kennst du schon die neue Sorte?“ · Desire: „Mit Schülerausweis nur 3,90 €.“ und Jugendliche lachen zusammen vor dem Café. · Action: „Komm vorbei: Müllerstraße 40, ab Montag! Die ersten 50 bekommen den Becher gratis.“",
+      check:["Attention: etwas, das auffällt","Interest: etwas, das neugierig macht oder das Produkt zeigt","Desire: ein Grund (sachlich oder Gefühl)","Action: Aufforderung mit Adresse oder Datum"]}]}
+];
+
+const CARDS = [
+ {topic:1, t:"Werbemittel", b:"Die gestaltete Werbung selbst. Frage: Was sehe oder höre ich? Beispiel: Plakat, Flyer, Werbespot."},
+ {topic:1, t:"Werbeträger", b:"Das Medium, das die Werbung zu den Menschen bringt. Frage: Wo? Beispiel: Zeitung, Bus, Instagram."},
+ {topic:1, t:"Werbebotschaft", b:"Das, was die Werbung sagen will."},
+ {topic:1, t:"Zielgruppe", b:"Die Menschen, die das Produkt kaufen sollen."},
+ {topic:1, t:"Reichweite", b:"Wie viele Menschen sehen oder hören die Werbung?"},
+ {topic:1, t:"Streuverlust", b:"Die Werbung erreicht Menschen, die nicht zur Zielgruppe gehören. Das Unternehmen bezahlt umsonst."},
+ {topic:2, t:"Marketingmix", b:"Ein Unternehmen plant alle vier Marketinginstrumente (4 P) zusammen. Sie müssen zusammenpassen."},
+ {topic:2, t:"Produktpolitik (Product)", b:"Was bieten wir an? Sortiment, Qualität, Marke, Verpackung, Service, Garantie."},
+ {topic:2, t:"Preispolitik (Price)", b:"Was kostet es? Preis, Rabatt, Skonto, Sonderangebot, Zahlungsbedingungen."},
+ {topic:2, t:"Distributionspolitik (Place)", b:"Wie kommt das Produkt zur Kundschaft? Laden, Online-Shop, Lieferung. Distribution = Verteilung."},
+ {topic:2, t:"Kommunikationspolitik (Promotion)", b:"Wie erfahren die Menschen davon? Werbung, Verkaufsaktionen, Öffentlichkeitsarbeit, Sponsoring."},
+ {topic:2, t:"Sponsoring", b:"Ein Unternehmen bezahlt zum Beispiel einen Verein oder ein Fest. Dafür wird sein Name oder Logo gezeigt."},
+ {topic:2, t:"Öffentlichkeitsarbeit", b:"Ein Unternehmen sorgt für ein gutes Bild in der Öffentlichkeit, zum Beispiel durch einen Zeitungsbericht über eine Spende."},
+ {topic:3, t:"AIDA", b:"Die vier Stufen der Werbung: Attention, Interest, Desire, Action."},
+ {topic:3, t:"Attention", b:"Aufmerksamkeit: Die Werbung muss auffallen. Mit körperlichen Reizen, Gefühls-Reizen oder Überraschungs-Reizen."},
+ {topic:3, t:"Interest", b:"Interesse: Die Person will mehr wissen. Geschichte, Frage, Rätsel oder Erklärung des Produkts."},
+ {topic:3, t:"Desire", b:"Wunsch: Die Person will das Produkt haben. Sachliche Gründe (Preis, Qualität) oder Gefühls-Gründe (Image)."},
+ {topic:3, t:"Action", b:"Handlung: Die Person soll etwas tun. Logo, Adresse, Internetseite, QR-Code, „Jetzt bestellen!“"},
+ {topic:3, t:"Image", b:"Das Bild, das Menschen von einer Marke haben, zum Beispiel cool, sportlich oder erfolgreich."},
+ {topic:3, t:"Imagewerbung", b:"Werbung, die nicht sofort verkaufen will. Sie soll die Marke bekannt und beliebt machen."},
+ {topic:5, t:"Kaufmotiv", b:"Der Grund, warum ein Mensch etwas kauft. Oft hat ein Kunde mehrere Motive."},
+ {topic:5, t:"Gewinn", b:"Geld sparen, ein Schnäppchen machen."},
+ {topic:5, t:"Ansehen", b:"Etwas Besonderes sein und bewundert werden."},
+ {topic:5, t:"Geselligkeit", b:"Etwas zusammen mit anderen erleben."},
+ {topic:5, t:"Neugier", b:"Neues entdecken und ausprobieren."},
+ {topic:5, t:"Gesundheit", b:"Gesund und fit bleiben, z. B. gut für Füße und Rücken."},
+ {topic:5, t:"Gutes Gewissen", b:"Beim Kaufen ein gutes Gefühl haben, z. B. weil etwas gut für die Umwelt ist."},
+ {topic:5, t:"Sicherheit", b:"Kein Risiko: Garantie, Rückgabe, Original statt Fälschung."},
+ {topic:5, t:"Bequemlichkeit", b:"Einkaufen soll einfach sein und wenig Mühe machen, z. B. Lieferung."},
+ {topic:6, t:"Die acht Phasen", b:"Begrüßung · Kundenwunsch ermitteln · Ware präsentieren · Preis nennen · Einwand behandeln · Kaufentscheidung · Ergänzungsangebot und Service · Verabschiedung"},
+ {topic:6, t:"Kundenwunsch ermitteln", b:"Offene Fragen stellen (Wofür? Was?), nicht zu viele auf einmal, gut zuhören."},
+ {topic:6, t:"Preis nennen", b:"Den Preis zwischen zwei Vorteilen nennen: Vorteil – Preis – Vorteil. Nie „billig“ oder „teuer“ sagen."},
+ {topic:6, t:"Einwand", b:"Die Kundin sagt, was sie stört. Verständnis zeigen, nicht widersprechen, mit Vorteil oder Alternative antworten."},
+ {topic:6, t:"Ergänzungsangebot", b:"Ein bis zwei Zusatzartikel, die zum Kauf passen, z. B. Pflegespray zu Schuhen."},
+ {topic:6, t:"Leitfaden", b:"Eine Anleitung, die Schritt für Schritt zeigt, wie etwas geht, z. B. ein Verkaufsgespräch."}
+];
+
+const AD_HTML = `<div class="ad" role="img" aria-label="Anzeige der Handywerkstatt FixIt Kiez mit fünf nummerierten Feldern">
+ <div class="part"><span class="mk">1</span><svg viewBox="0 0 84 140" aria-hidden="true"><rect x="4" y="4" width="76" height="132" rx="12" fill="none" stroke="currentColor" stroke-width="4"/><rect x="12" y="16" width="60" height="104" rx="4" fill="#2A3238"/><path d="M40 52 L28 30 M40 52 L62 40 M40 52 L22 70 M40 52 L50 92 M40 52 L66 74 M50 92 L36 112 M22 70 L14 96" stroke="#D7F20A" stroke-width="2.4" fill="none" stroke-linecap="round"/></svg><span class="big">KRACKS.</span></div>
+ <div class="part"><span class="mk">2</span><span>Handy runtergefallen? So läuft es bei uns: abgeben, Kaffee trinken, abholen.</span></div>
+ <div class="part"><span class="mk">3</span><span class="facts"><span>In 60 Minuten fertig</span><span>ab 49 €</span><span>6 Monate Garantie</span></span></div>
+ <div class="part"><span class="mk">4</span><span class="feel">Endlich wieder ohne Risse durch den Kiez.</span></div>
+ <div class="part addr"><span class="mk">5</span><span><span class="brand">FIXIT KIEZ</span><br>Handyreparatur · Sonnenallee 88 · Mo–Sa 10–20 Uhr<br>Ohne Termin vorbeikommen!</span></div>
+</div>`;
+
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const shuf = a => { a = a.slice(); for (let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; };
+const KEY = "marketing-training-v1";
+let best = {};
+try { best = JSON.parse(localStorage.getItem(KEY) || "{}") || {}; } catch(e) { best = {}; }
+const saveBest = () => { try { localStorage.setItem(KEY, JSON.stringify(best)); } catch(e) {} };
+
+const VIEWS = ROUNDS.map(r => r.id).concat(["cards"]);
+let cur = 0;
+try { const h = location.hash.slice(1); if (VIEWS.includes(h)) cur = VIEWS.indexOf(h); } catch(e) {}
+const state = {};
+let cardState = { order: CARDS.map((_,i)=>i), open: new Set(), topic: 0 };
+
+const kindOf = (r,q) => q.k || r.kind;
+const optsOf = (r,q) => q.o || r.opts;
+const ptsOf = (r,q) => kindOf(r,q)==="open" ? q.check.length : 1;
+const total = r => r.qs.reduce((s,q)=>s+ptsOf(r,q),0);
+
+function fresh(r){
+  const order = r.shuffle ? shuf(r.qs.map((_,i)=>i)) : r.qs.map((_,i)=>i);
+  const optOrder = r.qs.map(q => { const k = kindOf(r,q); const n = (optsOf(r,q)||[]).length; return k==="mc" ? shuf([...Array(n).keys()]) : [...Array(n).keys()]; });
+  return { order, optOrder, checked:false, res:r.qs.map(()=>null), ticks:r.qs.map(q=>q.check?q.check.map(()=>false):null) };
+}
+
+function renderNav(){
+  let h = "";
+  for (const t of [1,2,3,5,6,4]) {
+    const rs = ROUNDS.filter(r=>r.topic===t);
+    h += `<div class="group" style="--gc:${TOPICS[t].c}"><span class="glabel">${esc(TOPICS[t].name)}</span><div class="rounds">`;
+    h += rs.map(r => { const i = ROUNDS.indexOf(r); const b = best[r.id]; const tt = total(r);
+      return `<button class="rbtn" id="nav-${r.id}" aria-pressed="${i===cur}" data-i="${i}">${esc(r.t)}${b!=null?`<span class="sc${b===tt?" full":""}">${b}/${tt}</span>`:""}</button>`; }).join("");
+    if (t===4) h += `<button class="rbtn" id="nav-cards" style="--gc:var(--tag)" aria-pressed="${cur===ROUNDS.length}" data-i="${ROUNDS.length}">Lernkarten</button>`;
+    h += `</div></div>`;
+  }
+  $("#nav").innerHTML = h;
+  $("#nav").querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>{ cur=+b.dataset.i; try{ history.replaceState(null,"","#"+VIEWS[cur]); }catch(e){} render(); $("#round").scrollIntoView({block:"start"}); }));
+}
+
+function selHTML(id, opts, label){
+  return `<select id="${id}" aria-label="${esc(label)}"><option value="">bitte wählen</option>${opts.map((o,oi)=>`<option value="${oi}">${esc(o)}</option>`).join("")}</select>`;
+}
+function qHTML(r,q,qi,s){
+  const id = `${r.id}-${qi}`, k = kindOf(r,q), opts = optsOf(r,q);
+  if (k==="sel") return `<span class="qt">${esc(q.q)}</span><div class="row">${selHTML(id, opts, "Antwort zu: "+q.q)}</div>`;
+  if (k==="mc") return `<span class="qt">${esc(q.q)}</span><div class="opts" role="radiogroup" aria-label="${esc(q.q)}">${s.optOrder[qi].map(oi=>`<label class="opt"><input type="radio" name="${id}" id="${id}-${oi}" value="${oi}">${esc(opts[oi])}</label>`).join("")}</div>`;
+  if (k==="pair") return `<span class="qt">${esc(q.q)}</span><div class="row"><label><span class="lab">Werbemittel</span>${selHTML(id+"-m", opts, "Werbemittel")}</label><label><span class="lab">Werbeträger</span>${selHTML(id+"-t", opts, "Werbeträger")}</label></div>`;
+  return `<span class="qt">${esc(q.q)}</span><textarea id="${id}" aria-label="Deine Antwort"></textarea><div id="sol-${id}"></div>`;
+}
+
+function render(){
+  renderNav();
+  if (cur === ROUNDS.length) return renderCards();
+  const r = ROUNDS[cur];
+  if (!state[r.id]) state[r.id] = fresh(r);
+  const s = state[r.id];
+  let h = `<div class="rhead" style="--gc:${TOPICS[r.topic].c}"><span class="glabel" style="--gc:${TOPICS[r.topic].c}">${esc(TOPICS[r.topic].name)}</span><h2>${esc(r.t)}</h2><p class="lead">${esc(r.intro)}</p></div>`;
+  if (r.box === "AD") h += AD_HTML;
+  else if (r.box) h += `<div class="box">${r.box}</div>`;
+  if (r.help) h += `<details class="help"><summary>Hilfe: Das musst du wissen</summary><ul>${r.help.map(x=>`<li>${x}</li>`).join("")}</ul></details>`;
+  h += `<div class="bar" id="score" aria-live="polite"></div>`;
+  h += s.order.map((qi,n)=>{ const q = r.qs[qi]; const k = kindOf(r,q);
+    return `<div class="q" id="w-${r.id}-${qi}"><span class="qn">${k==="open"?"Schreibaufgabe":"Frage"} ${n+1}${k==="open"?` <span class="pts">· ${q.check.length} Punkte</span>`:""}</span>${qHTML(r,q,qi,s)}<div class="fb" id="fb-${r.id}-${qi}"></div></div>`; }).join("");
+  h += `<div class="bar"><button class="btn" id="check">Prüfen</button><button class="btn ghost" id="again">Runde neu starten</button><span class="err" id="err" role="alert"></span></div>`;
+  $("#round").innerHTML = h;
+  $("#check").addEventListener("click", check);
+  $("#again").addEventListener("click", () => { state[r.id] = fresh(r); render(); });
+  const clr = () => { $("#err").textContent = ""; };
+  $("#round").addEventListener("input", clr); $("#round").addEventListener("change", clr);
+  score();
+}
+
+function val(r,q,qi){
+  const id = `${r.id}-${qi}`, k = kindOf(r,q);
+  if (k==="mc"){ const c = document.querySelector(`input[name="${id}"]:checked`); return c ? +c.value : null; }
+  if (k==="sel"){ const v = document.getElementById(id).value; return v==="" ? null : +v; }
+  if (k==="pair"){ const m = document.getElementById(id+"-m").value, t = document.getElementById(id+"-t").value; return (m===""||t==="") ? null : [+m,+t]; }
+  return document.getElementById(id).value;
+}
+
+function check(){
+  const r = ROUNDS[cur], s = state[r.id];
+  const vals = r.qs.map((q,qi)=>val(r,q,qi));
+  const missing = r.qs.filter((q,qi)=>kindOf(r,q)!=="open" && vals[qi]===null).length;
+  if (missing) { $("#err").textContent = `Beantworte zuerst alle Auswahlfragen. Es fehlen noch ${missing}.`; return; }
+  r.qs.forEach((q,qi)=>{
+    const k = kindOf(r,q), opts = optsOf(r,q), v = vals[qi];
+    const w = document.getElementById(`w-${r.id}-${qi}`), fb = document.getElementById(`fb-${r.id}-${qi}`);
+    if (k==="open") {
+      const box = document.getElementById(`sol-${r.id}-${qi}`);
+      box.innerHTML = `<div class="sol"><p><b>Musterlösung:</b> ${esc(q.sol)}</p><span class="lab">Hake ab, was in deiner Antwort steht:</span><div class="chk">${q.check.map((c,ci)=>`<label><input type="checkbox" id="ck-${r.id}-${qi}-${ci}" data-q="${qi}" data-c="${ci}" ${s.ticks[qi][ci]?"checked":""}><span>${esc(c)}</span></label>`).join("")}</div></div>`;
+      box.querySelectorAll("input").forEach(cb=>cb.addEventListener("change",()=>{ s.ticks[+cb.dataset.q][+cb.dataset.c] = cb.checked; score(); }));
+      if (!v.trim()) { fb.className = "fb bad"; fb.innerHTML = "<b>Du hast noch nichts geschrieben.</b> Versuche es zuerst selbst, dann vergleiche."; }
+      else fb.innerHTML = "";
+      return;
+    }
+    let ok, right;
+    if (k==="pair") { ok = v[0]===q.m && v[1]===q.tr; right = `Werbemittel: ${opts[q.m]} · Werbeträger: ${opts[q.tr]}.`; }
+    else { ok = v===q.a; right = opts[q.a] + "."; }
+    s.res[qi] = ok;
+    w.classList.toggle("ok", ok); w.classList.toggle("no", !ok);
+    fb.className = "fb " + (ok ? "good" : "bad");
+    fb.innerHTML = ok ? `<b>Richtig.</b> ${esc(q.why)}` : `<b>Noch nicht.</b> Richtig ist: ${esc(right)} ${esc(q.why)}`;
+  });
+  s.checked = true; score();
+}
+
+function earned(r,s){
+  return r.qs.reduce((sum,q,qi)=> sum + (kindOf(r,q)==="open" ? s.ticks[qi].filter(Boolean).length : (s.res[qi]===true?1:0)), 0);
+}
+function score(){
+  const r = ROUNDS[cur], s = state[r.id], tt = total(r);
+  if (!s.checked) { $("#score").innerHTML = ""; return; }
+  const ok = earned(r,s);
+  if (best[r.id]==null || ok > best[r.id]) { best[r.id] = ok; saveBest(); renderNav(); }
+  const hasOpen = r.qs.some(q=>kindOf(r,q)==="open");
+  $("#score").innerHTML = `<b>${ok} von ${tt} Punkten</b><div class="meter"><i style="width:${ok/tt*100}%"></i></div>${ok===tt?'<span class="tag">Geschafft</span>':`<span class="fb">${hasOpen?"Hake bei den Schreibaufgaben ab, was du geschrieben hast. ":""}Lies die Erklärungen und starte die Runde neu.</span>`}`;
+}
+
+function renderCards(){
+  const cs = cardState;
+  const list = cs.order.filter(i => !cs.topic || CARDS[i].topic===cs.topic);
+  let h = `<div class="rhead" style="--gc:var(--tag)"><span class="glabel" style="--gc:var(--ink2)">Wortschatz</span><h2>Lernkarten</h2><p class="lead">Lies den Begriff und erkläre ihn zuerst laut oder im Kopf. Klicke dann auf die Karte. Dort steht die Erklärung.</p></div>`;
+  h += `<div class="bar"><label class="row"><span class="lab">Thema</span><select id="ctopic"><option value="0">alle Themen</option>${[1,2,3,5,6].map(t=>`<option value="${t}" ${cs.topic===t?"selected":""}>${esc(TOPICS[t].name)}</option>`).join("")}</select></label><button class="btn small" id="cmix">Mischen</button><button class="btn ghost small" id="cclose">Alle umdrehen</button></div>`;
+  h += `<div class="cards">${list.map(i=>{ const c = CARDS[i], open = cs.open.has(i);
+    return `<button class="card" id="card-${i}" data-i="${i}" aria-pressed="${open}" style="--gc:${TOPICS[c.topic].c}"><span class="cs">${esc(TOPICS[c.topic].name)}</span><span class="ct">${esc(c.t)}</span>${open?`<span class="back">${esc(c.b)}</span>`:""}</button>`; }).join("")}</div>`;
+  $("#round").innerHTML = h;
+  $("#ctopic").addEventListener("change", e => { cs.topic = +e.target.value; renderCards(); });
+  $("#cmix").addEventListener("click", () => { cs.order = shuf(cs.order); cs.open.clear(); renderCards(); });
+  $("#cclose").addEventListener("click", () => { cs.open.clear(); renderCards(); });
+  $("#round").querySelectorAll(".card").forEach(b=>b.addEventListener("click",()=>{ const i=+b.dataset.i; cs.open.has(i)?cs.open.delete(i):cs.open.add(i); renderCards(); document.getElementById("card-"+i).focus(); }));
+}
+
+render();
+</script>
+
+</html>
