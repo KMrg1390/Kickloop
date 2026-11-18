@@ -1,6 +1,6 @@
 # Kickloop
 
-Modellunternehmen Kickloop: Online-Shop und zugehörige Übungen · Hermann-Scheer-Schule · © Mrg
+Modellunternehmen Kickloop: Online-Shop und zugehörige Übungen · Hermann-Scheer-Schule · © Dnk, Mrg
 
 Statische Seiten auf Vercel. Jeder Push auf `main` wird automatisch veröffentlicht.
 
