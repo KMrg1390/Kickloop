@@ -1102,11 +1102,21 @@ a.btn{text-decoration:none;display:inline-block}
   <details><summary>Kauft ihr gebrauchte Sneaker an?</summary><p>Ja. Bring deine Sneaker in gutem Zustand in den Laden. Aylin Demir prüft den Zustand und macht dir ein Angebot.</p></details>
 </section>
 
-<!-- UEBUNGSRAUM -->
-<section class="view fpage" id="v-uebungsraum" hidden>
-  <div class="viewhead"><div><span class="eyebrow">Für den Unterricht</span><h1>Übungsraum</h1>
-  <p class="lead">Hier findest du alle Übungen zu Kickloop. Jede Übung öffnet sich in einem neuen Tab.</p></div></div>
+<!-- ARBEITSBEREICH -->
+<section class="view fpage" id="v-arbeitsbereich" hidden>
+  <div class="viewhead"><div><span class="eyebrow">Für den Unterricht</span><h1>Arbeitsbereich</h1>
+  <p class="lead">Hier findest du alle Themen und Übungen zu Kickloop. Jede Kachel öffnet sich in einem neuen Tab.</p></div></div>
   <h2>Lernfeld 2</h2>
+  <div class="ulist">
+    <a class="ucard" href="/lf2/kennenlernen.html" target="_blank" rel="noopener"><b>Kennenlernen Kickloop ↗</b><span>Das Unternehmen, das Team und der Laden</span></a>
+    <a class="ucard" href="/lf2/organigramm.html" target="_blank" rel="noopener"><b>Organigramm ↗</b><span>Aufbau des Unternehmens und Abteilungen</span></a>
+    <a class="ucard" href="/lf2/sortiment.html" target="_blank" rel="noopener"><b>Sortiment ↗</b><span>Aufbau des Sortiments und Produktpyramide</span></a>
+    <a class="ucard" href="/lf2/marketing.html" target="_blank" rel="noopener"><b>Marketing ↗</b><span>Werbung und Zielgruppen</span></a>
+    <a class="ucard" href="/lf2/verkaufsgespraech.html" target="_blank" rel="noopener"><b>Verkaufsgespräch ↗</b><span>Kundinnen und Kunden im Laden beraten</span></a>
+    <a class="ucard" href="/lf2/zahlungsmittel.html" target="_blank" rel="noopener"><b>Zahlungsmittel ↗</b><span>Wie Kundinnen und Kunden bezahlen</span></a>
+    <a class="ucard" href="/lf2/popup-store.html" target="_blank" rel="noopener"><b>Optional: Pop-up-Store ↗</b><span>Freiwillige Zusatzaufgabe</span></a>
+  </div>
+  <h2>Lernfeld 2: Training und Wiederholung</h2>
   <div class="ulist">
     <a class="ucard" href="/uebungen/lf2-klassenarbeitstraining.html" target="_blank" rel="noopener"><b>Fit für die Klassenarbeit ↗</b><span>Organigramm, Produktpyramide, Sortiment, Kaufmotive und Verkaufsgespräch</span></a>
     <a class="ucard" href="/uebungen/lf2-sortiment-training.html" target="_blank" rel="noopener"><b>Sortiment-Training ↗</b><span>Wiederholung zum Sortiment</span></a>
@@ -1121,8 +1131,6 @@ a.btn{text-decoration:none;display:inline-block}
   </div>
   <h2>Aufgaben direkt im Online-Shop</h2>
   <div class="ulist">
-    <a class="ucard" href="/#organigramm" target="_blank" rel="noopener"><b>Organigramm ↗</b><span>Das Organigramm von Kickloop legen</span></a>
-    <a class="ucard" href="/#pyramide" target="_blank" rel="noopener"><b>Produktpyramide ↗</b><span>Den Aufbau des Sortiments verstehen</span></a>
     <a class="ucard" href="/#popup" target="_blank" rel="noopener"><b>Pop-up-Store ↗</b><span>Sortiment für den Pop-up-Store planen</span></a>
     <a class="ucard" href="/#quiz-kickloop" target="_blank" rel="noopener"><b>Quiz Kickloop ↗</b><span>Was weißt du über das Unternehmen?</span></a>
     <a class="ucard" href="/#quiz-pyramide" target="_blank" rel="noopener"><b>Quiz Produktpyramide ↗</b><span>Fragen zur Produktpyramide</span></a>
@@ -1131,7 +1139,7 @@ a.btn{text-decoration:none;display:inline-block}
   </div>
 </section>
 
-<footer class="sitefoot"><nav class="footnav" aria-label="Fußleiste"><button data-fview="impressum">Impressum</button><button data-fview="kontakt">Kontakt</button><button data-fview="faq">FAQ</button><button data-fview="uebungsraum">Übungsraum</button></nav><div class="toolbar" style="margin-bottom:10px"><button class="btn ghost" id="resetAll">Alles auf diesem Computer löschen</button><span class="hint-s">Nur am Ende der Einheit oder für eine neue Person.</span></div>Kickloop ist ein erfundenes Modellunternehmen für den Unterricht. Die Marken sind echt. Die Preise sind Modellpreise von Kickloop und keine Angaben der Hersteller. Verkaufszahlen und Lagerbestand sind erfunden.</footer>
+<footer class="sitefoot"><nav class="footnav" aria-label="Fußleiste"><button data-fview="impressum">Impressum</button><button data-fview="kontakt">Kontakt</button><button data-fview="faq">FAQ</button><button data-fview="arbeitsbereich">Arbeitsbereich</button></nav><div class="toolbar" style="margin-bottom:10px"><button class="btn ghost" id="resetAll">Alles auf diesem Computer löschen</button><span class="hint-s">Nur am Ende der Einheit oder für eine neue Person.</span></div>Kickloop ist ein erfundenes Modellunternehmen für den Unterricht. Die Marken sind echt. Die Preise sind Modellpreise von Kickloop und keine Angaben der Hersteller. Verkaufszahlen und Lagerbestand sind erfunden.</footer>
 </div>
 
 <dialog id="dlg"></dialog>
@@ -1209,7 +1217,7 @@ const pills = a => [a.secondhand?'<span class="pill sh">Second Hand</span>':"", 
 const maxV = Math.max(...artikel.map(a=>a.verkauft));
 
 /* ---------- Tabs ---------- */
-const views = ["start","ueber","katalog","post","einkauf","rechnung","impressum","kontakt","faq","uebungsraum"];
+const views = ["start","ueber","katalog","post","einkauf","rechnung","impressum","kontakt","faq","arbeitsbereich"];
 /* Eigene Links im selben Artefakt: Artefakt-Link + #name. Kein Reiter, kein Code. */
 const ART_URL = location.origin + location.pathname;
 const SOLO = { "pyramide":"v-pyramide", "organigramm":"v-organigramm", "popup":"v-popup", "quiz-kickloop":"v-quiz", "quiz-pyramide":"v-quiz", "quiz-sortiment":"v-quiz", "quiz-angebot":"v-quiz" };
@@ -1228,7 +1236,7 @@ function applySolo(){
   return !!k;
 }
 /* Alte Reiter leiten weiter (Links, Lesezeichen, gespeicherter Reiter) */
-const ALIAS = { team:["ueber","team"], karriere:["ueber","karriere"], anfragen:["post","anf"], angebote:["post","ang"], reklamationen:["post","rek"], rallye:["start"], konditionen:["katalog","kondHead"], werkstatt:["katalog","dlHead"], regeln:["katalog","regelnHead"] };
+const ALIAS = { team:["ueber","team"], karriere:["ueber","karriere"], anfragen:["post","anf"], angebote:["post","ang"], reklamationen:["post","rek"], rallye:["start"], konditionen:["katalog","kondHead"], werkstatt:["katalog","dlHead"], regeln:["katalog","regelnHead"], uebungsraum:["arbeitsbereich"] };
 function show(v){
   if (applySolo()) return;
   let sub = null;
