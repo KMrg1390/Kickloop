@@ -23,7 +23,7 @@
       ]
     },
     {
-      "source": "/lf3/pdf/(.*)",
+      "source": "/lf3/dateien/(.*)",
       "headers": [
         {
           "key": "Content-Disposition",
