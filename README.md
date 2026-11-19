@@ -10,6 +10,8 @@ Statische Seiten auf Vercel. Jeder Push auf `main` wird automatisch veröffentli
 |---|---|
 | `index.html` | Online-Shop / Mitarbeiter-Portal (Quelle: „00 Online-Shop Kickloop.html“). Fußleiste mit `/#impressum`, `/#kontakt`, `/#faq`, `/#arbeitsbereich` (alter Link `/#uebungsraum` leitet weiter). Eigene Links: `/#organigramm`, `/#quiz-kickloop`, `/#pyramide`, `/#popup`, `/#quiz-pyramide`, `/#quiz-sortiment`, `/#quiz-angebot`, `/#einkauf` |
 | `lf2/*.html` | LF 2: Unterseiten des Arbeitsbereichs (Kennenlernen, Organigramm, Sortiment, Marketing, Verkaufsgespräch, Zahlungsmittel, Pop-up-Store) |
+| `lf3/*.html` | LF 3: Unterseiten (Bezugsquellen und Anfrage, Angebotsvergleich, Bestellung, Kaufvertrag) |
+| `lf3/pdf/` | LF 3: Arbeitsblätter als PDF zum Herunterladen (ohne Lösungen) |
 | `assets/` | Logo und gemeinsames CSS der Unterseiten |
 | `uebungen/lf2-klassenarbeitstraining.html` | LF 2: Fit für die Klassenarbeit – Organigramm, Produktpyramide, Sortiment, Kaufmotive, Verkaufsgespräch |
 | `uebungen/lf2-sortiment-training.html` | LF 2: Sortiment-Training (Wiederholung Sortiment) |

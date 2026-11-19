@@ -29,3 +29,5 @@ h2{font-size:1.25rem;font-weight:800;margin:30px 0 10px}
 .ucard span{font-size:.92rem;color:var(--ink-2)}
 .empty{background:var(--sand-2);border-radius:14px;padding:16px 18px;color:var(--ink-2);max-width:62ch}
 footer{margin-top:56px;padding-top:18px;border-top:1px solid var(--sand);color:var(--muted);font-size:.85rem}
+.ucard.dl{border-color:var(--ink-2)}
+.ucard .meta{font-family:var(--mono);font-size:.72rem;color:var(--muted);margin-top:4px}
