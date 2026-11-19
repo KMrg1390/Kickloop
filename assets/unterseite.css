@@ -15,8 +15,8 @@ h1,h2,h3{font-family:var(--display);font-stretch:112%;letter-spacing:-.01em;text
 .top a.logo{display:flex;align-items:center;gap:8px 16px;text-decoration:none;color:var(--muted);font-size:.85rem}
 .klogo{display:block;height:44px;width:auto}.klogo.on-dark{display:none}
 @media (prefers-color-scheme:dark){.klogo.on-light{display:none}.klogo.on-dark{display:block}}
-.back{margin-left:auto;font-family:var(--display);font-stretch:100%;font-weight:700;font-size:.9rem;color:var(--ink);text-decoration:none;border:1px solid var(--sand);border-radius:999px;padding:6px 14px;background:var(--surface)}
-.back:hover{background:var(--sand-2)}
+.back{margin-left:auto;font-family:var(--display);font-stretch:100%;font-weight:700;font-size:.95rem;color:#000;text-decoration:none;border:2px solid #000;border-radius:999px;padding:8px 20px;background:#C7F105}
+.back:hover{background:#B5DC04}
 main{max-width:960px;padding-top:28px}
 .eyebrow{font-family:var(--display);font-stretch:100%;font-weight:700;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
 h1{font-size:clamp(1.7rem,3.4vw,2.5rem);font-weight:800;margin-top:4px}
