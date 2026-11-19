@@ -31,5 +31,17 @@
         }
       ]
     }
+  ],
+  "redirects": [
+    {
+      "source": "/qr/anfrage",
+      "destination": "/uebungen/lf3-bezugsquellen-anfrage.html",
+      "permanent": false
+    },
+    {
+      "source": "/qr/angebot",
+      "destination": "/uebungen/lf3-angebotsvergleich.html",
+      "permanent": false
+    }
   ]
 }
