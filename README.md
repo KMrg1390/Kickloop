@@ -8,7 +8,7 @@ Statische Seiten auf Vercel. Jeder Push auf `main` wird automatisch veröffentli
 
 | Pfad | Inhalt |
 |---|---|
-| `index.html` | Online-Shop / Mitarbeiter-Portal (Quelle: „00 Online-Shop Kickloop.html“). Eigene Links: `/#organigramm`, `/#quiz-kickloop`, `/#pyramide`, `/#popup`, `/#quiz-pyramide`, `/#quiz-sortiment`, `/#quiz-angebot`, `/#einkauf` |
+| `index.html` | Online-Shop / Mitarbeiter-Portal (Quelle: „00 Online-Shop Kickloop.html“). Fußleiste mit `/#impressum`, `/#kontakt`, `/#faq`, `/#uebungsraum`. Eigene Links: `/#organigramm`, `/#quiz-kickloop`, `/#pyramide`, `/#popup`, `/#quiz-pyramide`, `/#quiz-sortiment`, `/#quiz-angebot`, `/#einkauf` |
 | `uebungen/lf2-klassenarbeitstraining.html` | LF 2: Fit für die Klassenarbeit – Organigramm, Produktpyramide, Sortiment, Kaufmotive, Verkaufsgespräch |
 | `uebungen/lf2-sortiment-training.html` | LF 2: Sortiment-Training (Wiederholung Sortiment) |
 | `uebungen/lf2-klausurtraining-marketing.html` | LF 2: Klausurtraining Marketing |

@@ -203,6 +203,28 @@ table.t td.r{text-align:right;font-variant-numeric:tabular-nums;white-space:nowr
 .tscroll{overflow-x:auto}
 footer{margin-top:40px;color:var(--muted);font-size:.85rem;max-width:80ch}
 
+/* Fußleiste und Seiten aus der Fußleiste */
+.sitefoot{margin-top:56px;padding-top:22px;border-top:1px solid var(--sand);max-width:none}
+.footnav{display:flex;flex-wrap:wrap;gap:6px 8px;margin-bottom:18px}
+.footnav button{border:1px solid var(--sand);background:var(--surface);color:var(--ink);border-radius:999px;padding:6px 14px;cursor:pointer;font-family:var(--display);font-stretch:100%;font-weight:700;font-size:.85rem}
+.footnav button:hover{background:var(--sand-2)}
+.footnav button[aria-current="page"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.footnote{max-width:80ch}
+body.solo .footnav{display:none}
+.fpage{max-width:900px}
+.fpage h2{font-size:1.25rem;font-weight:800;margin:26px 0 8px}
+.fpage p{max-width:70ch}
+.fgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.fgrid .kbox p{margin:0}
+.faq details{background:var(--surface);border:1px solid var(--sand);border-radius:12px;padding:12px 16px;margin-bottom:8px}
+.faq summary{cursor:pointer;font-weight:700}
+.faq details p{margin:.5em 0 0;max-width:70ch}
+.ulist{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.ucard{display:grid;align-content:start;gap:4px;background:var(--surface);border:1px solid var(--sand);border-radius:14px;padding:14px 16px;color:var(--ink);text-decoration:none}
+.ucard:hover{background:var(--sand-2)}
+.ucard b{font-family:var(--display);font-stretch:100%;font-size:1rem}
+.ucard span{font-size:.92rem;color:var(--ink-2)}
+
 @media (max-width:900px){
   .katalog,.pyr-wrap,.plan,.post{grid-template-columns:1fr}
   .side,.regal{position:static}
@@ -1027,7 +1049,89 @@ a.btn{text-decoration:none;display:inline-block}
   <div id="rechnung"></div>
 </section>
 
-<footer><div class="toolbar" style="margin-bottom:10px"><button class="btn ghost" id="resetAll">Alles auf diesem Computer löschen</button><span class="hint-s">Nur am Ende der Einheit oder für eine neue Person.</span></div>Kickloop ist ein erfundenes Modellunternehmen für den Unterricht. Die Marken sind echt. Die Preise sind Modellpreise von Kickloop und keine Angaben der Hersteller. Verkaufszahlen und Lagerbestand sind erfunden.</footer>
+<!-- IMPRESSUM -->
+<section class="view fpage" id="v-impressum" hidden>
+  <div class="viewhead"><div><span class="eyebrow">Rechtliches</span><h1>Impressum</h1></div></div>
+  <div class="fgrid">
+    <div class="kbox"><h3>Angaben zum Unternehmen</h3><p>Kickloop – Sneaker &amp; Second Hand<br>Inhaberin: Lena Yılmaz<br>Weserstraße 58<br>12045 Berlin</p></div>
+    <div class="kbox"><h3>Kontakt</h3><p>Telefon: <span class="mono">030 555 018 20</span><br>E-Mail: <span class="mono">service@kickloop-berlin.de</span><br>Internet: <span class="mono">www.kickloop-berlin.de</span></p></div>
+    <div class="kbox"><h3>Verantwortlich für den Inhalt</h3><p>Lena Yılmaz (Geschäftsführerin)<br>Anschrift wie oben</p></div>
+  </div>
+  <h2>Hinweis zu dieser Lernseite</h2>
+  <p>Kickloop ist ein erfundenes Modellunternehmen für den Unterricht an der Hermann-Scheer-Schule. Firma, Personen, Adresse, Telefonnummer und E-Mail-Adresse sind erfunden. Bitte schreibt nicht an diese Adressen und ruft die Nummer nicht an. Die Marken der Artikel sind echt. Die Preise sind Modellpreise.</p>
+  <p>Konzept und Inhalte der Lernseite: © Dnk, Mrg · Hermann-Scheer-Schule</p>
+</section>
+
+<!-- KONTAKT -->
+<section class="view fpage" id="v-kontakt" hidden>
+  <div class="viewhead"><div><span class="eyebrow">Service</span><h1>Kontakt</h1>
+  <p class="lead">Du hast eine Frage zu einem Artikel, einer Bestellung oder unserer Werkstatt? Komm in den Laden, ruf an oder schreib uns.</p></div></div>
+  <div class="fgrid">
+    <div class="kbox"><h3>Unser Laden</h3><p>Kickloop – Sneaker &amp; Second Hand<br>Weserstraße 58, 12045 Berlin (Neukölln)<br><b>Öffnungszeiten:</b> Montag bis Samstag, 11 bis 20 Uhr<br>Sonntag geschlossen</p></div>
+    <div class="kbox"><h3>Telefon und E-Mail</h3><p>Telefon: <span class="mono">030 555 018 20</span><br>E-Mail: <span class="mono">service@kickloop-berlin.de</span><br>Wir antworten innerhalb von 1–2 Werktagen.</p></div>
+  </div>
+  <h2>Ansprechpersonen</h2>
+  <div class="fgrid">
+    <div class="kbox"><h3>Bestellungen und Versand</h3><p>Emre Öztürk<br>Versand &amp; Kundenservice</p></div>
+    <div class="kbox"><h3>Werkstatt</h3><p>Marco Rossi<br>Leiter Werkstatt</p></div>
+    <div class="kbox"><h3>Ankauf Second Hand</h3><p>Aylin Demir<br>Ankauf Second Hand</p></div>
+    <div class="kbox"><h3>Vereine, Schulen und Firmen</h3><p>Tom Becker<br>Leiter Einkauf</p></div>
+    <div class="kbox"><h3>Rechnungen und Zahlungen</h3><p>Ines Wagner<br>Leiterin Verwaltung</p></div>
+    <div class="kbox"><h3>Bewerbungen und Praktikum</h3><p>Robert Lang<br>Personal &amp; Büro</p></div>
+  </div>
+  <p class="hint-s" style="margin-top:18px">Kickloop ist ein Modellunternehmen. Alle Kontaktdaten sind erfunden.</p>
+</section>
+
+<!-- FAQ -->
+<section class="view fpage faq" id="v-faq" hidden>
+  <div class="viewhead"><div><span class="eyebrow">Service</span><h1>Häufige Fragen (FAQ)</h1>
+  <p class="lead">Hier findest du Antworten auf die Fragen, die uns Kundinnen und Kunden am häufigsten stellen.</p></div></div>
+  <h2>Laden und Bestellung</h2>
+  <details><summary>Wann hat der Laden geöffnet?</summary><p>Montag bis Samstag von 11 bis 20 Uhr. Sonntags ist geschlossen.</p></details>
+  <details><summary>Wie kann ich bezahlen?</summary><p>Privatkundinnen und Privatkunden zahlen bar, mit Karte oder mit PayPal. Vereine, Schulen und Firmen können auch auf Rechnung zahlen: innerhalb von 14 Tagen ohne Abzug oder innerhalb von 7 Tagen mit 2 % Skonto.</p></details>
+  <details><summary>Was kostet die Lieferung?</summary><p>Die Abholung im Laden ist kostenlos. Die Lieferung kostet 5,90 Euro. Ab 150 Euro Warenwert liefern wir kostenlos.</p></details>
+  <details><summary>Wie lange dauert die Lieferung?</summary><p>Ware auf Lager: 2–3 Werktage. Bestellware, zum Beispiel eine andere Größe: 10–14 Werktage.</p></details>
+  <details><summary>Gibt es Rabatt für Vereine, Schulen und Firmen?</summary><p>Ja. Ab 10 Stück gibt es 10 %, ab 20 Stück 15 % Mengenrabatt. Es zählen alle Artikel einer Bestellung. Auf Second-Hand-Artikel und Dienstleistungen gibt es keinen Rabatt. Unsere Angebote gelten 14 Tage.</p></details>
+  <h2>Umtausch, Widerruf und Mängel</h2>
+  <details><summary>Kann ich Schuhe aus dem Laden umtauschen?</summary><p>Neue, ungetragene Ware kannst du innerhalb von 14 Tagen mit Kassenbon umtauschen oder zurückgeben. Das ist ein freiwilliger Service von Kickloop.</p></details>
+  <details><summary>Was gilt bei einer Bestellung im Online-Shop?</summary><p>Du hast 14 Tage Widerrufsrecht ab Erhalt der Ware. Das ist gesetzlich geregelt. Die Ware muss ungetragen sein.</p></details>
+  <details><summary>Mein Artikel ist kaputt. Was jetzt?</summary><p>Hat ein Artikel einen Mangel, gilt die gesetzliche Gewährleistung von 2 Jahren. Wir reparieren den Artikel kostenlos oder du bekommst Ersatz. Die Rücksendung ist kostenlos.</p></details>
+  <h2>Werkstatt und Second Hand</h2>
+  <details><summary>Was macht eure Werkstatt?</summary><p>Wir bieten Grundreinigung, Tiefenreinigung, Sohlen aufhellen, Imprägnierung, Reparaturen und Custom-Design an. Die Preise findest du im Katalog unter „Werkstatt-Service“.</p></details>
+  <details><summary>Was ist, wenn ich mit der Werkstatt-Arbeit nicht zufrieden bin?</summary><p>Dann bessern wir kostenlos nach. Klappt das nicht, bekommst du dein Geld zurück.</p></details>
+  <details><summary>Kauft ihr gebrauchte Sneaker an?</summary><p>Ja. Bring deine Sneaker in gutem Zustand in den Laden. Aylin Demir prüft den Zustand und macht dir ein Angebot.</p></details>
+</section>
+
+<!-- UEBUNGSRAUM -->
+<section class="view fpage" id="v-uebungsraum" hidden>
+  <div class="viewhead"><div><span class="eyebrow">Für den Unterricht</span><h1>Übungsraum</h1>
+  <p class="lead">Hier findest du alle Übungen zu Kickloop. Jede Übung öffnet sich in einem neuen Tab.</p></div></div>
+  <h2>Lernfeld 2</h2>
+  <div class="ulist">
+    <a class="ucard" href="/uebungen/lf2-klassenarbeitstraining.html" target="_blank" rel="noopener"><b>Fit für die Klassenarbeit ↗</b><span>Organigramm, Produktpyramide, Sortiment, Kaufmotive und Verkaufsgespräch</span></a>
+    <a class="ucard" href="/uebungen/lf2-sortiment-training.html" target="_blank" rel="noopener"><b>Sortiment-Training ↗</b><span>Wiederholung zum Sortiment</span></a>
+    <a class="ucard" href="/uebungen/lf2-klausurtraining-marketing.html" target="_blank" rel="noopener"><b>Klausurtraining Marketing ↗</b><span>Üben für die Klausur zum Marketing</span></a>
+    <a class="ucard" href="/uebungen/lf2-marktforschung-quiz.html" target="_blank" rel="noopener"><b>Quiz Marktforschung ↗</b><span>Die Zielgruppe des Loop Lite</span></a>
+  </div>
+  <h2>Lernfeld 3</h2>
+  <div class="ulist">
+    <a class="ucard" href="/uebungen/lf3-bezugsquellen-anfrage.html" target="_blank" rel="noopener"><b>Bezugsquellen und Anfrage ↗</b><span>Übungen zu Bezugsquellen und zur Anfrage</span></a>
+    <a class="ucard" href="/uebungen/lf3-trainingsraum-bezugsquellen.html" target="_blank" rel="noopener"><b>Trainingsraum Bezugsquellen ↗</b><span>Training zu Bezugsquellen und Anfrage</span></a>
+    <a class="ucard" href="/uebungen/lf3-angebotsvergleich.html" target="_blank" rel="noopener"><b>Angebotsvergleich ↗</b><span>Übungen zum Angebotsvergleich</span></a>
+  </div>
+  <h2>Aufgaben direkt im Online-Shop</h2>
+  <div class="ulist">
+    <a class="ucard" href="/#organigramm" target="_blank" rel="noopener"><b>Organigramm ↗</b><span>Das Organigramm von Kickloop legen</span></a>
+    <a class="ucard" href="/#pyramide" target="_blank" rel="noopener"><b>Produktpyramide ↗</b><span>Den Aufbau des Sortiments verstehen</span></a>
+    <a class="ucard" href="/#popup" target="_blank" rel="noopener"><b>Pop-up-Store ↗</b><span>Sortiment für den Pop-up-Store planen</span></a>
+    <a class="ucard" href="/#quiz-kickloop" target="_blank" rel="noopener"><b>Quiz Kickloop ↗</b><span>Was weißt du über das Unternehmen?</span></a>
+    <a class="ucard" href="/#quiz-pyramide" target="_blank" rel="noopener"><b>Quiz Produktpyramide ↗</b><span>Fragen zur Produktpyramide</span></a>
+    <a class="ucard" href="/#quiz-sortiment" target="_blank" rel="noopener"><b>Quiz Sortiment ↗</b><span>Fragen zum Sortiment</span></a>
+    <a class="ucard" href="/#quiz-angebot" target="_blank" rel="noopener"><b>Quiz Angebotsvergleich ↗</b><span>Fragen zum Angebotsvergleich</span></a>
+  </div>
+</section>
+
+<footer class="sitefoot"><nav class="footnav" aria-label="Fußleiste"><button data-fview="impressum">Impressum</button><button data-fview="kontakt">Kontakt</button><button data-fview="faq">FAQ</button><button data-fview="uebungsraum">Übungsraum</button></nav><div class="toolbar" style="margin-bottom:10px"><button class="btn ghost" id="resetAll">Alles auf diesem Computer löschen</button><span class="hint-s">Nur am Ende der Einheit oder für eine neue Person.</span></div>Kickloop ist ein erfundenes Modellunternehmen für den Unterricht. Die Marken sind echt. Die Preise sind Modellpreise von Kickloop und keine Angaben der Hersteller. Verkaufszahlen und Lagerbestand sind erfunden.</footer>
 </div>
 
 <dialog id="dlg"></dialog>
@@ -1105,7 +1209,7 @@ const pills = a => [a.secondhand?'<span class="pill sh">Second Hand</span>':"", 
 const maxV = Math.max(...artikel.map(a=>a.verkauft));
 
 /* ---------- Tabs ---------- */
-const views = ["start","ueber","katalog","post","einkauf","rechnung"];
+const views = ["start","ueber","katalog","post","einkauf","rechnung","impressum","kontakt","faq","uebungsraum"];
 /* Eigene Links im selben Artefakt: Artefakt-Link + #name. Kein Reiter, kein Code. */
 const ART_URL = location.origin + location.pathname;
 const SOLO = { "pyramide":"v-pyramide", "organigramm":"v-organigramm", "popup":"v-popup", "quiz-kickloop":"v-quiz", "quiz-pyramide":"v-quiz", "quiz-sortiment":"v-quiz", "quiz-angebot":"v-quiz" };
@@ -1133,11 +1237,13 @@ function show(v){
   if(v==="start") renderStart(); if(v==="ueber"&&window.renderUeber) renderUeber(sub); if(v==="rechnung"&&window.renderRech) renderRech(); if(v==="post"){ if(sub) setFolder(sub); renderPost(); }
   document.querySelectorAll("section.view").forEach(sec=>{ sec.hidden = sec.id !== "v-"+v; });
   document.querySelectorAll(".tab").forEach(t=>t.setAttribute("aria-selected", t.dataset.view===v));
+  document.querySelectorAll(".footnav button").forEach(b=>{ if (b.dataset.fview===v) b.setAttribute("aria-current","page"); else b.removeAttribute("aria-current"); });
   store.set("tab", v);
   if (location.hash.slice(1)!==v) history.replaceState(null,"","#"+v);
   if (v==="katalog" && sub) setTimeout(()=>{ const el=document.getElementById(sub); if(el) el.scrollIntoView({behavior:"smooth",block:"start"}); }, 40);
 }
 document.querySelectorAll(".tab").forEach(t=>t.addEventListener("click",()=>{show(t.dataset.view); window.scrollTo({top:0});}));
+document.querySelectorAll(".footnav button").forEach(b=>b.addEventListener("click",()=>{show(b.dataset.fview); window.scrollTo({top:0});}));
 $("#internToggle").addEventListener("change", e=>{ document.body.classList.toggle("show-intern", e.target.checked); store.set("intern", e.target.checked); renderGrid(); });
 
 /* ---------- Katalog ---------- */
