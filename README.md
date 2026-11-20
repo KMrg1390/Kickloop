@@ -62,4 +62,8 @@ Regeln für Links:
 
 Links zum Teilen: `https://kickloop.vercel.app/uebungen/<datei>.html`
 
+## Suchmaschinen (seit 20.11.2026)
+
+Die Seite soll in Suchmaschinen nicht auftauchen: Kickloop ist ein Modellunternehmen, nennt aber echte Marken mit Preisen. `vercel.json` schickt deshalb für jede Datei die Kopfzeile `X-Robots-Tag: noindex` (gilt auch für PDF und Bilder). Bewusst gibt es **keine** `robots.txt` mit Sperre: Suchmaschinen müssen die Seiten abrufen dürfen, um das „noindex“ zu sehen. Wer den Link hat, erreicht die Seite wie immer.
+
 Nicht im Repository (bewusst): Lehrkraft-Material (Lösungen, Stundenverläufe, Übersicht für Lehrkräfte), weil alles hier öffentlich erreichbar ist.
