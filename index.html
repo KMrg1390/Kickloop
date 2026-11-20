@@ -140,38 +140,78 @@ body.quiz .lname::after{content:"?"}
 .btn.ghost{background:transparent;color:var(--ink);border-color:var(--sand)}
 .btn:hover{filter:brightness(1.08)}
 
-/* popup */
-.orte{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-bottom:22px}
-.ort{text-align:left;border:2px solid var(--sand);background:var(--surface);border-radius:14px;padding:14px;cursor:pointer;display:grid;gap:4px}
+/* popup (eigener Link #popup) */
+.psteps{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 18px}
+.psteps button{display:flex;align-items:center;gap:8px;border:1px solid var(--sand);background:var(--surface);color:var(--ink);border-radius:999px;padding:6px 16px 6px 6px;cursor:pointer;font-family:var(--display);font-stretch:100%;font-weight:700;font-size:.92rem}
+.psteps button:hover{background:var(--sand-2)}
+.psteps .n{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--sand-2);font-size:.85rem}
+.psteps button.done .n{background:var(--ok-soft);color:var(--ok)}
+.psteps button[aria-current="step"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.psteps button[aria-current="step"] .n{background:var(--amber);color:#2A2A2A}
+.ppanel{display:grid;gap:18px}
+.ptask{background:var(--amber-soft);border-radius:14px;padding:12px 18px;max-width:80ch}
+.ptask b{font-family:var(--display);font-stretch:100%}
+.ptask ol{margin:.35em 0 0;padding-left:1.3em}
+.ptask li{margin:.15em 0}
+.orte{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.ort{text-align:left;border:2px solid var(--sand);background:var(--surface);border-radius:14px;padding:14px 16px;cursor:pointer;display:grid;gap:8px;align-content:start}
+.ort:hover{border-color:var(--amber)}
 .ort[aria-pressed="true"]{border-color:var(--amber);background:var(--amber-soft)}
-.ort b{font-family:var(--display);font-stretch:105%;font-size:1.05rem}
-.ort span{font-size:.92rem;color:var(--ink-2)}
-.plan{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:28px;align-items:start}
-.plist{display:grid;gap:18px}
-.pgroup h3{font-size:1.05rem;font-weight:800;margin-bottom:6px}
-.prow{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;padding:7px 10px;border-radius:9px;border:1px solid transparent;cursor:pointer}
+.ort .tag{font-family:var(--mono);font-size:.72rem;color:var(--muted);display:flex;justify-content:space-between;gap:8px}
+.ort .tag .on{color:var(--amber-ink);font-weight:700}
+.ort .tt{font-family:var(--display);font-stretch:105%;font-weight:800;font-size:1.12rem}
+.ort dl{margin:0;display:grid;gap:2px;font-size:.93rem}
+.ort dt{font-family:var(--display);font-stretch:100%;font-weight:700;font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+.ort dd{margin:0;color:var(--ink-2)}
+.ort .voices{border-top:1px dashed var(--sand);padding-top:8px;display:grid;gap:5px;font-size:.92rem;color:var(--ink-2)}
+.ort .voices .vq::before{content:"„"}.ort .voices .vq::after{content:"“"}
+.plan{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:28px;align-items:start}
+.pfilter{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.plist{display:grid;gap:20px}
+.pgroup h3{font-size:1.1rem;font-weight:800;margin-bottom:2px}
+.pgroup h4{font-family:var(--display);font-stretch:100%;font-weight:700;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:10px 0 4px}
+.prow{display:grid;grid-template-columns:auto 64px minmax(0,1fr) auto;gap:10px;align-items:center;padding:6px 10px;border-radius:9px;border:1px solid transparent;cursor:pointer}
+.prow.nopic{grid-template-columns:auto minmax(0,1fr) auto}
 .prow:hover{background:var(--sand-2)}
 .prow.sel{background:var(--amber-soft);border-color:var(--amber)}
 .prow input{width:20px;height:20px;accent-color:#B57A14;margin:0}
+.prow .pic{background:var(--tile);border-radius:8px;display:grid;place-items:center;padding:2px}
+.prow .pic svg{width:100%;height:auto;display:block}
 .prow .pmeta{font-size:.82rem;color:var(--muted)}
-.prow .price{font-size:.98rem}
-.regal{position:sticky;top:120px;background:var(--surface);border:1px solid var(--sand);border-radius:16px;padding:18px;display:grid;gap:14px}
-.slots{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.prow .price{font-size:.98rem;font-variant-numeric:tabular-nums;white-space:nowrap}
+.regal{position:sticky;top:20px;max-height:calc(100vh - 40px);overflow:auto;background:var(--surface);border:1px solid var(--sand);border-radius:16px;padding:16px 18px;display:grid;gap:10px}
+.regal .rhead{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.regal .rhead b{font-family:var(--display);font-size:1.4rem;font-weight:800;font-variant-numeric:tabular-nums}
+.slots{display:grid;grid-template-columns:repeat(6,1fr);gap:5px}
 .slot{aspect-ratio:1;max-width:100%;border-radius:8px;border:1.5px dashed var(--sand);display:grid;place-items:center;font-family:var(--mono);font-size:.62rem;color:var(--muted);text-align:center;padding:2px;overflow:hidden}
 .slot.full{border:0;background:var(--tile)}
 .slot svg{width:90%;height:auto}
-.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
-.stat{background:var(--sand-2);border-radius:10px;padding:8px 10px}
-.stat b{display:block;font-family:var(--display);font-size:1.5rem;font-weight:800;font-variant-numeric:tabular-nums;line-height:1.1}
-.stat span{font-size:.82rem;color:var(--ink-2)}
-.chosen{display:grid;gap:4px;max-height:280px;overflow:auto}
-.chosen div{display:grid;grid-template-columns:1fr auto;gap:6px;align-items:center;font-size:.9rem}
+.dlslot{border:1.5px dashed var(--sand);border-radius:10px;padding:8px 10px;font-size:.92rem;color:var(--muted)}
+.dlslot.full{border:0;background:var(--tile);color:var(--ink)}
+.chosen{display:grid;gap:4px;max-height:300px;overflow:auto}
+.chosen .crow{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:6px;align-items:center;font-size:.9rem}
+.chosen .x{border:0;background:transparent;color:var(--muted);cursor:pointer;font-size:1.1rem;line-height:1;padding:2px 4px}
+.chosen .x:hover{color:var(--bad)}
 .kr{display:flex;border:1px solid var(--sand);border-radius:8px;overflow:hidden}
-.kr button{border:0;background:var(--surface);padding:2px 8px;cursor:pointer;font-family:var(--display);font-weight:700;font-size:.78rem}
+.kr button{border:0;background:var(--surface);padding:2px 9px;cursor:pointer;font-family:var(--display);font-weight:700;font-size:.8rem}
 .kr button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+.stat{background:var(--sand-2);border-radius:10px;padding:8px 12px}
+.stat b{display:block;font-family:var(--display);font-size:1.5rem;font-weight:800;font-variant-numeric:tabular-nums;line-height:1.15}
+.stat span{font-size:.85rem;color:var(--ink-2)}
+.pcheck{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.pcheck li{display:flex;gap:10px;align-items:baseline}
+.pcheck .i{flex:none;display:grid;place-items:center;width:22px;height:22px;border-radius:50%;font-weight:800;font-size:.8rem;background:var(--sand-2);color:var(--muted)}
+.pcheck li.ok .i{background:var(--ok-soft);color:var(--ok)}
+.pcheck li.ok{color:var(--ink)} .pcheck li:not(.ok){color:var(--ink-2)}
+.pcols{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px;align-items:start}
 .field{display:grid;gap:4px}
 .field input{padding:8px 12px;border:1px solid var(--sand);border-radius:9px;background:var(--surface)}
 .warnline{color:var(--warn);font-size:.9rem}
+@media (max-width:900px){ .pcols{grid-template-columns:1fr} }
+@media (max-width:520px){ .prow{grid-template-columns:auto 48px minmax(0,1fr)} .prow .price{grid-column:3} }
+.linkbtn{border:0;background:none;padding:0;color:var(--amber-ink);text-decoration:underline;cursor:pointer;font:inherit}
+#v-popup h2.sec{margin:8px 0 -6px}
 
 /* post */
 .post{display:grid;grid-template-columns:300px minmax(0,1fr);gap:0;border:1px solid var(--sand);border-radius:16px;overflow:hidden;background:var(--surface);min-height:520px}
@@ -654,26 +694,45 @@ a.btn{text-decoration:none;display:inline-block}
   </div>
 </section>
 
-<!-- POPUP -->
+<!-- POPUP: eigener Link #popup (optionales Projekt, Arbeitsblatt 3) -->
 <section class="view" id="v-popup" hidden>
   <div class="viewhead">
-    <div><span class="eyebrow">Projekt Dezember 2026</span><h1>Pop-up-Store planen</h1>
-    <p class="lead">Kickloop eröffnet im Dezember für vier Wochen einen Pop-up-Store. Das Regal hat Platz für genau 12 Artikel. Dazu kommt eine Dienstleistung aus der Werkstatt.</p></div>
+    <div><span class="eyebrow">Optional · Projekt Dezember 2026</span><h1>Pop-up-Store planen</h1>
+    <p class="lead">Lena Yılmaz (Geschäftsführerin): „Im Dezember öffnen wir für vier Wochen einen Pop-up-Store. Das Regal hat Platz für genau 12 Artikel. Dazu kommt eine Dienstleistung aus der Werkstatt. Plant das beste Sortiment für euren Standort!“</p></div>
   </div>
-  <div class="orte" id="orte"></div>
-  <details class="kbox" style="margin-bottom:22px"><summary style="cursor:pointer;font-family:var(--display);font-weight:800">Notizen vom Verkaufsteam: Kundenwünsche Juli bis September</summary><div class="tscroll" style="margin-top:10px"><table class="t" id="wtab"></table></div></details>
-  <div class="plan">
-    <div class="plist" id="plist"></div>
-    <aside class="regal">
-      <div class="field"><label for="team" class="eyebrow">Unser Team</label><input id="team" placeholder="z. B. Gruppe 2: Ali, Mia, Deniz, Sara"></div>
-      <div><span class="eyebrow" id="ortLabel">Standort: noch nicht gewählt</span></div>
-      <div class="slots" id="slots"></div>
-      <div class="stats" id="stats"></div>
-      <div class="note" style="font-size:.9rem"><b>K</b> = Kernsortiment, <b>R</b> = Randsortiment. Markiert jeden Artikel.</div>
-      <div class="chosen" id="chosen"></div>
-      <div class="field"><label for="why" class="eyebrow">Unsere Begründung (breit/schmal, tief/flach, Kern/Rand)</label><textarea id="why" rows="4" style="padding:8px 12px;border:1px solid var(--sand);border-radius:9px;background:var(--surface);font:inherit" placeholder="Unser Sortiment ist eher …, weil …"></textarea></div>
-      <div class="toolbar"><button class="btn" id="exportPlan">Als Word-Datei speichern</button><button class="btn ghost" id="resetPlan">Alles löschen</button></div>
-    </aside>
+  <div class="me"><label class="field"><span class="eyebrow">Unser Team (alle Namen)</span><input id="team" placeholder="z. B. Gruppe 2: Ali, Mia, Deniz, Sara" autocomplete="off"></label><div class="hint-s">Die Namen stehen in eurer PDF- oder Word-Datei. Alles wird nur auf diesem Computer gespeichert.</div></div>
+  <nav class="psteps" id="psteps" aria-label="Schritte im Pop-up-Planer"></nav>
+
+  <div class="ppanel" id="pstep1">
+    <div class="ptask"><b>Schritt 1 · Standort und Zielgruppe</b>
+      <ol><li>Klickt auf den Standort, den eure Gruppe bekommen hat.</li><li>Lest die Karte genau: Wer kommt? Was ist wichtig? Was sagen die Menschen vor Ort?</li><li>Füllt im Arbeitsblatt 3 Schritt 1 aus.</li></ol></div>
+    <div class="orte" id="orte"></div>
+    <div class="bar2"><button class="btn" data-go="2">Weiter: Schritt 2 · Sortiment</button></div>
+  </div>
+
+  <div class="ppanel" id="pstep2" hidden>
+    <div class="ptask"><b>Schritt 2 · Sortiment wählen</b>
+      <ol><li>Wählt genau <b>12 Artikel</b> und <b>1 Dienstleistung</b>. Denkt an eure Zielgruppe.</li><li>Markiert im Regal jeden Artikel: <b>K</b> = Kernsortiment, <b>R</b> = Randsortiment.</li><li>Geht dann zum Fertig-Check.</li></ol></div>
+    <details class="kbox"><summary style="cursor:pointer;font-family:var(--display);font-weight:800">Notizen vom Verkaufsteam: Kundenwünsche Juli bis September</summary><div class="tscroll" style="margin-top:10px"><table class="t" id="wtab"></table></div><p class="hint-s" style="margin:8px 0 0">Diese Wünsche hat Kickloop noch nicht im Sortiment. Ihr braucht sie im Arbeitsblatt 3 bei der Sortimentserweiterung.</p></details>
+    <div class="plan">
+      <div><div class="pfilter" id="pfilter" aria-label="Warenbereich wählen"></div><div class="plist" id="plist"></div></div>
+      <aside class="regal" id="regal" aria-label="Euer Regal"></aside>
+    </div>
+  </div>
+
+  <div class="ppanel" id="pstep3" hidden>
+    <div class="ptask"><b>Fertig-Check</b> Prüft, ob alles fertig ist. Speichert dann eure Sortimentsliste als PDF oder als Word-Datei: für euer Plakat oder eure PowerPoint und zum Abgeben in IServ.</div>
+    <div class="pcols">
+      <div class="kbox"><h3>Ist alles fertig?</h3><ul class="pcheck" id="pcheck"></ul></div>
+      <div class="kbox"><h3>Unser Standort</h3><div id="portinfo" class="hint-s"></div></div>
+    </div>
+    <h2 class="sec">Unsere Kennzahlen</h2>
+    <div class="stats" id="pstats"></div>
+    <div class="tscroll"><table class="t" id="pcomp"></table></div>
+    <h2 class="sec">Unsere Sortimentsliste</h2>
+    <div class="tscroll"><table class="t" id="ptable"></table></div>
+    <div class="note"><b>So geht es weiter:</b> Bearbeitet im Arbeitsblatt 3 Schritt 3 (Entscheiden und begründen) und Schritt 4 (Plakat oder PowerPoint). Die Kennzahlen helfen euch beim Begründen.</div>
+    <div class="toolbar"><button class="btn" id="exportPdf">Als PDF speichern</button><button class="btn" id="exportPlan">Als Word-Datei speichern</button><button class="btn ghost" data-go="2">Zurück zum Sortiment</button><button class="btn ghost" id="resetPlan">Alles löschen</button></div>
   </div>
 </section>
 
@@ -1112,7 +1171,7 @@ a.btn{text-decoration:none;display:inline-block}
     <a class="ucard" href="/lf2/marketing.html" target="_blank" rel="noopener"><b>Marketing ↗</b><span>Werbung und Zielgruppen</span></a>
     <a class="ucard" href="/lf2/verkaufsgespraech.html" target="_blank" rel="noopener"><b>Verkaufsgespräch ↗</b><span>Kundinnen und Kunden im Laden beraten</span></a>
     <a class="ucard" href="/lf2/zahlungsmittel.html" target="_blank" rel="noopener"><b>Zahlungsmittel ↗</b><span>Wie Kundinnen und Kunden bezahlen</span></a>
-    <a class="ucard" href="/lf2/popup-store.html" target="_blank" rel="noopener"><b>Optional: Pop-up-Store ↗</b><span>Freiwillige Zusatzaufgabe</span></a>
+    <a class="ucard" href="/lf2/popup-store.html" target="_blank" rel="noopener"><b>Optional: Pop-up-Store ↗</b><span>Freiwilliges Projekt: ein Sortiment für den Pop-up-Store planen</span></a>
     <a class="ucard" href="/lf2/klausurtraining.html" target="_blank" rel="noopener"><b>Klausurtraining ↗</b><span>Üben für die Klassenarbeit</span></a>
   </div>
   <h2>Lernfeld 3</h2>
@@ -1216,7 +1275,7 @@ function applySolo(){
     document.querySelectorAll("section.view").forEach(sec => { sec.hidden = sec.id !== SOLO[k]; });
     if (k === "pyramide") renderPyr();
     if (k === "organigramm" && window.renderOrgPage) renderOrgPage();
-    if (k === "popup") { renderOrte(); renderPlist(); renderRegal(); }
+    if (k === "popup") renderPopup();
     if (k.startsWith("quiz-") && window.renderQuiz) renderQuiz(k);
   }
   return !!k;
@@ -1366,67 +1425,138 @@ $("#quizBtn").addEventListener("click",e=>{const on=document.body.classList.togg
 $("#exBtn").addEventListener("click",()=>{ path={bereich:"Schuhe",gruppe:"Sneaker neu",art:"Low-Top-Sneaker",id:"1102",sorte:"Schwarz/Weiß"}; renderPyr(); });
 $("#resetPyr").addEventListener("click",()=>{ path={}; renderPyr(); });
 
-/* ---------- Pop-up-Planer ---------- */
+/* ---------- Pop-up-Planer (eigener Link #popup) ---------- */
+/* Drei Schritte: 1 Standort · 2 Sortiment · Fertig-Check mit PDF- und Word-Export. Begründung und Plakat oder PowerPoint stehen im Arbeitsblatt 3. */
 const ORTE = [
-  {k:"campus", t:"Campus-Pop-up", o:"Foyer einer Hochschule in Berlin-Charlottenburg", z:"Studierende, 19–28 Jahre, wenig Geld, wollen etwas Praktisches."},
-  {k:"mall", t:"Einkaufszentrum", o:"Einkaufszentrum in Berlin-Mitte, Weihnachtszeit", z:"Familien und Jugendliche. Viele suchen Geschenke."},
-  {k:"messe", t:"Sneaker-Messe", o:"Sneaker-Messe am Wochenende, Halle in Berlin-Kreuzberg", z:"Sammlerinnen und Sammler. Sie kennen sich sehr gut aus und suchen Besonderes."},
-  {k:"bahnhof", t:"Bahnhof", o:"Kleiner Laden in einem großen Berliner Bahnhof", z:"Berufstätige und Pendler. Wenig Zeit, schneller Einkauf, Service ist wichtig."},
+  {k:"campus", b:"A", t:"Campus-Pop-up", o:"Foyer einer Hochschule in Berlin-Charlottenburg", z:"Studierende, 19–28 Jahre",
+   w:"Sie haben wenig Geld. Sie wollen praktische Dinge für jeden Tag, für die Uni und den Nebenjob.", s:"Viele interessieren sich für Nachhaltigkeit.",
+   v:["Mehr als 80 Euro gebe ich für Schuhe nicht aus.", "Second Hand finde ich gut. Das ist besser für die Umwelt.", "Ich brauche eine Tasche, in die mein Laptop passt."]},
+  {k:"mall", b:"B", t:"Einkaufszentrum", o:"Einkaufszentrum in Berlin-Mitte, Weihnachtszeit", z:"Familien und Jugendliche",
+   w:"Viele suchen Geschenke. Sie kennen Kickloop noch nicht.", s:"Sehr viele Menschen, kurze Beratung.",
+   v:["Ich suche ein Geschenk für meinen Neffen, so bis 30 Euro.", "Kickloop? Kenne ich nicht. Was verkauft ihr denn?", "Was ist euer beliebtester Sneaker?"]},
+  {k:"messe", b:"C", t:"Sneaker-Messe", o:"Sneaker-Messe am Wochenende in Berlin-Kreuzberg", z:"Sammlerinnen und Sammler",
+   w:"Sie kennen sich sehr gut aus. Sie suchen besondere Modelle und viele Farben.", s:"Sie geben auch viel Geld aus.",
+   v:["Habt ihr das Modell auch in einer anderen Farbe?", "Ein Einzelstück, das nicht jeder hat – so etwas suche ich.", "Meine Sneaker sollen lange wie neu aussehen."]},
+  {k:"bahnhof", b:"D", t:"Bahnhof", o:"Kleiner Laden in einem großen Berliner Bahnhof", z:"Berufstätige und Pendler",
+   w:"Sie haben wenig Zeit. Sie wollen schnell einkaufen.", s:"Service ist wichtig, z. B. Schuhe morgens abgeben, abends abholen.",
+   v:["Mein Zug fährt in zehn Minuten.", "Es regnet schon wieder. Meine Schuhe sind ganz nass.", "Ich brauche bequeme Schuhe für den Weg zur Arbeit."]},
 ];
-let plan = store.get("plan", {ort:null, items:[], kr:{}, dl:null, team:""});
+const POP_MAX = 12;
+const blankPlan = () => ({ort:null, items:[], kr:{}, dl:null, team:"", step:1});
+let plan = Object.assign(blankPlan(), store.get("plan", {}));
+delete plan.why;
+let pFilter = "Alle";
 function savePlan(){ store.set("plan", plan); }
+const pItems = () => plan.items.map(id=>byId[id]).filter(Boolean);
+const pOrt = () => ORTE.find(o=>o.k===plan.ort);
+const pDl = () => dienstleistungen.find(d=>d.id===plan.dl);
+const sortenText = a => `${a.sorten.length} ${a.secondhand ? (a.sorten.length>1 ? "Größen" : "Größe") : (a.sorten.length>1 ? "Sorten" : "Sorte")}`;
+function popStats(items){
+  return { bereiche: uniq(items.map(a=>a.bereich)).length, gruppen: uniq(items.map(a=>a.gruppe)).length, arten: uniq(items.map(a=>a.art)).length,
+           artikel: items.length, sorten: items.reduce((s,a)=>s+a.sorten.length,0),
+           avg: items.length ? items.reduce((s,a)=>s+a.preis,0)/items.length : 0,
+           min: items.length ? Math.min(...items.map(a=>a.preis)) : 0, max: items.length ? Math.max(...items.map(a=>a.preis)) : 0,
+           k: items.filter(a=>plan.kr[a.id]==="K").length, r: items.filter(a=>plan.kr[a.id]==="R").length, sh: items.filter(a=>a.secondhand).length };
+}
+function popChecks(){
+  const items = pItems(), marked = items.filter(a=>plan.kr[a.id]).length;
+  return [
+    [!!plan.team.trim(), "Ihr habt oben eure Namen eingetragen."],
+    [!!pOrt(), pOrt() ? `Standort gewählt: ${pOrt().t}` : "Ihr habt einen Standort gewählt."],
+    [items.length===POP_MAX, `Im Regal stehen genau 12 Artikel (jetzt: ${items.length}).`],
+    [!!pDl(), pDl() ? `Dienstleistung gewählt: ${pDl().name}` : "Ihr habt 1 Dienstleistung gewählt."],
+    [items.length>0 && marked===items.length, `Jeder Artikel ist als K oder R markiert (${marked} von ${items.length}).`],
+  ];
+}
+const stepDone = n => n===1 ? !!pOrt() : n===2 ? (pItems().length===POP_MAX && !!pDl() && pItems().every(a=>plan.kr[a.id])) : popChecks().every(c=>c[0]);
+function goStep(n){ plan.step = n; savePlan(); renderPopup(); const nav = $("#psteps"), y = nav.getBoundingClientRect().top; if (y < 0) window.scrollTo(0, y + window.scrollY - 16); }
+function renderPopup(){
+  const st = [1,2,3].includes(plan.step) ? plan.step : 1;
+  $("#psteps").innerHTML = [[1,"1","Standort"],[2,"2","Sortiment"],[3,"✓","Fertig-Check"]].map(([n,i,t])=>
+    `<button data-step="${n}" class="${stepDone(n)&&n<3?"done":""}" ${st===n?'aria-current="step"':""}><span class="n">${stepDone(n)&&n<3&&st!==n?"✓":i}</span>${t}</button>`).join("");
+  $("#psteps").querySelectorAll("[data-step]").forEach(b=>b.addEventListener("click",()=>goStep(+b.dataset.step)));
+  [1,2,3].forEach(n=>{ $("#pstep"+n).hidden = n!==st; });
+  if ($("#team") !== document.activeElement) $("#team").value = plan.team||"";
+  if (st===1) renderOrte();
+  if (st===2) { renderPlist(); renderRegal(); }
+  if (st===3) renderCheck();
+}
 function renderOrte(){
-  $("#orte").innerHTML = ORTE.map(o=>`<button class="ort" data-k="${o.k}" aria-pressed="${plan.ort===o.k}"><b>${o.t}</b><span>${o.o}</span><span><b style="font-size:.9rem">Zielgruppe:</b> ${o.z}</span></button>`).join("");
-  $("#orte").querySelectorAll(".ort").forEach(b=>b.addEventListener("click",()=>{plan.ort=b.dataset.k; savePlan(); renderOrte(); renderRegal();}));
+  $("#orte").innerHTML = ORTE.map(o=>`<button class="ort" data-k="${o.k}" aria-pressed="${plan.ort===o.k}">
+    <span class="tag"><span>Standort ${o.b}</span>${plan.ort===o.k?'<span class="on">✓ unser Standort</span>':""}</span>
+    <span class="tt">${esc(o.t)}</span>
+    <dl><dt>Ort</dt><dd>${esc(o.o)}</dd><dt>Zielgruppe</dt><dd>${esc(o.z)}</dd><dt>Das ist wichtig</dt><dd>${esc(o.w)}</dd><dt>Besonderheit</dt><dd>${esc(o.s)}</dd></dl>
+    <span class="voices"><span class="eyebrow" style="font-style:normal">Das sagen Menschen vor Ort</span>${o.v.map(x=>`<span class="vq">${esc(x)}</span>`).join("")}</span></button>`).join("");
+  $("#orte").querySelectorAll(".ort").forEach(b=>b.addEventListener("click",()=>{ plan.ort=b.dataset.k; savePlan(); renderPopup(); }));
 }
 function renderPlist(){
+  const F = ["Alle", ...BEREICHE, "Dienstleistung"];
+  $("#pfilter").innerHTML = F.map(f=>`<button class="chip" data-f="${esc(f)}" aria-pressed="${pFilter===f}">${esc(f)}</button>`).join("");
+  $("#pfilter").querySelectorAll("[data-f]").forEach(b=>b.addEventListener("click",()=>{ pFilter=b.dataset.f; renderPlist(); }));
   let h = "";
   for (const b of BEREICHE){
-    h += `<div class="pgroup"><h3>${esc(b)}</h3>` + artikel.filter(a=>a.bereich===b).map(a=>{
+    if (pFilter!=="Alle" && pFilter!==b) continue;
+    const arts = artikel.filter(a=>a.bereich===b);
+    h += `<div class="pgroup"><h3>${esc(b)}</h3>` + uniq(arts.map(a=>a.gruppe)).map(g=>`<h4>${esc(g)}</h4>` + arts.filter(a=>a.gruppe===g).map(a=>{
       const sel = plan.items.includes(a.id);
-      return `<label class="prow ${sel?"sel":""}"><input type="checkbox" data-id="${a.id}" ${sel?"checked":""}><span><b>${esc(a.marke)}</b> ${esc(a.name)}<br><span class="pmeta">${esc(a.gruppe)} › ${esc(a.art)} · ${a.sorten.length} ${a.secondhand?"Größe(n)":a.sorten.length>1?"Sorten":"Sorte"}</span></span><span class="price">${eur(a.preis)}</span></label>`;
-    }).join("") + `</div>`;
+      const tags = [a.secondhand?"Second Hand":"", a.eigenmarke?"Eigenmarke":""].filter(Boolean).join(" · ");
+      return `<label class="prow ${sel?"sel":""}"><input type="checkbox" data-id="${a.id}" ${sel?"checked":""}><span class="pic" aria-hidden="true">${illo(a)}</span><span><b>${esc(a.marke)}</b> ${esc(a.name)}<br><span class="pmeta">${esc(a.art)} · ${sortenText(a)}${tags?" · "+tags:""} · Art.-Nr. ${a.id}</span></span><span class="price">${eur(a.preis)}</span></label>`;
+    }).join("")).join("") + `</div>`;
   }
-  h += `<div class="pgroup"><h3>Dienstleistung (genau 1)</h3>` + dienstleistungen.map(d=>`<label class="prow ${plan.dl===d.id?"sel":""}"><input type="radio" name="dl" data-dl="${d.id}" ${plan.dl===d.id?"checked":""}><span><b>${esc(d.name)}</b><br><span class="pmeta">${esc(d.info)}</span></span><span class="price">${d.ab?"ab ":""}${eur(d.preis)}</span></label>`).join("") + `</div>`;
+  if (pFilter==="Alle" || pFilter==="Dienstleistung")
+    h += `<div class="pgroup"><h3>Dienstleistung aus der Werkstatt (genau 1)</h3>` + dienstleistungen.map(d=>`<label class="prow nopic ${plan.dl===d.id?"sel":""}"><input type="radio" name="dl" data-dl="${d.id}" ${plan.dl===d.id?"checked":""}><span><b>${esc(d.name)}</b><br><span class="pmeta">${esc(d.info)} Dauer: ${esc(d.dauer)}.</span></span><span class="price">${d.ab?"ab ":""}${eur(d.preis)}</span></label>`).join("") + `</div>`;
   $("#plist").innerHTML = h;
   $("#plist").querySelectorAll("input[type=checkbox]").forEach(i=>i.addEventListener("change",()=>{
-    const id=i.dataset.id;
-    if (i.checked){ if(plan.items.length>=12){ i.checked=false; flash(); return; } plan.items.push(id); plan.kr[id]=plan.kr[id]||null; }
-    else { plan.items=plan.items.filter(x=>x!==id); delete plan.kr[id]; }
-    savePlan(); i.closest(".prow").classList.toggle("sel", i.checked); renderRegal();
+    const id = i.dataset.id;
+    if (i.checked){ if (plan.items.length>=POP_MAX){ i.checked=false; toast("Das Regal ist voll. Nehmt zuerst einen Artikel heraus."); return; } plan.items.push(id); }
+    else { plan.items = plan.items.filter(x=>x!==id); delete plan.kr[id]; }
+    savePlan(); i.closest(".prow").classList.toggle("sel", i.checked); renderRegal(); renderSteps();
   }));
-  $("#plist").querySelectorAll("input[type=radio]").forEach(i=>i.addEventListener("change",()=>{ plan.dl=i.dataset.dl; savePlan(); renderPlist(); renderRegal(); }));
+  $("#plist").querySelectorAll("input[type=radio]").forEach(i=>i.addEventListener("change",()=>{
+    plan.dl = i.dataset.dl; savePlan();
+    $("#plist").querySelectorAll("input[type=radio]").forEach(r=>r.closest(".prow").classList.toggle("sel", r.checked));
+    renderRegal(); renderSteps();
+  }));
 }
-let flashT; function flash(){ const w=$("#stats"); w.insertAdjacentHTML("afterend",'<p class="warnline" id="fl">Das Regal ist voll. Nimm zuerst einen Artikel heraus.</p>'); clearTimeout(flashT); flashT=setTimeout(()=>{const f=$("#fl"); f&&f.remove();},2600); }
+function renderSteps(){ const cur = plan.step; $("#psteps").querySelectorAll("[data-step]").forEach(b=>{ const n=+b.dataset.step, d=stepDone(n)&&n<3; b.classList.toggle("done", d); b.querySelector(".n").textContent = d&&n!==cur ? "✓" : (n===3?"✓":String(n)); }); }
 function renderRegal(){
-  const items = plan.items.map(id=>byId[id]);
-  const ort = ORTE.find(o=>o.k===plan.ort);
-  $("#ortLabel").textContent = ort ? "Standort: "+ort.t : "Standort: noch nicht gewählt";
-  $("#slots").innerHTML = Array.from({length:12},(_,i)=>items[i]?`<div class="slot full" title="${esc(items[i].marke+" "+items[i].name)}">${illo(items[i])}</div>`:`<div class="slot">${i+1}</div>`).join("");
-  const nb = uniq(items.map(a=>a.bereich)).length, ng = uniq(items.map(a=>a.gruppe)).length, nw = uniq(items.map(a=>a.art)).length;
-  const ns = items.reduce((s,a)=>s+a.sorten.length,0);
-  const avg = items.length ? items.reduce((s,a)=>s+a.preis,0)/items.length : 0;
-  const k = items.filter(a=>plan.kr[a.id]==="K").length, r = items.filter(a=>plan.kr[a.id]==="R").length;
-  const dl = dienstleistungen.find(d=>d.id===plan.dl);
-  $("#stats").innerHTML = `
-    <div class="stat"><b>${items.length}/12</b><span>Artikel im Regal</span></div>
-    <div class="stat"><b>${ng}</b><span>Warengruppen (${nb} Bereiche)</span></div>
-    <div class="stat"><b>${nw}</b><span>Warenarten</span></div>
-    <div class="stat"><b>${ns}</b><span>Sorten insgesamt</span></div>
-    <div class="stat"><b>${items.length?eur(avg):"–"}</b><span>Durchschnittspreis</span></div>
-    <div class="stat"><b>${k} K · ${r} R</b><span>Kern / Rand</span></div>
-    <div class="stat" style="grid-column:1/-1"><span>Dienstleistung:</span> <b style="font-size:1.05rem">${dl?esc(dl.name):"noch keine"}</b></div>`;
-  $("#chosen").innerHTML = items.map(a=>`<div><span>${esc(a.marke)} ${esc(a.name)}</span><span class="kr"><button data-id="${a.id}" data-v="K" aria-pressed="${plan.kr[a.id]==="K"}" aria-label="Kernsortiment">K</button><button data-id="${a.id}" data-v="R" aria-pressed="${plan.kr[a.id]==="R"}" aria-label="Randsortiment">R</button></span></div>`).join("");
-  $("#chosen").querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>{ plan.kr[b.dataset.id]=b.dataset.v; savePlan(); renderRegal(); }));
+  const items = pItems(), ort = pOrt(), dl = pDl();
+  $("#regal").innerHTML = `
+    <div class="rhead"><span class="eyebrow">Euer Regal</span><b>${items.length} / ${POP_MAX}</b></div>
+    <div class="hint-s">${ort ? `Standort ${ort.b}: ${esc(ort.t)} · Zielgruppe: ${esc(ort.z)}` : `Noch kein Standort. <button class="linkbtn" data-go="1">Zu Schritt 1</button>`}</div>
+    <div class="slots">${Array.from({length:POP_MAX},(_,i)=>items[i]?`<div class="slot full" title="${esc(items[i].marke+" "+items[i].name)}">${illo(items[i])}</div>`:`<div class="slot">${i+1}</div>`).join("")}</div>
+    <div class="dlslot ${dl?"full":""}">${dl ? `<b>Dienstleistung:</b> ${esc(dl.name)} (${dl.ab?"ab ":""}${eur(dl.preis)})` : "Dienstleistung: noch keine"}</div>
+    ${items.length ? `<div class="note" style="font-size:.88rem;padding:8px 12px"><b>K</b> = Kernsortiment · <b>R</b> = Randsortiment. Markiert jeden Artikel.</div>` : ""}
+    <div class="chosen">${items.map(a=>`<div class="crow"><span>${esc(a.marke)} ${esc(a.name)}</span><span class="kr"><button data-id="${a.id}" data-v="K" aria-pressed="${plan.kr[a.id]==="K"}" aria-label="Kernsortiment">K</button><button data-id="${a.id}" data-v="R" aria-pressed="${plan.kr[a.id]==="R"}" aria-label="Randsortiment">R</button></span><button class="x" data-rm="${a.id}" aria-label="${esc(a.marke+" "+a.name)} herausnehmen" title="Herausnehmen">×</button></div>`).join("")}</div>
+    <button class="btn" data-go="3">Weiter: Fertig-Check</button>`;
+  $("#regal").querySelectorAll(".kr button").forEach(b=>b.addEventListener("click",()=>{ plan.kr[b.dataset.id]=b.dataset.v; savePlan(); renderRegal(); renderSteps(); }));
+  $("#regal").querySelectorAll("[data-rm]").forEach(b=>b.addEventListener("click",()=>{ const id=b.dataset.rm; plan.items=plan.items.filter(x=>x!==id); delete plan.kr[id]; savePlan(); renderPlist(); renderRegal(); renderSteps(); }));
 }
-$("#team").value = plan.team||"";
-$("#team").addEventListener("input",e=>{plan.team=e.target.value; savePlan();});
-let resetArmed=false;
-$("#resetPlan").addEventListener("click",e=>{
-  if(!resetArmed){ resetArmed=true; e.target.textContent="Wirklich löschen?"; setTimeout(()=>{resetArmed=false; e.target.textContent="Alles löschen";},3000); return; }
-  plan={ort:null,items:[],kr:{},dl:null,team:"",why:""}; savePlan(); $("#team").value=""; $("#why").value=""; resetArmed=false; e.target.textContent="Alles löschen"; renderOrte(); renderPlist(); renderRegal();
+function renderCheck(){
+  const items = pItems(), ort = pOrt(), dl = pDl(), s = popStats(items), all = popStats(artikel);
+  $("#pcheck").innerHTML = popChecks().map(([ok,t])=>`<li class="${ok?"ok":""}"><span class="i">${ok?"✓":"–"}</span><span>${esc(t)}</span></li>`).join("") +
+    (popChecks().every(c=>c[0]) ? `<li class="ok"><span class="i">★</span><b>Alles fertig! Speichert jetzt eure Sortimentsliste als PDF oder Word-Datei.</b></li>` : "");
+  $("#portinfo").innerHTML = ort ? `<b style="color:var(--ink)">Standort ${ort.b}: ${esc(ort.t)}</b><br>${esc(ort.o)}<br><b>Zielgruppe:</b> ${esc(ort.z)}. ${esc(ort.w)}` : `Noch kein Standort gewählt. <button class="linkbtn" data-go="1">Zu Schritt 1</button>`;
+  $("#pstats").innerHTML = `
+    <div class="stat"><b>${s.artikel}/${POP_MAX}</b><span>Artikel im Regal</span></div>
+    <div class="stat"><b>${s.k} K · ${s.r} R</b><span>Kern- und Randsortiment</span></div>
+    <div class="stat"><b>${items.length?eur(s.avg):"–"}</b><span>Durchschnittspreis</span></div>
+    <div class="stat"><b style="font-size:1.15rem">${items.length?eur(s.min)+" bis "+eur(s.max):"–"}</b><span>günstigster bis teuerster Artikel</span></div>
+    <div class="stat"><b>${s.sh}</b><span>davon Second Hand</span></div>
+    <div class="stat"><b style="font-size:1.1rem">${dl?esc(dl.name):"noch keine"}</b><span>Dienstleistung</span></div>`;
+  $("#pcomp").innerHTML = `<thead><tr><th>Zum Vergleich: Breite und Tiefe</th><th style="text-align:right">Unser Pop-up-Store</th><th style="text-align:right">Kickloop im Laden</th></tr></thead><tbody>` +
+    [["Warenbereiche","bereiche"],["Warengruppen","gruppen"],["Warenarten","arten"],["Artikel","artikel"],["Sorten (bei Second Hand: Größen)","sorten"]].map(([t,k])=>`<tr><td>${t}</td><td class="r"><b>${s[k]}</b></td><td class="r">${all[k]}</td></tr>`).join("") + `</tbody>`;
+  $("#ptable").innerHTML = `<thead><tr><th>Nr.</th><th>Art.-Nr.</th><th>Artikel</th><th>Warengruppe › Warenart</th><th style="text-align:right">Preis</th><th>K/R</th></tr></thead><tbody>` +
+    (items.length ? items.map((a,i)=>`<tr><td>${i+1}</td><td class="mono">${a.id}</td><td>${esc(a.marke)} ${esc(a.name)}</td><td>${esc(a.gruppe)} › ${esc(a.art)}</td><td class="r">${eur(a.preis)}</td><td><b>${plan.kr[a.id]||"–"}</b></td></tr>`).join("") : `<tr><td colspan="6" class="hint-s">Noch keine Artikel. <button class="linkbtn" data-go="2">Zu Schritt 2</button></td></tr>`) +
+    (dl ? `<tr><td>DL</td><td class="mono">${dl.id}</td><td>${esc(dl.name)}</td><td>Werkstatt-Service</td><td class="r">${dl.ab?"ab ":""}${eur(dl.preis)}</td><td>–</td></tr>` : "") + `</tbody>`;
+}
+$("#v-popup").addEventListener("click", e=>{ const g = e.target.closest("[data-go]"); if (g) goStep(+g.dataset.go); });
+$("#team").addEventListener("input", e=>{ plan.team = e.target.value; savePlan(); if (plan.step===3) renderCheck(); renderSteps(); });
+let resetArmed = false;
+$("#resetPlan").addEventListener("click", e=>{
+  if (!resetArmed){ resetArmed=true; e.target.textContent="Wirklich alles löschen? Nochmal klicken."; setTimeout(()=>{ resetArmed=false; e.target.textContent="Alles löschen"; },4000); return; }
+  plan = blankPlan(); savePlan(); $("#team").value=""; resetArmed=false; e.target.textContent="Alles löschen"; pFilter="Alle"; renderPopup();
 });
-
 $("#wtab").innerHTML = `<thead><tr><th>Wunsch von Kundinnen und Kunden</th><th style="text-align:right">Wie oft?</th></tr></thead><tbody>` + kundenwuensche.map(w=>`<tr><td>${esc(w.wunsch)}</td><td class="r">${w.anzahl}×</td></tr>`).join("") + `</tbody>`;
 /* ---------- Posteingang ---------- */
 const TASKS = {
@@ -2020,25 +2150,172 @@ $("#resetAll").addEventListener("click", e => {
   location.hash = "start"; location.reload();
 });
 
-/* ---------- Pop-up-Export ---------- */
+/* ---------- Pop-up-Export: Sortimentsliste als Word-Datei (für Plakat oder PowerPoint, Abgabe in IServ) ---------- */
 function popupDocx() {
-  const items = plan.items.map(id => byId[id]); const ort = ORTE.find(o => o.k === plan.ort); const dl = dienstleistungen.find(d => d.id === plan.dl);
-  let b = wp([wr("Kickloop-Pop-up-Store · Unsere Sortimentsplanung", { b: true, sz: 32 })], { after: 120 });
-  b += wp([wr("Team: ", { b: true }), wr(plan.team || "")]) + wp([wr("Standort: ", { b: true }), wr(ort ? ort.t + " – " + ort.o : "")]) + wp([wr("Zielgruppe: ", { b: true }), wr(ort ? ort.z : "")], { after: 200 });
-  b += wtbl([600, 1100, 3900, 2200, 1100, 738], [["Nr.", "Art.-Nr.", "Artikel", "Warengruppe", "Preis", "K/R"], ...items.map((a, i) => [String(i + 1), a.id, a.marke + " " + a.name, a.gruppe, fmt(a.preis) + " €", plan.kr[a.id] || "–"])], { head: true, sz: 19, right: [4] });
-  b += wp([wr("Dienstleistung: ", { b: true }), wr(dl ? dl.name + " (" + (dl.ab ? "ab " : "") + fmt(dl.preis) + " €)" : "")], { before: 160 });
-  const ng = uniq(items.map(a => a.gruppe)).length, nw = uniq(items.map(a => a.art)).length, ns = items.reduce((s, a) => s + a.sorten.length, 0);
-  b += wp(`Warengruppen: ${ng} · Warenarten: ${nw} · Sorten: ${ns} · Durchschnittspreis: ${items.length ? fmt(items.reduce((s, a) => s + a.preis, 0) / items.length) + " €" : "–"}`);
-  b += wp([wr("Unsere Begründung: ", { b: true })], { before: 160, after: 40 }) + (plan.why || "").split("\n").map(t => wp(t)).join("");
+  const items = pItems(), ort = pOrt(), dl = pDl(), s = popStats(items), all = popStats(artikel);
+  let b = wp([LOGO_DRAWING], { after: 120 });
+  b += wp([wr("Unser Pop-up-Store · Sortimentsliste", { b: true, sz: 34 })], { after: 80 });
+  b += wp([wr("Team: ", { b: true }), wr(plan.team || "________________")], { after: 40 }) + wp([wr("Datum: ", { b: true }), wr(today())], { after: 160 });
+  b += wtbl([2200, 7438], [
+    ["Standort", ort ? `Standort ${ort.b}: ${ort.t} – ${ort.o}` : "–"],
+    ["Zielgruppe", ort ? `${ort.z}. ${ort.w}` : "–"],
+    ["Besonderheit", ort ? ort.s : "–"]].map(r => [wp(wr(r[0], { b: true, sz: 20 }), { after: 0 }), wp(wr(r[1], { sz: 20 }), { after: 0 })]), { sz: 20 });
+  b += wp([wr("Unsere 12 Artikel und unsere Dienstleistung", { b: true, sz: 26 })], { before: 240, after: 80 });
+  b += wtbl([600, 1000, 3700, 2400, 1200, 738], [["Nr.", "Art.-Nr.", "Artikel", "Warengruppe › Warenart", "Preis", "K/R"],
+    ...items.map((a, i) => [String(i + 1), a.id, a.marke + " " + a.name, a.gruppe + " › " + a.art, fmt(a.preis) + " €", plan.kr[a.id] || "–"]),
+    ...(dl ? [["DL", dl.id, dl.name, "Werkstatt-Service", (dl.ab ? "ab " : "") + fmt(dl.preis) + " €", "–"]] : [])], { head: true, sz: 20, right: [4] });
+  b += wp([wr("Unsere Kennzahlen", { b: true, sz: 26 })], { before: 240, after: 80 });
+  b += wtbl([4400, 2600, 2638], [["Breite und Tiefe", "Unser Pop-up-Store", "Kickloop im Laden"],
+    ...[["Warenbereiche", "bereiche"], ["Warengruppen", "gruppen"], ["Warenarten", "arten"], ["Artikel", "artikel"], ["Sorten (bei Second Hand: Größen)", "sorten"]].map(([t, k]) => [t, String(s[k]), String(all[k])])], { head: true, sz: 20, right: [1, 2] });
+  b += wp("", { after: 80 });
+  b += wtbl([4400, 5238], [["Kernsortiment (K)", s.k + " Artikel"], ["Randsortiment (R)", s.r + " Artikel"], ["davon Second Hand", s.sh + " Artikel"],
+    ["Durchschnittspreis", items.length ? fmt(s.avg) + " €" : "–"], ["günstigster bis teuerster Artikel", items.length ? fmt(s.min) + " € bis " + fmt(s.max) + " €" : "–"]], { sz: 20 });
+  b += wp([wr("Weiter im Arbeitsblatt 3: Schritt 3 (Entscheiden und begründen) und Schritt 4 (Plakat oder PowerPoint).", { i: true, sz: 20, c: "5F646A" })], { before: 200 });
   return docx(b, null);
 }
+$("#exportPlan").addEventListener("click", () => {
+  saveFile(`PopupStore_Sortimentsliste_${safe(plan.team) || "Team"}.docx`, popupDocx());
+});
 
-$("#why").value = plan.why||"";
-$("#why").addEventListener("input",e=>{plan.why=e.target.value; savePlan();});
-$("#exportPlan").addEventListener("click",()=>saveFile(`PopupStore_${safe(plan.team)||"Team"}.docx`, popupDocx()));
+/* ---------- Mini-PDF ohne Bibliothek (Helvetica, WinAnsi), für den PDF-Export des Pop-up-Planers ---------- */
+const PDF_W = {
+  r: [278,278,355,556,556,889,667,191,333,333,389,584,278,333,278,278,556,556,556,556,556,556,556,556,556,556,278,278,584,584,584,556,1015,667,667,722,722,667,611,778,722,278,500,667,556,833,722,778,667,778,722,667,611,722,667,944,667,667,611,278,278,278,469,556,333,556,556,500,556,556,278,556,556,222,222,500,222,833,556,556,556,556,333,500,278,556,500,722,500,500,500,334,260,334,584,761,556,0,222,556,333,1000,556,556,333,1000,667,333,1000,0,611,0,0,222,222,333,333,350,556,1000,333,1000,500,333,944,0,500,667,278,333,556,556,556,556,260,556,333,737,370,556,584,333,737,333,400,584,333,333,333,556,537,278,333,333,365,556,834,834,834,611,667,667,667,667,667,667,1000,722,667,667,667,667,278,278,278,278,722,722,778,778,778,778,778,584,778,722,722,722,722,667,667,611,556,556,556,556,556,556,889,500,556,556,556,556,278,278,278,278,556,556,556,556,556,556,556,584,611,556,556,556,556,500,556,500],
+  b: [278,333,474,556,556,889,722,238,333,333,389,584,278,333,278,278,556,556,556,556,556,556,556,556,556,556,333,333,584,584,584,611,975,722,722,722,722,667,611,778,722,278,556,722,611,833,722,778,667,778,722,667,611,722,667,944,667,667,611,333,278,333,584,556,333,556,611,556,611,556,333,611,611,278,278,556,278,889,611,611,611,611,389,556,333,611,556,778,556,556,500,389,280,389,584,761,556,0,278,556,500,1000,556,556,333,1000,667,333,1000,0,611,0,0,278,278,500,500,350,556,1000,333,1000,556,333,944,0,500,667,278,333,556,556,556,556,280,556,333,737,370,556,584,333,737,333,400,584,333,333,333,611,556,278,333,333,365,556,834,834,834,611,722,722,722,722,722,722,1000,722,667,667,667,667,278,278,278,278,722,722,778,778,778,778,778,584,778,722,722,722,722,667,667,611,556,556,556,556,556,556,889,556,556,556,556,556,278,278,278,278,611,611,611,611,611,611,611,584,611,611,611,611,611,556,611,556]
+};
+const PDF_SPEC = "€‚ƒ„…†‡ˆ‰Š‹ŒŽ‘’“”•–—˜™š›œžŸ", PDF_SPEC_C = [128,130,131,132,133,134,135,136,137,138,139,140,142,145,146,147,148,149,150,151,152,153,154,155,156,158,159];
+const PDF_SUB = { "ı": "i", "−": "-", "✓": "x", "★": "*", "→": "->", "↗": "", " ": " ", " ": " " };
+function pdfCodes(s) {
+  const out = [];
+  for (const ch of String(s)) {
+    if (PDF_SUB[ch] !== undefined) { for (const c of PDF_SUB[ch]) out.push(c.charCodeAt(0)); continue; }
+    const c = ch.codePointAt(0);
+    if ((c >= 32 && c < 127) || (c >= 160 && c < 256)) out.push(c);
+    else { const i = PDF_SPEC.indexOf(ch); out.push(i >= 0 ? PDF_SPEC_C[i] : 63); }
+  }
+  return out;
+}
+const pdfWidth = (s, size, bold) => pdfCodes(s).reduce((w, c) => w + (PDF_W[bold ? "b" : "r"][c - 32] || 0), 0) * size / 1000;
+function pdfWrap(s, w, size, bold) {
+  const lines = [];
+  for (const para of String(s).split("\n")) {
+    let cur = "";
+    for (const word of para.split(/ +/)) {
+      const t = cur ? cur + " " + word : word;
+      if (!cur || pdfWidth(t, size, bold) <= w) cur = t; else { lines.push(cur); cur = word; }
+    }
+    lines.push(cur);
+  }
+  return lines;
+}
+const pdfStr = s => pdfCodes(s).map(c => (c >= 32 && c < 127 && c !== 40 && c !== 41 && c !== 92) ? String.fromCharCode(c) : "\\" + c.toString(8).padStart(3, "0")).join("");
+class MiniPdf {
+  constructor() { this.pages = []; this.W = 595.28; this.H = 841.89; this.addPage(); }
+  addPage() { this.c = []; this.pages.push(this.c); }
+  col(hex) { const n = parseInt(hex.slice(1), 16); return [(n >> 16) & 255, (n >> 8) & 255, n & 255].map(v => (v / 255).toFixed(3)).join(" "); }
+  /* y = Grundlinie, von oben gemessen */
+  text(x, y, s, o = {}) {
+    const size = o.size || 10;
+    if (o.right) x -= pdfWidth(s, size, o.bold);
+    this.c.push(`BT ${this.col(o.color || "#2A2E31")} rg /${o.bold ? "F2" : "F1"} ${size} Tf 1 0 0 1 ${x.toFixed(2)} ${(this.H - y).toFixed(2)} Tm (${pdfStr(s)}) Tj ET`);
+  }
+  /* y = Oberkante, von oben gemessen */
+  rect(x, y, w, h, o = {}) {
+    let op = "";
+    if (o.fill) op += `${this.col(o.fill)} rg `;
+    if (o.stroke) op += `${this.col(o.stroke)} RG ${o.lw || 0.6} w `;
+    this.c.push(op + `${x.toFixed(2)} ${(this.H - y - h).toFixed(2)} ${w.toFixed(2)} ${h.toFixed(2)} re ${o.fill && o.stroke ? "B" : o.fill ? "f" : "S"}`);
+  }
+  line(x1, y1, x2, y2, o = {}) { this.c.push(`${this.col(o.color || "#2A2E31")} RG ${o.lw || 0.6} w ${x1.toFixed(2)} ${(this.H - y1).toFixed(2)} m ${x2.toFixed(2)} ${(this.H - y2).toFixed(2)} l S`); }
+  blob(title) {
+    const objs = [], n = this.pages.length;
+    objs[1] = "<< /Type /Catalog /Pages 2 0 R >>";
+    objs[2] = `<< /Type /Pages /Count ${n} /Kids [${this.pages.map((_, i) => `${5 + 2 * i} 0 R`).join(" ")}] >>`;
+    objs[3] = "<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>";
+    objs[4] = "<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>";
+    this.pages.forEach((c, i) => {
+      const stream = c.join("\n");
+      objs[5 + 2 * i] = `<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ${this.W} ${this.H}] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents ${6 + 2 * i} 0 R >>`;
+      objs[6 + 2 * i] = `<< /Length ${stream.length} >>\nstream\n${stream}\nendstream`;
+    });
+    const info = objs.length;
+    objs[info] = `<< /Title (${pdfStr(title)}) /Producer (Kickloop Pop-up-Planer) >>`;
+    let out = "%PDF-1.4\n";
+    const offs = [];
+    for (let i = 1; i < objs.length; i++) { offs[i] = out.length; out += `${i} 0 obj\n${objs[i]}\nendobj\n`; }
+    const xref = out.length;
+    out += `xref\n0 ${objs.length}\n0000000000 65535 f \n` + offs.slice(1).map(o => String(o).padStart(10, "0") + " 00000 n \n").join("");
+    out += `trailer\n<< /Size ${objs.length} /Root 1 0 R /Info ${info} 0 R >>\nstartxref\n${xref}\n%%EOF\n`;
+    return new Blob([out], { type: "application/pdf" });
+  }
+}
+
+/* ---------- Pop-up-Export: Sortimentsliste als PDF (gleicher Inhalt wie die Word-Datei) ---------- */
+function popupPdf() {
+  const items = pItems(), ort = pOrt(), dl = pDl(), s = popStats(items), all = popStats(artikel);
+  const P = new MiniPdf(), L = 50, R = P.W - 50, WD = R - L, TOP = 56, BOT = P.H - 62;
+  const GREY = "#5F646A", SAND = "#F3D9A4";
+  let y = TOP;
+  const ensure = h => { if (y + h > BOT) { P.addPage(); y = TOP; return true; } return false; };
+  const table = (widths, rows, o = {}) => {
+    const size = o.size || 9.5, pad = 4, lh = size * 1.28;
+    const drawRow = (r, head) => {
+      const bold = i => head || (o.boldFirst && i === 0);
+      const cells = r.map((t, i) => pdfWrap(t, widths[i] - 2 * pad, size, bold(i)));
+      const h = Math.max(...cells.map(c => c.length)) * lh + 2 * pad - (lh - size);
+      if (ensure(h) && o.head && !head) drawRow(rows[0], true);
+      let x = L;
+      widths.forEach((w, i) => {
+        P.rect(x, y, w, h, { fill: head ? SAND : null, stroke: "#2A2E31" });
+        cells[i].forEach((ln, k) => {
+          const by = y + pad + size * 0.8 + k * lh;
+          if ((o.right || []).includes(i)) P.text(x + w - pad, by, ln, { size, bold: bold(i), right: true });
+          else P.text(x + pad, by, ln, { size, bold: bold(i) });
+        });
+        x += w;
+      });
+      y += h;
+    };
+    rows.forEach((r, i) => drawRow(r, !!o.head && i === 0));
+  };
+  const heading = t => { ensure(44); y += 22; P.text(L, y, t, { size: 12.5, bold: true }); y += 8; };
+
+  P.text(L, y, "Kickloop", { size: 20, bold: true });
+  P.text(R, y, "Sneaker & Second Hand · Berlin-Neukölln", { size: 9, color: GREY, right: true });
+  y += 9; P.rect(L, y, WD, 3, { fill: "#E8A33D" }); y += 30;
+  P.text(L, y, "Unser Pop-up-Store · Sortimentsliste", { size: 16, bold: true }); y += 22;
+  P.text(L, y, "Team:", { bold: true }); P.text(L + 44, y, plan.team || "________________"); y += 15;
+  P.text(L, y, "Datum:", { bold: true }); P.text(L + 44, y, today()); y += 14;
+  table([110, WD - 110], [
+    ["Standort", ort ? `Standort ${ort.b}: ${ort.t} – ${ort.o}` : "–"],
+    ["Zielgruppe", ort ? `${ort.z}. ${ort.w}` : "–"],
+    ["Besonderheit", ort ? ort.s : "–"]], { boldFirst: true });
+  heading("Unsere 12 Artikel und unsere Dienstleistung");
+  table([26, 48, 170, WD - 26 - 48 - 170 - 62 - 30, 62, 30], [["Nr.", "Art.-Nr.", "Artikel", "Warengruppe › Warenart", "Preis", "K/R"],
+    ...items.map((a, i) => [String(i + 1), a.id, a.marke + " " + a.name, a.gruppe + " › " + a.art, fmt(a.preis) + " €", plan.kr[a.id] || "–"]),
+    ...(dl ? [["DL", dl.id, dl.name, "Werkstatt-Service", (dl.ab ? "ab " : "") + fmt(dl.preis) + " €", "–"]] : [])], { head: true, right: [4] });
+  heading("Unsere Kennzahlen");
+  table([WD - 260, 130, 130], [["Breite und Tiefe", "Unser Pop-up-Store", "Kickloop im Laden"],
+    ...[["Warenbereiche", "bereiche"], ["Warengruppen", "gruppen"], ["Warenarten", "arten"], ["Artikel", "artikel"], ["Sorten (bei Second Hand: Größen)", "sorten"]].map(([t, k]) => [t, String(s[k]), String(all[k])])], { head: true, right: [1, 2] });
+  y += 8;
+  table([WD - 260, 260], [["Kernsortiment (K)", s.k + " Artikel"], ["Randsortiment (R)", s.r + " Artikel"], ["davon Second Hand", s.sh + " Artikel"],
+    ["Durchschnittspreis", items.length ? fmt(s.avg) + " €" : "–"], ["günstigster bis teuerster Artikel", items.length ? fmt(s.min) + " € bis " + fmt(s.max) + " €" : "–"]]);
+  ensure(40); y += 22;
+  pdfWrap("Weiter im Arbeitsblatt 3: Schritt 3 (Entscheiden und begründen) und Schritt 4 (Plakat oder PowerPoint).", WD, 9.5)
+    .forEach(ln => { P.text(L, y, ln, { size: 9.5, color: GREY }); y += 12.5; });
+  P.pages.forEach((c, i) => {
+    P.c = c;
+    P.line(L, P.H - 44, R, P.H - 44, { color: "#C9CDD1", lw: 0.5 });
+    P.text(L, P.H - 32, "Pop-up-Planer · Kickloop · Lernfeld 2", { size: 8, color: GREY });
+    P.text(R, P.H - 32, `Seite ${i + 1} von ${P.pages.length}`, { size: 8, color: GREY, right: true });
+  });
+  return P.blob("Pop-up-Store Sortimentsliste " + (plan.team || ""));
+}
+$("#exportPdf").addEventListener("click", () => {
+  saveFile(`PopupStore_Sortimentsliste_${safe(plan.team) || "Team"}.pdf`, popupPdf());
+});
 /* ---------- Start ---------- */
 if (store.get("intern", false)) { $("#internToggle").checked = true; document.body.classList.add("show-intern"); }
-renderTree(); renderGrid(); renderPyr(); renderOrte(); renderPlist(); renderRegal(); renderPost();
+renderTree(); renderGrid(); renderPyr(); renderPopup(); renderPost();
 show(location.hash.slice(1) || store.get("tab","start"));
 window.addEventListener("hashchange",()=>show(location.hash.slice(1)));
 </script>
