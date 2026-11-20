@@ -981,11 +981,11 @@ details.hilfe summary,.ek details.tipp summary{color:var(--lern-ink)}
   </div>
 </section>
 
-<!-- POSTEINGANG mit Ordnern: Reklamationen (Lernfeld 2), Anfragen und Angebote (Lernfeld 3) -->
+<!-- POSTEINGANG mit Ordnern: Reklamationen (Lernfeld 2), Widerruf und Garantie, Anfragen und Angebote (Lernfeld 3) -->
 <section class="view" id="v-post" hidden>
   <div class="viewhead">
     <div><span class="eyebrow">Kundenservice · Team Verkauf (Leitung: Sara Hoffmann)</span><h1>Posteingang</h1>
-    <p class="lead">Hier kommen die E-Mails von Kundinnen und Kunden an. In „Reklamationen“ beantwortest du Beschwerden: Antwort schreiben, auf <b>Prüfen</b> klicken und als Word-Datei speichern. Die Ordner „Anfragen“ und „Angebote“ brauchst du später.</p></div>
+    <p class="lead">Hier kommen die E-Mails von Kundinnen und Kunden an. In „Reklamationen“ beantwortest du Beschwerden: Antwort schreiben, auf <b>Prüfen</b> klicken und als Word-Datei speichern. In „Widerruf und Garantie“ entscheidest du mit Hilfe der FAQ, ob Kundinnen und Kunden einen Anspruch haben. Die Ordner „Anfragen“ und „Angebote“ brauchst du später.</p></div>
   </div>
   <div class="me" data-me="full"></div>
   <div class="post">
@@ -1404,10 +1404,26 @@ details.hilfe summary,.ek details.tipp summary{color:var(--lern-ink)}
   <details><summary>Was kostet die Lieferung?</summary><p>Die Abholung im Laden ist kostenlos. Die Lieferung kostet 5,90 Euro. Ab 150 Euro Warenwert liefern wir kostenlos.</p></details>
   <details><summary>Wie lange dauert die Lieferung?</summary><p>Ware auf Lager: 2–3 Werktage. Bestellware, zum Beispiel eine andere Größe: 10–14 Werktage.</p></details>
   <details><summary>Gibt es Rabatt für Vereine, Schulen und Firmen?</summary><p>Ja. Ab 10 Stück gibt es 10 %, ab 20 Stück 15 % Mengenrabatt. Es zählen alle Artikel einer Bestellung. Auf Second-Hand-Artikel und Dienstleistungen gibt es keinen Rabatt. Unsere Angebote gelten 14 Tage.</p></details>
-  <h2>Umtausch, Widerruf und Mängel</h2>
-  <details><summary>Kann ich Schuhe aus dem Laden umtauschen?</summary><p>Neue, ungetragene Ware kannst du innerhalb von 14 Tagen mit Kassenbon umtauschen oder zurückgeben. Das ist ein freiwilliger Service von Kickloop.</p></details>
-  <details><summary>Was gilt bei einer Bestellung im Online-Shop?</summary><p>Du hast 14 Tage Widerrufsrecht ab Erhalt der Ware. Das ist gesetzlich geregelt. Die Ware muss ungetragen sein.</p></details>
-  <details><summary>Mein Artikel ist kaputt. Was jetzt?</summary><p>Hat ein Artikel einen Mangel, gilt die gesetzliche Gewährleistung von 2 Jahren. Wir reparieren den Artikel kostenlos oder du bekommst Ersatz. Die Rücksendung ist kostenlos.</p></details>
+  <h2>Umtausch und Widerruf</h2>
+  <details id="faq-umtausch-laden"><summary>Kann ich Schuhe aus dem Laden umtauschen?</summary><p>Neue, ungetragene Ware kannst du innerhalb von 14 Tagen mit Kassenbon umtauschen oder zurückgeben. Das ist ein freiwilliger Service von Kickloop.</p></details>
+  <details id="faq-widerruf"><summary>Was gilt bei einer Bestellung im Online-Shop?</summary><p>Du hast 14 Tage Widerrufsrecht ab Erhalt der Ware. Das ist gesetzlich geregelt. Die Ware muss ungetragen sein.</p></details>
+  <details id="faq-widerruf-wie"><summary>Wie widerrufe ich eine Online-Bestellung?</summary><p>Schreib uns innerhalb der 14 Tage eine E-Mail an service@kickloop-berlin.de oder nutze das Widerrufsformular aus dem Paket. Einen Grund musst du nicht nennen. Die Ware einfach zurückzuschicken, reicht nicht. Schick die Ware spätestens 14 Tage nach deinem Widerruf zurück.</p></details>
+  <details id="faq-widerruf-frist"><summary>Wann endet die Widerrufsfrist?</summary><p>Die Frist beginnt an dem Tag, an dem du die Ware bekommst. Sie dauert 14 Tage. Beispiel: Das Paket kommt am 3. November an. Dann endet die Frist am 17. November. Danach ist kein Widerruf mehr möglich.</p></details>
+  <details id="faq-widerruf-geld"><summary>Bekomme ich beim Widerruf mein ganzes Geld zurück?</summary><p>Ja. Du bekommst den Kaufpreis und die Versandkosten für die Lieferung zurück. Die Rücksendung ist kostenlos: Das Rücksende-Etikett liegt im Paket. Wir zahlen innerhalb von 14 Tagen auf dem gleichen Weg zurück, auf dem du bezahlt hast, zum Beispiel über PayPal. Wir dürfen warten, bis die Ware wieder bei uns ist.</p></details>
+  <details id="faq-anprobieren"><summary>Darf ich die Ware vor dem Widerruf anprobieren?</summary><p>Ja, so wie im Laden, zum Beispiel zu Hause auf dem Teppich. Hast du die Schuhe draußen getragen, haben sie an Wert verloren. Diesen Wertverlust musst du bezahlen.</p></details>
+  <details id="faq-widerruf-ausnahme"><summary>Kann ich jede Bestellung widerrufen?</summary><p>Nein. Artikel, die wir nur für dich nach deinen Wünschen anfertigen, kannst du nicht widerrufen. Dazu gehören Sneaker mit Custom-Design, zum Beispiel mit deinem Namen. Für Einkäufe im Laden gibt es kein gesetzliches Widerrufsrecht. Dort gilt nur unser freiwilliger Umtausch.</p></details>
+  <h2>Mängel, Gewährleistung und Garantie</h2>
+  <details id="faq-mangel"><summary>Mein Artikel ist kaputt. Was jetzt?</summary><p>Hat ein Artikel einen Mangel, gilt die gesetzliche Gewährleistung von 2 Jahren. Wir reparieren den Artikel kostenlos oder du bekommst Ersatz. Die Rücksendung ist kostenlos.</p></details>
+  <details id="faq-gewaehrleistung-garantie"><summary>Was ist der Unterschied zwischen Gewährleistung und Garantie?</summary><p><b>Gewährleistung</b> ist gesetzlich. Sie gilt 2 Jahre ab dem Kauf. Zuständig ist der Verkäufer, also Kickloop. Zeigt sich ein Mangel im ersten Jahr, gehen wir davon aus, dass er schon beim Kauf da war.</p><p><b>Garantie</b> ist freiwillig. Sie kommt meist vom Hersteller, zum Beispiel von Eastpak oder Nike. Was sie umfasst und wie lange sie gilt, steht in den Garantiebedingungen. Die Garantie kommt zur Gewährleistung dazu. Du kannst dich also immer auch an uns wenden.</p></details>
+  <details id="faq-kein-mangel"><summary>Wann ist etwas kein Mangel?</summary><p>Kein Mangel ist normaler Verschleiß, zum Beispiel eine abgelaufene Sohle nach langem Tragen. Auch Schäden durch falsche Pflege oder einen Unfall sind kein Mangel. Sneaker gehören zum Beispiel nicht in die Waschmaschine oder auf die Heizung. Dann gilt die Gewährleistung nicht. Unsere Werkstatt kann den Schaden aber gegen Bezahlung reparieren (Reparatur ab 15 Euro).</p></details>
+  <details id="faq-reklamation"><summary>Was brauche ich für eine Reklamation?</summary><p>Den Kaufbeleg (Kassenbon, Rechnung oder Bestellnummer), eine kurze Beschreibung des Mangels und am besten ein Foto. Bring den Artikel in den Laden oder schick uns eine E-Mail. Wir schicken dir dann ein kostenloses Rücksende-Etikett.</p></details>
+  <details id="faq-nach-2-jahren"><summary>Was ist, wenn der Kauf länger als 2 Jahre her ist?</summary><p>Dann ist die gesetzliche Gewährleistung vorbei. Hilfe gibt es nur noch, wenn der Hersteller eine längere Garantie gibt. Unsere Werkstatt repariert gegen Bezahlung.</p></details>
+  <h2>Lieferung und Zahlung: Wenn etwas schiefgeht</h2>
+  <details id="faq-falsche-ware"><summary>Ich habe die falsche Ware oder zu wenig bekommen. Was jetzt?</summary><p>Eine falsche Größe, eine falsche Farbe, ein falscher Artikel oder fehlende Stücke zählen als Mangel. Melde dich bitte schnell bei uns. Wir schicken dir die richtige oder fehlende Ware kostenlos. Die falsche Ware schickst du mit unserem Rücksende-Etikett kostenlos zurück.</p></details>
+  <details id="faq-lieferung-spaet"><summary>Meine Bestellung ist noch nicht da. Was kann ich tun?</summary><p>Schau zuerst auf die Lieferzeit: Ware auf Lager kommt in 2–3 Werktagen, Bestellware in 10–14 Werktagen. Ist die Zeit vorbei, schreib uns mit deiner Bestellnummer. Liefern wir dann immer noch nicht, kannst du uns eine neue, angemessene Frist setzen. Klappt es auch in dieser Frist nicht, kannst du vom Kauf zurücktreten und bekommst dein Geld zurück.</p></details>
+  <details id="faq-zu-viel"><summary>Mir wurde zu viel Geld abgebucht. Was jetzt?</summary><p>Schick uns deine Bestellnummer und einen Screenshot der Abbuchung. Wir prüfen das sofort. Hast du zu viel bezahlt, bekommst du das Geld innerhalb von 5 Werktagen zurück, auf dem gleichen Weg, auf dem du bezahlt hast.</p></details>
+  <details id="faq-skonto"><summary>Wann dürfen Vereine, Schulen und Firmen Skonto abziehen?</summary><p>Nur beim Kauf auf Rechnung und nur, wenn das Geld innerhalb von 7 Tagen ab dem Rechnungsdatum bei uns ist. Dann dürft ihr 2 % abziehen. Wer später zahlt, muss den ganzen Betrag zahlen. Fehlt Geld, schicken wir eine Zahlungserinnerung über den Rest.</p></details>
+  <details id="faq-zahlung-spaet"><summary>Was passiert, wenn eine Rechnung nicht pünktlich bezahlt wird?</summary><p>Eine Rechnung muss innerhalb von 14 Tagen bezahlt sein. Danach schicken wir eine freundliche Zahlungserinnerung. Kommt das Geld dann immer noch nicht, folgt eine Mahnung. Dann können Mahngebühren und Verzugszinsen dazukommen.</p></details>
   <h2>Werkstatt und Second Hand</h2>
   <details><summary>Was macht eure Werkstatt?</summary><p>Wir bieten Grundreinigung, Tiefenreinigung, Sohlen aufhellen, Imprägnierung, Reparaturen und Custom-Design an. Die Preise findest du im Katalog unter „Werkstatt-Service“.</p></details>
   <details><summary>Was ist, wenn ich mit der Werkstatt-Arbeit nicht zufrieden bin?</summary><p>Dann bessern wir kostenlos nach. Klappt das nicht, bekommst du dein Geld zurück.</p></details>
@@ -1520,7 +1536,7 @@ function applySolo(){
   return !!k;
 }
 /* Alte Reiter leiten weiter (Links, Lesezeichen, gespeicherter Reiter) */
-const ALIAS = { team:["ueber","team"], karriere:["ueber","karriere"], anfragen:["post","anf"], angebote:["post","ang"], reklamationen:["post","rek"], rallye:["start"], konditionen:["katalog","kondHead"], werkstatt:["katalog","dlHead"], regeln:["katalog","regelnHead"], uebungsraum:["arbeitsbereich"], korb:["warenkorb"], kasse:["warenkorb"] };
+const ALIAS = { team:["ueber","team"], karriere:["ueber","karriere"], anfragen:["post","anf"], angebote:["post","ang"], reklamationen:["post","rek"], widerruf:["post","wid"], garantie:["post","wid"], rallye:["start"], konditionen:["katalog","kondHead"], werkstatt:["katalog","dlHead"], regeln:["katalog","regelnHead"], uebungsraum:["arbeitsbereich"], korb:["warenkorb"], kasse:["warenkorb"] };
 function show(v){
   if (applySolo()) return;
   let sub = null;
@@ -1820,17 +1836,19 @@ const LINKS = {1:["1102"],2:["1110","1121","1101"],3:["1110","2301"],4:["4101"],
 let cur = store.get("mail", 1);                 // gewählte Anfrage (1–6)
 let curRek = store.get("rekSel", 101);          // gewählte Reklamation (101–105)
 if (cur > 100) { curRek = cur; cur = 1; }        // alter Speicherstand
-let FOLDER = store.get("folder", "rek");        // rek · anf · ang
+let curWid = store.get("widSel", 201);          // gewählter Fall im Ordner „Widerruf und Garantie“ (201–208)
+let FOLDER = store.get("folder", "rek");        // rek · wid · anf · ang
 let seen = new Set(store.get("seen", []));
-function setFolder(f){ FOLDER = ["anf","ang","rek"].includes(f) ? f : "rek"; store.set("folder", FOLDER); }
+function setFolder(f){ FOLDER = ["anf","ang","rek","wid"].includes(f) ? f : "rek"; store.set("folder", FOLDER); }
 function letterPill(nr, showNew){ const st = (typeof LET!=="undefined" && LET[nr]) ? LET[nr].status : ""; return st==="geprüft" ? `<span class="st done">✓ geprüft</span>` : st==="Entwurf" ? `<span class="st part">Entwurf</span>` : (showNew && st) ? `<span class="st">neu</span>` : ""; }
 function myLetters(){ return typeof LET!=="undefined" ? anfragen.filter(m => LET[m.nr]) : []; }
 function rekList(){ return typeof REK!=="undefined" ? REK : []; }
+function widList(){ return typeof WID!=="undefined" ? WID : []; }
 function renderInbox(){
-  const R = rekList(), L = myLetters();
-  const unA = anfragen.filter(m=>!seen.has(m.nr)).length, unR = R.filter(m=>!seen.has(m.nr)).length;
+  const R = rekList(), W = widList(), L = myLetters();
+  const unA = anfragen.filter(m=>!seen.has(m.nr)).length, unR = R.filter(m=>!seen.has(m.nr)).length, unW = W.filter(m=>!seen.has(m.nr)).length;
   /* Unter jedem Ordner steht, wessen Post das ist (2026-11-20): Im Einkauf gibt es auch Anfragen und Angebote, dort aber mit Lieferanten. Die Ordnernamen bleiben, weil Texte und Arbeitsblätter sie nennen. */
-  const F = [["rek","Reklamationen",R.length,unR,"Kundenpost"],["anf","Anfragen",anfragen.length,unA,"Kundenpost"],["ang","Angebote",L.length,0,"deine Briefe"]];
+  const F = [["rek","Reklamationen",R.length,unR,"Kundenpost"],["wid","Widerruf und Garantie",W.length,unW,"Kundenpost"],["anf","Anfragen",anfragen.length,unA,"Kundenpost"],["ang","Angebote",L.length,0,"deine Briefe"]];
   $("#folders").innerHTML = F.map(([k,n,c,u,d])=>`<button data-f="${k}" aria-pressed="${FOLDER===k}"><span class="fn">${n}<small>${d}</small></span><span class="n ${u?"new":""}">${u ? u+" neu" : c}</span></button>`).join("");
   $("#folders").querySelectorAll("[data-f]").forEach(b=>b.addEventListener("click",()=>{ setFolder(b.dataset.f); renderPost(); }));
   let h = "";
@@ -1838,15 +1856,16 @@ function renderInbox(){
   else if (FOLDER === "ang") h = L.length ? L.map(m=>{ const Lm = LET[m.nr]; const subj = (Lm.betreff||"").trim() || (Lm.mode==="antwort" ? "Antwort" : "Angebot") + " zu: " + m.betreff;
       return `<button class="mail" data-nr="${m.nr}" aria-selected="${m.nr===curA}"><span class="from"><span>An: ${esc(m.von)}</span><span class="mono">Anfrage ${m.nr}</span></span><span class="subj">${esc(subj)}</span><span class="org">${esc(m.org)}</span><span class="pills">${letterPill(m.nr, true)}</span></button>`; }).join("")
     : `<p class="inbox-empty">Hier stehen deine Angebote. Öffne im Ordner „Anfragen“ eine Anfrage und klicke auf „Angebot schreiben“.</p>`;
+  else if (FOLDER === "wid") h = W.map(m=>{ const st = window.widStatus ? widStatus(m.nr) : ""; return `<button class="mail" data-nr="${m.nr}" aria-selected="${m.nr===curWid}"><span class="from"><span>${seen.has(m.nr)?"":"● "}${esc(m.von)}</span><span class="mono">${m.datum}</span></span><span class="subj">${esc(m.betreff)}</span><span class="org">${esc(m.org)}</span><span class="lv ${st==="fertig"?"leicht":st?"mittel":"zusatz"}">${st==="fertig"?"beantwortet":st?"begonnen":"Widerruf und Garantie"}</span></button>`; }).join("");
   else h = R.map(m=>`<button class="mail" data-nr="${m.nr}" aria-selected="${m.nr===curRek}"><span class="from"><span>${seen.has(m.nr)?"":"● "}${esc(m.von)}</span><span class="mono">${m.datum}</span></span><span class="subj">${esc(m.betreff)}</span><span class="org">${esc(m.org)}</span><span class="lv ${(RK[m.nr]||{}).status==="geprüft"?"leicht":"zusatz"}">${(RK[m.nr]||{}).status==="geprüft"?"beantwortet":"Service · "+esc(m.art)}</span></button>`).join("");
   $("#inbox").innerHTML = h;
   $("#inbox").querySelectorAll(".mail").forEach(b=>b.addEventListener("click",()=>{
     const n = +b.dataset.nr;
-    if (FOLDER === "anf") { cur = n; store.set("mail", cur); } else if (FOLDER === "ang") { curA = n; store.set("curA", curA); } else { curRek = n; store.set("rekSel", curRek); }
+    if (FOLDER === "anf") { cur = n; store.set("mail", cur); } else if (FOLDER === "ang") { curA = n; store.set("curA", curA); } else if (FOLDER === "wid") { curWid = n; store.set("widSel", curWid); } else { curRek = n; store.set("rekSel", curRek); }
     renderPost();
     if (matchMedia("(max-width:900px)").matches) $("#reader").scrollIntoView({behavior:"smooth",block:"start"});
   }));
-  const unseen = unA + unR;
+  const unseen = unA + unR + unW;
   $("#mailCount").textContent = unseen;
   $("#mailCount").hidden = unseen===0;
 }
@@ -1860,6 +1879,15 @@ function renderPost(){
     if (!R.some(r=>r.nr===curRek)) curRek = R[0].nr;
     seen.add(curRek); store.set("seen",[...seen]); renderInbox();
     if (window.renderRek) renderRek(curRek);
+    return;
+  }
+  if (FOLDER === "wid") {
+    LA.hidden = true;
+    const W = widList();
+    if (!W.length) { renderInbox(); RM.innerHTML = ""; return; }
+    if (!W.some(r=>r.nr===curWid)) curWid = W[0].nr;
+    seen.add(curWid); store.set("seen",[...seen]); renderInbox();
+    if (window.renderWid) renderWid(curWid);
     return;
   }
   if (FOLDER === "ang") {
@@ -3031,6 +3059,137 @@ function renderRek(nr) {
   });
   $("#rekCopy").addEventListener("click", async () => { try { await navigator.clipboard.writeText(ta.value); toast("Text kopiert."); } catch (e) { ta.select(); toast("Text markiert. Kopiere mit Strg+C oder ⌘+C."); } });
   $("#rekDocx").addEventListener("click", () => { let b = wp([LOGO_DRAWING], { after: 200 }) + wp([wr("Antwort an: ", { b: true }), wr(r.von + " (" + r.org + ")")]) + wp([wr("Betreff: ", { b: true }), wr("AW: " + r.betreff)], { after: 200 }) + ta.value.split("\n").map(x => wp(x)).join(""); saveFile(`Antwort ${r.von}.docx`, docx(b, BANK)); });
+}
+
+/* =====================================================================
+   ORDNER „WIDERRUF UND GARANTIE“ (LF 3 · Kaufvertragsstörungen, 2026-11-20)
+   8 Fälle, lösbar mit den FAQ (#v-faq). Fälle ohne Anspruch: 202, 203, 205, 208.
+   Passt zum Arbeitsblatt „Kaufvertragsstörungen“ (lf3/kaufvertrag.html, Nr. 3).
+   Gespeichert unter kickloop:wid. Der Ordnername wird im Arbeitsblatt wörtlich genannt.
+   ===================================================================== */
+const WID_ART = [["wid", "Widerruf"], ["mangel", "Mangel oder falsche Lieferung"], ["zahlung", "Fehler bei der Zahlung"]];
+const WID_LEID = /(leider|bedauer|tut uns leid|verständnis)/i, WID_SORRY = /(entschuldig|tut uns leid|bedauer)/i;
+const WID = [
+  { nr: 201, von: "Selin Aydın", org: "Privatkundin, Online-Shop", mail: "selin.aydin@mail.example", datum: "17.11.2026", betreff: "Rücksendung New Balance 530", anr: "Sehr geehrte Frau Aydın,",
+    art: "wid", ja: true, faq: ["faq-widerruf-geld", "faq-widerruf", "faq-widerruf-frist", "faq-widerruf-wie", "faq-anprobieren"],
+    text: ["Hallo,", "am 12.11.2026 kam mein Paket mit den New Balance 530 in Weiß/Silber, Größe 38 (Bestellnummer KL-48213). Ich habe 119,99 Euro und 5,90 Euro Versand mit PayPal bezahlt.", "Ich habe die Schuhe zu Hause anprobiert. Sie passen, aber die Farbe gefällt mir in echt nicht. Ich möchte die Bestellung widerrufen.", "Bekomme ich auch die Versandkosten zurück? Und muss ich die Rücksendung bezahlen?", "Viele Grüße", "Selin Aydın"],
+    chk: [[/widerruf/i, "Widerruf bestätigt", "Darf Frau Aydın widerrufen? Sag es ihr klar."], [/(125,89|versandkosten|versand)/i, "Versandkosten beantwortet", "Frau Aydın fragt nach den Versandkosten. Was sagen die FAQ?"], [/paypal/i, "Rückzahlung über PayPal genannt", "Auf welchem Weg bekommt Frau Aydın ihr Geld?"], [/(etikett|kostenlos|kostenfrei)/i, "Kostenlose Rücksendung erklärt", "Muss sie die Rücksendung bezahlen?"]] },
+  { nr: 202, von: "Marco Schulz", org: "Privatkunde, Online-Shop", mail: "marco.schulz@mail.example", datum: "18.11.2026", betreff: "Hoodie zurückgeben", anr: "Sehr geehrter Herr Schulz,",
+    art: "wid", ja: false, faq: ["faq-widerruf-frist", "faq-widerruf"],
+    text: ["Hallo Kickloop,", "ich habe am 16.10.2026 bei euch online den Carhartt WIP Hooded Chase Sweat in Grau, Größe L, bestellt. Das Paket kam am 20.10.2026.", "Ich hatte viel Stress und habe den Hoodie erst gestern anprobiert. Er ist mir zu groß. Er ist ungetragen und das Etikett ist noch dran.", "Ich möchte ihn zurückschicken und mein Geld wiederhaben.", "Gruß", "Marco Schulz"],
+    chk: [[WID_LEID, "Freundlich bedauert", "Bleib freundlich, auch wenn du Nein sagst."], [/(14 tage|frist)/i, "Widerrufsfrist erklärt", "Warum geht es nicht mehr? Erkläre die Frist."], [/(0?3\.\s?11|3\.\s?november)/i, "Ende der Frist genannt", "Wann endete die Frist genau? Rechne ab dem Tag, an dem das Paket kam."]] },
+  { nr: 203, von: "Leonie Fischer", org: "Privatkundin, Online-Shop", mail: "leonie.fischer@mail.example", datum: "16.11.2026", betreff: "Widerruf Custom-Sneaker", anr: "Sehr geehrte Frau Fischer,",
+    art: "wid", ja: false, faq: ["faq-widerruf-ausnahme"],
+    text: ["Liebes Kickloop-Team,", "ich habe bei euch im Online-Shop Nike Air Force 1 in Weiß mit Custom-Design bestellt: mit meinem Namen „LEO“ an der Ferse und lila Blumen an der Seite. Bezahlt habe ich 119,99 Euro für die Schuhe und 79 Euro für das Design.", "Die Schuhe sind am 14.11.2026 angekommen und sehen genau so aus, wie wir es besprochen haben. Aber meine Freundin findet sie kitschig, und jetzt mag ich sie auch nicht mehr.", "Ich widerrufe hiermit die Bestellung und möchte mein Geld zurück.", "Liebe Grüße", "Leonie Fischer"],
+    chk: [[WID_LEID, "Freundlich bedauert", "Bleib freundlich, auch wenn du Nein sagst."], [/(wunsch|extra|angefertigt|individuell|custom|persönlich|name)/i, "Grund genannt: nur für sie angefertigt", "Warum kann Frau Fischer nicht widerrufen? Nenne den Grund."], [/(kein\w*\s+(gesetzliche[sn]?\s+)?widerruf|nicht\s+(\w+\s+){0,3}widerruf|ausgeschlossen)/i, "Klar gesagt: kein Widerruf möglich", "Sag klar, dass ein Widerruf hier nicht geht."]] },
+  { nr: 204, von: "Jonas Weber", org: "Privatkunde, Laden", mail: "jonas.weber@mail.example", datum: "17.11.2026", betreff: "Rucksack kaputt – Garantie?", anr: "Sehr geehrter Herr Weber,",
+    art: "mangel", ja: true, faq: ["faq-gewaehrleistung-garantie", "faq-mangel", "faq-reklamation"],
+    text: ["Guten Tag,", "ich habe am 15.05.2026 bei Ihnen im Laden den Eastpak Padded Pak'r in Schwarz gekauft (49,99 Euro). Den Kassenbon habe ich noch.", "Jetzt, nach sechs Monaten, ist der Reißverschluss kaputt. Er geht nicht mehr zu. Ich habe den Rucksack ganz normal für die Schule benutzt.", "Ein Freund sagt, ich muss mich an Eastpak wenden, weil die eine Garantie geben. Stimmt das, oder helfen Sie mir?", "Mit freundlichen Grüßen", "Jonas Weber"],
+    chk: [[/gewährleistung/i, "Gewährleistung genannt", "Welches Recht hat Herr Weber gegenüber Kickloop? Nenne den Fachbegriff."], [/(reparier|reparatur|ersatz|neue[nr]?\s+rucksack|austausch)/i, "Lösung angeboten: Reparatur oder Ersatz", "Was bietet Kickloop an?"], [/(kassenbon|kaufbeleg|beleg)/i, "An den Kassenbon erinnert", "Was soll Herr Weber mitbringen?"], [/garantie/i, "Garantie erklärt", "Herr Weber fragt nach der Garantie. Erkläre kurz den Unterschied."]] },
+  { nr: 205, von: "Sandra Krüger", org: "Privatkundin, Laden", mail: "s.krueger@mail.example", datum: "18.11.2026", betreff: "Sohle löst sich – Chuck 70", anr: "Sehr geehrte Frau Krüger,",
+    art: "mangel", ja: false, faq: ["faq-kein-mangel"],
+    text: ["Hallo,", "ich habe im August 2026 bei Ihnen im Laden die Converse Chuck 70 Hi in Beige gekauft. Weil sie schmutzig waren, habe ich sie letzte Woche in der Waschmaschine bei 60 Grad gewaschen, damit sie wieder richtig hell werden.", "Jetzt löst sich vorne an beiden Schuhen die Sohle ab! Das darf nach drei Monaten doch nicht sein. Auf dem Etikett im Schuh steht zwar „Nicht in der Waschmaschine waschen“, aber das liest doch keiner.", "Ich möchte neue Schuhe.", "Sandra Krüger"],
+    chk: [[WID_LEID, "Freundlich bedauert", "Bleib freundlich, auch wenn du Nein sagst."], [/(waschmaschine|pflege)/i, "Grund genannt: falsche Pflege", "Warum ist das kein Fall für die Gewährleistung? Nenne den Grund."], [/(kein\w*\s+mangel|nicht\s+(\w+\s+){0,3}mangel|gewährleistung gilt (hier )?nicht|kein\w*\s+gewährleistung)/i, "Klar gesagt: kein Mangel", "Sag klar, dass hier kein Mangel vorliegt."], [/(werkstatt|reparatur|reparieren)/i, "Hilfe angeboten: Reparatur gegen Bezahlung", "Kann Kickloop trotzdem helfen? Schau in die FAQ."]] },
+  { nr: 206, von: "Huong Nguyen", org: "Privatkundin, Online-Shop", mail: "h.nguyen@mail.example", datum: "19.11.2026", betreff: "Falsche Größe geliefert", anr: "Sehr geehrte Frau Nguyen,",
+    art: "mangel", ja: true, faq: ["faq-falsche-ware"],
+    text: ["Sehr geehrte Damen und Herren,", "heute kam mein Paket (Bestellnummer KL-48377). Bestellt habe ich die Vans Old Skool in Schwarz/Weiß, Größe 43, für meinen Sohn. Auf dem Lieferschein steht auch Größe 43. Im Karton sind aber Schuhe in Größe 41.", "Mein Sohn braucht die Schuhe bis zum 01.12.2026 für eine Klassenfahrt. Was soll ich jetzt tun? Muss ich die Rücksendung bezahlen?", "Mit freundlichen Grüßen", "Huong Nguyen"],
+    chk: [[WID_SORRY, "Entschuldigung", "Der Fehler liegt bei Kickloop. Entschuldige dich."], [/43/, "Richtige Größe genannt", "Welche Größe schickt Kickloop jetzt?"], [/(kostenlos|kostenfrei|etikett)/i, "Kostenlose Rücksendung erklärt", "Muss Frau Nguyen die Rücksendung bezahlen?"], [/(schicken|senden|liefern|versenden|geschickt|gesendet|geliefert)/i, "Zusage: Die richtigen Schuhe kommen", "Sag, dass Kickloop die richtigen Schuhe schickt."]] },
+  { nr: 207, von: "Ali Hassan", org: "Privatkunde, Online-Shop", mail: "ali.hassan@mail.example", datum: "17.11.2026", betreff: "Doppelt abgebucht!", anr: "Sehr geehrter Herr Hassan,",
+    art: "zahlung", ja: true, faq: ["faq-zu-viel"],
+    text: ["Hallo,", "ich habe am 13.11.2026 im Online-Shop den Nike Sportswear Club Fleece Hoodie in Grau bestellt (Bestellnummer KL-48290) und mit Kreditkarte bezahlt. Der Hoodie ist da und alles ist gut.", "Aber auf meiner Kreditkartenabrechnung stehen zwei Abbuchungen von Kickloop über je 70,89 Euro (64,99 Euro Hoodie und 5,90 Euro Versand). Ich habe aber nur einen Hoodie bestellt. Den Screenshot schicke ich mit.", "Ich will mein Geld zurück!", "Ali Hassan"],
+    chk: [[WID_SORRY, "Entschuldigung", "Der Fehler liegt bei Kickloop. Entschuldige dich."], [/70,89/, "Betrag genannt", "Wie viel Geld bekommt Herr Hassan zurück?"], [/kreditkarte/i, "Rückzahlung auf die Kreditkarte", "Auf welchem Weg bekommt er das Geld zurück?"], [/(5|fünf)\s+werktag/i, "Zeitraum genannt", "Bis wann ist das Geld da? Schau in die FAQ."]] },
+  { nr: 208, von: "Dirk Lehmann", org: "FC Weserkiez 2012 e. V., Kassenwart", mail: "kasse@fc-weserkiez.example", datum: "19.11.2026", betreff: "Ihre Zahlungserinnerung zu RE-2026-0151", anr: "Sehr geehrter Herr Lehmann,",
+    art: "zahlung", ja: false, faq: ["faq-skonto", "faq-zahlung-spaet"],
+    text: ["Sehr geehrte Damen und Herren,", "heute kam Ihre Zahlungserinnerung über 20,25 Euro zur Rechnung RE-2026-0151 vom 03.11.2026. Das verstehen wir nicht.", "Die Rechnung über 1.012,37 Euro für 15 adidas Adicolor Trefoil Hoodies haben wir am 13.11.2026 bezahlt. Wir haben 2 % Skonto abgezogen und 992,12 Euro überwiesen. Auf der Rechnung steht doch, dass man Skonto abziehen darf.", "Wir sehen die Sache als erledigt an.", "Mit freundlichen Grüßen", "Dirk Lehmann", "Kassenwart, FC Weserkiez 2012 e. V."],
+    chk: [[WID_LEID, "Freundlich bedauert", "Bleib freundlich, auch wenn du Nein sagst."], [/(7|sieben)\s+tage|10\.\s?11|10\.\s?november/i, "Skontofrist erklärt", "Bis wann hätte der Verein zahlen müssen, um Skonto abzuziehen?"], [/20,25/, "Offenen Betrag genannt", "Wie viel Geld fehlt noch?"], [/(überweis|bitte.{0,60}zahl|begleich)/i, "Um Zahlung des Rests gebeten", "Was soll Herr Lehmann jetzt tun?"]] },
+];
+const WIDBY = Object.fromEntries(WID.map(w => [w.nr, w]));
+let WS = store.get("wid", {});
+const saveWid = () => store.set("wid", WS);
+const HILFE_WID_DENKEN = ["Anrede: förmlich mit Namen", "Auf das Anliegen eingehen", "Anspruch ja: Was bekommt die Person, und wie geht es weiter?", "Anspruch nein: Warum nicht? Nenne die Regel aus den FAQ. Gibt es trotzdem eine Hilfe?", "Gruß und Absender"];
+const HILFE_WID = ["Vielen Dank für Ihre Nachricht …", "Es tut uns leid, dass …", "Gern erstatten wir Ihnen …", "Leider können wir …, weil …", "Laut unseren Regeln …", "Bitte schicken Sie …"];
+function widFaqList() { return [...document.querySelectorAll("#v-faq details[id]")].filter(d => /^faq-(widerruf|anprobieren|umtausch|mangel|gewaehrleistung|kein-mangel|reklamation|nach-2|falsche|lieferung|zu-viel|skonto|zahlung)/.test(d.id)).map(d => [d.id, d.querySelector("summary").textContent.trim()]); }
+function widFaqBox() {
+  const f = document.querySelector("#v-faq"); if (!f) return "";
+  let h = "", on = false;
+  f.querySelectorAll(":scope > h2, :scope > details").forEach(el => {
+    if (el.tagName === "H2") { on = /Widerruf|Mängel|Zahlung/.test(el.textContent); if (on) h += `<h3 style="font-size:1rem;margin:12px 0 6px">${esc(el.textContent)}</h3>`; }
+    else if (on) h += el.outerHTML.replace(/\sid="[^"]*"/, "").replace("<details", "<details data-faqid=\"" + el.id + "\"");
+  });
+  return h;
+}
+function widDecision(w, s) {
+  return [
+    [s.art === w.art, "Worum geht es? richtig", "Worum geht es? Lies die Nachricht noch einmal: Will die Person vom Kauf zurück, ist etwas kaputt oder falsch, oder geht es ums Geld?"],
+    [s.ja === w.ja, "Anspruch richtig entschieden", "Anspruch: Prüfe noch einmal mit den FAQ. Achte auf Daten, Fristen und darauf, wer den Schaden verursacht hat."],
+    [w.faq.includes(s.faq), "Passende Frage aus den FAQ gewählt", "FAQ: Such eine Frage, die genau zu diesem Fall passt."],
+  ];
+}
+function widChecks(w, t) {
+  const L = [];
+  L.push([new RegExp(w.anr.replace(",", "").replace(/\s+/g, "\\s+"), "i").test(t), "Förmliche Anrede mit Namen", "Prüfe die Anrede: förmlich, mit dem Namen der Person, Komma am Ende."]);
+  L.push([!/(^|\n)\s*(hallo|hey|hi)\b/i.test(t), "Keine lockere Anrede", "Eine lockere Anrede passt hier nicht."]);
+  w.chk.forEach(([re, l, h]) => L.push([re.test(t), l, h]));
+  L.push([/mit freundlichen grüßen/i.test(t), "Gruß wie im Geschäftsbrief", "Es fehlt der Gruß wie im Geschäftsbrief."]);
+  L.push([/kickloop/i.test(t), "Absender Kickloop genannt", "Wer schreibt? Unterschreibe für Kickloop."]);
+  return L.map(([ok, l, h]) => ({ ok, l: ok ? l : (h || l) }));
+}
+function widStatus(nr) { const s = WS[nr] || {}; return s.decOk && s.textOk ? "fertig" : (s.text || s.art || s.faq) ? "begonnen" : ""; }
+function renderWid(nr) {
+  const w = WIDBY[nr], s = WS[nr] || (WS[nr] = { text: "", art: "", ja: null, faq: "", decOk: false, textOk: false });
+  const nrIdx = WID.indexOf(w) + 1;
+  $("#readerMail").innerHTML = `
+    <div><span class="lv mittel">Widerruf und Garantie · Fall ${nrIdx} von ${WID.length}</span><h2 style="font-size:1.45rem;margin-top:6px">${esc(w.betreff)}</h2></div>
+    <div class="meta"><span>Von:</span><span><b>${esc(w.von)}</b>, ${esc(w.org)} &lt;<span class="mono">${esc(w.mail)}</span>&gt;</span><span>An:</span><span class="mono">${esc(konditionen.mail)}</span><span>Datum:</span><span>${w.datum}</span></div>
+    <div class="msg">${w.text.map(p => `<p>${esc(p)}</p>`).join("")}</div>
+    <div class="task"><b>Deine Aufgabe im Kundenservice</b><ol><li>Lies die Nachricht. Was möchte die Person?</li><li>Such die Antwort in den FAQ von Kickloop (unten aufklappen).</li><li>Entscheide: Worum geht es? Hat die Person einen Anspruch? Klicke auf „Entscheidung prüfen“.</li><li>Schreibe eine freundliche Antwort. Auch ein Nein muss freundlich und begründet sein.</li><li>Klicke auf „Prüfen“ und speichere die Antwort als Word-Datei.</li></ol></div>
+    <details class="kbox faq"><summary style="cursor:pointer;font-family:var(--display);font-weight:800">FAQ von Kickloop: Widerruf, Mängel, Lieferung und Zahlung</summary><div style="margin-top:8px">${widFaqBox()}</div><button class="chip" data-go="faq" style="margin-top:6px">Ganze FAQ-Seite öffnen</button></details>
+    <div class="kbox" style="display:grid;gap:12px;min-width:0">
+      <h3 style="margin:0">Deine Entscheidung</h3>
+      <div style="display:grid;gap:6px"><span class="eyebrow">1 · Worum geht es?</span><div class="modeSw" id="widArt" style="display:flex;flex-wrap:wrap;justify-self:start;max-width:100%">${WID_ART.map(([k, n]) => `<button data-a="${k}" aria-pressed="${s.art === k}">${esc(n)}</button>`).join("")}</div></div>
+      <div style="display:grid;gap:6px"><span class="eyebrow">2 · Hat die Person einen Anspruch?</span><div class="modeSw" id="widJa"><button data-j="1" aria-pressed="${s.ja === true}">Ja</button><button data-j="0" aria-pressed="${s.ja === false}">Nein</button></div></div>
+      <label style="display:grid;gap:6px;min-width:0"><span class="eyebrow">3 · Welche Frage aus den FAQ hilft dir?</span><select id="widFaq" style="width:100%;min-width:0;font:inherit;padding:8px;border:1px solid var(--sand);border-radius:10px;background:var(--surface)"><option value="">– bitte wählen –</option>${widFaqList().map(([id, q]) => `<option value="${id}" ${s.faq === id ? "selected" : ""}>${esc(q)}</option>`).join("")}</select></label>
+      <div class="bar2" style="position:static"><button class="btn" id="widDec">Entscheidung prüfen</button><span class="err" id="widDecErr" role="alert"></span></div>
+      <div class="checks" id="widDecRes" hidden></div>
+    </div>
+    <h3 style="margin:4px 0 0">Deine Antwort</h3>
+    <textarea class="bigtext" id="widText" style="min-height:240px" aria-label="Antwort">${esc(s.text)}</textarea>
+    <div>${hilfe("Hilfe 1: Woran muss ich denken?", HILFE_WID_DENKEN)}${hilfe("Hilfe 2: Satzanfänge", HILFE_WID)}</div>
+    <div class="bar2"><button class="btn" id="widCheck">Prüfen</button><button class="btn ghost" id="widCopy">Text kopieren</button><button class="btn ghost" id="widDocx">Als Word-Datei speichern</button><span class="err" id="widErr" role="alert"></span></div>
+    <div class="checks" id="widRes" hidden></div>
+    ${nrIdx < WID.length ? `<button class="backlink" id="widNext" style="justify-self:end">Nächster Fall →</button>` : ""}`;
+  const RM = $("#readerMail"), ta = $("#widText");
+  const save = () => { saveWid(); renderInbox(); };
+  RM.querySelectorAll("[data-go]").forEach(b => b.addEventListener("click", () => { show(b.dataset.go); window.scrollTo({ top: 0 }); }));
+  RM.querySelectorAll("#widArt [data-a]").forEach(b => b.addEventListener("click", () => { s.art = b.dataset.a; s.decOk = false; RM.querySelectorAll("#widArt [data-a]").forEach(x => x.setAttribute("aria-pressed", x === b)); save(); }));
+  RM.querySelectorAll("#widJa [data-j]").forEach(b => b.addEventListener("click", () => { s.ja = b.dataset.j === "1"; s.decOk = false; RM.querySelectorAll("#widJa [data-j]").forEach(x => x.setAttribute("aria-pressed", x === b)); save(); }));
+  $("#widFaq").addEventListener("change", e => { s.faq = e.target.value; s.decOk = false; save(); });
+  $("#widDec").addEventListener("click", () => {
+    if (!s.art || s.ja === null || !s.faq) { $("#widDecErr").textContent = "Beantworte zuerst alle drei Fragen."; return; }
+    $("#widDecErr").textContent = "";
+    const res = widDecision(w, s), ok = res.every(x => x[0]);
+    s.decOk = ok; save();
+    $("#widDecRes").hidden = false;
+    $("#widDecRes").innerHTML = (ok ? "" : `<b>${res.filter(x => x[0]).length} von 3 richtig. Verbessere:</b>`) + res.map(([o, l, h]) => `<div><span class="${o ? "y" : "n"}">${o ? "✓" : "✗"}</span><span>${esc(o ? l : h)}</span></div>`).join("") + (ok ? `<div><span></span><b style="color:var(--ok)">Richtig! ${w.ja ? "Die Person bekommt Hilfe." : "Die Person hat keinen Anspruch. Erkläre freundlich, warum."} Jetzt schreibst du die Antwort.</b></div>` : "");
+  });
+  ta.addEventListener("input", () => { s.text = ta.value; s.textOk = false; saveWid(); $("#widErr").textContent = ""; });
+  RM.querySelectorAll("[data-sb]").forEach(b => b.addEventListener("click", () => { const v = b.dataset.sb; const pos = ta.selectionStart ?? ta.value.length; ta.value = ta.value.slice(0, pos) + (pos && ta.value[pos - 1] !== "\n" ? "\n" : "") + v + "\n" + ta.value.slice(pos); ta.dispatchEvent(new Event("input")); ta.focus(); }));
+  $("#widCheck").addEventListener("click", () => {
+    if (words(ta.value) < 30) { $("#widErr").textContent = "Schreibe zuerst deine Antwort (mindestens 30 Wörter)."; return; }
+    const res = widChecks(w, ta.value), ok = res.every(x => x.ok);
+    s.textOk = ok; save();
+    $("#widRes").hidden = false;
+    $("#widRes").innerHTML = `<b>${ok ? "" : res.filter(x => x.ok).length + " von " + res.length + " Punkten erfüllt. Verbessere:"}</b>` + res.filter(x => !ok).map(x => `<div><span class="${x.ok ? "y" : "n"}">${x.ok ? "✓" : "✗"}</span><span>${esc(x.l)}</span></div>`).join("") + (ok ? `<div><span></span><b style="color:var(--ok)">Sehr gut! Die Antwort kann raus.${s.decOk ? "" : " Prüfe oben auch noch deine Entscheidung."}</b></div>` : "");
+  });
+  $("#widCopy").addEventListener("click", async () => { try { await navigator.clipboard.writeText(ta.value); toast("Text kopiert."); } catch (e) { ta.select(); toast("Text markiert. Kopiere mit Strg+C oder ⌘+C."); } });
+  $("#widDocx").addEventListener("click", () => {
+    const artN = (WID_ART.find(([k]) => k === s.art) || [, "–"])[1], faqQ = (widFaqList().find(([id]) => id === s.faq) || [, "–"])[1];
+    let b = wp([LOGO_DRAWING], { after: 200 }) + wp([wr("Antwort an: ", { b: true }), wr(w.von + " (" + w.org + ")")]) + wp([wr("Betreff: ", { b: true }), wr("AW: " + w.betreff)], { after: 120 })
+      + wp([wr("Meine Entscheidung: ", { b: true, c: "5F646A" }), wr(artN + " · Anspruch: " + (s.ja === null ? "–" : s.ja ? "ja" : "nein") + " · FAQ: " + faqQ, { c: "5F646A" })], { after: 240 })
+      + ta.value.split("\n").map(x => wp(x)).join("");
+    saveFile(`Antwort ${w.von} (Widerruf und Garantie).docx`, docx(b, BANK));
+  });
+  const nx = $("#widNext"); if (nx) nx.addEventListener("click", () => { curWid = WID[nrIdx].nr; store.set("widSel", curWid); renderPost(); $("#reader").scrollIntoView({ behavior: "smooth", block: "start" }); });
 }
 
 /* =====================================================================
