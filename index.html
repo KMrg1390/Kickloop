@@ -981,11 +981,11 @@ details.hilfe summary,.ek details.tipp summary{color:var(--lern-ink)}
   </div>
 </section>
 
-<!-- POSTEINGANG mit Ordnern: Reklamationen (Lernfeld 2 und 3), Kundenbewertungen, Anfragen und Angebote (Lernfeld 3) -->
+<!-- POSTEINGANG mit Ordnern: Reklamationen (Lernfeld 2 und 3), Anfragen und Angebote (Lernfeld 3) -->
 <section class="view" id="v-post" hidden>
   <div class="viewhead">
     <div><span class="eyebrow">Kundenservice · Team Verkauf (Leitung: Sara Hoffmann)</span><h1>Posteingang</h1>
-    <p class="lead">Hier kommen die E-Mails von Kundinnen und Kunden an. In „Reklamationen“ prüfst du mit Hilfe der FAQ, ob Kundinnen und Kunden einen Anspruch haben, und beantwortest ihre Nachricht: Antwort schreiben, auf <b>Prüfen</b> klicken und als Word-Datei speichern. In „Kundenbewertungen“ antwortest du auf Bewertungen im Netz. Die Ordner „Anfragen“ und „Angebote“ brauchst du später.</p></div>
+    <p class="lead">Hier kommen die E-Mails von Kundinnen und Kunden an. In „Reklamationen“ prüfst du mit Hilfe der FAQ, ob Kundinnen und Kunden einen Anspruch haben, und beantwortest ihre Nachricht: Antwort schreiben, auf <b>Prüfen</b> klicken und als Word-Datei speichern. Die Ordner „Anfragen“ und „Angebote“ brauchst du später.</p></div>
   </div>
   <div class="me" data-me="full"></div>
   <div class="post">
@@ -1536,7 +1536,7 @@ function applySolo(){
   return !!k;
 }
 /* Alte Reiter leiten weiter (Links, Lesezeichen, gespeicherter Reiter) */
-const ALIAS = { team:["ueber","team"], karriere:["ueber","karriere"], anfragen:["post","anf"], angebote:["post","ang"], reklamationen:["post","rek"], widerruf:["post","rek"], garantie:["post","rek"], bewertungen:["post","bew"], kundenbewertungen:["post","bew"], rallye:["start"], konditionen:["katalog","kondHead"], werkstatt:["katalog","dlHead"], regeln:["katalog","regelnHead"], uebungsraum:["arbeitsbereich"], korb:["warenkorb"], kasse:["warenkorb"] };
+const ALIAS = { team:["ueber","team"], karriere:["ueber","karriere"], anfragen:["post","anf"], angebote:["post","ang"], reklamationen:["post","rek"], widerruf:["post","rek"], garantie:["post","rek"], bewertungen:["post","rek"], kundenbewertungen:["post","rek"], rallye:["start"], konditionen:["katalog","kondHead"], werkstatt:["katalog","dlHead"], regeln:["katalog","regelnHead"], uebungsraum:["arbeitsbereich"], korb:["warenkorb"], kasse:["warenkorb"] };
 function show(v){
   if (applySolo()) return;
   let sub = null;
@@ -1834,23 +1834,21 @@ const TASKS = {
 };
 const LINKS = {1:["1102"],2:["1110","1121","1101"],3:["1110","2301"],4:["4101"],5:[],6:["1115"]};
 let cur = store.get("mail", 1);                 // gewählte Anfrage (1–6)
-let curRek = store.get("rekSel", 101);          // gewählte Reklamation (101, 102, 104, 105, 201–208)
+let curRek = store.get("rekSel", 101);          // gewählte Reklamation (101–105, 201–203, 205–208)
 if (cur > 100) { curRek = cur; cur = 1; }        // alter Speicherstand
-let curBew = store.get("bewSel", 103);          // gewählte Kundenbewertung
-let FOLDER = store.get("folder", "rek");        // rek · bew · anf · ang
-if (!["rek","bew","anf","ang"].includes(FOLDER)) FOLDER = "rek";   // alter Speicherstand (Ordner „wid“ gibt es nicht mehr)
+let FOLDER = store.get("folder", "rek");        // rek · anf · ang
+if (!["rek","anf","ang"].includes(FOLDER)) FOLDER = "rek";   // alter Speicherstand (Ordner „wid“ und „bew“ gibt es nicht mehr)
 let seen = new Set(store.get("seen", []));
-function setFolder(f){ FOLDER = ["anf","ang","rek","bew"].includes(f) ? f : "rek"; store.set("folder", FOLDER); }
+function setFolder(f){ FOLDER = ["anf","ang","rek"].includes(f) ? f : "rek"; store.set("folder", FOLDER); }
 function letterPill(nr, showNew){ const st = (typeof LET!=="undefined" && LET[nr]) ? LET[nr].status : ""; return st==="geprüft" ? `<span class="st done">✓ geprüft</span>` : st==="Entwurf" ? `<span class="st part">Entwurf</span>` : (showNew && st) ? `<span class="st">neu</span>` : ""; }
 function myLetters(){ return typeof LET!=="undefined" ? anfragen.filter(m => LET[m.nr]) : []; }
-/* Ordner neu sortiert (20.11.2026, zweite Runde): „Reklamationen“ = alte Reklamationen (ohne Bewertung) + Fälle 201–208; „Kundenbewertungen“ = Bewertungen. */
+/* Ordner „Reklamationen“ = alte Reklamationen 101–105 (inkl. Google-Bewertung 103) + Fälle 201–203, 205–208 (Stand 20.11.2026). */
 function rekList(){ return typeof REKALL!=="undefined" ? REKALL : []; }
-function bewList(){ return typeof BEW!=="undefined" ? BEW : []; }
 function renderInbox(){
-  const R = rekList(), B = bewList(), L = myLetters();
-  const unA = anfragen.filter(m=>!seen.has(m.nr)).length, unR = R.filter(m=>!seen.has(m.nr)).length, unB = B.filter(m=>!seen.has(m.nr)).length;
+  const R = rekList(), L = myLetters();
+  const unA = anfragen.filter(m=>!seen.has(m.nr)).length, unR = R.filter(m=>!seen.has(m.nr)).length;
   /* Unter jedem Ordner steht, wessen Post das ist (2026-11-20): Im Einkauf gibt es auch Anfragen und Angebote, dort aber mit Lieferanten. Die Ordnernamen bleiben, weil Texte und Arbeitsblätter sie nennen. */
-  const F = [["rek","Reklamationen",R.length,unR,"Kundenpost"],["bew","Kundenbewertungen",B.length,unB,"öffentlich im Netz"],["anf","Anfragen",anfragen.length,unA,"Kundenpost"],["ang","Angebote",L.length,0,"deine Briefe"]];
+  const F = [["rek","Reklamationen",R.length,unR,"Kundenpost"],["anf","Anfragen",anfragen.length,unA,"Kundenpost"],["ang","Angebote",L.length,0,"deine Briefe"]];
   $("#folders").innerHTML = F.map(([k,n,c,u,d])=>`<button data-f="${k}" aria-pressed="${FOLDER===k}"><span class="fn">${n}<small>${d}</small></span><span class="n ${u?"new":""}">${u ? u+" neu" : c}</span></button>`).join("");
   $("#folders").querySelectorAll("[data-f]").forEach(b=>b.addEventListener("click",()=>{ setFolder(b.dataset.f); renderPost(); }));
   let h = "";
@@ -1858,16 +1856,15 @@ function renderInbox(){
   else if (FOLDER === "ang") h = L.length ? L.map(m=>{ const Lm = LET[m.nr]; const subj = (Lm.betreff||"").trim() || (Lm.mode==="antwort" ? "Antwort" : "Angebot") + " zu: " + m.betreff;
       return `<button class="mail" data-nr="${m.nr}" aria-selected="${m.nr===curA}"><span class="from"><span>An: ${esc(m.von)}</span><span class="mono">Anfrage ${m.nr}</span></span><span class="subj">${esc(subj)}</span><span class="org">${esc(m.org)}</span><span class="pills">${letterPill(m.nr, true)}</span></button>`; }).join("")
     : `<p class="inbox-empty">Hier stehen deine Angebote. Öffne im Ordner „Anfragen“ eine Anfrage und klicke auf „Angebot schreiben“.</p>`;
-  else if (FOLDER === "bew") h = B.map(m=>`<button class="mail" data-nr="${m.nr}" aria-selected="${m.nr===curBew}"><span class="from"><span>${seen.has(m.nr)?"":"● "}${esc(m.von)}</span><span class="mono">${m.datum}</span></span><span class="subj">${esc(m.betreff)}</span><span class="org">${esc(m.org)}</span><span class="lv ${(RK[m.nr]||{}).status==="geprüft"?"leicht":"zusatz"}">${(RK[m.nr]||{}).status==="geprüft"?"beantwortet":"Bewertung"}</span></button>`).join("");
   else h = R.map(m=>{ const st = window.widStatus ? widStatus(m.nr) : ""; return `<button class="mail" data-nr="${m.nr}" aria-selected="${m.nr===curRek}"><span class="from"><span>${seen.has(m.nr)?"":"● "}${esc(m.von)}</span><span class="mono">${m.datum}</span></span><span class="subj">${esc(m.betreff)}</span><span class="org">${esc(m.org)}</span><span class="lv ${st==="fertig"?"leicht":st?"mittel":"zusatz"}">${st==="fertig"?"beantwortet":st?"begonnen":"Reklamation"}</span></button>`; }).join("");
   $("#inbox").innerHTML = h;
   $("#inbox").querySelectorAll(".mail").forEach(b=>b.addEventListener("click",()=>{
     const n = +b.dataset.nr;
-    if (FOLDER === "anf") { cur = n; store.set("mail", cur); } else if (FOLDER === "ang") { curA = n; store.set("curA", curA); } else if (FOLDER === "bew") { curBew = n; store.set("bewSel", curBew); } else { curRek = n; store.set("rekSel", curRek); }
+    if (FOLDER === "anf") { cur = n; store.set("mail", cur); } else if (FOLDER === "ang") { curA = n; store.set("curA", curA); } else { curRek = n; store.set("rekSel", curRek); }
     renderPost();
     if (matchMedia("(max-width:900px)").matches) $("#reader").scrollIntoView({behavior:"smooth",block:"start"});
   }));
-  const unseen = unA + unR + unB;
+  const unseen = unA + unR;
   $("#mailCount").textContent = unseen;
   $("#mailCount").hidden = unseen===0;
 }
@@ -1881,15 +1878,6 @@ function renderPost(){
     if (!R.some(r=>r.nr===curRek)) curRek = R[0].nr;
     seen.add(curRek); store.set("seen",[...seen]); renderInbox();
     if (window.renderWid) renderWid(curRek);
-    return;
-  }
-  if (FOLDER === "bew") {
-    LA.hidden = true;
-    const B = bewList();
-    if (!B.length) { renderInbox(); RM.innerHTML = ""; return; }
-    if (!B.some(r=>r.nr===curBew)) curBew = B[0].nr;
-    seen.add(curBew); store.set("seen",[...seen]); renderInbox();
-    if (window.renderRek) renderRek(curBew);
     return;
   }
   if (FOLDER === "ang") {
@@ -3016,8 +3004,9 @@ const REK = [
     text: ["Sehr geehrte Damen und Herren,", "am 12.08.2026 habe ich in Ihrem Online-Shop die adidas Gazelle in Blau bestellt. Jetzt, nach drei Monaten, hat sich an der Seite die Naht gelöst. Ich habe die Schuhe ganz normal getragen.", "Was können Sie für mich tun?", "Mit freundlichen Grüßen", "Benedikt Arnold"],
     chk: [[/(entschuldig|leid|bedauer)/i, "Entschuldigung oder Bedauern", "Zeigst du, dass es Kickloop leidtut?"], [/(reparier|reparatur|ersatz|neue[sn]? paar|neue schuhe|austausch|umtausch|tauschen)/i, "Lösung angeboten", "Welche Lösung bietet Kickloop an? Schau in die FAQ."], [/(kostenlos|kostenfrei|ohne kosten|übernehmen die kosten)/i, "Kostenlos für den Kunden", "Muss Herr Arnold etwas bezahlen? Sag es ihm."], [/(rücksend|zurücksend|zurückschick|einschick|schicken sie|senden sie|etikett|vorbeibring|im laden|bringen sie)/i, "Gesagt, wie der Schuh zu Kickloop kommt", "Wie kommt der Schuh zu Kickloop? Erkläre den nächsten Schritt."]] },
   { nr: 103, von: "Lukas M.", org: "Google-Bewertung · 2 von 5 Sternen", mail: "öffentliche Bewertung", datum: "12.11.2026", betreff: "★★☆☆☆ „Schöne Schuhe, schlechter Versand“", anr: "Hallo Lukas,", art: "Bewertung",
+    kat: "lieferung", ja: false, faq: ["faq-lieferung-spaet"], bew: true,
     text: ["Die Sneaker sind top, aber der Versand hat 6 Tage gedauert. Im Shop stand 2 bis 3 Tage. Ich habe auch keine Info bekommen, wo mein Paket ist. Schade."],
-    chk: [[/lukas/i, "Person mit Namen angesprochen", "Sprich die Person mit Namen an."], [/dank/i, "Dank für die Bewertung", "Bedankst du dich für die Bewertung?"], [/(entschuldig|leid|bedauer)/i, "Entschuldigung", "Zeigst du, dass es Kickloop leidtut?"], [/(sendungsnummer|versandbestätigung|künftig|in zukunft|ab sofort|verbesser)/i, "Verbesserung genannt", "Was macht Kickloop in Zukunft besser?"]] },
+    chk: [[/dank/i, "Dank für die Bewertung", "Bedankst du dich für die Bewertung?"], [/(entschuldig|leid|bedauer)/i, "Entschuldigung", "Zeigst du, dass es Kickloop leidtut?"], [/(sendungsnummer|versandbestätigung|künftig|in zukunft|ab sofort|verbesser)/i, "Verbesserung genannt", "Was macht Kickloop in Zukunft besser?"]] },
   { nr: 104, von: "Petra Lindemann", org: "Privatkundin, Werkstatt", mail: "p.lindemann@mail.example", datum: "12.11.2026", betreff: "Gelbe Flecken nach der Reinigung", anr: "Sehr geehrte Frau Lindemann,", art: "Werkstatt",
     kat: "werkstatt", ja: true, faq: ["faq-werkstatt"],
     text: ["Guten Tag,", "ich habe meine weißen Nike Air Force 1 bei Ihnen zur Tiefenreinigung (29 €) gegeben und am 08.11. abgeholt. Zu Hause habe ich gesehen: Die Sohle hat jetzt gelbe Flecken. Vorher war sie weiß.", "Ich bin enttäuscht.", "Freundliche Grüße", "Petra Lindemann"],
@@ -3069,13 +3058,13 @@ function renderRek(nr) {
 
 /* =====================================================================
    ORDNER „REKLAMATIONEN“: Fälle 201–208 (LF 3 · Kaufvertragsstörungen, 2026-11-20)
-   Zusammen mit den alten Reklamationen 101, 102, 104, 105 (REKALL, 12 Fälle) mit Entscheidung und Antwort.
-   Lösbar mit den FAQ (#v-faq). Kein Anspruch: 105, 202, 203, 205, 208.
-   Die Bewertung 103 liegt im Ordner „Kundenbewertungen“ (BEW) und läuft weiter über renderRek.
+   Zusammen mit den alten Reklamationen 101–105 (REKALL, 12 Fälle) mit Entscheidung und Antwort.
+   Fall 204 (Jonas Weber) wurde gestrichen. 103 ist eine Google-Bewertung (bew: true): Anrede „Hallo Lukas“ ist dort richtig.
+   Lösbar mit den FAQ (#v-faq). Kein Anspruch: 103, 105, 202, 203, 205, 208.
    Passt zu Aufgabe 4 im Arbeitsblatt „Kaufvertragsstörungen“ (lf3/kaufvertrag.html, Nr. 3): Reihenfolge dort = Reihenfolge von REKALL.
    Gespeichert unter kickloop:wid (Antworten aus dem alten Speicher kickloop:rek werden übernommen).
    ===================================================================== */
-const WID_ART = [["wid", "Umtausch oder Widerruf"], ["mangel", "Mangel oder falsche Lieferung"], ["werkstatt", "Werkstatt-Arbeit"], ["zahlung", "Fehler bei der Zahlung"]];
+const WID_ART = [["wid", "Umtausch oder Widerruf"], ["mangel", "Mangel oder falsche Lieferung"], ["lieferung", "Lieferung zu spät"], ["werkstatt", "Werkstatt-Arbeit"], ["zahlung", "Fehler bei der Zahlung"]];
 const WID_LEID = /(leider|bedauer|tut uns leid|verständnis)/i, WID_SORRY = /(entschuldig|tut uns leid|bedauer)/i;
 const WID = [
   { nr: 201, von: "Mira Kowalski", org: "Privatkundin, Online-Shop", mail: "mira.kowalski@mail.example", datum: "17.11.2026", betreff: "Rücksendung New Balance 530", anr: "Sehr geehrte Frau Kowalski,",
@@ -3090,10 +3079,6 @@ const WID = [
     kat: "wid", ja: false, faq: ["faq-widerruf-ausnahme"],
     text: ["Liebes Kickloop-Team,", "ich habe bei euch im Online-Shop Nike Air Force 1 in Weiß mit Custom-Design bestellt: mit meinem Namen „LEO“ an der Ferse und lila Blumen an der Seite. Bezahlt habe ich 119,99 Euro für die Schuhe und 79 Euro für das Design.", "Die Schuhe sind am 14.11.2026 angekommen und sehen genau so aus, wie wir es besprochen haben. Aber meine Freundin findet sie kitschig, und jetzt mag ich sie auch nicht mehr.", "Ich widerrufe hiermit die Bestellung und möchte mein Geld zurück.", "Liebe Grüße", "Leonie Fischer"],
     chk: [[WID_LEID, "Freundlich bedauert", "Bleib freundlich, auch wenn du Nein sagst."], [/(wunsch|extra|angefertigt|individuell|custom|persönlich|name)/i, "Grund genannt: nur für sie angefertigt", "Warum kann Frau Fischer nicht widerrufen? Nenne den Grund."], [/(kein\w*\s+(gesetzliche[sn]?\s+)?widerruf|nicht\s+(\w+\s+){0,3}widerruf|ausgeschlossen)/i, "Klar gesagt: kein Widerruf möglich", "Sag klar, dass ein Widerruf hier nicht geht."]] },
-  { nr: 204, von: "Jonas Weber", org: "Privatkunde, Laden", mail: "jonas.weber@mail.example", datum: "17.11.2026", betreff: "Rucksack kaputt – Garantie?", anr: "Sehr geehrter Herr Weber,",
-    kat: "mangel", ja: true, faq: ["faq-gewaehrleistung-garantie", "faq-mangel", "faq-reklamation"],
-    text: ["Guten Tag,", "ich habe am 15.05.2026 bei Ihnen im Laden den Eastpak Padded Pak'r in Schwarz gekauft (49,99 Euro). Den Kassenbon habe ich noch.", "Jetzt, nach sechs Monaten, ist der Reißverschluss kaputt. Er geht nicht mehr zu. Ich habe den Rucksack ganz normal für die Schule benutzt.", "Ein Freund sagt, ich muss mich an Eastpak wenden, weil die eine Garantie geben. Stimmt das, oder helfen Sie mir?", "Mit freundlichen Grüßen", "Jonas Weber"],
-    chk: [[/gewährleistung/i, "Gewährleistung genannt", "Welches Recht hat Herr Weber gegenüber Kickloop? Nenne den Fachbegriff."], [/(reparier|reparatur|ersatz|neue[nr]?\s+rucksack|austausch)/i, "Lösung angeboten: Reparatur oder Ersatz", "Was bietet Kickloop an?"], [/(kassenbon|kaufbeleg|beleg)/i, "An den Kassenbon erinnert", "Was soll Herr Weber mitbringen?"], [/garantie/i, "Garantie erklärt", "Herr Weber fragt nach der Garantie. Erkläre kurz den Unterschied."]] },
   { nr: 205, von: "Sandra Krüger", org: "Privatkundin, Laden", mail: "s.krueger@mail.example", datum: "18.11.2026", betreff: "Sohle löst sich – Chuck 70", anr: "Sehr geehrte Frau Krüger,",
     kat: "mangel", ja: false, faq: ["faq-kein-mangel"],
     text: ["Hallo,", "ich habe im August 2026 bei Ihnen im Laden die Converse Chuck 70 Hi in Beige gekauft. Weil sie schmutzig waren, habe ich sie letzte Woche in der Waschmaschine bei 60 Grad gewaschen, damit sie wieder richtig hell werden.", "Jetzt löst sich vorne an beiden Schuhen die Sohle ab! Das darf nach drei Monaten doch nicht sein. Auf dem Etikett im Schuh steht zwar „Nicht in der Waschmaschine waschen“, aber das liest doch keiner.", "Ich möchte neue Schuhe.", "Sandra Krüger"],
@@ -3111,8 +3096,7 @@ const WID = [
     text: ["Sehr geehrte Damen und Herren,", "heute kam Ihre Zahlungserinnerung über 20,25 Euro zur Rechnung RE-2026-0151 vom 03.11.2026. Das verstehen wir nicht.", "Die Rechnung über 1.012,37 Euro für 15 adidas Adicolor Trefoil Hoodies haben wir am 13.11.2026 bezahlt. Wir haben 2 % Skonto abgezogen und 992,12 Euro überwiesen. Auf der Rechnung steht doch, dass man Skonto abziehen darf.", "Wir sehen die Sache als erledigt an.", "Mit freundlichen Grüßen", "Dirk Lehmann", "Kassenwart, FC Weserkiez 2012 e. V."],
     chk: [[WID_LEID, "Freundlich bedauert", "Bleib freundlich, auch wenn du Nein sagst."], [/(7|sieben)\s+tage|10\.\s?11|10\.\s?november/i, "Skontofrist erklärt", "Bis wann hätte der Verein zahlen müssen, um Skonto abzuziehen?"], [/20,25/, "Offenen Betrag genannt", "Wie viel Geld fehlt noch?"], [/(überweis|bitte.{0,60}zahl|begleich)/i, "Um Zahlung des Rests gebeten", "Was soll Herr Lehmann jetzt tun?"]] },
 ];
-const REKALL = [...REK.filter(r => r.art !== "Bewertung"), ...WID];
-const BEW = REK.filter(r => r.art === "Bewertung");
+const REKALL = [...REK, ...WID];
 const WIDBY = Object.fromEntries(REKALL.map(w => [w.nr, w]));
 let WS = store.get("wid", {});
 REKALL.forEach(r => { const o = (typeof RK !== "undefined" && RK[r.nr]) || null; if (o && o.text && !WS[r.nr]) WS[r.nr] = { text: o.text, art: "", ja: null, faq: "", decOk: false, textOk: false }; });
@@ -3138,10 +3122,13 @@ function widDecision(w, s) {
 }
 function widChecks(w, t) {
   const L = [];
-  L.push([new RegExp(w.anr.replace(",", "").replace(/\s+/g, "\\s+"), "i").test(t), "Förmliche Anrede mit Namen", "Prüfe die Anrede: förmlich, mit dem Namen der Person, Komma am Ende."]);
-  L.push([!/(^|\n)\s*(hallo|hey|hi)\b/i.test(t), "Keine lockere Anrede", "Eine lockere Anrede passt hier nicht."]);
+  if (w.bew) L.push([/(hallo|liebe[rs]?)\s+lukas/i.test(t), "Persönliche Anrede mit Namen", "Bei einer Bewertung im Netz sprichst du die Person mit Vornamen an, zum Beispiel „Hallo Lukas,“."]);
+  else {
+    L.push([new RegExp(w.anr.replace(",", "").replace(/\s+/g, "\\s+"), "i").test(t), "Förmliche Anrede mit Namen", "Prüfe die Anrede: förmlich, mit dem Namen der Person, Komma am Ende."]);
+    L.push([!/(^|\n)\s*(hallo|hey|hi)\b/i.test(t), "Keine lockere Anrede", "Eine lockere Anrede passt hier nicht."]);
+  }
   w.chk.forEach(([re, l, h]) => L.push([re.test(t), l, h]));
-  L.push([/mit freundlichen grüßen/i.test(t), "Gruß wie im Geschäftsbrief", "Es fehlt der Gruß wie im Geschäftsbrief."]);
+  L.push(w.bew ? [/grüße/i.test(t), "Gruß am Ende", "Es fehlt ein Gruß am Ende."] : [/mit freundlichen grüßen/i.test(t), "Gruß wie im Geschäftsbrief", "Es fehlt der Gruß wie im Geschäftsbrief."]);
   L.push([/kickloop/i.test(t), "Absender Kickloop genannt", "Wer schreibt? Unterschreibe für Kickloop."]);
   return L.map(([ok, l, h]) => ({ ok, l: ok ? l : (h || l) }));
 }
@@ -3153,7 +3140,7 @@ function renderWid(nr) {
     <div><span class="lv mittel">Reklamation · Fall ${nrIdx} von ${REKALL.length}</span><h2 style="font-size:1.45rem;margin-top:6px">${esc(w.betreff)}</h2></div>
     <div class="meta"><span>Von:</span><span><b>${esc(w.von)}</b>, ${esc(w.org)} &lt;<span class="mono">${esc(w.mail)}</span>&gt;</span><span>An:</span><span class="mono">${esc(konditionen.mail)}</span><span>Datum:</span><span>${w.datum}</span></div>
     <div class="msg">${w.text.map(p => `<p>${esc(p)}</p>`).join("")}</div>
-    <div class="task"><b>Deine Aufgabe im Kundenservice</b><ol><li>Lies die Nachricht. Was möchte die Person?</li><li>Such die Antwort in den FAQ von Kickloop (unten aufklappen).</li><li>Entscheide: Worum geht es? Hat die Person einen Anspruch? Klicke auf „Entscheidung prüfen“.</li><li>Schreibe eine freundliche Antwort. Auch ein Nein muss freundlich und begründet sein.</li><li>Klicke auf „Prüfen“ und speichere die Antwort als Word-Datei.</li></ol></div>
+    <div class="task"><b>Deine Aufgabe im Kundenservice</b><ol>${w.bew ? `<li>Das ist eine öffentliche Google-Bewertung. Deine Antwort kann jeder lesen. Sprich die Person mit Vornamen an, so wie sie sich zeigt.</li>` : ""}<li>Lies die Nachricht. Was möchte die Person?</li><li>Such die Antwort in den FAQ von Kickloop (unten aufklappen).</li><li>Entscheide: Worum geht es? Hat die Person einen Anspruch? Klicke auf „Entscheidung prüfen“.</li><li>Schreibe eine freundliche Antwort. Auch ein Nein muss freundlich und begründet sein.</li><li>Klicke auf „Prüfen“ und speichere die Antwort als Word-Datei.</li></ol></div>
     <details class="kbox faq"><summary style="cursor:pointer;font-family:var(--display);font-weight:800">FAQ von Kickloop: Umtausch, Widerruf, Mängel, Werkstatt, Lieferung und Zahlung</summary><div style="margin-top:8px">${widFaqBox()}</div><button class="chip" data-go="faq" style="margin-top:6px">Ganze FAQ-Seite öffnen</button></details>
     <div class="kbox" style="display:grid;gap:12px;min-width:0">
       <h3 style="margin:0">Deine Entscheidung</h3>
