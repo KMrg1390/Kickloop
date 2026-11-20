@@ -1,17 +1,20 @@
+/* Farben der Lernwelt (Arbeitsbereich): grünlich statt Shop-Beige, damit die Lernenden sehen, dass sie bei den Aufgaben sind (2026-11-20) */
 :root{
-  --paper:#FAF8F5; --surface:#FFFFFF; --sand:#E7E3DC; --sand-2:#F1EDE6; --ink:#383E42; --ink-2:#5F646A; --muted:#7A746B;
+  --paper:#F2F6E4; --surface:#FFFFFF; --sand:#D8E2BB; --sand-2:#E6EECF; --ink:#383E42; --ink-2:#5F646A; --muted:#666A55;
   --amber:#E8A33D; --amber-ink:#8F5E0C; --amber-soft:#FFF3DC;
+  --lime:#C7F105; --lime-ink:#3B4F00; --lime-soft:#E9F5B8;
   --display:"Archivo","Arial Narrow",Arial,sans-serif; --body:"Hubballi","Segoe UI",Arial,sans-serif; --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
 }
 @media (prefers-color-scheme:dark){:root{
-  color-scheme:dark; --paper:#1D2023; --surface:#26292D; --sand:#3A3F44; --sand-2:#2F3337; --ink:#F1EEE9; --ink-2:#C9C4BC; --muted:#A39D94;
+  color-scheme:dark; --paper:#1A1E16; --surface:#242A1F; --sand:#3B4433; --sand-2:#2D3426; --ink:#F1EEE9; --ink-2:#C9C4BC; --muted:#A39D94;
   --amber-ink:#F2B85E; --amber-soft:#3A2F1C;
+  --lime-ink:#D3F542; --lime-soft:#2E3814;
 }}
 *{box-sizing:border-box}
 body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:18px;line-height:1.45;padding-inline:clamp(16px,3vw,40px);padding-block:0 48px}
 :focus-visible{outline:3px solid var(--amber);outline-offset:2px}
 h1,h2,h3{font-family:var(--display);font-stretch:112%;letter-spacing:-.01em;text-wrap:balance;margin:0}
-.top{border-bottom:1px solid var(--sand);margin-inline:calc(-1*clamp(16px,3vw,40px));padding:14px clamp(16px,3vw,40px) 12px;display:flex;flex-wrap:wrap;align-items:center;gap:8px 24px}
+.top{border-bottom:4px solid var(--lime);background:var(--surface);margin-inline:calc(-1*clamp(16px,3vw,40px));padding:14px clamp(16px,3vw,40px) 12px;display:flex;flex-wrap:wrap;align-items:center;gap:8px 24px}
 .top a.logo{display:flex;align-items:center;gap:8px 16px;text-decoration:none;color:var(--muted);font-size:.85rem}
 .klogo{display:block;height:44px;width:auto}.klogo.on-dark{display:none}
 @media (prefers-color-scheme:dark){.klogo.on-light{display:none}.klogo.on-dark{display:block}}
@@ -19,7 +22,9 @@ h1,h2,h3{font-family:var(--display);font-stretch:112%;letter-spacing:-.01em;text
 .back:hover{background:#B5DC04}
 main{max-width:960px;padding-top:28px}
 .eyebrow{font-family:var(--display);font-stretch:100%;font-weight:700;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
-h1{font-size:clamp(1.7rem,3.4vw,2.5rem);font-weight:800;margin-top:4px}
+/* Erkennungszeichen der Lernwelt: grüne Plakette über der Überschrift */
+main>.eyebrow{display:inline-block;background:var(--lime);color:#000;border:2px solid #000;border-radius:999px;padding:3px 12px;letter-spacing:.1em}
+h1{font-size:clamp(1.7rem,3.4vw,2.5rem);font-weight:800;margin-top:8px}
 .lead{max-width:62ch;color:var(--ink-2);margin:.4rem 0 0}
 h2{font-size:1.25rem;font-weight:800;margin:30px 0 10px}
 .ulist{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
@@ -31,3 +36,22 @@ h2{font-size:1.25rem;font-weight:800;margin:30px 0 10px}
 footer{margin-top:56px;padding-top:18px;border-top:1px solid var(--sand);color:var(--muted);font-size:.85rem}
 .ucard.dl{border-color:var(--ink-2)}
 .ucard .meta{font-family:var(--mono);font-size:.72rem;color:var(--muted);margin-top:4px}
+
+/* Schritt-Folge auf den Themenseiten (2026-11-20): Schritte untereinander, Nummer automatisch */
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:14px;max-width:760px;counter-reset:schritt}
+.steps>li{counter-increment:schritt;position:relative;display:grid;grid-template-columns:42px minmax(0,1fr);column-gap:14px;row-gap:8px}
+.steps>li::before{content:counter(schritt);grid-row:1;grid-column:1;width:40px;height:40px;border-radius:50%;background:var(--lime);color:#000;border:2px solid #000;display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:1.1rem;position:relative;z-index:1}
+.steps>li:not(:last-child)::after{content:"";position:absolute;left:20px;top:42px;bottom:-14px;width:2px;background:var(--sand)}
+.steps>li>.ucard,.steps>li>.sx{grid-column:2}
+.ucard .stype{font-family:var(--display);font-stretch:100%;font-weight:700;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--lime-ink)}
+/* Hilfe, Zusatz und Material gehören zu einem Schritt und haben keine eigene Nummer */
+.sx{display:grid;gap:8px}
+.sx .ucard{border-style:dashed;padding:10px 14px}
+.sx .ucard b{font-size:.95rem}
+.ucard .xtag{justify-self:start;font-family:var(--display);font-stretch:100%;font-weight:700;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);background:var(--sand-2);border-radius:999px;padding:1px 8px}
+/* Abschluss-Hinweis */
+.finish{margin-top:22px;max-width:760px;display:grid;grid-template-columns:42px minmax(0,1fr);column-gap:14px;align-items:start}
+.finish::before{content:"✓";width:40px;height:40px;border-radius:50%;background:#000;color:var(--lime);display:grid;place-items:center;font-weight:800;font-size:1.1rem}
+.finish div{background:var(--lime-soft);border:2px solid var(--lime-ink);border-radius:14px;padding:12px 16px}
+.finish b{display:block;font-family:var(--display);font-stretch:100%;font-size:1rem}
+.finish p{margin:2px 0 0}

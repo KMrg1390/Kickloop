@@ -9,7 +9,7 @@ Statische Seiten auf Vercel. Jeder Push auf `main` wird automatisch veröffentli
 | Pfad | Inhalt |
 |---|---|
 | `index.html` | Online-Shop / Mitarbeiter-Portal (Quelle: „00 Online-Shop Kickloop.html“). Fußleiste mit `/#impressum`, `/#kontakt`, `/#faq`, `/#arbeitsbereich` (alter Link `/#uebungsraum` leitet weiter). Eigene Links: `/#organigramm`, `/#quiz-kickloop`, `/#pyramide`, `/#popup`, `/#quiz-pyramide`, `/#quiz-sortiment`, `/#quiz-angebot`, `/#einkauf` |
-| `lf2/*.html` | LF 2: Unterseiten des Arbeitsbereichs (Kennenlernen, Organigramm, Sortiment, Marketing, Verkaufsgespräch, Zahlungsmittel, Pop-up-Store, Klausurtraining) |
+| `lf2/*.html` | LF 2: Unterseiten des Arbeitsbereichs (Kennenlernen, Organigramm, Sortiment, Marketing, Verkaufsgespräch, Zahlungsmittel, Pop-up-Store, Girokonto, Klausurtraining). Aufbau seit 20.11.2026: „So gehst du vor“ als Schritt-Folge (`<ol class="steps">`, Nummern zählt das CSS), Hilfe/Zusatz/Material ohne Nummer in `<div class="sx">`, am Ende der Kasten „Zum Schluss“ (`.finish`). Ändert sich eine Themenseite, auch die Angabe unter der Kachel im Arbeitsbereich (`index.html`, `.tmeta`) anpassen. |
 | `lf2/dateien/` | LF 2: digitale Arbeitsblätter (ausfüllbare PDF aus „6 Digital“) zum Herunterladen, ohne Lösungen |
 | `lf3/*.html` | LF 3: Unterseiten (Bezugsquellen und Anfrage, Angebotsvergleich, Bestellung, Kaufvertrag, Klausurtraining) |
 | `lf3/dateien/` | LF 3: Arbeitsblätter (PDF) und Vorlage Anfrage (Word) zum Herunterladen, ohne Lösungen |

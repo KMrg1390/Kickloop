@@ -33,6 +33,8 @@ h1,h2,h3{font-family:var(--display);font-stretch:112%;letter-spacing:-.01em;text
 
 /* header */
 .top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--paper);border-bottom:1px solid var(--sand);margin-inline:calc(-1*clamp(16px,3vw,40px));padding-inline:clamp(16px,3vw,40px)}
+/* Beim Scrollen bleibt nur die Reiterleiste oben: der Kopf rutscht um die Höhe der Logo-Zeile nach oben (--brandH setzt ein Skript, 2026-11-20) */
+header.top{top:calc(env(safe-area-inset-top,0px) - var(--brandH,0px))}
 .brandrow{display:flex;flex-wrap:wrap;align-items:center;gap:12px 24px;padding-block:14px 8px}
 .logo{display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px}.klogo{display:block;height:48px;width:auto}.klogo.on-dark{display:none}@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .klogo.on-light{display:none}:root:not([data-theme="light"]) .klogo.on-dark{display:block}}:root[data-theme="dark"] .klogo.on-light{display:none}:root[data-theme="dark"] .klogo.on-dark{display:block}.logo small{border-left:1px solid var(--sand);padding-left:16px}.lh .klogo{display:block!important;height:66px;margin-bottom:6px}
 .logo-mark{width:44px;height:44px;border-radius:50%;background:var(--ink);display:grid;place-items:center;flex:none}
@@ -268,6 +270,27 @@ body.solo .footnav{display:none}
 .ucard b{font-family:var(--display);font-stretch:100%;font-size:1rem}
 .ucard span{font-size:.92rem;color:var(--ink-2)}
 .ucard.ufrei b,.ucard.ufrei span{color:var(--muted)}
+/* ===== Lernwelt (2026-11-20): Arbeitsbereich grünlich statt Shop-Beige, gleiche Farben wie die Themenseiten (assets/unterseite.css) ===== */
+body.lernwelt{--paper:#F2F6E4; --sand:#D8E2BB; --sand-2:#E6EECF; --muted:#666A55}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) body.lernwelt{--paper:#1A1E16; --surface:#242A1F; --sand:#3B4433; --sand-2:#2D3426; --muted:#A39D94}}
+:root[data-theme="dark"] body.lernwelt{--paper:#1A1E16; --surface:#242A1F; --sand:#3B4433; --sand-2:#2D3426; --muted:#A39D94}
+body.lernwelt header.top{border-bottom:4px solid #C7F105}
+.lernpill{display:inline-block;background:#C7F105;color:#000;border:2px solid #000;border-radius:999px;padding:3px 12px;letter-spacing:.1em}
+/* Themen untereinander mit Nummer (Zähler automatisch); freiwillige Themen hängen ohne Nummer am Pflichtthema */
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:14px;max-width:760px;counter-reset:schritt}
+.steps>li{counter-increment:schritt;position:relative;display:grid;grid-template-columns:42px minmax(0,1fr);column-gap:14px;row-gap:8px}
+.steps>li::before{content:counter(schritt);grid-row:1;grid-column:1;width:40px;height:40px;border-radius:50%;background:#C7F105;color:#000;border:2px solid #000;display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:1.1rem;position:relative;z-index:1}
+.steps>li:not(:last-child)::after{content:"";position:absolute;left:20px;top:42px;bottom:-14px;width:2px;background:var(--sand)}
+.steps>li>.ucard,.steps>li>.sx{grid-column:2}
+.sx{display:grid;gap:8px}
+.sx .ucard{border-style:dashed;padding:10px 14px}
+.ucard .xtag{justify-self:start;font-family:var(--display);font-stretch:100%;font-weight:700;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);background:var(--sand-2);border-radius:999px;padding:1px 8px}
+.ucard .tmeta{font-family:var(--display);font-stretch:100%;font-size:.85rem;font-weight:600;color:var(--ink);margin-top:4px}
+.ucard.ufrei .tmeta{color:var(--muted)}
+.ucard .tmeta.soon{justify-self:start;font-weight:600;color:var(--muted);background:var(--sand-2);border-radius:999px;padding:0 10px}
+/* Abschluss-Hinweis unter jedem Knopf „Als Word-Datei speichern“ (wird per Skript eingefügt) */
+.savehint{margin:10px 0 0;padding:8px 12px;border-radius:10px;background:var(--amber-soft);color:var(--ink);font-size:.92rem;max-width:62ch}
+.savehint b{color:var(--amber-ink)}
 
 @media (max-width:900px){
   .katalog,.pyr-wrap,.plan,.post{grid-template-columns:1fr}
@@ -1162,28 +1185,29 @@ a.btn{text-decoration:none;display:inline-block}
 
 <!-- ARBEITSBEREICH -->
 <section class="view fpage" id="v-arbeitsbereich" hidden>
-  <div class="viewhead"><div><span class="eyebrow">Für den Unterricht</span><h1>Arbeitsbereich</h1>
-  <p class="lead">Hier findest du alle Themen und Übungen zu Kickloop. Jede Kachel öffnet sich in einem neuen Tab.</p></div></div>
+  <div class="viewhead"><div><span class="eyebrow lernpill">Für den Unterricht</span><h1>Arbeitsbereich</h1>
+  <p class="lead">Hier findest du alle Themen, Arbeitsblätter und Übungen zu Kickloop. Arbeite die Themen der Reihe nach durch. Jedes Thema öffnet sich in einem neuen Tab.</p></div></div>
+  <!-- Angaben unter den Kacheln: Zahl der Arbeitsblätter und Online-Übungen auf der Themenseite, Dauer aus den Stundenverläufen. Ändert sich eine Themenseite, hier mit anpassen. -->
   <h2>Lernfeld 2</h2>
-  <div class="ulist">
-    <a class="ucard" href="/lf2/kennenlernen.html" target="_blank" rel="noopener"><b>Kennenlernen Kickloop ↗</b><span>Das Unternehmen, das Team und der Laden</span></a>
-    <a class="ucard" href="/lf2/organigramm.html" target="_blank" rel="noopener"><b>Organigramm ↗</b><span>Aufbau des Unternehmens und Abteilungen</span></a>
-    <a class="ucard" href="/lf2/sortiment.html" target="_blank" rel="noopener"><b>Sortiment ↗</b><span>Aufbau des Sortiments und Produktpyramide</span></a>
-    <a class="ucard" href="/lf2/marketing.html" target="_blank" rel="noopener"><b>Marketing ↗</b><span>Werbung und Zielgruppen</span></a>
-    <a class="ucard ufrei" href="/lf2/popup-store.html" target="_blank" rel="noopener"><b>Optional: Pop-up-Store ↗</b><span>Freiwilliges Projekt: ein Sortiment für den Pop-up-Store planen</span></a>
-    <a class="ucard" href="/lf2/verkaufsgespraech.html" target="_blank" rel="noopener"><b>Verkaufsgespräch ↗</b><span>Kundinnen und Kunden im Laden beraten</span></a>
-    <a class="ucard" href="/lf2/zahlungsmittel.html" target="_blank" rel="noopener"><b>Zahlungsmittel ↗</b><span>Wie Kundinnen und Kunden bezahlen</span></a>
-    <a class="ucard ufrei" href="/lf2/girokonto.html" target="_blank" rel="noopener"><b>Optional: Mein erstes Girokonto ↗</b><span>Freiwillige Stunde: Welches Konto passt zu mir?</span></a>
-    <a class="ucard" href="/lf2/klausurtraining.html" target="_blank" rel="noopener"><b>Klausurtraining ↗</b><span>Üben für die Klassenarbeit</span></a>
-  </div>
+  <ol class="steps">
+    <li><a class="ucard" href="/lf2/kennenlernen.html" target="_blank" rel="noopener"><b>Kennenlernen Kickloop ↗</b><span>Das Unternehmen, das Team und der Laden</span><span class="tmeta">1 Arbeitsblatt · Online-Shop · ca. 25 Minuten</span></a></li>
+    <li><a class="ucard" href="/lf2/organigramm.html" target="_blank" rel="noopener"><b>Organigramm ↗</b><span>Aufbau des Unternehmens und Abteilungen</span><span class="tmeta">1 Arbeitsblatt · 2 Online-Übungen · 1 Zusatzblatt · ca. 2 Doppelstunden</span></a></li>
+    <li><a class="ucard" href="/lf2/sortiment.html" target="_blank" rel="noopener"><b>Sortiment ↗</b><span>Aufbau des Sortiments und Produktpyramide</span><span class="tmeta">2 Arbeitsblätter · 4 Online-Übungen · ca. 4 Doppelstunden</span></a></li>
+    <li><a class="ucard" href="/lf2/marketing.html" target="_blank" rel="noopener"><b>Marketing ↗</b><span>Werbung und Zielgruppen</span><span class="tmeta">4 Arbeitsblätter · 1 Hilfeblatt · 1 Online-Übung · ca. 4 Doppelstunden</span></a>
+      <div class="sx"><a class="ucard ufrei" href="/lf2/popup-store.html" target="_blank" rel="noopener"><span class="xtag">freiwillig</span><b>Optional: Pop-up-Store ↗</b><span>Freiwilliges Projekt: ein Sortiment für den Pop-up-Store planen</span><span class="tmeta">1 Arbeitsblatt · Hilfekarten · 1 Online-Übung · ca. 1 Doppelstunde</span></a></div></li>
+    <li><a class="ucard" href="/lf2/verkaufsgespraech.html" target="_blank" rel="noopener"><b>Verkaufsgespräch ↗</b><span>Kundinnen und Kunden im Laden beraten</span><span class="tmeta soon">kommt bald</span></a></li>
+    <li><a class="ucard" href="/lf2/zahlungsmittel.html" target="_blank" rel="noopener"><b>Zahlungsmittel ↗</b><span>Wie Kundinnen und Kunden bezahlen</span><span class="tmeta">3 Online-Übungen · ca. 3 Doppelstunden</span></a>
+      <div class="sx"><a class="ucard ufrei" href="/lf2/girokonto.html" target="_blank" rel="noopener"><span class="xtag">freiwillig</span><b>Optional: Mein erstes Girokonto ↗</b><span>Freiwillige Stunde: Welches Konto passt zu mir?</span><span class="tmeta">1 Online-Übung · ca. 1 Doppelstunde</span></a></div></li>
+    <li><a class="ucard" href="/lf2/klausurtraining.html" target="_blank" rel="noopener"><b>Klausurtraining ↗</b><span>Üben für die Klassenarbeit</span><span class="tmeta">3 Online-Übungen</span></a></li>
+  </ol>
   <h2>Lernfeld 3</h2>
-  <div class="ulist">
-    <a class="ucard" href="/lf3/bezugsquellen-anfrage.html" target="_blank" rel="noopener"><b>Bezugsquellen und Anfrage ↗</b><span>Lieferanten finden und eine Anfrage schreiben</span></a>
-    <a class="ucard" href="/lf3/angebotsvergleich.html" target="_blank" rel="noopener"><b>Der Angebotsvergleich ↗</b><span>Angebote rechnerisch und qualitativ vergleichen</span></a>
-    <a class="ucard" href="/lf3/bestellung.html" target="_blank" rel="noopener"><b>Die Bestellung ↗</b><span>Beim Lieferanten bestellen</span></a>
-    <a class="ucard" href="/lf3/kaufvertrag.html" target="_blank" rel="noopener"><b>Der Kaufvertrag ↗</b><span>Wie ein Kaufvertrag zustande kommt</span></a>
-    <a class="ucard" href="/lf3/klausurtraining.html" target="_blank" rel="noopener"><b>Klausurtraining ↗</b><span>Üben für die Klassenarbeit</span></a>
-  </div>
+  <ol class="steps">
+    <li><a class="ucard" href="/lf3/bezugsquellen-anfrage.html" target="_blank" rel="noopener"><b>Bezugsquellen und Anfrage ↗</b><span>Lieferanten finden und eine Anfrage schreiben</span><span class="tmeta">1 Arbeitsblatt · 1 Word-Vorlage · 2 Online-Übungen</span></a></li>
+    <li><a class="ucard" href="/lf3/angebotsvergleich.html" target="_blank" rel="noopener"><b>Der Angebotsvergleich ↗</b><span>Angebote rechnerisch und qualitativ vergleichen</span><span class="tmeta">2 Arbeitsblätter · 3 Online-Übungen</span></a></li>
+    <li><a class="ucard" href="/lf3/bestellung.html" target="_blank" rel="noopener"><b>Die Bestellung ↗</b><span>Beim Lieferanten bestellen</span><span class="tmeta soon">kommt bald</span></a></li>
+    <li><a class="ucard" href="/lf3/kaufvertrag.html" target="_blank" rel="noopener"><b>Der Kaufvertrag ↗</b><span>Wie ein Kaufvertrag zustande kommt</span><span class="tmeta soon">kommt bald</span></a></li>
+    <li><a class="ucard" href="/lf3/klausurtraining.html" target="_blank" rel="noopener"><b>Klausurtraining ↗</b><span>Üben für die Klassenarbeit</span><span class="tmeta soon">kommt bald</span></a></li>
+  </ol>
 </section>
 
 <footer class="sitefoot"><nav class="footnav" aria-label="Fußleiste"><button data-fview="impressum">Impressum</button><button data-fview="kontakt">Kontakt</button><button data-fview="faq">FAQ</button><button data-fview="arbeitsbereich">Arbeitsbereich</button></nav><div class="toolbar" style="margin-bottom:10px"><button class="btn ghost" id="resetAll">Alles auf diesem Computer löschen</button><span class="hint-s">Nur am Ende der Einheit oder für eine neue Person.</span></div>Kickloop ist ein erfundenes Modellunternehmen für den Unterricht. Die Marken sind echt. Die Preise sind Modellpreise von Kickloop und keine Angaben der Hersteller. Verkaufszahlen und Lagerbestand sind erfunden.</footer>
@@ -1285,10 +1309,11 @@ function applySolo(){
 /* Alte Reiter leiten weiter (Links, Lesezeichen, gespeicherter Reiter) */
 const ALIAS = { team:["ueber","team"], karriere:["ueber","karriere"], anfragen:["post","anf"], angebote:["post","ang"], reklamationen:["post","rek"], rallye:["start"], konditionen:["katalog","kondHead"], werkstatt:["katalog","dlHead"], regeln:["katalog","regelnHead"], uebungsraum:["arbeitsbereich"] };
 function show(v){
-  if (applySolo()) return;
+  if (applySolo()) { document.body.classList.remove("lernwelt"); return; }
   let sub = null;
   if (ALIAS[v]) { sub = ALIAS[v][1] || null; v = ALIAS[v][0]; }
   if(!views.includes(v)) { v="start"; sub=null; }
+  document.body.classList.toggle("lernwelt", v === "arbeitsbereich");
   if(v==="start") renderStart(); if(v==="ueber"&&window.renderUeber) renderUeber(sub); if(v==="rechnung"&&window.renderRech) renderRech(); if(v==="post"){ if(sub) setFolder(sub); renderPost(); }
   document.querySelectorAll("section.view").forEach(sec=>{ sec.hidden = sec.id !== "v-"+v; });
   document.querySelectorAll(".tab").forEach(t=>t.setAttribute("aria-selected", t.dataset.view===v));
@@ -3099,6 +3124,31 @@ function startExtra() {
   karte.addEventListener("touchstart", e => { x0 = e.touches[0].clientX; }, { passive: true });
   karte.addEventListener("touchend", e => { if (x0 === null) return; const dx = e.changedTouches[0].clientX - x0; if (Math.abs(dx) > 50) zeige(i + (dx < 0 ? 1 : -1)); x0 = null; });
   zeige(i);
+})();
+
+/* Kopf: Höhe der Logo-Zeile messen, damit beim Scrollen nur die Reiterleiste oben bleibt (2026-11-20) */
+(function () {
+  const br = document.querySelector("header.top .brandrow");
+  if (!br) return;
+  const set = () => document.documentElement.style.setProperty("--brandH", br.offsetHeight + "px");
+  set();
+  if (window.ResizeObserver) new ResizeObserver(set).observe(br); else window.addEventListener("resize", set);
+})();
+
+/* Abschluss-Hinweis unter jedem Knopf „… als Word-Datei speichern“, auch in Bereichen, die erst später gezeichnet werden (2026-11-20) */
+(function () {
+  const add = () => document.querySelectorAll("button").forEach(b => {
+    if (!/Word-Datei speichern/.test(b.textContent)) return;
+    const bar = b.closest(".toolbar, .bar2") || b.parentElement;
+    if (!bar || (bar.nextElementSibling && bar.nextElementSibling.classList.contains("savehint"))) return;
+    const p = document.createElement("p");
+    p.className = "savehint";
+    p.innerHTML = "<b>Zum Schluss:</b> Speichere deine Word-Datei, bevor du gehst. Am nächsten PC ist sonst alles weg.";
+    bar.after(p);
+  });
+  let t = null;
+  new MutationObserver(() => { clearTimeout(t); t = setTimeout(add, 60); }).observe(document.body, { childList: true, subtree: true });
+  add();
 })();
 
 /* Start der Seite (ohne Stundencodes) */
