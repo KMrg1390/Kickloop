@@ -1,27 +1,29 @@
 /* Farben der Lernwelt (Arbeitsbereich): grünlich statt Shop-Beige, damit die Lernenden sehen, dass sie bei den Aufgaben sind (2026-11-20) */
 :root{
-  --paper:#F2F6E4; --surface:#FFFFFF; --sand:#D8E2BB; --sand-2:#E6EECF; --ink:#383E42; --ink-2:#5F646A; --muted:#666A55;
+  --paper:#F2F6E4; --surface:#FFFFFF; --sand:#D8E2BB; --sand-2:#E6EECF; --ink:#383E42; --ink-2:#5F646A; --muted:#5C604C;
   --amber:#E8A33D; --amber-ink:#8F5E0C; --amber-soft:#FFF3DC;
   --lime:#C7F105; --lime-ink:#3B4F00; --lime-soft:#E9F5B8;
+  --lav:#E7E0EC; --lav-ink:#5B4A6E;
   --display:"Archivo","Arial Narrow",Arial,sans-serif; --body:"Hubballi","Segoe UI",Arial,sans-serif; --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
 }
 @media (prefers-color-scheme:dark){:root{
   color-scheme:dark; --paper:#1A1E16; --surface:#242A1F; --sand:#3B4433; --sand-2:#2D3426; --ink:#F1EEE9; --ink-2:#C9C4BC; --muted:#A39D94;
   --amber-ink:#F2B85E; --amber-soft:#3A2F1C;
   --lime-ink:#D3F542; --lime-soft:#2E3814;
+  --lav:#342E3B; --lav-ink:#CDBFE0;
 }}
 *{box-sizing:border-box}
 body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:18px;line-height:1.45;padding-inline:clamp(16px,3vw,40px);padding-block:0 48px}
 :focus-visible{outline:3px solid var(--amber);outline-offset:2px}
 h1,h2,h3{font-family:var(--display);font-stretch:112%;letter-spacing:-.01em;text-wrap:balance;margin:0}
 .top{border-bottom:4px solid var(--lime);background:var(--surface);margin-inline:calc(-1*clamp(16px,3vw,40px));padding:14px clamp(16px,3vw,40px) 12px;display:flex;flex-wrap:wrap;align-items:center;gap:8px 24px}
-.top a.logo{display:flex;align-items:center;gap:8px 16px;text-decoration:none;color:var(--muted);font-size:.85rem}
+.top a.logo{display:flex;align-items:center;gap:8px 16px;text-decoration:none;color:var(--muted);font-size:.9rem}
 .klogo{display:block;height:44px;width:auto}.klogo.on-dark{display:none}
 @media (prefers-color-scheme:dark){.klogo.on-light{display:none}.klogo.on-dark{display:block}}
 .back{margin-left:auto;font-family:var(--display);font-stretch:100%;font-weight:700;font-size:.95rem;color:#000;text-decoration:none;border:2px solid #000;border-radius:999px;padding:8px 20px;background:#C7F105}
 .back:hover{background:#B5DC04}
 main{max-width:960px;padding-top:28px}
-.eyebrow{font-family:var(--display);font-stretch:100%;font-weight:700;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.eyebrow{font-family:var(--display);font-stretch:100%;font-weight:700;font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
 /* Erkennungszeichen der Lernwelt: grüne Plakette über der Überschrift */
 main>.eyebrow{display:inline-block;background:var(--lime);color:#000;border:2px solid #000;border-radius:999px;padding:3px 12px;letter-spacing:.1em}
 h1{font-size:clamp(1.7rem,3.4vw,2.5rem);font-weight:800;margin-top:8px}
@@ -33,9 +35,9 @@ h2{font-size:1.25rem;font-weight:800;margin:30px 0 10px}
 .ucard b{font-family:var(--display);font-stretch:100%;font-size:1rem}
 .ucard span{font-size:.92rem;color:var(--ink-2)}
 .empty{background:var(--sand-2);border-radius:14px;padding:16px 18px;color:var(--ink-2);max-width:62ch}
-footer{margin-top:56px;padding-top:18px;border-top:1px solid var(--sand);color:var(--muted);font-size:.85rem}
+footer{margin-top:56px;padding-top:18px;border-top:1px solid var(--sand);color:var(--muted);font-size:.9rem}
 .ucard.dl{border-color:var(--ink-2)}
-.ucard .meta{font-family:var(--mono);font-size:.72rem;color:var(--muted);margin-top:4px}
+.ucard .meta{font-family:var(--mono);font-size:.75rem;color:var(--muted);margin-top:4px}
 
 /* Schritt-Folge auf den Themenseiten (2026-11-20): Schritte untereinander, Nummer automatisch */
 .steps{list-style:none;margin:0;padding:0;display:grid;gap:14px;max-width:760px;counter-reset:schritt}
@@ -43,15 +45,68 @@ footer{margin-top:56px;padding-top:18px;border-top:1px solid var(--sand);color:v
 .steps>li::before{content:counter(schritt);grid-row:1;grid-column:1;width:40px;height:40px;border-radius:50%;background:var(--lime);color:#000;border:2px solid #000;display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:1.1rem;position:relative;z-index:1}
 .steps>li:not(:last-child)::after{content:"";position:absolute;left:20px;top:42px;bottom:-14px;width:2px;background:var(--sand)}
 .steps>li>.ucard,.steps>li>.sx{grid-column:2}
-.ucard .stype{font-family:var(--display);font-stretch:100%;font-weight:700;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--lime-ink)}
+.ucard .stype{font-family:var(--display);font-stretch:100%;font-weight:700;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--lime-ink)}
 /* Hilfe, Zusatz und Material gehören zu einem Schritt und haben keine eigene Nummer */
 .sx{display:grid;gap:8px}
 .sx .ucard{border-style:dashed;padding:10px 14px}
 .sx .ucard b{font-size:.95rem}
-.ucard .xtag{justify-self:start;font-family:var(--display);font-stretch:100%;font-weight:700;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);background:var(--sand-2);border-radius:999px;padding:1px 8px}
+.ucard .xtag{justify-self:start;font-family:var(--display);font-stretch:100%;font-weight:700;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);background:var(--sand-2);border-radius:999px;padding:1px 8px}
 /* Abschluss-Hinweis */
 .finish{margin-top:22px;max-width:760px;display:grid;grid-template-columns:42px minmax(0,1fr);column-gap:14px;align-items:start}
 .finish::before{content:"✓";width:40px;height:40px;border-radius:50%;background:#000;color:var(--lime);display:grid;place-items:center;font-weight:800;font-size:1.1rem}
 .finish div{background:var(--lime-soft);border:2px solid var(--lime-ink);border-radius:14px;padding:12px 16px}
 .finish b{display:block;font-family:var(--display);font-stretch:100%;font-size:1rem}
 .finish p{margin:2px 0 0}
+
+/* ===== Zwei-Tab-Modell (2026-11-20) =====
+   Der grüne Kopf kommt aus assets/arbeitsbereich.js und assets/arbeitsbereich.css. Der frühere Kopf (.top, .back) wird nicht mehr benutzt. */
+main{padding-top:24px}
+/* Schild auf Schritten, die auf der Webseite spielen (wechseln den Tab). Alle anderen Schritte bleiben im Arbeitsbereich. */
+.ucard .wo{justify-self:start;font-family:var(--display);font-stretch:100%;font-weight:700;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;border-radius:999px;padding:2px 10px}
+.ucard .wo.shop{background:var(--amber-soft);color:var(--amber-ink)}
+.ucard .wo.portal{background:var(--lav);color:var(--lav-ink)}
+/* Übersicht (arbeitsbereich/index.html): Angaben unter den Kacheln, freiwillige Themen, „kommt bald“ */
+.ucard .tmeta{font-family:var(--display);font-stretch:100%;font-size:.9rem;font-weight:600;color:var(--ink);margin-top:4px}
+.ucard.ufrei b,.ucard.ufrei span,.ucard.ufrei .tmeta{color:var(--muted)}
+.ucard .tmeta.soon{justify-self:start;font-weight:600;color:var(--muted);background:var(--sand-2);border-radius:999px;padding:0 10px}
+/* ===== Einstieg im Arbeitsbereich (2026-11-20): „So geht es“ in drei Schritten und ein klarer erster Knopf ===== */
+.so{list-style:none;margin:18px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;max-width:760px;counter-reset:so}
+.so li{counter-increment:so;background:var(--lime-soft);border-radius:14px;padding:12px 14px;display:grid;gap:2px;align-content:start}
+.so li b{font-family:var(--display);font-stretch:100%;font-size:1rem;color:var(--ink)}
+.so li b::before{content:counter(so) ". "}
+.so li span{font-size:.92rem;color:var(--ink-2)}
+/* Am Handy ein flacher Kasten mit drei Zeilen, damit die Themen früh auf dem Bildschirm stehen */
+@media (max-width:640px){.so{grid-template-columns:1fr;gap:0;background:var(--lime-soft);border-radius:14px;padding:6px 0}.so li{display:block;background:none;border-radius:0;padding:5px 14px}.so li b{font-size:.95rem;margin-right:6px}.so li span{font-size:.88rem}}
+.los{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.losbtn{font-family:var(--display);font-stretch:100%;font-weight:700;font-size:1rem;text-decoration:none;color:#000;background:#C7F105;border:2px solid #000;border-radius:999px;padding:11px 22px;min-height:46px;display:inline-flex;align-items:center}
+.losbtn:hover{background:#B5DC04}
+.losbtn.hell{background:var(--surface);color:var(--ink);border-color:var(--ink-2)}
+.losbtn.hell:hover{background:var(--sand-2)}
+/* Themen ohne Inhalt: als Ausblick sichtbar, aber kein Link */
+.ucard.usoon{border-style:dashed;background:transparent;cursor:default}
+.ucard.usoon:hover{background:transparent}
+.ucard.usoon b,.ucard.usoon span{color:var(--muted)}
+/* ===== Schritt-Karten mit Knopf und Häkchen (2026-11-20, Vorschläge 3 und 4 des UX-Konzepts) =====
+   assets/arbeitsbereich.js baut jede Karte um: aus dem Link wird eine Karte mit genau einem Knopf („Herunterladen“, „Starten“, „Zur Webseite“)
+   und dem Häkchen „Erledigt“. Ohne Skript bleiben die Karten ganz normale Links. */
+div.ucard:hover{background:var(--surface)}
+.akt{display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px;margin-top:8px}
+.sbtn{font-family:var(--display);font-stretch:100%;font-weight:700;font-size:.95rem;text-decoration:none;color:var(--surface);background:var(--ink);border:2px solid var(--ink);border-radius:999px;padding:8px 18px;min-height:44px;display:inline-flex;align-items:center;white-space:nowrap}
+.sbtn:hover{opacity:.9}
+.sx .sbtn{background:var(--surface);color:var(--ink);min-height:40px;padding:6px 16px}
+.erl{display:inline-flex;align-items:center;gap:8px;min-height:44px;font-size:.95rem;color:var(--ink-2);cursor:pointer;user-select:none}
+.erl input{width:22px;height:22px;accent-color:#3B4F00;margin:0;cursor:pointer}
+.steps>li.fertig::before{content:"✓";background:#000;color:#C7F105}
+.steps>li.fertig>.ucard{border-color:var(--lime-ink)}
+.stand{margin:0 0 14px;max-width:760px;color:var(--ink-2)}
+.stand b{color:var(--ink)}
+.stand.alle b{color:var(--lime-ink)}
+/* Abgabe-Karte am Ende der Themenseite */
+.finish.abgabe ol{margin:4px 0 0;padding-left:1.25em;display:grid;gap:3px}
+.mono{font-family:var(--mono);font-size:.86em}
+/* Übersicht: Stand je Thema */
+.ucard .tstand{font-family:var(--display);font-stretch:100%;font-weight:700;font-size:.875rem;color:var(--ink);margin-top:4px;display:grid;gap:5px}
+.ucard .tstand.alle{color:var(--lime-ink)}
+.tstand i{display:block;height:6px;border-radius:999px;background:var(--sand);overflow:hidden;max-width:260px}
+.tstand u{display:block;height:100%;background:var(--ink);border-radius:999px;text-decoration:none}
+.naechster{margin:8px 0 0;color:var(--ink-2);font-size:.95rem;max-width:62ch}

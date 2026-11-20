@@ -1,0 +1,54 @@
+/* Grüne Zeile (2026-11-20): der feste Ort für „Wo bin ich, wie komme ich zurück, wer bin ich“.
+   - Im Arbeitsbereich (Übersicht, Themenseiten, Übungsseiten, Einzel-Übungen in index.html): Rückweg, Namensschild, „Zur Webseite“.
+   - Auf der Webseite (Shop und Mitarbeiter-Portal): laufende Aufgabe, Namensschild, „Arbeitsbereich“. Sie ist dort die Tür zum Unterricht.
+   Die Zeile fügt assets/arbeitsbereich.js ein. Sie liegt ganz oben über der Seite und rollt mit weg. */
+html.kl-ab,html.kl-web{padding-top:calc(46px + env(safe-area-inset-top,0px)) !important}
+.kl-bar{position:absolute;top:0;left:0;right:0;z-index:50;box-sizing:border-box;height:calc(46px + env(safe-area-inset-top,0px));
+  padding:env(safe-area-inset-top,0px) max(16px,env(safe-area-inset-right,0px)) 0 max(16px,env(safe-area-inset-left,0px));
+  display:flex;align-items:center;gap:8px;background:#C7F105;color:#000;border-bottom:2px solid #000;margin:0;
+  font:700 15px/1.2 "Archivo","Arial Narrow",Arial,sans-serif;font-stretch:100%;letter-spacing:0;text-transform:none;text-align:left}
+.kl-bar a{color:#000;text-decoration:none;white-space:nowrap;border-radius:999px;padding:7px 12px;min-width:0;overflow:hidden;text-overflow:ellipsis;font:inherit}
+.kl-bar a:hover{background:rgba(0,0,0,.1)}
+.kl-bar a:focus-visible,.kl-bar button:focus-visible{outline:3px solid #000;outline-offset:1px}
+.kl-bar .kl-back,.kl-bar a.kl-auf{margin-left:-12px}
+.kl-bar .kl-here{font-weight:800;white-space:nowrap;min-width:0;overflow:hidden;text-overflow:ellipsis}
+.kl-bar .kl-ich em{font-style:normal}
+.kl-bar .kl-auf{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.kl-bar .kl-auf em{font-style:normal;font-weight:500}
+.kl-bar .kl-auf.leer{font-weight:500;opacity:.85}
+.kl-bar .kl-sp{flex:1}
+.kl-bar .kl-web{border:2px solid #000;background:#fff;padding:5px 12px;flex:none}
+.kl-bar .kl-web:hover{background:#F2F6E4}
+/* Namensschild */
+.kl-bar .kl-ich{flex:none;display:inline-flex;align-items:center;gap:7px;max-width:42%;background:#000;color:#C7F105;border:0;border-radius:999px;padding:4px 12px 4px 4px;font:inherit;font-size:14px;cursor:pointer;min-height:32px}
+.kl-bar .kl-ich i{flex:none;width:24px;height:24px;border-radius:50%;background:#C7F105;color:#000;display:grid;place-items:center;font-style:normal;font-size:11px;font-weight:800}
+.kl-bar .kl-ich span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.kl-bar .kl-ich.leer{padding:4px 12px}
+@media (max-width:560px){
+  html.kl-ab,html.kl-web{padding-top:calc(42px + env(safe-area-inset-top,0px)) !important}
+  .kl-bar{height:calc(42px + env(safe-area-inset-top,0px));gap:6px;font-size:14px}
+  .kl-bar .kl-ich:not(.leer){padding:4px}
+  .kl-bar .kl-ich:not(.leer) span{display:none}
+  .kl-bar .kl-ich.leer em{display:none}
+  .kl-bar .kl-web{padding:5px 10px}
+}
+/* Dialog „Dein Name“ */
+.kl-dlg{border:2px solid #000;border-radius:18px;padding:0;max-width:min(92vw,420px);width:100%;background:#fff;color:#1E2420;font:400 16px/1.45 "Hubballi","Segoe UI",Arial,sans-serif;box-shadow:0 18px 60px rgba(0,0,0,.3)}
+.kl-dlg::backdrop{background:rgba(20,24,20,.55)}
+.kl-form{display:flex;flex-direction:column;gap:10px;padding:20px;margin:0}
+.kl-form .kl-dt{font:800 20px/1.2 "Archivo","Arial Narrow",Arial,sans-serif}
+.kl-form label{font:700 12px/1.2 "Archivo","Arial Narrow",Arial,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#4A524C}
+.kl-form input{font:inherit;color:inherit;background:#fff;border:2px solid #000;border-radius:10px;padding:10px 12px;min-height:46px;box-sizing:border-box;width:100%}
+.kl-form p{margin:0;color:#4A524C;font-size:14px}
+.kl-zeile{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.kl-form button{font:700 15px/1.2 "Archivo","Arial Narrow",Arial,sans-serif;border-radius:999px;padding:10px 18px;min-height:44px;cursor:pointer;border:2px solid #000;background:#fff;color:#000}
+.kl-form .kl-ok{background:#C7F105}
+.kl-weg{display:flex;flex-direction:column;gap:6px;margin-top:10px;padding-top:14px;border-top:1px dashed #B8BDB0;font-size:14px;color:#4A524C}
+.kl-weg b{color:#1E2420;font:800 15px/1.2 "Archivo","Arial Narrow",Arial,sans-serif}
+.kl-form .kl-loesch{align-self:flex-start;border-color:#A23A32;color:#A23A32}
+.kl-form .kl-loesch.scharf{background:#A23A32;color:#fff}
+/* Hinweis, falls der Browser nicht von selbst in den anderen Tab wechselt */
+.kl-hint{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:1000;box-sizing:border-box;
+  width:max-content;max-width:min(92vw,520px);background:#000;color:#C7F105;font:700 15px/1.35 "Archivo","Arial Narrow",Arial,sans-serif;
+  border-radius:14px;padding:12px 16px;box-shadow:0 6px 24px rgba(0,0,0,.25)}
+@media print{.kl-bar,.kl-hint,.kl-dlg{display:none}html.kl-ab,html.kl-web{padding-top:0 !important}}

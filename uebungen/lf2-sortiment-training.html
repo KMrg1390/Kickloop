@@ -1,10 +1,9 @@
 <!doctype html>
 <html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/arbeitsbereich.css"><link rel="icon" href="/assets/icon-arbeitsbereich.svg" type="image/svg+xml"><script src="/assets/arbeitsbereich.js" defer></script>
 <title>Sortiment-Training</title>
 <meta name="description" content="Übungen mit Selbstkontrolle zu Produktpyramide, Sortiment, Erweiterung und Bereinigung.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Hubballi&family=IBM+Plex+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="/assets/schriften.css">
 <style>
 :root{
   --paper:#F5F6F3; --card:#FFFFFF; --line:#D5D9D6; --ink:#1F2A33; --ink2:#51606B;
@@ -117,12 +116,30 @@ const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":
 const eur = n => n.toLocaleString("de-DE",{minimumFractionDigits:2,maximumFractionDigits:2}) + " €";
 const parseNum = v => { v = String(v).replace(/€/g,"").replace(/\s/g,""); if (v.includes(",")) v = v.replace(/\./g,"").replace(",","."); return v === "" ? NaN : Number(v); };
 let cur = 0;
-const state = ROUNDS.map(r => ({ checked:false, res:r.qs.map(()=>null) }));
+const leer = r => ({ checked:false, res:r.qs.map(()=>null), ans:r.qs.map(()=>"") });
+const state = ROUNDS.map(leer);
+/* Antworten bleiben in diesem Browser gespeichert (2026-11-20): Seit die Übung im selben Tab öffnet, geht beim Zurückgehen sonst alles verloren. */
+const SKEY = "kickloop:sortiment-training";
+function sichern(){ try { localStorage.setItem(SKEY, JSON.stringify({ cur, state })); } catch (e) {} }
+(function laden(){
+  let d = null; try { d = JSON.parse(localStorage.getItem(SKEY)); } catch (e) {}
+  if (!d || !Array.isArray(d.state)) return;
+  ROUNDS.forEach((r,i) => { const x = d.state[i];
+    if (x && Array.isArray(x.ans) && x.ans.length === r.qs.length) state[i] = { checked:!!x.checked, res:r.qs.map(()=>null), ans:x.ans.map(v => v == null ? "" : String(v)) }; });
+  if (Number.isInteger(d.cur) && d.cur >= 0 && d.cur < ROUNDS.length) cur = d.cur;
+})();
+function merken(){
+  const r = ROUNDS[cur];
+  state[cur].ans = r.qs.map((_,qi) => { const id = `${r.id}-${qi}`;
+    if (r.kind==="mc") { const c = document.querySelector(`input[name="${id}"]:checked`); return c ? c.value : ""; }
+    const e = document.getElementById(id); return e ? e.value : ""; });
+  sichern();
+}
 
 function renderNav(){
   $("#rounds").innerHTML = ROUNDS.map((r,i)=>{ const s = state[i]; const ok = s.res.filter(x=>x===true).length;
     return `<button class="rbtn" id="nav-${r.id}" aria-pressed="${i===cur}" data-i="${i}">${esc(r.t)}${s.checked?`<span class="sc">${ok}/${r.qs.length}</span>`:""}</button>`; }).join("");
-  $("#rounds").querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>{cur=+b.dataset.i; render();}));
+  $("#rounds").querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>{cur=+b.dataset.i; sichern(); render();}));
 }
 function qHTML(r,q,qi){
   const id = `${r.id}-${qi}`;
@@ -141,9 +158,14 @@ function render(){
   h += `<div class="bar"><button class="btn" id="check">Prüfen</button><button class="btn ghost" id="again">Runde neu starten</button><span class="err" id="err" role="alert"></span></div>`;
   $("#round").innerHTML = h;
   $("#check").addEventListener("click", check);
-  $("#again").addEventListener("click", () => { state[cur] = { checked:false, res:r.qs.map(()=>null) }; render(); });
-  $("#round").addEventListener("input", () => { $("#err").textContent = ""; });
-  $("#round").addEventListener("change", () => { $("#err").textContent = ""; });
+  $("#again").addEventListener("click", () => { state[cur] = leer(r); sichern(); render(); });
+  $("#round").oninput = () => { $("#err").textContent = ""; merken(); };
+  $("#round").onchange = () => { $("#err").textContent = ""; merken(); };
+  /* gespeicherte Antworten wieder eintragen; war die Runde schon geprüft, die Rückmeldungen wieder zeigen */
+  r.qs.forEach((_,qi) => { const v = s.ans[qi], id = `${r.id}-${qi}`; if (v === "" || v == null) return;
+    if (r.kind==="mc") { const e = document.getElementById(`${id}-${v}`); if (e) e.checked = true; }
+    else { const e = document.getElementById(id); if (e) e.value = v; } });
+  if (s.checked) check();
   score();
 }
 function val(r,qi){
@@ -166,7 +188,7 @@ function check(){
     fb.className = "fb " + (ok ? "good" : "bad");
     fb.innerHTML = ok ? `<b>Richtig.</b> ${esc(q.why)}` : `<b>Noch nicht.</b> Richtig ist: ${esc(right)}. ${esc(q.why)}`;
   });
-  s.checked = true; renderNav(); score();
+  s.checked = true; sichern(); renderNav(); score();
 }
 function score(){
   const r = ROUNDS[cur], s = state[cur], ok = s.res.filter(x=>x===true).length;

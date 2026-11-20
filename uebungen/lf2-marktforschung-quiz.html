@@ -1,7 +1,7 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html><html lang="de"><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><link rel="stylesheet" href="/assets/arbeitsbereich.css"><link rel="icon" href="/assets/icon-arbeitsbereich.svg" type="image/svg+xml"><script src="/assets/arbeitsbereich.js" defer></script></head><body>
 <title>Kickloop Marktforschung-Quiz</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hubballi&display=swap">
+<link rel="stylesheet" href="/assets/schriften.css">
 <style>
 /* Layout: weißes Arbeitsblatt mit schwarzem Rahmen auf Sand, Aufgaben als umrandete Kästen untereinander (Kickloop-Standard, einheitlich hell wie Papier) */
 :root{
@@ -58,7 +58,7 @@ details.loes input{font-family:var(--font);font-size:16px;border:1px solid var(-
 
 <div class="blatt">
   <table class="kopf"><tr>
-    <td class="logo">KICKLOOP</td>
+    <td class="logo"><img src="/assets/logo-light.png" width="748" height="150" alt="Kickloop. Gute Schuhe. Zweites Leben." style="display:block;height:auto;width:100%;max-width:170px;margin:0 auto"></td>
     <td>Hermann-Scheer-Schule, OSZ Wirtschaft</td>
     <td>Wirtschaftstheorie und Wirtschaftspraxis · Lernfeld 2<br><b>Marktforschung</b></td>
     <td class="name">Name / Datum</td>
@@ -138,10 +138,26 @@ FRAGEN.forEach((q,n)=>{
     const ok=+sel.value===(q.c^K);geprueft.add(n);
     sel.parentElement.classList.add(ok?"richtig":"falsch");
     rk.hidden=false;rk.className="rueck "+(ok?"ok":"no");rk.textContent=ok?q.r:q.f;
-    ok?richtig.add(n):richtig.delete(n);aktualisieren();
+    ok?richtig.add(n):richtig.delete(n);aktualisieren();speichern();
   };
+  s.addEventListener("change",speichern);
   box.appendChild(s);
 });
+/* Antworten bleiben in diesem Browser gespeichert (2026-11-20): Seit das Quiz im selben Tab öffnet, geht beim Zurückgehen sonst alles verloren. */
+const SKEY="kickloop:marktforschung-quiz";
+function speichern(){
+  try{localStorage.setItem(SKEY,JSON.stringify(FRAGEN.map((_,n)=>{const sel=document.querySelector(`input[name="f${n}"]:checked`);return {v:sel?+sel.value:null,g:geprueft.has(n)}})))}catch(e){}
+}
+function laden(){
+  let d=null;try{d=JSON.parse(localStorage.getItem(SKEY))}catch(e){}
+  if(!Array.isArray(d))return;
+  d.forEach((x,n)=>{
+    if(!x||x.v===null||x.v===undefined)return;
+    const inp=document.getElementById(`f${n}o${x.v}`);if(!inp)return;
+    inp.checked=true;
+    if(x.g)inp.closest("section").querySelector("button").click();
+  });
+}
 function aktualisieren(){
   const r=richtig.size;document.getElementById("balken").style.width=(r/FRAGEN.length*100)+"%";
   document.getElementById("ergebnistext").textContent=r===FRAGEN.length?"Prima, du hast alle 4 Fragen richtig beantwortet. Jetzt kennst du die Wünsche der Zielgruppe.":`${r} von ${FRAGEN.length} Fragen sind richtig. Geprüft: ${geprueft.size}.`;
@@ -153,6 +169,8 @@ document.getElementById("pwbtn").onclick=()=>{
   if(!ok){m.textContent="Das Passwort stimmt nicht.";return}
   m.textContent="";l.innerHTML=FRAGEN.map(q=>`<li>${q.o[q.c^K]}</li>`).join("");l.hidden=false;
 };
+laden();
+
 </script>
 
 </body></html>
