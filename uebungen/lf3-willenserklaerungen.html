@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Übung: Willenserklärungen · Arbeitsbereich Kickloop</title>
-<meta name="description" content="Online-Übung zu Arbeitsblatt 1: Willenserklärungen erkennen, ein- und zweiseitige Rechtsgeschäfte unterscheiden, Testament begründen. Ergebnis als Word-Datei.">
+<meta name="description" content="Online-Übung zu Arbeitsblatt 1: Willenserklärungen erkennen, ein- und zweiseitige Rechtsgeschäfte unterscheiden, Testament begründen. Ergebnis als PDF.">
 <link rel="stylesheet" href="/assets/schriften.css">
 <link rel="stylesheet" href="/assets/unterseite.css">
 <link rel="stylesheet" href="/assets/arbeitsbereich.css">
@@ -65,8 +65,8 @@ input[type=text]{font:inherit;font-size:1rem;color:var(--ink);background:var(--s
 <main>
   <span class="eyebrow">Arbeitsbereich · Lernfeld 3 · Online-Übung</span>
   <h1>Übung: Willenserklärungen</h1>
-  <p class="lead">Drei Aufgaben zu Arbeitsblatt 1. Klicke bei jeder Aufgabe auf <b>Prüfen</b>. Am Ende lädst du dein Ergebnis als Word-Datei herunter.</p>
-  <div class="task"><b>Tipp:</b> Nimm deine Übersicht aus Arbeitsblatt 1 zur Hilfe. Deine Antworten bleiben in diesem Browser gespeichert, bis du die Übung neu startest.</div>
+  <p class="lead">Drei Aufgaben zu Arbeitsblatt 1 und 1.1. Klicke bei jeder Aufgabe auf <b>Prüfen</b>. Am Ende lädst du dein Ergebnis als PDF herunter.</p>
+  <div class="task"><b>Tipp:</b> Nimm deine Übersichten aus Arbeitsblatt 1 und 1.1 zur Hilfe. Deine Antworten bleiben in diesem Browser gespeichert, bis du die Übung neu startest.</div>
   <label class="me"><b>Dein Name</b><input type="text" id="meName" autocomplete="name" placeholder="Vor- und Nachname"></label>
 
   <section class="auf" id="a1">
@@ -93,8 +93,8 @@ input[type=text]{font:inherit;font-size:1rem;color:var(--ink);background:var(--s
 
   <div class="ende">
     <h2>Fertig? Ergebnis herunterladen</h2>
-    <p>Die Word-Datei enthält deinen Namen, alle Antworten, die Auswertung von Aufgabe 1 und 2 und deine Begründung. Speichere sie in IServ.</p>
-    <div class="bar"><button class="btn dl" id="dl">⬇ Ergebnis als Word-Datei</button><button class="btn ghost" id="reset">Übung neu starten</button></div>
+    <p>Die PDF enthält deinen Namen, alle Antworten, die Auswertung von Aufgabe 1 und 2 und deine Begründung. Speichere sie in IServ.</p>
+    <div class="bar"><button class="btn dl" id="dl">⬇ Ergebnis als PDF</button><button class="btn ghost" id="reset">Übung neu starten</button></div>
   </div>
 </main>
 <div class="toast" id="toast" role="status"></div>
@@ -236,72 +236,150 @@ $("#meName").value = sessionStorage.getItem("kickloop:we-name") || "";
 $("#meName").addEventListener("input", e => { try { sessionStorage.setItem("kickloop:we-name", e.target.value); } catch (x) {} });
 const nameJetzt = () => ich() || $("#meName").value.trim();
 
-/* ---------- Word-Datei (kleiner DOCX-Schreiber wie in index.html) ---------- */
-const X = s => String(s ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-function wr(text, o = {}) { return `<w:r><w:rPr>${o.b ? "<w:b/>" : ""}${o.i ? "<w:i/>" : ""}${o.c ? `<w:color w:val="${o.c}"/>` : ""}<w:sz w:val="${o.sz || 22}"/></w:rPr><w:t xml:space="preserve">${X(text)}</w:t></w:r>`; }
-function wp(runs, o = {}) { const r = Array.isArray(runs) ? runs.join("") : (String(runs).startsWith("<w:r>") ? runs : wr(runs, o));
-  return `<w:p><w:pPr><w:spacing w:before="${o.before || 0}" w:after="${o.after ?? 100}"/></w:pPr>${r}</w:p>`; }
-function wtbl(widths, rows) {
-  const brd = `<w:tblBorders>${["top", "left", "bottom", "right", "insideH", "insideV"].map(k => `<w:${k} w:val="single" w:sz="6" w:color="000000"/>`).join("")}</w:tblBorders>`;
-  return `<w:tbl><w:tblPr><w:tblW w:w="${widths.reduce((a, c) => a + c, 0)}" w:type="dxa"/>${brd}<w:tblLayout w:type="fixed"/><w:tblCellMar><w:left w:w="80" w:type="dxa"/><w:right w:w="80" w:type="dxa"/></w:tblCellMar></w:tblPr><w:tblGrid>${widths.map(w => `<w:gridCol w:w="${w}"/>`).join("")}</w:tblGrid>` +
-    rows.map((r, ri) => `<w:tr>${r.map((c, ci) => `<w:tc><w:tcPr><w:tcW w:w="${widths[ci]}" w:type="dxa"/>${ri === 0 ? '<w:shd w:val="clear" w:color="auto" w:fill="F3D9A4"/>' : ""}</w:tcPr>${wp(wr(c, { b: ri === 0, sz: 20 }), { after: 0 })}</w:tc>`).join("")}</w:tr>`).join("") + `</w:tbl>`;
-}
-const CRC = (() => { const t = new Uint32Array(256); for (let n = 0; n < 256; n++) { let c = n; for (let k = 0; k < 8; k++) c = c & 1 ? 0xEDB88320 ^ (c >>> 1) : c >>> 1; t[n] = c >>> 0; } return t; })();
-function crc32(u8) { let c = 0xFFFFFFFF; for (let i = 0; i < u8.length; i++) c = CRC[(c ^ u8[i]) & 0xFF] ^ (c >>> 8); return (c ^ 0xFFFFFFFF) >>> 0; }
-function zip(files) {
-  const enc = new TextEncoder(); const parts = []; const cen = []; let off = 0;
-  for (const [name, str] of files) {
-    const n = enc.encode(name), d = (str instanceof Uint8Array) ? str : enc.encode(str), crc = crc32(d);
-    const h = new DataView(new ArrayBuffer(30)); h.setUint32(0, 0x04034b50, true); h.setUint16(4, 20, true); h.setUint16(6, 0x0800, true);
-    h.setUint32(14, crc, true); h.setUint32(18, d.length, true); h.setUint32(22, d.length, true); h.setUint16(26, n.length, true);
-    parts.push(new Uint8Array(h.buffer), n, d);
-    const c = new DataView(new ArrayBuffer(46)); c.setUint32(0, 0x02014b50, true); c.setUint16(4, 20, true); c.setUint16(6, 20, true); c.setUint16(8, 0x0800, true);
-    c.setUint32(16, crc, true); c.setUint32(20, d.length, true); c.setUint32(24, d.length, true); c.setUint16(28, n.length, true); c.setUint32(42, off, true);
-    cen.push(new Uint8Array(c.buffer), n); off += 30 + n.length + d.length;
+/* ---------- PDF (MiniPdf wie in index.html, Pop-up-Export) ---------- */
+const PDF_W = {
+  r: [278,278,355,556,556,889,667,191,333,333,389,584,278,333,278,278,556,556,556,556,556,556,556,556,556,556,278,278,584,584,584,556,1015,667,667,722,722,667,611,778,722,278,500,667,556,833,722,778,667,778,722,667,611,722,667,944,667,667,611,278,278,278,469,556,333,556,556,500,556,556,278,556,556,222,222,500,222,833,556,556,556,556,333,500,278,556,500,722,500,500,500,334,260,334,584,761,556,0,222,556,333,1000,556,556,333,1000,667,333,1000,0,611,0,0,222,222,333,333,350,556,1000,333,1000,500,333,944,0,500,667,278,333,556,556,556,556,260,556,333,737,370,556,584,333,737,333,400,584,333,333,333,556,537,278,333,333,365,556,834,834,834,611,667,667,667,667,667,667,1000,722,667,667,667,667,278,278,278,278,722,722,778,778,778,778,778,584,778,722,722,722,722,667,667,611,556,556,556,556,556,556,889,500,556,556,556,556,278,278,278,278,556,556,556,556,556,556,556,584,611,556,556,556,556,500,556,500],
+  b: [278,333,474,556,556,889,722,238,333,333,389,584,278,333,278,278,556,556,556,556,556,556,556,556,556,556,333,333,584,584,584,611,975,722,722,722,722,667,611,778,722,278,556,722,611,833,722,778,667,778,722,667,611,722,667,944,667,667,611,333,278,333,584,556,333,556,611,556,611,556,333,611,611,278,278,556,278,889,611,611,611,611,389,556,333,611,556,778,556,556,500,389,280,389,584,761,556,0,278,556,500,1000,556,556,333,1000,667,333,1000,0,611,0,0,278,278,500,500,350,556,1000,333,1000,556,333,944,0,500,667,278,333,556,556,556,556,280,556,333,737,370,556,584,333,737,333,400,584,333,333,333,611,556,278,333,333,365,556,834,834,834,611,722,722,722,722,722,722,1000,722,667,667,667,667,278,278,278,278,722,722,778,778,778,778,778,584,778,722,722,722,722,667,667,611,556,556,556,556,556,556,889,556,556,556,556,556,278,278,278,278,611,611,611,611,611,611,611,584,611,611,611,611,611,556,611,556]
+};
+const PDF_SPEC = "€‚ƒ„…†‡ˆ‰Š‹ŒŽ‘’“”•–—˜™š›œžŸ", PDF_SPEC_C = [128,130,131,132,133,134,135,136,137,138,139,140,142,145,146,147,148,149,150,151,152,153,154,155,156,158,159];
+const PDF_SUB = { "ı": "i", "−": "-", "✓": "x", "★": "*", "→": "->", "↗": "", " ": " ", " ": " " };
+function pdfCodes(s) {
+  const out = [];
+  for (const ch of String(s)) {
+    if (PDF_SUB[ch] !== undefined) { for (const c of PDF_SUB[ch]) out.push(c.charCodeAt(0)); continue; }
+    const c = ch.codePointAt(0);
+    if ((c >= 32 && c < 127) || (c >= 160 && c < 256)) out.push(c);
+    else { const i = PDF_SPEC.indexOf(ch); out.push(i >= 0 ? PDF_SPEC_C[i] : 63); }
   }
-  const cs = cen.reduce((a, x) => a + x.length, 0);
-  const e = new DataView(new ArrayBuffer(22)); e.setUint32(0, 0x06054b50, true); e.setUint16(8, files.length, true); e.setUint16(10, files.length, true); e.setUint32(12, cs, true); e.setUint32(16, off, true);
-  return new Blob([...parts, ...cen, new Uint8Array(e.buffer)], { type: "application/vnd.openxmlformats-officedocument.wordprocessingml.document" });
+  return out;
 }
-const LOGO = `<w:r><w:drawing><wp:inline xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" distT="0" distB="0" distL="0" distR="0"><wp:extent cx="1900800" cy="381177"/><wp:docPr id="1" name="Kickloop-Logo" descr="Kickloop"/><a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"><a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture"><pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture"><pic:nvPicPr><pic:cNvPr id="1" name="kickloop-logo.png"/><pic:cNvPicPr/></pic:nvPicPr><pic:blipFill><a:blip r:embed="rId9"/><a:stretch><a:fillRect/></a:stretch></pic:blipFill><pic:spPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="1900800" cy="381177"/></a:xfrm><a:prstGeom prst="rect"><a:avLst/></a:prstGeom></pic:spPr></pic:pic></a:graphicData></a:graphic></wp:inline></w:drawing></w:r>`;
-function docx(bodyXml, logo) {
-  const W = 'xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"';
-  const doc = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:document ${W}><w:body>${logo ? wp(LOGO, { after: 200 }) : ""}${bodyXml}<w:sectPr><w:pgSz w:w="11906" w:h="16838"/><w:pgMar w:top="900" w:right="1134" w:bottom="1000" w:left="1134" w:header="400" w:footer="500" w:gutter="0"/></w:sectPr></w:body></w:document>`;
-  const styles = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:styles ${W}><w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="Hubballi" w:hAnsi="Hubballi" w:cs="Hubballi" w:eastAsia="Hubballi"/><w:color w:val="2B2F32"/><w:sz w:val="22"/><w:lang w:val="de-DE"/></w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:spacing w:after="100" w:line="264" w:lineRule="auto"/></w:pPr></w:pPrDefault></w:docDefaults></w:styles>`;
-  const files = [
-    ["[Content_Types].xml", `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Default Extension="png" ContentType="image/png"/><Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/><Override PartName="/word/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml"/></Types>`],
-    ["_rels/.rels", `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/></Relationships>`],
-    ["word/_rels/document.xml.rels", `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/>${logo ? '<Relationship Id="rId9" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/image" Target="media/kickloop-logo.png"/>' : ""}</Relationships>`],
-    ["word/document.xml", doc], ["word/styles.xml", styles]
-  ];
-  if (logo) files.push(["word/media/kickloop-logo.png", logo]);
-  return zip(files);
+const pdfWidth = (s, size, bold) => pdfCodes(s).reduce((w, c) => w + (PDF_W[bold ? "b" : "r"][c - 32] || 0), 0) * size / 1000;
+function pdfWrap(s, w, size, bold) {
+  const lines = [];
+  for (const para of String(s).split("\n")) {
+    let cur = "";
+    for (const word of para.split(/ +/)) {
+      const t = cur ? cur + " " + word : word;
+      if (!cur || pdfWidth(t, size, bold) <= w) cur = t; else { lines.push(cur); cur = word; }
+    }
+    lines.push(cur);
+  }
+  return lines;
 }
-async function logoBytes() { try { const r = await fetch("/assets/logo-light.png"); if (!r.ok) return null; return new Uint8Array(await r.arrayBuffer()); } catch (e) { return null; } }
+const pdfStr = s => pdfCodes(s).map(c => (c >= 32 && c < 127 && c !== 40 && c !== 41 && c !== 92) ? String.fromCharCode(c) : "\\" + c.toString(8).padStart(3, "0")).join("");
+class MiniPdf {
+  constructor() { this.pages = []; this.W = 595.28; this.H = 841.89; this.addPage(); }
+  addPage() { this.c = []; this.pages.push(this.c); }
+  col(hex) { const n = parseInt(hex.slice(1), 16); return [(n >> 16) & 255, (n >> 8) & 255, n & 255].map(v => (v / 255).toFixed(3)).join(" "); }
+  /* y = Grundlinie, von oben gemessen */
+  text(x, y, s, o = {}) {
+    const size = o.size || 10;
+    if (o.right) x -= pdfWidth(s, size, o.bold);
+    this.c.push(`BT ${this.col(o.color || "#2A2E31")} rg /${o.bold ? "F2" : "F1"} ${size} Tf 1 0 0 1 ${x.toFixed(2)} ${(this.H - y).toFixed(2)} Tm (${pdfStr(s)}) Tj ET`);
+  }
+  /* y = Oberkante, von oben gemessen */
+  rect(x, y, w, h, o = {}) {
+    let op = "";
+    if (o.fill) op += `${this.col(o.fill)} rg `;
+    if (o.stroke) op += `${this.col(o.stroke)} RG ${o.lw || 0.6} w `;
+    this.c.push(op + `${x.toFixed(2)} ${(this.H - y - h).toFixed(2)} ${w.toFixed(2)} ${h.toFixed(2)} re ${o.fill && o.stroke ? "B" : o.fill ? "f" : "S"}`);
+  }
+  line(x1, y1, x2, y2, o = {}) { this.c.push(`${this.col(o.color || "#2A2E31")} RG ${o.lw || 0.6} w ${x1.toFixed(2)} ${(this.H - y1).toFixed(2)} m ${x2.toFixed(2)} ${(this.H - y2).toFixed(2)} l S`); }
+  blob(title) {
+    const objs = [], n = this.pages.length;
+    objs[1] = "<< /Type /Catalog /Pages 2 0 R >>";
+    objs[2] = `<< /Type /Pages /Count ${n} /Kids [${this.pages.map((_, i) => `${5 + 2 * i} 0 R`).join(" ")}] >>`;
+    objs[3] = "<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>";
+    objs[4] = "<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>";
+    this.pages.forEach((c, i) => {
+      const stream = c.join("\n");
+      objs[5 + 2 * i] = `<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ${this.W} ${this.H}] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents ${6 + 2 * i} 0 R >>`;
+      objs[6 + 2 * i] = `<< /Length ${stream.length} >>\nstream\n${stream}\nendstream`;
+    });
+    const info = objs.length;
+    objs[info] = `<< /Title (${pdfStr(title)}) /Producer (Kickloop Arbeitsbereich) >>`;
+    let out = "%PDF-1.4\n";
+    const offs = [];
+    for (let i = 1; i < objs.length; i++) { offs[i] = out.length; out += `${i} 0 obj\n${objs[i]}\nendobj\n`; }
+    const xref = out.length;
+    out += `xref\n0 ${objs.length}\n0000000000 65535 f \n` + offs.slice(1).map(o => String(o).padStart(10, "0") + " 00000 n \n").join("");
+    out += `trailer\n<< /Size ${objs.length} /Root 1 0 R /Info ${info} 0 R >>\nstartxref\n${xref}\n%%EOF\n`;
+    return new Blob([out], { type: "application/pdf" });
+  }
+}
+
 function dateiName(n) {
   return String(n || "").trim().replace(/ä/g, "ae").replace(/ö/g, "oe").replace(/ü/g, "ue").replace(/Ä/g, "Ae").replace(/Ö/g, "Oe").replace(/Ü/g, "Ue").replace(/ß/g, "ss")
     .normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/\s+/g, "_").replace(/[^A-Za-z0-9_-]/g, "");
 }
-$("#dl").addEventListener("click", async () => {
+$("#dl").addEventListener("click", () => {
   const name = nameJetzt();
   const heute = new Date().toLocaleDateString("de-DE");
   const artTxt = v => (ART.find(a => a[0] === v) || ["", "–"])[1];
-  let b = wp([wr("Übung: Willenserklärungen", { b: true, sz: 32 })], { after: 60 });
-  b += wp([wr("Lernfeld 3 · Der Kaufvertrag · Online-Übung zu Arbeitsblatt 1", { c: "7A746B", sz: 18 })], { after: 160 });
-  b += wp([wr("Name: ", { b: true }), wr(name || "____________________"), wr("     Datum: ", { b: true }), wr(heute)], { after: 240 });
-  b += wp([wr("Aufgabe 1: Willenserklärung – ja oder nein?", { b: true, sz: 24 })], { after: 80 });
-  const r1 = A1.map((q, i) => [String.fromCharCode(97 + i) + ") " + q.t, S.a1[i].ja === "ja" ? "Ja" : S.a1[i].ja === "nein" ? "Nein" : "–", S.a1[i].ja === "ja" ? artTxt(S.a1[i].art) : "–", S.chk[1] ? (ergebnis1(i) ? "richtig" : "falsch") : "nicht geprüft"]);
-  b += wtbl([5000, 900, 2000, 1700], [["Situation", "WE?", "Art", "Ergebnis"], ...r1]);
-  if (S.chk[1]) b += wp([wr(`${A1.filter((_, i) => ergebnis1(i)).length} von ${A1.length} richtig`, { b: true })], { before: 80, after: 240 }); else b += wp("", { after: 160 });
-  b += wp([wr("Aufgabe 2: Einseitig oder zweiseitig?", { b: true, sz: 24 })], { after: 80 });
-  const r2 = A2.map((q, i) => [String.fromCharCode(97 + i) + ") " + q.t, S.a2[i] === "ein" ? "einseitig" : S.a2[i] === "zwei" ? "zweiseitig" : "–", S.chk[2] ? (ergebnis2(i) ? "richtig" : "falsch") : "nicht geprüft"]);
-  b += wtbl([5900, 2000, 1700], [["Fall", "Meine Antwort", "Ergebnis"], ...r2]);
-  if (S.chk[2]) b += wp([wr(`${A2.filter((_, i) => ergebnis2(i)).length} von ${A2.length} richtig`, { b: true })], { before: 80, after: 240 }); else b += wp("", { after: 160 });
-  b += wp([wr("Aufgabe 3: Das Testament von Herrn Adam", { b: true, sz: 24 })], { after: 80 });
-  b += wp([wr("Herr Adam hat ein Testament errichtet und keiner Person etwas davon gesagt. Begründe, ob hier ein gültiges Rechtsgeschäft vorliegt.", { i: true })]);
-  b += (S.a3.trim() ? S.a3.split("\n") : ["(keine Antwort)"]).map(l => wp(l)).join("");
-  const blob = docx(b, await logoBytes());
-  const fn = `Uebung_Willenserklaerungen${name ? "_" + dateiName(name) : ""}.docx`;
+  const P = new MiniPdf(), L = 50, R = P.W - 50, WD = R - L, BOT = P.H - 60;
+  const INK = "#383E42", MUT = "#6B7074", OR = "#E8A33D", OK = "#2E7D4F", BAD = "#B3412F";
+  let y = 0, page = 1;
+  function kopf() {
+    P.rect(0, 0, P.W, 7, { fill: OR });
+    P.text(L, 40, "Kickloop", { size: 18, bold: true, color: INK });
+    P.text(R, 40, "Lernfeld 3 · Der Kaufvertrag", { size: 9, right: true, color: MUT });
+    P.line(L, 50, R, 50, { color: "#E7E3DC" });
+    y = 72;
+  }
+  function fuss() {
+    P.line(L, P.H - 42, R, P.H - 42, { color: "#E7E3DC" });
+    P.text(L, P.H - 30, "Kickloop · Online-Übung Willenserklärungen" + (name ? " · " + name : ""), { size: 8, color: MUT });
+    P.text(R, P.H - 30, "Seite " + page, { size: 8, right: true, color: MUT });
+  }
+  function platz(h) { if (y + h > BOT) { fuss(); P.addPage(); page++; kopf(); } }
+  function absatz(t, o = {}) {
+    const size = o.size || 10.5, lh = size * 1.35;
+    for (const ln of pdfWrap(t, o.w || WD, size, o.bold)) { platz(lh); y += lh; P.text(o.x || L, y - 3, ln, { size, bold: o.bold, color: o.color || INK }); }
+  }
+  function tabelle(cols, head, rows) {
+    const xs = [L]; cols.forEach(w => xs.push(xs[xs.length - 1] + w));
+    const zeile = (cells, kopfzeile) => {
+      const lines = cells.map((c, k) => pdfWrap(c.t ?? c, cols[k] - 10, 9.5, kopfzeile));
+      const h = Math.max(...lines.map(l => l.length)) * 12.5 + 9;
+      platz(h);
+      if (kopfzeile) P.rect(L, y, WD, h, { fill: "#F3D9A4" });
+      lines.forEach((ls, k) => ls.forEach((ln, m) => P.text(xs[k] + 5, y + 14 + m * 12.5, ln, { size: 9.5, bold: kopfzeile || !!cells[k].b, color: cells[k].c || INK })));
+      P.rect(L, y, WD, h, { stroke: INK, lw: 0.6 });
+      xs.slice(1, -1).forEach(x => P.line(x, y, x, y + h, { color: INK }));
+      y += h;
+    };
+    zeile(head, true); rows.forEach(r => zeile(r, false));
+  }
+  const erg = r => r ? { t: "richtig", c: OK, b: true } : { t: "falsch", c: BAD, b: true };
+  kopf();
+  P.text(L, y + 14, "Übung: Willenserklärungen", { size: 18, bold: true, color: INK }); y += 26;
+  P.text(L, y + 8, "Online-Übung zu Arbeitsblatt 1 und 1.1", { size: 9.5, color: MUT }); y += 26;
+  P.text(L, y, "Name:", { size: 10.5, bold: true }); P.text(L + 38, y, name || "______________________________", { size: 10.5 });
+  P.text(R - 120, y, "Datum:", { size: 10.5, bold: true }); P.text(R - 76, y, heute, { size: 10.5 }); y += 22;
+
+  absatz("Aufgabe 1: Willenserklärung – ja oder nein?", { size: 12.5, bold: true, color: OR }); y += 6;
+  tabelle([255, 50, 110, 80], ["Situation", "WE?", "Art", "Ergebnis"], A1.map((q, i) => [
+    String.fromCharCode(97 + i) + ") " + q.t,
+    S.a1[i].ja === "ja" ? "Ja" : S.a1[i].ja === "nein" ? "Nein" : "–",
+    S.a1[i].ja === "ja" ? artTxt(S.a1[i].art) : "–",
+    S.chk[1] ? erg(ergebnis1(i)) : "nicht geprüft"]));
+  y += 6; if (S.chk[1]) absatz(`${A1.filter((_, i) => ergebnis1(i)).length} von ${A1.length} richtig`, { bold: true }); y += 14;
+
+  absatz("Aufgabe 2: Einseitig oder zweiseitig?", { size: 12.5, bold: true, color: OR }); y += 6;
+  tabelle([315, 100, 80], ["Fall", "Meine Antwort", "Ergebnis"], A2.map((q, i) => [
+    String.fromCharCode(97 + i) + ") " + q.t,
+    S.a2[i] === "ein" ? "einseitig" : S.a2[i] === "zwei" ? "zweiseitig" : "–",
+    S.chk[2] ? erg(ergebnis2(i)) : "nicht geprüft"]));
+  y += 6; if (S.chk[2]) absatz(`${A2.filter((_, i) => ergebnis2(i)).length} von ${A2.length} richtig`, { bold: true }); y += 14;
+
+  absatz("Aufgabe 3: Das Testament von Herrn Adam", { size: 12.5, bold: true, color: OR }); y += 4;
+  absatz("Herr Adam hat ein Testament errichtet und keiner Person etwas davon gesagt. Begründe, ob hier ein gültiges Rechtsgeschäft vorliegt.", { color: MUT });
+  y += 6;
+  absatz("Meine Begründung:", { bold: true });
+  absatz(S.a3.trim() || "(keine Antwort)");
+  fuss();
+  const fn = `Uebung_Willenserklaerungen${name ? "_" + dateiName(name) : ""}.pdf`;
+  const blob = P.blob("Übung: Willenserklärungen" + (name ? " - " + name : ""));
   const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = fn; document.body.appendChild(a); a.click();
   setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
   toast("Gespeichert: " + fn);
