@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Übung: Willenserklärungen · Arbeitsbereich Kickloop</title>
+<meta name="description" content="Online-Übung zu Arbeitsblatt 1: Willenserklärungen erkennen, ein- und zweiseitige Rechtsgeschäfte unterscheiden, Testament begründen. Ergebnis als Word-Datei.">
+<link rel="stylesheet" href="/assets/schriften.css">
+<link rel="stylesheet" href="/assets/unterseite.css">
+<link rel="stylesheet" href="/assets/arbeitsbereich.css">
+<link rel="icon" href="/assets/icon-arbeitsbereich.svg" type="image/svg+xml">
+<script src="/assets/arbeitsbereich.js" defer></script>
+<style>
+/* Übung Willenserklärungen (21.11.2026). Stand im Browser unter kickloop:willenserklaerungen. */
+main{max-width:860px}
+.ok-c{--ok:#2E7D4F;--ok-soft:#E4F2E9;--bad:#B3412F;--bad-soft:#F8E6E2}
+@media (prefers-color-scheme:dark){.ok-c{--ok:#6CC592;--ok-soft:#1C3325;--bad:#EE8B78;--bad-soft:#3A2420}}
+.task{background:var(--lime-soft);border:2px solid #000;border-radius:14px;padding:12px 16px;margin:18px 0 6px;font-size:1rem}
+.task b{font-family:var(--display);font-stretch:100%}
+.me{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;background:var(--lime-soft);border:2px solid #000;border-radius:14px;padding:10px 14px;margin-top:14px;font-size:1rem}
+.me input{flex:1;min-width:200px}
+html.kl-hat-name .me{display:none}
+section.auf{margin-top:30px}
+section.auf h2{font-size:1.45rem;display:flex;align-items:center;gap:10px}
+section.auf h2 .nr{font-family:var(--display);font-stretch:100%;background:var(--amber);color:#000;border-radius:999px;padding:2px 12px;font-size:.85rem;letter-spacing:.06em;text-transform:uppercase}
+.auf>p{margin:.5rem 0 .8rem;max-width:66ch}
+.q{background:var(--surface);border:1.5px solid var(--sand);border-radius:12px;padding:12px 14px;margin:10px 0;display:grid;gap:10px}
+.q.ok{border-color:var(--ok);background:var(--ok-soft)}
+.q.no{border-color:var(--bad)}
+.qt{display:flex;gap:10px;font-size:1.05rem}
+.qt .l{font-family:var(--display);font-stretch:100%;font-weight:700;color:var(--muted);flex:none;width:1.4em}
+.row{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;padding-left:calc(1.4em + 10px)}
+.grp{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.grp>span.cap{font-size:.9rem;color:var(--ink-2);margin-right:2px}
+.chip{position:relative;display:inline-flex}
+.chip input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+.chip span{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:6px 14px;border:1.5px solid var(--sand);border-radius:999px;background:var(--surface);font-size:1rem;cursor:pointer;user-select:none}
+.chip span svg{width:26px;height:26px;flex:none}
+.chip input:checked+span{border-color:#000;background:var(--lime);color:#000;font-weight:700}
+.chip input:focus-visible+span{outline:3px solid var(--amber);outline-offset:2px}
+.chip input:disabled+span{opacity:.4;cursor:not-allowed}
+.fb{font-size:1rem;padding-left:calc(1.4em + 10px)}
+.fb:empty{display:none}
+.fb.good{color:var(--ok)} .fb.bad{color:var(--bad)}
+.fb b{font-family:var(--display);font-stretch:100%}
+textarea{width:100%;min-height:150px;font:inherit;font-size:1.05rem;color:var(--ink);background:var(--surface);border:1.5px solid var(--sand);border-radius:12px;padding:10px 12px;resize:vertical}
+input[type=text]{font:inherit;font-size:1rem;color:var(--ink);background:var(--surface);border:1.5px solid var(--sand);border-radius:10px;padding:8px 10px;min-height:44px}
+.muster{background:var(--amber-soft);border-radius:12px;padding:12px 16px;font-size:1rem;margin-top:10px}
+.muster b{font-family:var(--display);font-stretch:100%}
+.bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:12px}
+.btn{font-family:var(--display);font-stretch:100%;font-weight:700;font-size:1rem;min-height:44px;border:2px solid #000;border-radius:999px;padding:8px 20px;cursor:pointer;background:#C7F105;color:#000}
+.btn:hover{background:#B5DC04}
+.btn.ghost{background:var(--surface);color:var(--ink);border-color:var(--sand)}
+.btn.dl{background:var(--amber);border-color:#000}
+.err{color:var(--bad);font-size:.95rem}
+.score{font-family:var(--display);font-stretch:100%;font-weight:700}
+.meter{flex:1;min-width:140px;max-width:260px;height:10px;background:var(--sand);border-radius:5px;overflow:hidden}
+.meter i{display:block;height:100%;background:var(--ok);transition:width .3s}
+.ende{margin-top:34px;background:var(--surface);border:2px solid #000;border-radius:16px;padding:16px 18px}
+.ende h2{font-size:1.3rem}
+.ende p{margin:.4rem 0 0;font-size:1rem;color:var(--ink-2)}
+.toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:#000;color:#C7F105;border-radius:999px;padding:10px 18px;font-family:var(--display);font-weight:700;font-size:.95rem;opacity:0;transition:opacity .2s;pointer-events:none;z-index:60}
+.toast.on{opacity:1}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head><body class="ok-c">
+<noscript><p style="padding:12px 0"><a href="/lf3/kaufvertrag.html">← Der Kaufvertrag</a></p></noscript>
+<main>
+  <span class="eyebrow">Arbeitsbereich · Lernfeld 3 · Online-Übung</span>
+  <h1>Übung: Willenserklärungen</h1>
+  <p class="lead">Drei Aufgaben zu Arbeitsblatt 1. Klicke bei jeder Aufgabe auf <b>Prüfen</b>. Am Ende lädst du dein Ergebnis als Word-Datei herunter.</p>
+  <div class="task"><b>Tipp:</b> Nimm deine Übersicht aus Arbeitsblatt 1 zur Hilfe. Deine Antworten bleiben in diesem Browser gespeichert, bis du die Übung neu startest.</div>
+  <label class="me"><b>Dein Name</b><input type="text" id="meName" autocomplete="name" placeholder="Vor- und Nachname"></label>
+
+  <section class="auf" id="a1">
+    <h2><span class="nr">Aufgabe 1</span>Willenserklärung – ja oder nein?</h2>
+    <p><b>Kreuze an</b>, ob es sich um eine Willenserklärung handelt. Gib zudem an, auf welche Art sie abgegeben wird.</p>
+    <div id="a1q"></div>
+    <div class="bar"><button class="btn" data-check="1">Prüfen</button><span class="err" id="err1" role="alert"></span><span id="sc1" class="bar" style="margin:0"></span></div>
+  </section>
+
+  <section class="auf" id="a2">
+    <h2><span class="nr">Aufgabe 2</span>Einseitig oder zweiseitig?</h2>
+    <p><b>Entscheide</b>, ob in den Fällen ein einseitiges oder zweiseitiges Rechtsgeschäft vorliegt.</p>
+    <div id="a2q"></div>
+    <div class="bar"><button class="btn" data-check="2">Prüfen</button><span class="err" id="err2" role="alert"></span><span id="sc2" class="bar" style="margin:0"></span></div>
+  </section>
+
+  <section class="auf" id="a3">
+    <h2><span class="nr">Aufgabe 3</span>Das Testament von Herrn Adam</h2>
+    <p>Herr Adam hat ein Testament errichtet und keiner Person etwas davon gesagt. <b>Begründe</b>, ob hier ein gültiges Rechtsgeschäft vorliegt.</p>
+    <textarea id="a3t" aria-label="Deine Begründung" placeholder="Schreibe in ganzen Sätzen."></textarea>
+    <div class="bar"><button class="btn" data-check="3">Mit Musterlösung vergleichen</button><span class="err" id="err3" role="alert"></span></div>
+    <div id="a3m"></div>
+  </section>
+
+  <div class="ende">
+    <h2>Fertig? Ergebnis herunterladen</h2>
+    <p>Die Word-Datei enthält deinen Namen, alle Antworten, die Auswertung von Aufgabe 1 und 2 und deine Begründung. Speichere sie in IServ.</p>
+    <div class="bar"><button class="btn dl" id="dl">⬇ Ergebnis als Word-Datei</button><button class="btn ghost" id="reset">Übung neu starten</button></div>
+  </div>
+</main>
+<div class="toast" id="toast" role="status"></div>
+<footer>Kickloop ist ein erfundenes Modellunternehmen für den Unterricht · © Dnk, Mrg · Hermann-Scheer-Schule · Aufgaben nach einer Vorlage von Maekelnburg (12-2021)</footer>
+
+<script>
+"use strict";
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+/* Piktogramme wie auf den Arbeitsblättern: Mund = mündlich, Notizzettel = schriftlich, Zahnräder = schlüssige Handlung */
+const ICON = {
+  muendlich: '<svg viewBox="0 0 40 40" aria-hidden="true"><ellipse cx="29" cy="11" rx="8" ry="7" fill="#e9e9e9" stroke="#8d8d8d"/><path d="M4 24c4-6 9-7 13-4 1-1 2-1 3 0 5-3 10-2 13 4-9 1-20 1-29 0z" fill="#d9574f" stroke="#9e2f2b"/><path d="M4 24c9 1 20 1 29 0-4 8-24 8-29 0z" fill="#e46a62" stroke="#9e2f2b"/></svg>',
+  schriftlich: '<svg viewBox="0 0 40 40" aria-hidden="true"><g transform="rotate(-5 20 20)"><rect x="7" y="7" width="26" height="26" fill="#f6b9b0" stroke="#d98f85"/><rect x="7" y="7" width="26" height="5" fill="#f1a196"/><g stroke="#5b4b4b" stroke-width="1.4" fill="none"><path d="M14 17h14M14 22h16M14 27h11"/></g><g fill="#5b4b4b"><circle cx="11" cy="17" r="1"/><circle cx="11" cy="22" r="1"/><circle cx="11" cy="27" r="1"/></g></g></svg>',
+  konkludent: '<svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="16" cy="24" r="10" fill="#3d5ea8" stroke="#253c74" stroke-width="3" stroke-dasharray="3 2.2"/><circle cx="16" cy="24" r="3" fill="#f4f1ea"/><circle cx="23" cy="10" r="6" fill="#f2a93b" stroke="#b8761b" stroke-width="2.4" stroke-dasharray="2.4 1.8"/><circle cx="32" cy="19" r="4.5" fill="#7fb77e" stroke="#4f8a4e" stroke-width="2" stroke-dasharray="2 1.5"/></svg>'
+};
+const ART = [["konkludent", "schlüssig (konkludent)"], ["muendlich", "mündlich"], ["schriftlich", "schriftlich"]];
+
+const A1 = [
+  { t: "Frau Krüger hebt die Hand bei der Versteigerung eines antiken Tisches. Sie erhält den Zuschlag.", ja: true, art: "konkludent",
+    why: "Das Handheben ist eine schlüssige Handlung: Allein daraus wird klar, dass sie den Tisch kaufen will." },
+  { t: "Bernd wirft 1,00 € in den Getränkeautomaten.", ja: true, art: "konkludent",
+    why: "Wie Kemal am Ticketautomaten: Das Einwerfen des Geldes ist die Willenserklärung." },
+  { t: "Ein Unternehmen bestellt Ware per E-Mail bei einem Lieferanten.", ja: true, art: "schriftlich",
+    why: "Die Bestellung wird schriftlich festgehalten – eine E-Mail ist Schrift." },
+  { t: "Karl fragt Moni: „Ich möchte spazieren gehen. Willst du mitkommen?“", ja: false, art: "",
+    why: "Karl will kein Rechtsgeschäft abschließen. Aus der Einladung entstehen keine Pflichten – deshalb ist es keine Willenserklärung." },
+  { t: "Ein Kunde bestellt telefonisch Ware.", ja: true, art: "muendlich",
+    why: "Am Telefon wird gesprochen: eine ausdrückliche, mündliche Willenserklärung." },
+  { t: "Ein Mitarbeiter gibt einen Brief mit seiner Kündigung in der Personalabteilung ab.", ja: true, art: "schriftlich",
+    why: "Die Kündigung steht im Brief, sie ist also schriftlich." }
+];
+const A2 = [
+  { t: "Arian hat keine Lust mehr auf seine Ausbildung. Er reicht bei seinem Chef die Kündigung ein.", a: "ein",
+    why: "Für die Kündigung reicht Arians Willenserklärung. Der Chef muss nicht zustimmen." },
+  { t: "Tina bekommt von ihrer Oma 50 € zugesteckt.", a: "zwei",
+    why: "Eine Schenkung ist ein Vertrag: Die Oma schenkt (Antrag), Tina nimmt das Geld an (Annahme)." },
+  { t: "Arian schließt einen neuen Ausbildungsvertrag bei einem anderen Unternehmen ab.", a: "zwei",
+    why: "Ein Vertrag braucht zwei übereinstimmende Willenserklärungen: Antrag und Annahme." },
+  { t: "Michael geht beim Aldi einkaufen. Seine Einkäufe bezahlt er an der Kasse.", a: "zwei",
+    why: "Ein Kaufvertrag zwischen Michael (Käufer) und dem Supermarkt (Verkäufer)." }
+];
+const MUSTER = "Ja, das Rechtsgeschäft ist gültig. Ein Testament ist ein einseitiges Rechtsgeschäft. Es entsteht allein durch die Willenserklärung von Herrn Adam. Niemand muss zustimmen, und Herr Adam muss es auch niemandem mitteilen. Wichtig ist nur die Form: Er muss das Testament eigenhändig schreiben und unterschreiben (oder es bei einem Notar errichten).";
+const STICH = ["einseitig", "eine Willenserklärung bzw. eine Person", "keine Zustimmung, keine Mitteilung nötig", "Form: eigenhändig geschrieben und unterschrieben"];
+
+/* ---------- Speicher ---------- */
+const KEY = "kickloop:willenserklaerungen";
+function leer() { return { a1: A1.map(() => ({ ja: "", art: "" })), a2: A2.map(() => ""), a3: "", chk: { 1: false, 2: false, 3: false } }; }
+let S = (() => { try { const d = JSON.parse(localStorage.getItem(KEY)); if (d && d.a1 && d.a1.length === A1.length) return d; } catch (e) {} return leer(); })();
+const sichern = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} };
+function ich() { try { const m = JSON.parse(localStorage.getItem("kickloop:me")); return m && m.name ? m.name : ""; } catch (e) { return ""; } }
+
+/* ---------- Aufbau ---------- */
+function chip(name, value, label, icon, checked, disabled) {
+  return `<label class="chip"><input type="radio" name="${name}" value="${value}"${checked ? " checked" : ""}${disabled ? " disabled" : ""}><span>${icon || ""}${esc(label)}</span></label>`;
+}
+function bauen() {
+  $("#a1q").innerHTML = A1.map((q, i) => {
+    const s = S.a1[i];
+    return `<div class="q" id="q1-${i}"><div class="qt"><span class="l">${String.fromCharCode(97 + i)})</span><span>${esc(q.t)}</span></div>
+      <div class="row"><div class="grp" role="radiogroup" aria-label="Willenserklärung?"><span class="cap">Willenserklärung?</span>${chip("ja" + i, "ja", "Ja", "", s.ja === "ja")}${chip("ja" + i, "nein", "Nein", "", s.ja === "nein")}</div>
+      <div class="grp" role="radiogroup" aria-label="Auf welche Art?"><span class="cap">Art:</span>${ART.map(([v, l]) => chip("art" + i, v, l, ICON[v], s.art === v, s.ja === "nein")).join("")}</div></div>
+      <div class="fb" id="fb1-${i}"></div></div>`;
+  }).join("");
+  $("#a2q").innerHTML = A2.map((q, i) => `<div class="q" id="q2-${i}"><div class="qt"><span class="l">${String.fromCharCode(97 + i)})</span><span>${esc(q.t)}</span></div>
+      <div class="row"><div class="grp" role="radiogroup" aria-label="Art des Rechtsgeschäfts">${chip("rg" + i, "ein", "einseitig", "", S.a2[i] === "ein")}${chip("rg" + i, "zwei", "zweiseitig", "", S.a2[i] === "zwei")}</div></div>
+      <div class="fb" id="fb2-${i}"></div></div>`).join("");
+  $("#a3t").value = S.a3;
+  [1, 2, 3].forEach(n => { if (S.chk[n]) pruefen(n, true); });
+}
+
+document.addEventListener("change", e => {
+  const t = e.target; if (!t.name) return;
+  let m;
+  if ((m = t.name.match(/^ja(\d)$/))) {
+    const i = +m[1]; S.a1[i].ja = t.value;
+    const nein = t.value === "nein";
+    document.querySelectorAll(`input[name="art${i}"]`).forEach(x => { x.disabled = nein; if (nein) x.checked = false; });
+    if (nein) S.a1[i].art = "";
+    neu(1);
+  } else if ((m = t.name.match(/^art(\d)$/))) { S.a1[+m[1]].art = t.value; neu(1); }
+  else if ((m = t.name.match(/^rg(\d)$/))) { S.a2[+m[1]] = t.value; neu(2); }
+  sichern();
+});
+$("#a3t").addEventListener("input", e => { S.a3 = e.target.value; $("#err3").textContent = ""; sichern(); });
+function neu(n) { $("#err" + n).textContent = ""; }
+
+/* ---------- Prüfen ---------- */
+function ergebnis1(i) { const q = A1[i], s = S.a1[i]; return q.ja ? (s.ja === "ja" && s.art === q.art) : s.ja === "nein"; }
+function ergebnis2(i) { return S.a2[i] === A2[i].a; }
+function pruefen(n, still) {
+  if (n === 1) {
+    const offen = S.a1.filter(s => !s.ja || (s.ja === "ja" && !s.art)).length;
+    if (offen && !still) { $("#err1").textContent = `Beantworte zuerst alle Situationen (Ja/Nein und Art). Es fehlen noch ${offen}.`; return; }
+    let ok = 0;
+    A1.forEach((q, i) => {
+      const r = ergebnis1(i); if (r) ok++;
+      $("#q1-" + i).classList.toggle("ok", r); $("#q1-" + i).classList.toggle("no", !r);
+      const fb = $("#fb1-" + i); fb.className = "fb " + (r ? "good" : "bad");
+      const richtig = q.ja ? "Ja, " + ART.find(a => a[0] === q.art)[1] : "Nein";
+      fb.innerHTML = r ? `<b>Richtig.</b> ${esc(q.why)}` : `<b>Noch nicht.</b> Richtig ist: ${esc(richtig)}. ${esc(q.why)}`;
+    });
+    score(1, ok, A1.length);
+  } else if (n === 2) {
+    const offen = S.a2.filter(x => !x).length;
+    if (offen && !still) { $("#err2").textContent = `Entscheide zuerst alle Fälle. Es fehlen noch ${offen}.`; return; }
+    let ok = 0;
+    A2.forEach((q, i) => {
+      const r = ergebnis2(i); if (r) ok++;
+      $("#q2-" + i).classList.toggle("ok", r); $("#q2-" + i).classList.toggle("no", !r);
+      const fb = $("#fb2-" + i); fb.className = "fb " + (r ? "good" : "bad");
+      fb.innerHTML = r ? `<b>Richtig.</b> ${esc(q.why)}` : `<b>Noch nicht.</b> Richtig ist: ${q.a === "ein" ? "einseitig" : "zweiseitig"}. ${esc(q.why)}`;
+    });
+    score(2, ok, A2.length);
+  } else {
+    if (S.a3.trim().length < 20 && !still) { $("#err3").textContent = "Schreibe zuerst deine Begründung (mindestens einen ganzen Satz)."; return; }
+    $("#a3m").innerHTML = `<div class="muster"><b>Musterlösung</b><p style="margin:.3rem 0">${esc(MUSTER)}</p><b>Hast du an alles gedacht?</b><ul style="margin:.3rem 0 0;padding-left:1.2em">${STICH.map(s => `<li>${esc(s)}</li>`).join("")}</ul></div>`;
+  }
+  S.chk[n] = true; sichern();
+}
+function score(n, ok, all) {
+  $("#sc" + n).innerHTML = `<span class="score">${ok} von ${all} richtig</span><span class="meter"><i style="width:${ok / all * 100}%"></i></span>`;
+}
+document.querySelectorAll("[data-check]").forEach(b => b.addEventListener("click", () => pruefen(+b.dataset.check)));
+$("#reset").addEventListener("click", () => {
+  if (!confirmReset()) return;
+  S = leer(); sichern(); $("#a3m").innerHTML = ""; $("#sc1").innerHTML = ""; $("#sc2").innerHTML = ""; bauen(); toast("Übung neu gestartet");
+});
+let resetArm = 0;
+function confirmReset() { /* zweimal klicken statt Dialog */
+  const b = $("#reset");
+  if (Date.now() - resetArm < 4000) { b.textContent = "Übung neu starten"; return true; }
+  resetArm = Date.now(); b.textContent = "Wirklich alles löschen? Nochmal klicken"; setTimeout(() => { b.textContent = "Übung neu starten"; }, 4000); return false;
+}
+function toast(t) { const e = $("#toast"); e.textContent = t; e.classList.add("on"); clearTimeout(toast.t); toast.t = setTimeout(() => e.classList.remove("on"), 2200); }
+
+/* ---------- Name ---------- */
+$("#meName").value = sessionStorage.getItem("kickloop:we-name") || "";
+$("#meName").addEventListener("input", e => { try { sessionStorage.setItem("kickloop:we-name", e.target.value); } catch (x) {} });
+const nameJetzt = () => ich() || $("#meName").value.trim();
+
+/* ---------- Word-Datei (kleiner DOCX-Schreiber wie in index.html) ---------- */
+const X = s => String(s ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+function wr(text, o = {}) { return `<w:r><w:rPr>${o.b ? "<w:b/>" : ""}${o.i ? "<w:i/>" : ""}${o.c ? `<w:color w:val="${o.c}"/>` : ""}<w:sz w:val="${o.sz || 22}"/></w:rPr><w:t xml:space="preserve">${X(text)}</w:t></w:r>`; }
+function wp(runs, o = {}) { const r = Array.isArray(runs) ? runs.join("") : (String(runs).startsWith("<w:r>") ? runs : wr(runs, o));
+  return `<w:p><w:pPr><w:spacing w:before="${o.before || 0}" w:after="${o.after ?? 100}"/></w:pPr>${r}</w:p>`; }
+function wtbl(widths, rows) {
+  const brd = `<w:tblBorders>${["top", "left", "bottom", "right", "insideH", "insideV"].map(k => `<w:${k} w:val="single" w:sz="6" w:color="000000"/>`).join("")}</w:tblBorders>`;
+  return `<w:tbl><w:tblPr><w:tblW w:w="${widths.reduce((a, c) => a + c, 0)}" w:type="dxa"/>${brd}<w:tblLayout w:type="fixed"/><w:tblCellMar><w:left w:w="80" w:type="dxa"/><w:right w:w="80" w:type="dxa"/></w:tblCellMar></w:tblPr><w:tblGrid>${widths.map(w => `<w:gridCol w:w="${w}"/>`).join("")}</w:tblGrid>` +
+    rows.map((r, ri) => `<w:tr>${r.map((c, ci) => `<w:tc><w:tcPr><w:tcW w:w="${widths[ci]}" w:type="dxa"/>${ri === 0 ? '<w:shd w:val="clear" w:color="auto" w:fill="F3D9A4"/>' : ""}</w:tcPr>${wp(wr(c, { b: ri === 0, sz: 20 }), { after: 0 })}</w:tc>`).join("")}</w:tr>`).join("") + `</w:tbl>`;
+}
+const CRC = (() => { const t = new Uint32Array(256); for (let n = 0; n < 256; n++) { let c = n; for (let k = 0; k < 8; k++) c = c & 1 ? 0xEDB88320 ^ (c >>> 1) : c >>> 1; t[n] = c >>> 0; } return t; })();
+function crc32(u8) { let c = 0xFFFFFFFF; for (let i = 0; i < u8.length; i++) c = CRC[(c ^ u8[i]) & 0xFF] ^ (c >>> 8); return (c ^ 0xFFFFFFFF) >>> 0; }
+function zip(files) {
+  const enc = new TextEncoder(); const parts = []; const cen = []; let off = 0;
+  for (const [name, str] of files) {
+    const n = enc.encode(name), d = (str instanceof Uint8Array) ? str : enc.encode(str), crc = crc32(d);
+    const h = new DataView(new ArrayBuffer(30)); h.setUint32(0, 0x04034b50, true); h.setUint16(4, 20, true); h.setUint16(6, 0x0800, true);
+    h.setUint32(14, crc, true); h.setUint32(18, d.length, true); h.setUint32(22, d.length, true); h.setUint16(26, n.length, true);
+    parts.push(new Uint8Array(h.buffer), n, d);
+    const c = new DataView(new ArrayBuffer(46)); c.setUint32(0, 0x02014b50, true); c.setUint16(4, 20, true); c.setUint16(6, 20, true); c.setUint16(8, 0x0800, true);
+    c.setUint32(16, crc, true); c.setUint32(20, d.length, true); c.setUint32(24, d.length, true); c.setUint16(28, n.length, true); c.setUint32(42, off, true);
+    cen.push(new Uint8Array(c.buffer), n); off += 30 + n.length + d.length;
+  }
+  const cs = cen.reduce((a, x) => a + x.length, 0);
+  const e = new DataView(new ArrayBuffer(22)); e.setUint32(0, 0x06054b50, true); e.setUint16(8, files.length, true); e.setUint16(10, files.length, true); e.setUint32(12, cs, true); e.setUint32(16, off, true);
+  return new Blob([...parts, ...cen, new Uint8Array(e.buffer)], { type: "application/vnd.openxmlformats-officedocument.wordprocessingml.document" });
+}
+const LOGO = `<w:r><w:drawing><wp:inline xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" distT="0" distB="0" distL="0" distR="0"><wp:extent cx="1900800" cy="381177"/><wp:docPr id="1" name="Kickloop-Logo" descr="Kickloop"/><a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"><a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture"><pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture"><pic:nvPicPr><pic:cNvPr id="1" name="kickloop-logo.png"/><pic:cNvPicPr/></pic:nvPicPr><pic:blipFill><a:blip r:embed="rId9"/><a:stretch><a:fillRect/></a:stretch></pic:blipFill><pic:spPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="1900800" cy="381177"/></a:xfrm><a:prstGeom prst="rect"><a:avLst/></a:prstGeom></pic:spPr></pic:pic></a:graphicData></a:graphic></wp:inline></w:drawing></w:r>`;
+function docx(bodyXml, logo) {
+  const W = 'xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"';
+  const doc = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:document ${W}><w:body>${logo ? wp(LOGO, { after: 200 }) : ""}${bodyXml}<w:sectPr><w:pgSz w:w="11906" w:h="16838"/><w:pgMar w:top="900" w:right="1134" w:bottom="1000" w:left="1134" w:header="400" w:footer="500" w:gutter="0"/></w:sectPr></w:body></w:document>`;
+  const styles = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:styles ${W}><w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="Hubballi" w:hAnsi="Hubballi" w:cs="Hubballi" w:eastAsia="Hubballi"/><w:color w:val="2B2F32"/><w:sz w:val="22"/><w:lang w:val="de-DE"/></w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:spacing w:after="100" w:line="264" w:lineRule="auto"/></w:pPr></w:pPrDefault></w:docDefaults></w:styles>`;
+  const files = [
+    ["[Content_Types].xml", `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Default Extension="png" ContentType="image/png"/><Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/><Override PartName="/word/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml"/></Types>`],
+    ["_rels/.rels", `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/></Relationships>`],
+    ["word/_rels/document.xml.rels", `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/>${logo ? '<Relationship Id="rId9" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/image" Target="media/kickloop-logo.png"/>' : ""}</Relationships>`],
+    ["word/document.xml", doc], ["word/styles.xml", styles]
+  ];
+  if (logo) files.push(["word/media/kickloop-logo.png", logo]);
+  return zip(files);
+}
+async function logoBytes() { try { const r = await fetch("/assets/logo-light.png"); if (!r.ok) return null; return new Uint8Array(await r.arrayBuffer()); } catch (e) { return null; } }
+function dateiName(n) {
+  return String(n || "").trim().replace(/ä/g, "ae").replace(/ö/g, "oe").replace(/ü/g, "ue").replace(/Ä/g, "Ae").replace(/Ö/g, "Oe").replace(/Ü/g, "Ue").replace(/ß/g, "ss")
+    .normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/\s+/g, "_").replace(/[^A-Za-z0-9_-]/g, "");
+}
+$("#dl").addEventListener("click", async () => {
+  const name = nameJetzt();
+  const heute = new Date().toLocaleDateString("de-DE");
+  const artTxt = v => (ART.find(a => a[0] === v) || ["", "–"])[1];
+  let b = wp([wr("Übung: Willenserklärungen", { b: true, sz: 32 })], { after: 60 });
+  b += wp([wr("Lernfeld 3 · Der Kaufvertrag · Online-Übung zu Arbeitsblatt 1", { c: "7A746B", sz: 18 })], { after: 160 });
+  b += wp([wr("Name: ", { b: true }), wr(name || "____________________"), wr("     Datum: ", { b: true }), wr(heute)], { after: 240 });
+  b += wp([wr("Aufgabe 1: Willenserklärung – ja oder nein?", { b: true, sz: 24 })], { after: 80 });
+  const r1 = A1.map((q, i) => [String.fromCharCode(97 + i) + ") " + q.t, S.a1[i].ja === "ja" ? "Ja" : S.a1[i].ja === "nein" ? "Nein" : "–", S.a1[i].ja === "ja" ? artTxt(S.a1[i].art) : "–", S.chk[1] ? (ergebnis1(i) ? "richtig" : "falsch") : "nicht geprüft"]);
+  b += wtbl([5000, 900, 2000, 1700], [["Situation", "WE?", "Art", "Ergebnis"], ...r1]);
+  if (S.chk[1]) b += wp([wr(`${A1.filter((_, i) => ergebnis1(i)).length} von ${A1.length} richtig`, { b: true })], { before: 80, after: 240 }); else b += wp("", { after: 160 });
+  b += wp([wr("Aufgabe 2: Einseitig oder zweiseitig?", { b: true, sz: 24 })], { after: 80 });
+  const r2 = A2.map((q, i) => [String.fromCharCode(97 + i) + ") " + q.t, S.a2[i] === "ein" ? "einseitig" : S.a2[i] === "zwei" ? "zweiseitig" : "–", S.chk[2] ? (ergebnis2(i) ? "richtig" : "falsch") : "nicht geprüft"]);
+  b += wtbl([5900, 2000, 1700], [["Fall", "Meine Antwort", "Ergebnis"], ...r2]);
+  if (S.chk[2]) b += wp([wr(`${A2.filter((_, i) => ergebnis2(i)).length} von ${A2.length} richtig`, { b: true })], { before: 80, after: 240 }); else b += wp("", { after: 160 });
+  b += wp([wr("Aufgabe 3: Das Testament von Herrn Adam", { b: true, sz: 24 })], { after: 80 });
+  b += wp([wr("Herr Adam hat ein Testament errichtet und keiner Person etwas davon gesagt. Begründe, ob hier ein gültiges Rechtsgeschäft vorliegt.", { i: true })]);
+  b += (S.a3.trim() ? S.a3.split("\n") : ["(keine Antwort)"]).map(l => wp(l)).join("");
+  const blob = docx(b, await logoBytes());
+  const fn = `Uebung_Willenserklaerungen${name ? "_" + dateiName(name) : ""}.docx`;
+  const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = fn; document.body.appendChild(a); a.click();
+  setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+  toast("Gespeichert: " + fn);
+});
+
+bauen();
+</script>
+</body></html>
