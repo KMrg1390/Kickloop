@@ -1,0 +1,547 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Phasen-Puzzle · Arbeitsbereich Kickloop</title>
+<meta name="description" content="Online-Übung zu Arbeitsblatt 5, Teil A: die acht Phasen des Verkaufsgesprächs zuordnen, ordnen und die Zeilen notieren. Leitfaden als PDF.">
+<link rel="stylesheet" href="/assets/schriften.css">
+<link rel="stylesheet" href="/assets/unterseite.css">
+<link rel="stylesheet" href="/assets/arbeitsbereich.css">
+<link rel="icon" href="/assets/icon-arbeitsbereich.svg" type="image/svg+xml">
+<script src="/assets/arbeitsbereich.js" defer></script>
+<style>
+/* Phasen-Puzzle (24.11.2026): digitale Fassung von Arbeitsblatt 5, Teil A (Schnipselbogen und Klebebogen).
+   Stand im Browser unter kickloop:phasen-puzzle. Aufbau wie uebungen/lf3-willenserklaerungen.html. */
+main{max-width:860px}
+.ok-c{--ok:#2E7D4F;--ok-soft:#E4F2E9;--bad:#B3412F;--bad-soft:#F8E6E2}
+@media (prefers-color-scheme:dark){.ok-c{--ok:#6CC592;--ok-soft:#1C3325;--bad:#EE8B78;--bad-soft:#3A2420}}
+.task{background:var(--lime-soft);border:2px solid #000;border-radius:14px;padding:12px 16px;margin:18px 0 6px;font-size:1rem}
+.task b{font-family:var(--display);font-stretch:100%}
+.me{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;background:var(--lime-soft);border:2px solid #000;border-radius:14px;padding:10px 14px;margin-top:14px;font-size:1rem}
+.me input{flex:1;min-width:200px}
+html.kl-hat-name .me{display:none}
+section.auf{margin-top:34px;scroll-margin-top:12px}
+section.auf h2{font-size:1.45rem;display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px}
+section.auf h2 .nr{font-family:var(--display);font-stretch:100%;background:var(--amber);color:#000;border-radius:999px;padding:2px 12px;font-size:.85rem;letter-spacing:.06em;text-transform:uppercase}
+.auf>p{margin:.5rem 0 .8rem;max-width:66ch}
+.auf>p.intro{color:var(--ink-2);font-size:1rem}
+.warte{background:var(--sand-2);border-radius:12px;padding:12px 16px;color:var(--ink-2);font-size:1rem;margin:0}
+
+/* Mitschrift mit Zeilennummern: Eine Zeile darf am Bildschirm umbrechen, die Nummer links zählt. */
+.mit{background:var(--surface);border:1.5px solid var(--sand);border-radius:12px;padding:10px 14px 10px 4px;font-size:1rem;line-height:1.42}
+.mit .z{display:grid;grid-template-columns:2em 1fr;column-gap:10px}
+.mit .n{font-family:var(--mono);font-size:.78rem;color:var(--muted);text-align:right;padding-top:.22em;user-select:none}
+.mit .regie{color:var(--muted)}
+/* Hubballi hat nur eine Stärke: Beschriftungen und Namen deshalb in der Überschriften-Schrift */
+.mit b,.wort b,.karte p b,.lfz p b,.auf>p b{font-family:var(--display);font-stretch:100%;font-weight:700;font-size:.92em}
+.wort{font-size:.95rem;color:var(--ink-2);background:var(--sand-2);border-radius:12px;padding:10px 14px;margin:10px 0 0}
+
+/* Karten und Schnipsel */
+.karte{background:var(--surface);border:1.5px solid var(--sand);border-radius:12px;padding:12px 14px;margin:10px 0;display:grid;gap:8px}
+.karte p{margin:0;font-size:1.02rem}
+.karte.aktiv{border-color:#000;box-shadow:0 0 0 3px var(--lime)}
+.karte.fest{border-color:var(--ok);background:var(--ok-soft)}
+.karte.falsch{border-color:var(--bad);border-style:dashed}
+.karte .hin{color:var(--bad);font-size:.95rem}
+.karte .klein{font-size:.95rem;color:var(--ink-2)}
+.slot{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.slot:empty{display:none}
+.schn{font-family:var(--display);font-stretch:100%;font-weight:700;font-size:.98rem;line-height:1.2;min-height:44px;padding:6px 14px;border:2px dashed #000;border-radius:8px;background:var(--amber-soft);color:var(--ink);cursor:pointer;display:inline-flex;align-items:center;gap:8px;text-align:left}
+button.schn:hover{background:var(--amber);color:#000}
+.schn:focus-visible,.leer:focus-visible,.zi:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+.schn.gelegt{border-style:solid;background:var(--lime);color:#000}
+.schn.fest{border:2px solid var(--ok);background:var(--surface);color:var(--ink);cursor:default}
+.schn.fest span{color:var(--ok)}
+.leer{font:inherit;font-size:.98rem;min-height:44px;padding:6px 14px;border:1.5px dashed var(--muted);border-radius:8px;background:none;color:var(--ink-2);cursor:pointer}
+.wahl{display:flex;flex-wrap:wrap;gap:8px;align-items:center;border-top:1.5px dashed var(--sand);padding-top:10px}
+.wahl .cap{flex-basis:100%;font-size:.95rem;color:var(--ink-2)}
+.pos{grid-template-columns:auto 1fr;column-gap:12px;align-items:start}
+.pos .pin{display:grid;gap:8px;min-width:0}
+.pnr{font-family:var(--display);font-stretch:100%;font-weight:800;font-size:1.05rem;width:2.1em;height:2.1em;border-radius:50%;background:#000;color:#C7F105;display:inline-flex;align-items:center;justify-content:center;flex:none}
+
+/* Aufgabe 3: Mitschrift bleibt oben stehen, darunter die Zeilen-Felder */
+.lese{position:sticky;top:0;z-index:5;background:var(--paper);padding:8px 0 10px;border-bottom:2px solid #000;margin-bottom:12px}
+.lesekopf{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;justify-content:space-between;margin-bottom:6px;font-size:1rem}
+.lesekopf b{font-family:var(--display);font-stretch:100%}
+.lese .mit{max-height:38vh;overflow:auto;-webkit-overflow-scrolling:touch}
+.zrow{grid-template-columns:auto 1fr;column-gap:12px;align-items:center}
+.zrow .zin{display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center;font-size:1rem}
+.zrow b.pn{font-family:var(--display);font-stretch:100%}
+.zi{font:inherit;font-size:1.05rem;width:4.2em;min-height:44px;text-align:center;color:var(--ink);background:var(--surface);border:1.5px solid var(--sand);border-radius:10px;padding:6px 4px}
+.zi:disabled{border-color:var(--ok);opacity:1;-webkit-text-fill-color:var(--ink)}
+.zfb{font-size:.95rem}
+.zfb.good{color:var(--ok)} .zfb.bad{color:var(--bad)}
+
+/* Leitfaden */
+.lf{display:grid;gap:0;border:2px solid #000;border-radius:12px;overflow:hidden;background:var(--surface)}
+.lfz{display:grid;grid-template-columns:5.6em 1fr;gap:4px 14px;padding:10px 14px;border-top:1.5px solid var(--sand)}
+.lfz:first-child{border-top:0}
+.lfz .lnr{font-family:var(--display);font-stretch:100%;font-weight:800}
+.lfz .lze{display:block;font-family:var(--mono);font-size:.85rem;font-weight:400;color:var(--ink-2)}
+.lfz p{margin:0;font-size:1rem}
+.lfz .lph{font-family:var(--display);font-stretch:100%;font-weight:700}
+.feld{display:grid;gap:6px;margin-top:16px;font-size:1rem}
+.feld b{font-family:var(--display);font-stretch:100%}
+.feld small{color:var(--ink-2);font-size:.95rem}
+textarea,input[type=text]{width:100%;font:inherit;font-size:1.05rem;color:var(--ink);background:var(--surface);border:1.5px solid var(--sand);border-radius:12px;padding:10px 12px}
+textarea{min-height:110px;resize:vertical}
+input[type=text]{min-height:44px}
+.me input[type=text]{width:auto}
+
+.bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:12px}
+.btn{font-family:var(--display);font-stretch:100%;font-weight:700;font-size:1rem;min-height:44px;border:2px solid #000;border-radius:999px;padding:8px 20px;cursor:pointer;background:#C7F105;color:#000;text-decoration:none;display:inline-flex;align-items:center}
+.btn:hover{background:#B5DC04}
+.btn.ghost{background:var(--surface);color:var(--ink);border-color:var(--sand)}
+.btn.dl{background:var(--amber);border-color:#000}
+.btn.klein{min-height:36px;padding:4px 14px;font-size:.9rem}
+.err{color:var(--bad);font-size:.95rem}
+.fbx{font-size:1rem;margin-top:10px}
+.fbx:empty{display:none}
+.fbx.good{color:var(--ok)} .fbx.bad{color:var(--bad)}
+.fbx b{font-family:var(--display);font-stretch:100%}
+.score{font-family:var(--display);font-stretch:100%;font-weight:700}
+.meter{flex:1;min-width:140px;max-width:260px;height:10px;background:var(--sand);border-radius:5px;overflow:hidden}
+.meter i{display:block;height:100%;background:var(--ok);transition:width .3s}
+.ende{margin-top:34px;background:var(--surface);border:2px solid #000;border-radius:16px;padding:16px 18px}
+.ende h2{font-size:1.3rem;margin-top:0}
+.ende p{margin:.4rem 0 0;font-size:1rem;color:var(--ink-2)}
+.toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:#000;color:#C7F105;border-radius:999px;padding:10px 18px;font-family:var(--display);font-weight:700;font-size:.95rem;opacity:0;transition:opacity .2s;pointer-events:none;z-index:60;max-width:calc(100vw - 32px);text-align:center}
+.toast.on{opacity:1}
+@media (max-width:560px){
+  .mit{font-size:.95rem;padding-left:2px}
+  .mit .z{grid-template-columns:1.7em 1fr;column-gap:8px}
+  .lfz{grid-template-columns:1fr}
+  .lfz .lze{display:inline;margin-left:8px}
+  .lese .mit{max-height:34vh}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head><body class="ok-c">
+<noscript><p style="padding:12px 0"><a href="/lf2/verkaufsgespraech.html">← Verkaufsgespräch</a></p></noscript>
+<main>
+  <span class="eyebrow">Arbeitsbereich · Lernfeld 2 · Online-Übung</span>
+  <h1>Phasen-Puzzle</h1>
+  <p class="lead">Ein gutes Verkaufsgespräch hat acht Phasen. Ihr ordnet jeder Beschreibung die passende Phase zu, bringt die Phasen in die Reihenfolge des Gesprächs und notiert die Zeilen. Am Ende ladet ihr euren Leitfaden als PDF herunter.</p>
+  <div class="task"><b>Partnerarbeit, 22 Minuten.</b> Das ist Teil A von Arbeitsblatt 5. Den Leitfaden braucht ihr danach in Teil B. Eure Antworten bleiben in diesem Browser gespeichert, bis ihr die Übung neu startet.</div>
+  <label class="me"><b>Dein Name</b><input type="text" id="meName" autocomplete="name" placeholder="Vor- und Nachname"></label>
+
+  <section class="auf" id="m5">
+    <h2><span class="nr">Zuerst lesen</span>Material 5 · Deniz berät eine Kundin</h2>
+    <p class="intro">Samstag, 11 Uhr bei Kickloop. Deniz arbeitet seit drei Wochen im Laden. Eine junge Frau sieht sich die weißen Sneaker an. Deniz geht zu ihr. Grau in Klammern steht, was die Personen tun. Die Zahlen links sind die Zeilen wie im Arbeitsblatt.</p>
+    <div class="mit" id="mit1"></div>
+    <p class="wort"><b>Worterklärungen:</b> <b>gepolstert</b> (Z. 12): innen weich · <b>das Obermaterial</b> (Z. 18): der obere Teil des Schuhs · <b>das Imprägnierspray</b> (Z. 26): ein Spray, das gegen Wasser und Schmutz schützt · <b>die Treuekarte</b> (Z. 27): eine Karte, auf der man Einkäufe sammelt</p>
+  </section>
+
+  <section class="auf" id="a1">
+    <h2><span class="nr">Aufgabe 1</span>Welche Phase ist das?</h2>
+    <p>Hier stehen acht Beschreibungen. <b>Ordnet</b> jeder Beschreibung die passende Phase <b>zu</b>: Tippt auf eine Karte und dann auf den Schnipsel mit der Phase.</p>
+    <div id="a1q"></div>
+    <div class="bar" id="bar1"><button class="btn" data-check="1">Prüfen</button><span class="err" id="err1" role="alert"></span><span id="sc1" class="bar" style="margin:0"></span></div>
+    <div class="fbx" id="fb1" role="status"></div>
+  </section>
+
+  <section class="auf" id="a2">
+    <h2><span class="nr">Aufgabe 2</span>Die Reihenfolge im Gespräch</h2>
+    <p><b>Bringt</b> die acht Phasen in die Reihenfolge des Gesprächs. Was macht Deniz zuerst, was danach? Lest in Material 5 nach.</p>
+    <div id="a2q"></div>
+    <div class="bar" id="bar2"><button class="btn" data-check="2">Prüfen</button><span class="err" id="err2" role="alert"></span><span id="sc2" class="bar" style="margin:0"></span></div>
+    <div class="fbx" id="fb2" role="status"></div>
+  </section>
+
+  <section class="auf" id="a3">
+    <h2><span class="nr">Aufgabe 3</span>Die Zeilen in Material 5</h2>
+    <p><b>Notiert</b> zu jeder Phase die Zeilen in Material 5: In welcher Zeile beginnt die Phase, in welcher endet sie?</p>
+    <div id="a3q"></div>
+    <div class="bar" id="bar3"><button class="btn" data-check="3">Prüfen</button><span class="err" id="err3" role="alert"></span><span id="sc3" class="bar" style="margin:0"></span></div>
+    <div class="fbx" id="fb3" role="status"></div>
+  </section>
+
+  <section class="auf" id="lf">
+    <h2><span class="nr">Ergebnis</span>Leitfaden: So läuft ein gutes Verkaufsgespräch</h2>
+    <div id="lfq"></div>
+  </section>
+
+  <div class="ende">
+    <h2>Fertig? Leitfaden herunterladen</h2>
+    <p id="endeTxt">Die PDF enthält euren Leitfaden mit allen acht Phasen, den Zeilen und dem Merksatz. Speichert sie in IServ. Ihr braucht den Leitfaden in Teil B von Arbeitsblatt 5.</p>
+    <div class="bar"><button class="btn dl" id="dl">⬇ Leitfaden als PDF</button><button class="btn ghost" id="reset">Übung neu starten</button></div>
+  </div>
+</main>
+<div class="toast" id="toast" role="status"></div>
+<footer>Kickloop ist ein erfundenes Modellunternehmen für den Unterricht · © Dnk, Mrg · Hermann-Scheer-Schule</footer>
+
+<script>
+"use strict";
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+/* Die acht Phasen in der richtigen Reihenfolge; z = Zeilen in Material 5 (eine Zeile mehr oder weniger gilt als richtig). */
+const PH = [
+  { n: "Begrüßung", ziel: "Die Kundin fühlt sich willkommen.", so: "Ich sehe die Kundin an und lächle. Ich bin freundlich und lege das Handy weg.", z: [1, 3] },
+  { n: "Kundenwunsch ermitteln", ziel: "Ich weiß, was die Kundin braucht und warum.", so: "Ich stelle offene Fragen (Wofür? Was?), aber nicht zu viele auf einmal. Ich höre gut zu.", z: [4, 10] },
+  { n: "Ware präsentieren", ziel: "Die Kundin sieht, dass die Ware zu ihr passt.", so: "Ich zeige zuerst eine Ware aus der mittleren Preisklasse und nenne Vorteile. Die Kundin darf sie ausprobieren.", z: [11, 15] },
+  { n: "Preis nennen", ziel: "Die Kundin findet den Preis angemessen.", so: "Ich nenne den Betrag zwischen zwei Vorteilen. Ich sage nicht „teuer“ oder „billig“.", z: [16, 18] },
+  { n: "Einwand behandeln", ziel: "Die Kundin hat keine Zweifel mehr.", so: "Ich zeige Verständnis und widerspreche nicht. Ich antworte mit einem Vorteil oder zeige eine andere Ware.", z: [19, 23] },
+  { n: "Kaufentscheidung", ziel: "Die Kundin entscheidet sich sicher und freiwillig.", so: "Ich fasse die Vorteile kurz zusammen und frage freundlich. Ich mache keinen Druck.", z: [24, 25] },
+  { n: "Ergänzungsangebot und Service", ziel: "Die Kundin bekommt alles, was zum Kauf passt.", so: "Ich biete ein bis zwei passende Zusatzartikel an. Ich informiere über Umtausch, Reparatur oder Lieferung.", z: [26, 29] },
+  { n: "Verabschiedung", ziel: "Die Kundin ist zufrieden und kommt wieder.", so: "Ich bestätige den Kauf, bedanke mich und wünsche einen schönen Tag.", z: [30, 32] }
+];
+/* Gemischt wie auf dem Schnipselbogen des Arbeitsblatts: Reihenfolge der Beschreibungen und der Phasen-Namen */
+const ORD_B = [5, 2, 7, 0, 3, 6, 1, 4];
+const ORD_N = [3, 6, 0, 5, 1, 7, 4, 2];
+/* Material 5: feste Zeilen wie im Arbeitsblatt. **fett** = wer spricht, {{…}} = was die Person tut */
+const M5 = [
+  "**Deniz:** {{(lächelt und sieht die Kundin an)}} Guten Tag und willkommen bei Kickloop! Kann ich Ihnen",
+  "helfen?",
+  "**Selin:** Hallo. Ja, gern. Ich suche Sneaker.",
+  "**Deniz:** Wofür brauchen Sie die Sneaker?",
+  "**Selin:** Ich fange im November eine Ausbildung in einer Drogerie an. Da stehe ich den ganzen Tag.",
+  "Die Schuhe sollen bequem sein und zur Arbeitskleidung passen, also weiß oder schwarz.",
+  "**Deniz:** Welche Größe haben Sie?",
+  "**Selin:** 39.",
+  "**Deniz:** Haben Sie schon an einen Preis gedacht?",
+  "**Selin:** Ungefähr 100 Euro, mehr nicht.",
+  "**Deniz:** {{(holt einen weißen Sneaker aus dem Regal)}} Dann zeige ich Ihnen dieses Modell. Die Sohle ist",
+  "gepolstert und federt jeden Schritt ab. Das ist gut für Füße und Rücken, wenn man lange steht.",
+  "Probieren Sie ihn doch an. Gehen Sie ruhig ein paar Schritte.",
+  "**Selin:** {{(geht durch den Laden)}} Oh, der ist wirklich weich.",
+  "**Deniz:** Das freut mich.",
+  "**Selin:** Was kostet er denn?",
+  "**Deniz:** Sie bekommen einen Schuh, der auch nach acht Stunden noch bequem ist, für 94,99 Euro.",
+  "Und das Obermaterial ist leicht abwaschbar.",
+  "**Selin:** Hm. Weiß wird aber so schnell dreckig. Nach zwei Wochen sieht der bestimmt alt aus.",
+  "**Deniz:** Das verstehe ich gut. Darum ist das Leder abwaschbar: Ein feuchtes Tuch reicht. Und wenn",
+  "er doch einmal sehr schmutzig ist, reinigt unsere Werkstatt ihn für 19 Euro. Danach sieht er wieder",
+  "aus wie neu.",
+  "**Selin:** Okay, das klingt gut.",
+  "**Deniz:** Der Schuh passt also, er ist bequem und leicht sauber zu halten. Möchten Sie ihn nehmen?",
+  "**Selin:** Ja, ich nehme ihn.",
+  "**Deniz:** Gern. Damit der Schuh lange weiß bleibt, empfehle ich Ihnen dieses Imprägnierspray für 8,90",
+  "Euro. Dann bleibt Schmutz nicht so leicht hängen. Außerdem bekommen Sie bei uns die Treuekarte",
+  "für die Werkstatt: Die sechste Reinigung ist kostenlos.",
+  "**Selin:** Das Spray nehme ich. Und die Karte auch, danke.",
+  "**Deniz:** Sie haben eine gute Wahl getroffen. Damit stehen Sie den ganzen Tag bequem. Bezahlen",
+  "können Sie vorne an der Kasse. Viel Erfolg in der Ausbildung und auf Wiedersehen!",
+  "**Selin:** Danke, tschüss!"
+];
+const N = PH.length, ZMAX = M5.length;
+
+/* ---------- Speicher ---------- */
+const KEY = "kickloop:phasen-puzzle";
+/* a[k] = gewählte Phase zur k-ten Beschreibung · r[p] = Phase an Stelle p · von/bis = Zeilen zur Phase p · v = Zahl der Prüfungen je Aufgabe */
+function leer() {
+  return { a: Array(N).fill(-1), aOk: Array(N).fill(false), r: Array(N).fill(-1), rOk: Array(N).fill(false),
+    von: Array(N).fill(""), bis: Array(N).fill(""), zOk: Array(N).fill(false), merk: "", zus: "", partner: "", v: [0, 0, 0] };
+}
+let S = (() => { try { const d = JSON.parse(localStorage.getItem(KEY)); if (d && Array.isArray(d.a) && d.a.length === N && Array.isArray(d.zOk)) return Object.assign(leer(), d); } catch (e) {} return leer(); })();
+const sichern = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} };
+function ich() { try { const m = JSON.parse(localStorage.getItem("kickloop:me")); return m && m.name ? m.name : ""; } catch (e) { return ""; } }
+const fertig1 = () => S.aOk.every(Boolean), fertig2 = () => fertig1() && S.rOk.every(Boolean), fertig3 = () => fertig2() && S.zOk.every(Boolean);
+
+let akt1 = -1, akt2 = -1;                       /* Karte, die gerade gefüllt wird */
+let falsch1 = new Set(), falsch2 = new Set();   /* nach dem Prüfen: Das passte noch nicht */
+let falsch3 = {};                               /* Phase -> Hinweis */
+let leseZu = false;
+
+const zeileHtml = z => esc(z).replace(/\*\*(.+?)\*\*/g, "<b>$1</b>").replace(/\{\{(.+?)\}\}/g, '<span class="regie">$1</span>');
+const mitHtml = () => M5.map((z, i) => `<div class="z"><span class="n">${i + 1}</span><span>${zeileHtml(z)}</span></div>`).join("");
+function naechste(arr, fest, ab) { for (let i = 1; i <= N; i++) { const k = (ab + i) % N; if (arr[k] < 0 && !fest[k]) return k; } return -1; }
+
+/* ---------- Aufgabe 1: Beschreibung -> Phase ---------- */
+function bau1() {
+  const frei = ORD_N.filter(p => !S.a.includes(p));
+  if (akt1 < 0 || S.aOk[akt1] || S.a[akt1] >= 0) akt1 = naechste(S.a, S.aOk, N - 1);
+  $("#a1q").innerHTML = ORD_B.map((p, k) => {
+    const g = S.a[k], fest = S.aOk[k], aktiv = k === akt1, miss = falsch1.has(k) && g < 0;
+    const slot = fest ? `<span class="schn fest"><span aria-hidden="true">✓</span>${esc(PH[g].n)}</span>`
+      : g >= 0 ? `<button type="button" class="schn gelegt" data-raus1="${k}" aria-label="${esc(PH[g].n)} wieder wegnehmen">${esc(PH[g].n)}<span aria-hidden="true">✕</span></button>`
+      : aktiv ? "" : `<button type="button" class="leer">Phase wählen</button>`;
+    const wahl = aktiv ? `<div class="wahl"><span class="cap">Welche Phase ist das? Tippt auf den passenden Schnipsel.</span>${frei.map(f => `<button type="button" class="schn" data-setz1="${f}">${esc(PH[f].n)}</button>`).join("")}</div>` : "";
+    return `<div class="karte${aktiv ? " aktiv" : ""}${fest ? " fest" : ""}${miss ? " falsch" : ""}" data-k1="${k}">
+      <p><b>Ziel:</b> ${esc(PH[p].ziel)}</p><p><b>So geht’s:</b> ${esc(PH[p].so)}</p>${miss ? '<p class="hin">Das passte noch nicht. Wählt eine andere Phase.</p>' : ""}<div class="slot">${slot}</div>${wahl}</div>`;
+  }).join("");
+  $("#bar1").hidden = fertig1();
+  melde(1, S.aOk);
+}
+
+/* ---------- Aufgabe 2: Stelle 1–8 -> Phase ---------- */
+function bau2() {
+  const el = $("#a2q");
+  if (!fertig1()) { el.innerHTML = '<p class="warte">Löst zuerst Aufgabe 1. Dann geht es hier weiter.</p>'; $("#bar2").hidden = true; $("#fb2").innerHTML = ""; return; }
+  const frei = ORD_N.filter(p => !S.r.includes(p));
+  if (akt2 < 0 || S.rOk[akt2] || S.r[akt2] >= 0) akt2 = naechste(S.r, S.rOk, N - 1);
+  el.innerHTML = S.r.map((g, p) => {
+    const fest = S.rOk[p], aktiv = p === akt2, miss = falsch2.has(p) && g < 0;
+    const slot = fest ? `<span class="schn fest"><span aria-hidden="true">✓</span>${esc(PH[g].n)}</span>`
+      : g >= 0 ? `<button type="button" class="schn gelegt" data-raus2="${p}" aria-label="${esc(PH[g].n)} wieder wegnehmen">${esc(PH[g].n)}<span aria-hidden="true">✕</span></button>`
+      : aktiv ? "" : `<button type="button" class="leer">Phase wählen</button>`;
+    const wahl = aktiv ? `<div class="wahl"><span class="cap">Welche Phase kommt an Stelle ${p + 1}?</span>${frei.map(f => `<button type="button" class="schn" data-setz2="${f}">${esc(PH[f].n)}</button>`).join("")}</div>` : "";
+    return `<div class="karte pos${aktiv ? " aktiv" : ""}${fest ? " fest" : ""}${miss ? " falsch" : ""}" data-k2="${p}"><span class="pnr" aria-hidden="true">${p + 1}</span><div class="pin">
+      ${miss ? '<p class="hin">Das passte noch nicht. Wählt eine andere Phase.</p>' : ""}<div class="slot">${slot}</div>${g >= 0 ? `<p class="klein"><b>Ziel:</b> ${esc(PH[g].ziel)}</p>` : ""}${wahl}</div></div>`;
+  }).join("");
+  $("#bar2").hidden = fertig2();
+  melde(2, S.rOk);
+}
+
+/* ---------- Aufgabe 3: Zeilen ---------- */
+function bau3() {
+  const el = $("#a3q");
+  if (!fertig2()) { el.innerHTML = '<p class="warte">Löst zuerst Aufgabe 2. Dann geht es hier weiter.</p>'; $("#bar3").hidden = true; $("#fb3").innerHTML = ""; return; }
+  const feld = (art, p, wert, fest) => `<input class="zi" type="number" inputmode="numeric" min="1" max="${ZMAX}" data-${art}="${p}" value="${esc(wert)}"${fest ? " disabled" : ""} aria-label="${esc(PH[p].n)}: ${art === "von" ? "erste" : "letzte"} Zeile">`;
+  el.innerHTML = `<div class="lese"><div class="lesekopf"><b>Material 5</b><button type="button" class="btn ghost klein" id="leseBtn" aria-expanded="${!leseZu}">${leseZu ? "Text einblenden" : "Text ausblenden"}</button></div><div class="mit" id="mit2"${leseZu ? " hidden" : ""} tabindex="0" aria-label="Material 5, Gesprächsmitschrift">${mitHtml()}</div></div>` +
+    PH.map((ph, p) => {
+      const fest = S.zOk[p], miss = falsch3[p] && !fest;
+      return `<div class="karte zrow${fest ? " fest" : ""}${miss ? " falsch" : ""}" id="zr${p}"><span class="pnr" aria-hidden="true">${p + 1}</span><div class="pin">
+        <div class="zin"><b class="pn">${esc(ph.n)}</b></div>
+        <div class="zin"><span>Zeile</span>${feld("von", p, S.von[p], fest)}<span>bis</span>${feld("bis", p, S.bis[p], fest)}
+        <span class="zfb ${fest ? "good" : "bad"}" id="zf${p}">${fest ? "✓ richtig" : miss ? esc(falsch3[p]) : ""}</span></div></div></div>`;
+    }).join("");
+  $("#bar3").hidden = fertig3();
+  melde(3, S.zOk);
+}
+
+/* ---------- Ergebnis: Leitfaden ---------- */
+function bauLf() {
+  const el = $("#lfq"), ok = fertig3();
+  $("#dl").disabled = !ok; $("#dl").style.opacity = ok ? "" : ".45";
+  $("#endeTxt").textContent = ok ? "Die PDF enthält euren Leitfaden mit allen acht Phasen, den Zeilen und dem Merksatz. Speichert sie in IServ. Ihr braucht den Leitfaden in Teil B von Arbeitsblatt 5."
+    : "Löst zuerst die Aufgaben 1 bis 3. Dann könnt ihr euren Leitfaden als PDF herunterladen.";
+  if (!ok) { el.innerHTML = '<p class="warte">Löst zuerst die Aufgaben 1 bis 3. Dann steht hier euer Leitfaden.</p>'; return; }
+  el.innerHTML = `<div class="lf">${PH.map((ph, p) => `<div class="lfz"><div class="lnr">${p + 1}<span class="lze">Z. ${esc(S.von[p])}–${esc(S.bis[p])}</span></div><div><p class="lph">${esc(ph.n)}</p><p><b>Ziel:</b> ${esc(ph.ziel)}</p><p><b>So geht’s:</b> ${esc(ph.so)}</p></div></div>`).join("")}</div>
+    <label class="feld"><b>Merksatz</b><small>Den Merksatz schreibt ihr gemeinsam in der Klasse auf.</small><input type="text" id="merk" value="${esc(S.merk)}" placeholder="Merksatz"></label>
+    <label class="feld"><b>Zusatz für Schnelle</b><small>Deniz nennt den Preis in Zeile 17–18. Was sagt er vor dem Preis, was danach? Warum macht er das?</small><textarea id="zus" placeholder="Schreibt in ganzen Sätzen.">${esc(S.zus)}</textarea></label>
+    <label class="feld"><b>Partnerin oder Partner</b><small>Der Name steht mit auf dem Leitfaden.</small><input type="text" id="partner" value="${esc(S.partner)}" placeholder="Vor- und Nachname" autocomplete="off"></label>`;
+}
+
+/* ---------- Rückmeldung ---------- */
+function melde(n, okArr) {
+  const ok = okArr.filter(Boolean).length, fb = $("#fb" + n), sc = $("#sc" + n);
+  if (!S.v[n - 1]) { fb.innerHTML = ""; sc.innerHTML = ""; return; }
+  sc.innerHTML = `<span class="score">${ok} von ${N} richtig</span><span class="meter"><i style="width:${ok / N * 100}%"></i></span>`;
+  if (ok === N) {
+    fb.className = "fbx good";
+    fb.innerHTML = n === 1 ? '<b>Alle 8 richtig.</b> Weiter mit Aufgabe 2. <a class="btn ghost klein" href="#a2">Zu Aufgabe 2 ↓</a>'
+      : n === 2 ? '<b>Die Reihenfolge stimmt.</b> Weiter mit Aufgabe 3. <a class="btn ghost klein" href="#a3">Zu Aufgabe 3 ↓</a>'
+      : '<b>Alle Zeilen passen.</b> Euer Leitfaden ist fertig. <a class="btn ghost klein" href="#lf">Zum Leitfaden ↓</a>';
+  } else {
+    fb.className = "fbx bad";
+    const rest = N - ok;
+    fb.innerHTML = n === 1 ? `<b>${ok} von ${N} richtig.</b> ${rest === 1 ? "Eine Phase passt" : rest + " Phasen passen"} noch nicht. ${rest === 1 ? "Sie liegt" : "Sie liegen"} wieder zur Auswahl. Lest das Ziel noch einmal genau.`
+      : n === 2 ? `<b>${ok} von ${N} richtig.</b> ${rest === 1 ? "Eine Phase steht" : rest + " Phasen stehen"} noch an der falschen Stelle. Lest in Material 5 nach, was Deniz der Reihe nach macht.`
+      : `<b>${ok} von ${N} richtig.</b> Seht euch die markierten Phasen noch einmal an. Eine Zeile mehr oder weniger ist in Ordnung.`;
+  }
+}
+const fehler = (n, t) => { $("#err" + n).textContent = t; };
+
+function pruefen(n) {
+  if (n === 1 || n === 2) {
+    const wahl = n === 1 ? S.a : S.r, fest = n === 1 ? S.aOk : S.rOk, soll = k => n === 1 ? ORD_B[k] : k;
+    const offen = wahl.filter(x => x < 0).length;
+    if (offen) { fehler(n, n === 1 ? `Ordnet zuerst jeder Beschreibung eine Phase zu. Es ${offen === 1 ? "fehlt" : "fehlen"} noch ${offen}.` : `Füllt zuerst alle acht Stellen. Es ${offen === 1 ? "fehlt" : "fehlen"} noch ${offen}.`); return; }
+    const miss = new Set();
+    wahl.forEach((g, k) => { if (fest[k]) return; if (g === soll(k)) fest[k] = true; else { wahl[k] = -1; miss.add(k); } });
+    if (n === 1) { falsch1 = miss; akt1 = -1; } else { falsch2 = miss; akt2 = -1; }
+  } else {
+    const zahl = v => /^\d+$/.test(String(v).trim()) ? +v : NaN;
+    let offen = 0; falsch3 = {};
+    PH.forEach((ph, p) => {
+      if (S.zOk[p]) return;
+      const a = zahl(S.von[p]), b = zahl(S.bis[p]);
+      if (!(a >= 1 && a <= ZMAX && b >= 1 && b <= ZMAX)) { offen++; return; }
+      if (a > b) { falsch3[p] = "Die erste Zeile muss vor der letzten liegen."; return; }
+      const okA = Math.abs(a - ph.z[0]) <= 1, okB = Math.abs(b - ph.z[1]) <= 1;
+      if (okA && okB) return;
+      falsch3[p] = !okA && !okB ? "Anfang und Ende stimmen noch nicht." : !okA ? "Der Anfang stimmt noch nicht." : "Das Ende stimmt noch nicht.";
+    });
+    if (offen) { falsch3 = {}; fehler(3, `Tragt zuerst bei jeder Phase beide Zeilen ein (Zahlen von 1 bis ${ZMAX}). Es ${offen === 1 ? "fehlt" : "fehlen"} noch ${offen} ${offen === 1 ? "Phase" : "Phasen"}.`); return; }
+    PH.forEach((ph, p) => { if (!S.zOk[p] && !falsch3[p]) S.zOk[p] = true; });
+  }
+  fehler(n, ""); S.v[n - 1]++; sichern(); alles();
+}
+
+function alles() { bau1(); bau2(); bau3(); bauLf(); }
+function sicht(sel) { const b = $(sel); if (!b) return; try { b.focus({ preventScroll: true }); } catch (e) {} const k = b.closest(".karte"); if (k && k.scrollIntoView) k.scrollIntoView({ block: "nearest", behavior: "smooth" }); }
+
+/* ---------- Bedienung ---------- */
+document.addEventListener("click", e => {
+  let t;
+  if ((t = e.target.closest("[data-check]"))) { pruefen(+t.dataset.check); return; }
+  if ((t = e.target.closest("[data-setz1]"))) { if (akt1 < 0) return; const k = akt1; S.a[k] = +t.dataset.setz1; falsch1.delete(k); akt1 = naechste(S.a, S.aOk, k); fehler(1, ""); sichern(); bau1(); sicht("#a1q .karte.aktiv .wahl .schn"); return; }
+  if ((t = e.target.closest("[data-raus1]"))) { const k = +t.dataset.raus1; S.a[k] = -1; akt1 = k; fehler(1, ""); sichern(); bau1(); sicht("#a1q .karte.aktiv .wahl .schn"); return; }
+  if ((t = e.target.closest("[data-k1]"))) { const k = +t.dataset.k1; if (!S.aOk[k] && S.a[k] < 0 && akt1 !== k) { akt1 = k; bau1(); sicht("#a1q .karte.aktiv .wahl .schn"); } return; }
+  if ((t = e.target.closest("[data-setz2]"))) { if (akt2 < 0) return; const p = akt2; S.r[p] = +t.dataset.setz2; falsch2.delete(p); akt2 = naechste(S.r, S.rOk, p); fehler(2, ""); sichern(); bau2(); sicht("#a2q .karte.aktiv .wahl .schn"); return; }
+  if ((t = e.target.closest("[data-raus2]"))) { const p = +t.dataset.raus2; S.r[p] = -1; akt2 = p; fehler(2, ""); sichern(); bau2(); sicht("#a2q .karte.aktiv .wahl .schn"); return; }
+  if ((t = e.target.closest("[data-k2]"))) { const p = +t.dataset.k2; if (!S.rOk[p] && S.r[p] < 0 && akt2 !== p) { akt2 = p; bau2(); sicht("#a2q .karte.aktiv .wahl .schn"); } return; }
+  if (e.target.closest("#leseBtn")) { leseZu = !leseZu; $("#mit2").hidden = leseZu; const b = $("#leseBtn"); b.textContent = leseZu ? "Text einblenden" : "Text ausblenden"; b.setAttribute("aria-expanded", String(!leseZu)); return; }
+});
+document.addEventListener("input", e => {
+  const t = e.target;
+  if (t.dataset.von !== undefined || t.dataset.bis !== undefined) {
+    const art = t.dataset.von !== undefined ? "von" : "bis", p = +t.dataset[art];
+    S[art][p] = t.value.trim(); fehler(3, "");
+    if (falsch3[p]) { delete falsch3[p]; $("#zr" + p).classList.remove("falsch"); $("#zf" + p).textContent = ""; }
+    sichern();
+  } else if (t.id === "merk") { S.merk = t.value; sichern(); }
+  else if (t.id === "zus") { S.zus = t.value; sichern(); }
+  else if (t.id === "partner") { S.partner = t.value; sichern(); }
+});
+$("#reset").addEventListener("click", () => {
+  if (!confirmReset()) return;
+  S = leer(); sichern(); akt1 = akt2 = -1; falsch1 = new Set(); falsch2 = new Set(); falsch3 = {}; [1, 2, 3].forEach(n => fehler(n, "")); alles(); toast("Übung neu gestartet");
+  window.scrollTo({ top: 0 });
+});
+let resetArm = 0;
+function confirmReset() { /* zweimal klicken statt Dialog */
+  const b = $("#reset");
+  if (Date.now() - resetArm < 4000) { b.textContent = "Übung neu starten"; return true; }
+  resetArm = Date.now(); b.textContent = "Wirklich alles löschen? Nochmal klicken"; setTimeout(() => { b.textContent = "Übung neu starten"; }, 4000); return false;
+}
+function toast(t) { const e = $("#toast"); e.textContent = t; e.classList.add("on"); clearTimeout(toast.t); toast.t = setTimeout(() => e.classList.remove("on"), 2600); }
+
+/* ---------- Name ---------- */
+$("#meName").value = sessionStorage.getItem("kickloop:pp-name") || "";
+$("#meName").addEventListener("input", e => { try { sessionStorage.setItem("kickloop:pp-name", e.target.value); } catch (x) {} });
+const nameJetzt = () => ich() || $("#meName").value.trim();
+
+/* ---------- PDF (MiniPdf wie in uebungen/lf3-willenserklaerungen.html) ---------- */
+const PDF_W = {
+  r: [278,278,355,556,556,889,667,191,333,333,389,584,278,333,278,278,556,556,556,556,556,556,556,556,556,556,278,278,584,584,584,556,1015,667,667,722,722,667,611,778,722,278,500,667,556,833,722,778,667,778,722,667,611,722,667,944,667,667,611,278,278,278,469,556,333,556,556,500,556,556,278,556,556,222,222,500,222,833,556,556,556,556,333,500,278,556,500,722,500,500,500,334,260,334,584,761,556,0,222,556,333,1000,556,556,333,1000,667,333,1000,0,611,0,0,222,222,333,333,350,556,1000,333,1000,500,333,944,0,500,667,278,333,556,556,556,556,260,556,333,737,370,556,584,333,737,333,400,584,333,333,333,556,537,278,333,333,365,556,834,834,834,611,667,667,667,667,667,667,1000,722,667,667,667,667,278,278,278,278,722,722,778,778,778,778,778,584,778,722,722,722,722,667,667,611,556,556,556,556,556,556,889,500,556,556,556,556,278,278,278,278,556,556,556,556,556,556,556,584,611,556,556,556,556,500,556,500],
+  b: [278,333,474,556,556,889,722,238,333,333,389,584,278,333,278,278,556,556,556,556,556,556,556,556,556,556,333,333,584,584,584,611,975,722,722,722,722,667,611,778,722,278,556,722,611,833,722,778,667,778,722,667,611,722,667,944,667,667,611,333,278,333,584,556,333,556,611,556,611,556,333,611,611,278,278,556,278,889,611,611,611,611,389,556,333,611,556,778,556,556,500,389,280,389,584,761,556,0,278,556,500,1000,556,556,333,1000,667,333,1000,0,611,0,0,278,278,500,500,350,556,1000,333,1000,556,333,944,0,500,667,278,333,556,556,556,556,280,556,333,737,370,556,584,333,737,333,400,584,333,333,333,611,556,278,333,333,365,556,834,834,834,611,722,722,722,722,722,722,1000,722,667,667,667,667,278,278,278,278,722,722,778,778,778,778,778,584,778,722,722,722,722,667,667,611,556,556,556,556,556,556,889,556,556,556,556,556,278,278,278,278,611,611,611,611,611,611,611,584,611,611,611,611,611,556,611,556]
+};
+const PDF_SPEC = "€‚ƒ„…†‡ˆ‰Š‹ŒŽ‘’“”•–—˜™š›œžŸ", PDF_SPEC_C = [128,130,131,132,133,134,135,136,137,138,139,140,142,145,146,147,148,149,150,151,152,153,154,155,156,158,159];
+const PDF_SUB = { "ı": "i", "−": "-", "✓": "x", "★": "*", "→": "->", "↗": "", " ": " ", " ": " " };
+function pdfCodes(s) {
+  const out = [];
+  for (const ch of String(s)) {
+    if (PDF_SUB[ch] !== undefined) { for (const c of PDF_SUB[ch]) out.push(c.charCodeAt(0)); continue; }
+    const c = ch.codePointAt(0);
+    if ((c >= 32 && c < 127) || (c >= 160 && c < 256)) out.push(c);
+    else { const i = PDF_SPEC.indexOf(ch); out.push(i >= 0 ? PDF_SPEC_C[i] : 63); }
+  }
+  return out;
+}
+const pdfWidth = (s, size, bold) => pdfCodes(s).reduce((w, c) => w + (PDF_W[bold ? "b" : "r"][c - 32] || 0), 0) * size / 1000;
+function pdfWrap(s, w, size, bold) {
+  const lines = [];
+  for (const para of String(s).split("\n")) {
+    let cur = "";
+    for (const word of para.split(/ +/)) {
+      const t = cur ? cur + " " + word : word;
+      if (!cur || pdfWidth(t, size, bold) <= w) cur = t; else { lines.push(cur); cur = word; }
+    }
+    lines.push(cur);
+  }
+  return lines;
+}
+const pdfStr = s => pdfCodes(s).map(c => (c >= 32 && c < 127 && c !== 40 && c !== 41 && c !== 92) ? String.fromCharCode(c) : "\\" + c.toString(8).padStart(3, "0")).join("");
+class MiniPdf {
+  constructor() { this.pages = []; this.W = 595.28; this.H = 841.89; this.addPage(); }
+  addPage() { this.c = []; this.pages.push(this.c); }
+  col(hex) { const n = parseInt(hex.slice(1), 16); return [(n >> 16) & 255, (n >> 8) & 255, n & 255].map(v => (v / 255).toFixed(3)).join(" "); }
+  /* y = Grundlinie, von oben gemessen */
+  text(x, y, s, o = {}) {
+    const size = o.size || 10;
+    if (o.right) x -= pdfWidth(s, size, o.bold);
+    this.c.push(`BT ${this.col(o.color || "#2A2E31")} rg /${o.bold ? "F2" : "F1"} ${size} Tf 1 0 0 1 ${x.toFixed(2)} ${(this.H - y).toFixed(2)} Tm (${pdfStr(s)}) Tj ET`);
+  }
+  /* y = Oberkante, von oben gemessen */
+  rect(x, y, w, h, o = {}) {
+    let op = "";
+    if (o.fill) op += `${this.col(o.fill)} rg `;
+    if (o.stroke) op += `${this.col(o.stroke)} RG ${o.lw || 0.6} w `;
+    this.c.push(op + `${x.toFixed(2)} ${(this.H - y - h).toFixed(2)} ${w.toFixed(2)} ${h.toFixed(2)} re ${o.fill && o.stroke ? "B" : o.fill ? "f" : "S"}`);
+  }
+  line(x1, y1, x2, y2, o = {}) { this.c.push(`${this.col(o.color || "#2A2E31")} RG ${o.lw || 0.6} w ${x1.toFixed(2)} ${(this.H - y1).toFixed(2)} m ${x2.toFixed(2)} ${(this.H - y2).toFixed(2)} l S`); }
+  blob(title) {
+    const objs = [], n = this.pages.length;
+    objs[1] = "<< /Type /Catalog /Pages 2 0 R >>";
+    objs[2] = `<< /Type /Pages /Count ${n} /Kids [${this.pages.map((_, i) => `${5 + 2 * i} 0 R`).join(" ")}] >>`;
+    objs[3] = "<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>";
+    objs[4] = "<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>";
+    this.pages.forEach((c, i) => {
+      const stream = c.join("\n");
+      objs[5 + 2 * i] = `<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ${this.W} ${this.H}] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents ${6 + 2 * i} 0 R >>`;
+      objs[6 + 2 * i] = `<< /Length ${stream.length} >>\nstream\n${stream}\nendstream`;
+    });
+    const info = objs.length;
+    objs[info] = `<< /Title (${pdfStr(title)}) /Producer (Kickloop Arbeitsbereich) >>`;
+    let out = "%PDF-1.4\n";
+    const offs = [];
+    for (let i = 1; i < objs.length; i++) { offs[i] = out.length; out += `${i} 0 obj\n${objs[i]}\nendobj\n`; }
+    const xref = out.length;
+    out += `xref\n0 ${objs.length}\n0000000000 65535 f \n` + offs.slice(1).map(o => String(o).padStart(10, "0") + " 00000 n \n").join("");
+    out += `trailer\n<< /Size ${objs.length} /Root 1 0 R /Info ${info} 0 R >>\nstartxref\n${xref}\n%%EOF\n`;
+    return new Blob([out], { type: "application/pdf" });
+  }
+}
+
+function dateiName(n) {
+  return String(n || "").trim().replace(/ä/g, "ae").replace(/ö/g, "oe").replace(/ü/g, "ue").replace(/Ä/g, "Ae").replace(/Ö/g, "Oe").replace(/Ü/g, "Ue").replace(/ß/g, "ss").replace(/ı/g, "i").replace(/İ/g, "I")
+    .normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/\s+/g, "_").replace(/[^A-Za-z0-9_-]/g, "");
+}
+
+$("#dl").addEventListener("click", () => {
+  if (!fertig3()) { toast("Löst zuerst die Aufgaben 1 bis 3."); return; }
+  const name = nameJetzt(), partner = S.partner.trim();
+  const heute = new Date().toLocaleDateString("de-DE");
+  const P = new MiniPdf(), L = 50, R = P.W - 50, WD = R - L, BOT = P.H - 60;
+  const INK = "#383E42", MUT = "#6B7074", OR = "#E8A33D";
+  let y = 0, page = 1;
+  function kopf() {
+    P.rect(0, 0, P.W, 7, { fill: OR });
+    P.text(L, 40, "Kickloop", { size: 18, bold: true, color: INK });
+    P.text(R, 40, "Lernfeld 2 · Verkauf: Das Verkaufsgespräch", { size: 9, right: true, color: MUT });
+    P.line(L, 50, R, 50, { color: "#E7E3DC" });
+    y = 72;
+  }
+  function fuss() {
+    P.line(L, P.H - 42, R, P.H - 42, { color: "#E7E3DC" });
+    P.text(L, P.H - 30, "Kickloop · Phasen-Puzzle (Arbeitsblatt 5, Teil A)" + (name ? " · " + name : ""), { size: 8, color: MUT });
+    P.text(R, P.H - 30, "Seite " + page, { size: 8, right: true, color: MUT });
+  }
+  function platz(h) { if (y + h > BOT) { fuss(); P.addPage(); page++; kopf(); } }
+  function absatz(t, o = {}) {
+    const size = o.size || 10.5, lh = size * 1.35;
+    for (const ln of pdfWrap(t, o.w || WD, size, o.bold)) { platz(lh); y += lh; P.text(o.x || L, y - 3, ln, { size, bold: o.bold, color: o.color || INK }); }
+  }
+  function tabelle(cols, head, rows) {
+    const xs = [L]; cols.forEach(w => xs.push(xs[xs.length - 1] + w));
+    const zeile = (cells, kopfzeile) => {
+      const lines = cells.map((c, k) => pdfWrap(c.t ?? c, cols[k] - 10, 9.5, kopfzeile || !!c.b));
+      const h = Math.max(...lines.map(l => l.length)) * 12.5 + 9;
+      platz(h);
+      if (kopfzeile) P.rect(L, y, WD, h, { fill: "#F3D9A4" });
+      lines.forEach((ls, k) => ls.forEach((ln, m) => P.text(xs[k] + 5, y + 14 + m * 12.5, ln, { size: 9.5, bold: kopfzeile || !!cells[k].b, color: cells[k].c || INK })));
+      P.rect(L, y, WD, h, { stroke: INK, lw: 0.6 });
+      xs.slice(1, -1).forEach(x => P.line(x, y, x, y + h, { color: INK }));
+      y += h;
+    };
+    zeile(head, true); rows.forEach(r => zeile(r, false));
+  }
+  kopf();
+  P.text(L, y + 14, "Leitfaden: So läuft ein gutes Verkaufsgespräch", { size: 17, bold: true, color: INK }); y += 26;
+  P.text(L, y + 8, "Arbeitsblatt 5 · Teil A: Das Phasen-Puzzle · Zeilen aus Material 5", { size: 9.5, color: MUT }); y += 26;
+  P.text(L, y, "Name:", { size: 10.5, bold: true }); P.text(L + 38, y, (name || "______________________________") + (partner ? " und " + partner : ""), { size: 10.5 });
+  P.text(R - 120, y, "Datum:", { size: 10.5, bold: true }); P.text(R - 76, y, heute, { size: 10.5 }); y += 20;
+  tabelle([78, 122, WD - 200], ["Nr. · Zeilen", "Phase", "Ziel und So geht’s"], PH.map((ph, p) => [
+    { t: `${p + 1}\nZ. ${S.von[p]}–${S.bis[p]}`, b: true }, { t: ph.n, b: true }, `Ziel: ${ph.ziel}\nSo geht’s: ${ph.so}`]));
+  y += 16;
+  absatz("Merksatz", { size: 12.5, bold: true, color: OR }); y += 2;
+  if (S.merk.trim()) absatz(S.merk.trim());
+  else { platz(22); y += 20; P.line(L, y, R, y, { color: MUT }); }
+  if (S.zus.trim()) {
+    y += 14;
+    absatz("Zusatz für Schnelle", { size: 12.5, bold: true, color: OR }); y += 2;
+    absatz("Deniz nennt den Preis in Zeile 17–18. Was sagt er vor dem Preis, was danach? Warum macht er das?", { color: MUT }); y += 4;
+    absatz(S.zus.trim());
+  }
+  fuss();
+  const fn = `Leitfaden_Verkaufsgespraech${name ? "_" + dateiName(name) : ""}.pdf`;
+  const blob = P.blob("Leitfaden: So läuft ein gutes Verkaufsgespräch" + (name ? " - " + name : ""));
+  const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = fn; document.body.appendChild(a); a.click();
+  setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+  toast("Gespeichert: " + fn);
+});
+
+$("#mit1").innerHTML = mitHtml();
+alles();
+</script>
+</body></html>
