@@ -137,12 +137,12 @@ details ul{margin:4px 0 0;padding-left:1.2em;display:grid;gap:4px}
     return m;
   }
   /* Testwerte: SC[0] sieht man im Ausschnitt, alle vier dienen der Prüfung (verschiedene Werte, damit Zufallstreffer ausscheiden) */
-  var SC = [{ p: 12.5, q: 40, r: 0.10, s: 0.02, v: 18 }, { p: 7.8, q: 125, r: 0.15, s: 0.03, v: 42.5 }, { p: 249, q: 6, r: 0.05, s: 0.015, v: 9.9 }, { p: 3.35, q: 480, r: 0.20, s: 0.025, v: 57 }];
+  var SC = [{ p: 54, q: 120, r: 0.10, s: 0.02, v: 220 }, { p: 7.8, q: 125, r: 0.15, s: 0.03, v: 42.5 }, { p: 249, q: 6, r: 0.05, s: 0.015, v: 9.9 }, { p: 3.35, q: 480, r: 0.20, s: 0.025, v: 57 }];
   var TESTS = [
-    { id: "t1", spalte: "B", name: "Lieferant 1", v: { p: 12.5, q: 40, r: 0.10, s: 0.02, v: 18 }, hinweis: "" },
-    { id: "t2", spalte: "D", name: "Lieferant 2", v: { p: 11.9, q: 40, r: 0.05, s: 0.03, v: 25 }, hinweis: "" },
-    { id: "t3", spalte: "F", name: "Lieferant 3", v: { p: 13.2, q: 40, r: 0.15, s: 0, v: 0 }, hinweis: "Kein Skonto und frei Haus: Trage 0 % und 0,00 € ein." },
-    { id: "t4", spalte: "B", name: "Stresstest", v: { p: 12.5, q: 100, r: 0.10, s: 0.02, v: 18 }, hinweis: "Ändere in Spalte B nur die Menge (B5) auf 100. Alles andere bleibt wie bei Lieferant 1." }
+    { id: "t1", spalte: "B", name: "Solenwerk Sneaker GmbH", v: { p: 54, q: 120, r: 0.10, s: 0.02, v: 220 }, hinweis: "Lieferkosten: Fracht 180 € + Verpackung 40 € = 220 €." },
+    { id: "t2", spalte: "D", name: "StreetStep Distribution GmbH", v: { p: 49.5, q: 120, r: 0.05, s: 0.03, v: 180 }, hinweis: "Lieferkosten: 1,50 € Fracht je Paar × 120 Paar = 180 €." },
+    { id: "t3", spalte: "F", name: "Urban Sole Import KG", v: { p: 58, q: 120, r: 0.15, s: 0, v: 0 }, hinweis: "Kein Skonto und frei Haus: Trage 0 % und 0,00 € ein." },
+    { id: "t4", spalte: "B", name: "Stresstest", v: { p: 54, q: 100, r: 0.10, s: 0.02, v: 220 }, hinweis: "Ändere in Spalte B nur die Menge (B5) auf 100. Alles andere bleibt wie bei Solenwerk." }
   ];
 
   /* ---------- Formel-Prüfung: ein kleiner Excel-Rechner ---------- */
@@ -270,7 +270,7 @@ details ul{margin:4px 0 0;padding-left:1.2em;display:grid;gap:4px}
     ROWS.forEach(function (r) {
       var n = r[0];
       h += '<tr><td class="rn">' + n + '</td><td class="lab">' + esc(r[1]) + "</td>";
-      if (n === 3) { h += '<td class="nm" colspan="2">Lupine Lighting Systems GmbH</td></tr>'; return; }
+      if (n === 3) { h += '<td class="nm" colspan="2">Solenwerk Sneaker GmbH</td></tr>'; return; }
       var zellen = n === 7 ? ["B7", "C7"] : n === 9 ? ["B9", "C9"] : ["B" + n];
       zellen.forEach(function (a) {
         var istIn = INPUTS.indexOf(a) >= 0, cls = "c", txt;
@@ -380,7 +380,7 @@ details ul{margin:4px 0 0;padding-left:1.2em;display:grid;gap:4px}
         '<div class="rw"><div><b>Du änderst später nur</b><span>Stückpreis, Menge, Rabatt, Skonto und Lieferkosten</span></div><div><b>Excel rechnet</b><span>Gesamtpreis, Rabatt, Skonto und am Ende den Bezugspreis</span></div><div><b>Dauer</b><span>etwa 30 bis 40 Minuten</span></div></div>' +
         '<h3>Lade die Vorlage und öffne sie</h3>' +
         '<div class="sub"><a class="sbtn go" href="' + VORLAGE + '" download>Excel-Vorlage herunterladen</a></div>' +
-        '<div class="excel"><ol><li>Speichere die Datei sofort in IServ unter „Dateien“. Am nächsten PC ist sie sonst weg.</li><li>Öffne sie mit Excel. Das Tabellenblatt <b>Quantitativer Angebotsvergleich</b> ist das erste.</li><li>Du siehst drei Lieferanten nebeneinander: Spalte B (Lupine Lighting Systems GmbH), Spalte D (TALAMP KG) und Spalte F (Lichthaus Berlin OHG).</li></ol></div>' +
+        '<div class="excel"><ol><li>Speichere die Datei sofort in IServ unter „Dateien“. Am nächsten PC ist sie sonst weg.</li><li>Öffne sie mit Excel. Das Tabellenblatt <b>Quantitativer Angebotsvergleich</b> ist das erste.</li><li>Du siehst drei Lieferanten nebeneinander: Spalte B (Solenwerk Sneaker GmbH), Spalte D (StreetStep Distribution GmbH) und Spalte F (Urban Sole Import KG). Es sind die drei Angebote für den Einkauf der Sneaker „Retro Court“.</li></ol></div>' +
         '<p>Auf dieser Seite siehst du in einem Kasten immer einen kleinen <b>Ausschnitt</b> der Vorlage. Dort übst du jede Formel, und die Übung prüft sie. Danach trägst du sie in deine echte Datei ein.</p>' +
         xlBox(0, "Ich habe die Vorlage heruntergeladen, in IServ gespeichert und geöffnet.");
     },
@@ -402,9 +402,9 @@ details ul{margin:4px 0 0;padding-left:1.2em;display:grid;gap:4px}
         h += "<h3>2 · Jetzt in deiner Excel-Datei</h3>";
         h += '<div class="excel"><ol>' +
           "<li>Färbe die fünf Eingabezellen <b>gelb</b>: erste Zelle anklicken, mit gedrückter <kbd>Strg</kbd>-Taste die anderen anklicken, dann <b>Start → Füllfarbe</b>. Dann sieht jeder, wo man etwas ändern darf.</li>" +
-          "<li>Die Bestellmenge (B5) steht in der Vorlage im Euro-Format. Markiere B5 und wähle bei <b>Start → Zahlenformat</b> den Eintrag <b>Zahl</b>. Sonst steht bei 40 Stück „40,00 €“.</li>" +
-          "<li>Trage diese <b>Testwerte</b> in Spalte B ein: Stückpreis (B4) <b>12,50</b> · Menge (B5) <b>40</b> · Rabatt (B7) <b>10%</b> · Skonto (B9) <b>2%</b> · Lieferkosten (B11) <b>18</b></li></ol></div>";
-        h += "<p>Mit diesen Testwerten rechnest du jetzt immer weiter. Am Ende muss <b>459,00 €</b> herauskommen.</p>";
+          "<li>Die Bestellmenge (B5) steht in der Vorlage im Euro-Format. Markiere B5 und wähle bei <b>Start → Zahlenformat</b> den Eintrag <b>Zahl</b>. Sonst steht bei 120 Paar „120,00 €“.</li>" +
+          "<li>Trage diese <b>Testwerte</b> in Spalte B ein: Stückpreis (B4) <b>54</b> · Menge (B5) <b>120</b> · Rabatt (B7) <b>10%</b> · Skonto (B9) <b>2%</b> · Lieferkosten (B11) <b>220</b></li></ol></div>";
+        h += "<p>Mit diesen Testwerten rechnest du jetzt immer weiter. Das sind die Zahlen aus dem Angebot der Solenwerk Sneaker GmbH. Am Ende muss <b>5.935,36 €</b> herauskommen.</p>";
         h += xlBox(1, "Ich habe die fünf Zellen gelb gefärbt, B5 als Zahl formatiert und die Testwerte eingetragen.");
       }
       return h;
@@ -433,7 +433,7 @@ details ul{margin:4px 0 0;padding-left:1.2em;display:grid;gap:4px}
   /* 3 bis 8 Formeln */
   STEPS.push(formelSchritt({
     idx: 2, addr: "B6", kurz: "Gesamtpreis", titel: "Listeneinkaufspreis für die Gesamtstückzahl",
-    warum: "Das Angebot nennt den Preis für <b>ein</b> Stück. Du bestellst aber 40 Stück. Der Gesamtpreis soll sich von selbst ändern, wenn sich Preis oder Menge ändern. Dafür brauchst du eine Formel statt einer festen Zahl.",
+    warum: "Das Angebot nennt den Preis für <b>ein</b> Stück. Du bestellst aber 120 Paar. Der Gesamtpreis soll sich von selbst ändern, wenn sich Preis oder Menge ändern. Dafür brauchst du eine Formel statt einer festen Zahl.",
     merke: "<p><b>Merke:</b> Eine Formel beginnt in Excel immer mit <kbd>=</kbd>. Danach kommen Zellen und Rechenzeichen: <kbd>+</kbd> plus, <kbd>-</kbd> minus, <kbd>*</kbd> mal, <kbd>/</kbd> geteilt.</p>",
     rechenweg: "Listeneinkaufspreis pro Stück × Bestellmenge",
     tipps: ["Du brauchst zwei Zellen aus den gelben Eingaben: den Preis pro Stück und die Menge.", "Preis pro Stück steht in B4, die Menge in B5. Die beiden werden multipliziert.", "Die Formel hat die Form <code>=Zelle*Zelle</code> mit B4 und B5."],
@@ -490,7 +490,7 @@ details ul{margin:4px 0 0;padding-left:1.2em;display:grid;gap:4px}
   /* 9 Kopieren */
   var MC = [
     { id: "q1", frage: "Du kopierst Zelle B6 (<code>=B4*B5</code>) in Zelle D6. Was steht danach in D6?", opt: [["=B4*B5", "Excel übernimmt die Formel nicht Buchstabe für Buchstabe. Es verschiebt die Zellen mit: ein normaler Bezug wandert mit."], ["=D4*D5", ""], ["=C4*C5", "Fast. Von Spalte B nach D sind es zwei Spalten, nicht eine."], ["=D6*D4", "Der Bezug auf sich selbst wäre ein Zirkelbezug. Excel verschiebt nur die Spalte."]], richtig: 1, erkl: "Die Formel wandert mit: B wird zu D, also <code>=D4*D5</code>. Das nennt man <b>relativen Bezug</b>." },
-    { id: "q2", frage: "Du kopierst den Bereich B4:C12 nach F4. In C7 stand <code>=B6*B7</code>. Was steht danach in G7?", opt: [["=B6*B7", "Dann würde Lieferant 3 mit den Zahlen von Lieferant 1 rechnen."], ["=G6*G7", "Die Formel wandert um vier Spalten, von C nach G. Der Bezug in der Formel wandert genauso: B wird zu F."], ["=F6*F7", ""], ["=E6*E7", "E wäre nur zwei Spalten weiter. Von B nach F sind es vier."]], richtig: 2, erkl: "Alles wandert um vier Spalten: B6 wird zu F6, B7 zu F7. Jeder Lieferant rechnet also mit seinen eigenen Zahlen." }
+    { id: "q2", frage: "Du kopierst den Bereich B4:C12 nach F4. In C7 stand <code>=B6*B7</code>. Was steht danach in G7?", opt: [["=B6*B7", "Dann würde Urban Sole mit den Zahlen von Solenwerk rechnen."], ["=G6*G7", "Die Formel wandert um vier Spalten, von C nach G. Der Bezug in der Formel wandert genauso: B wird zu F."], ["=F6*F7", ""], ["=E6*E7", "E wäre nur zwei Spalten weiter. Von B nach F sind es vier."]], richtig: 2, erkl: "Alles wandert um vier Spalten: B6 wird zu F6, B7 zu F7. Jeder Lieferant rechnet also mit seinen eigenen Zahlen." }
   ];
   STEPS.push({
     kurz: "Kopieren", titel: "Formeln auf die anderen Lieferanten kopieren",
@@ -538,7 +538,7 @@ details ul{margin:4px 0 0;padding-left:1.2em;display:grid;gap:4px}
     g.push([m.B6 - m.B6 * v.s + v.v, "Der Rabatt wurde nicht abgezogen. Prüfe B8."]);
     g.push([m.B6 * (1 - v.r - v.s) + v.v, "Rabatt und Skonto wurden zusammengezählt. Skonto rechnet man erst vom Preis nach dem Rabatt."]);
     g.push([m.B6 + v.v, "Es sieht aus, als wären Rabatt und Skonto nicht abgezogen worden. Prüfe die Eingaben in B7 und B9."]);
-    if (t.id === "t4") g.unshift([model(TESTS[0].v).B12, "Du hast das Ergebnis von Lieferant 1 bekommen. Hast du die Menge in B5 wirklich auf 100 gesetzt? Steckt in einer Zelle vielleicht eine feste Zahl statt einer Formel?"]);
+    if (t.id === "t4") g.unshift([model(TESTS[0].v).B12, "Du hast das Ergebnis von Solenwerk mit 120 Paar bekommen. Hast du die Menge in B5 wirklich auf 100 gesetzt? Steckt in einer Zelle vielleicht eine feste Zahl statt einer Formel?"]);
     for (var i = 0; i < g.length; i++) if (Math.abs(g[i][0] - x) <= 0.011 && Math.abs(g[i][0] - richtig) > 0.011) return g[i][1];
     return "Vergleiche deine Eingaben Zelle für Zelle mit der Tabelle. Danach prüfe die Formeln in B6 bis B12 mit einem Klick in die Zelle.";
   }
@@ -553,14 +553,14 @@ details ul{margin:4px 0 0;padding-left:1.2em;display:grid;gap:4px}
         h += "<tr><td><b>" + t.name + "</b><br>Spalte " + t.spalte + "</td><td>" + EUR.format(v.p) + "</td><td>" + v.q + "</td><td>" + fmt("B7", v.r) + "</td><td>" + fmt("B9", v.s) + "</td><td>" + EUR.format(v.v) + '</td><td><input type="text" inputmode="decimal" data-t="' + t.id + '" aria-label="Bezugspreis ' + t.name + '" value="' + esc(ST.tests[t.id] || "") + '"' + (ok ? ' class="ok" disabled' : "") + '> <button type="button" class="sbtn go klein" data-tp="' + t.id + '"' + (ok ? " disabled" : "") + ">" + (ok ? "✓" : "Prüfen") + '</button><span class="msg" id="m-' + t.id + '" role="status" aria-live="polite">' + (ok ? "Stimmt." : (t.hinweis ? esc(t.hinweis) : "")) + "</span></td></tr>";
       });
       h += "</tbody></table></div>";
-      h += "<p>Du kannst Euro und Komma mitschreiben, zum Beispiel <code>463,63 €</code>. Excel zeigt zwei Nachkommastellen an.</p>";
+      h += "<p>Du kannst Euro und Komma mitschreiben, zum Beispiel <code>5.653,71 €</code>. Excel zeigt zwei Nachkommastellen an.</p>";
       h += '<details><summary>Mein Ergebnis weicht ab. Was prüfe ich?</summary><ul><li>Steht der <b>Prozentsatz</b> richtig? 10% oder 10, aber nicht 0,10%.</li><li>Steht in einer Eingabezelle noch ein <b>Text</b> oder ein Leerzeichen? Zahlen stehen rechtsbündig in der Zelle.</li><li>Klicke in B6 bis B12 und schau in die <b>Formelleiste</b>: Steht dort eine Formel oder eine feste Zahl?</li><li>In Spalte D und F: Rechnen die Formeln mit der <b>eigenen</b> Spalte? Prüfe zum Beispiel F9.</li><li>Zeigt Excel <b>#####</b>? Dann ist die Spalte zu schmal. Doppelklick auf die Spaltenkante.</li></ul></details>';
       var drei = TESTS.slice(0, 3).every(function (t) { return ST.testOk[t.id]; });
       if (drei) {
         var m = TESTS.slice(0, 3).map(function (t) { return model(t.v).B12; });
         h += "<h3>Welches Angebot ist am günstigsten?</h3>";
-        h += '<fieldset><legend>Vergleiche die drei Bezugspreise in Zeile 12.</legend>' + ["Lieferant 1 (Spalte B)", "Lieferant 2 (Spalte D)", "Lieferant 3 (Spalte F)"].map(function (n, i) { return '<label class="opt' + (ST.guenstig && i === 2 ? " richtig" : "") + '"><input type="radio" name="g" value="' + i + '"' + (ST.guenstig ? " disabled" : "") + (ST.guenstig && i === 2 ? " checked" : "") + "> " + n + "</label>"; }).join("") + "</fieldset>";
-        h += '<div class="sub">' + (ST.guenstig ? "" : '<button type="button" class="sbtn go klein" id="gpr">Antwort prüfen</button>') + '</div><div id="fb" class="fb' + (ST.guenstig ? " ok" : "") + '" role="status" aria-live="polite">' + (ST.guenstig ? "<b>Richtig.</b> Lieferant 3 hat den höchsten Listenpreis, ist durch 15 % Rabatt und die kostenlose Lieferung mit " + EUR.format(m[2]) + " aber am günstigsten. Das siehst du nur mit der Kalkulation." : "") + "</div>";
+        h += '<fieldset><legend>Vergleiche die drei Bezugspreise in Zeile 12.</legend>' + ["Solenwerk Sneaker GmbH (Spalte B)", "StreetStep Distribution GmbH (Spalte D)", "Urban Sole Import KG (Spalte F)"].map(function (n, i) { return '<label class="opt' + (ST.guenstig && i === 1 ? " richtig" : "") + '"><input type="radio" name="g" value="' + i + '"' + (ST.guenstig ? " disabled" : "") + (ST.guenstig && i === 1 ? " checked" : "") + "> " + n + "</label>"; }).join("") + "</fieldset>";
+        h += '<div class="sub">' + (ST.guenstig ? "" : '<button type="button" class="sbtn go klein" id="gpr">Antwort prüfen</button>') + '</div><div id="fb" class="fb' + (ST.guenstig ? " ok" : "") + '" role="status" aria-live="polite">' + (ST.guenstig ? "<b>Richtig.</b> StreetStep hat den niedrigsten Listenpreis und 3 % Skonto. Trotz Fracht ist das Angebot mit " + EUR.format(m[1]) + " am günstigsten. Urban Sole gibt 15 % Rabatt und liefert frei Haus, liegt aber mit " + EUR.format(m[2]) + " wegen des hohen Listenpreises darüber. Das siehst du nur mit der Kalkulation." : "") + "</div>";
       }
       return h;
     },
@@ -570,7 +570,7 @@ details ul{margin:4px 0 0;padding-left:1.2em;display:grid;gap:4px}
           var id = b.getAttribute("data-tp"), t = TESTS.filter(function (x) { return x.id === id; })[0], inp = q('input[data-t="' + id + '"]'), msg = q("#m-" + id);
           var x = parseDE(inp.value);
           ST.tests[id] = inp.value; sichern();
-          if (isNaN(x)) { msg.textContent = "Schreibe eine Zahl, zum Beispiel 463,63"; return; }
+          if (isNaN(x)) { msg.textContent = "Schreibe eine Zahl, zum Beispiel 5653,71"; return; }
           var soll = model(t.v).B12;
           if (Math.abs(x - soll) <= 0.011) { ST.testOk[id] = true; sichern(); render(true); return; }
           msg.textContent = falschGrund(t, x);
@@ -585,7 +585,7 @@ details ul{margin:4px 0 0;padding-left:1.2em;display:grid;gap:4px}
       if (g) g.addEventListener("click", function () {
         var s = q('input[name="g"]:checked');
         if (!s) { say("Wähle zuerst eine Antwort.", "no"); return; }
-        if (s.value === "2") { ST.guenstig = true; sichern(); render(true); }
+        if (s.value === "1") { ST.guenstig = true; sichern(); render(true); }
         else say("<b>Noch nicht.</b> Vergleiche die Bezugspreise in Zeile 12, nicht die Listenpreise in Zeile 4.", "no");
       });
     }
@@ -613,8 +613,8 @@ details ul{margin:4px 0 0;padding-left:1.2em;display:grid;gap:4px}
       if (z) z.addEventListener("click", function () {
         var t = q("#zin").value; ST.zusatz = t; sichern();
         try {
-          var ok = [[459, 463.634, 448.8], [100, 90, 95], [10, 20, 5], [7, 7, 3]].every(function (s) { var r = evalFormel(t, { B12: s[0], D12: s[1], F12: s[2] }); return Math.abs(r.v - Math.min(s[0], s[1], s[2])) < 1e-9; });
-          if (ok) say("<b>Richtig.</b> <code>MIN</code> sucht den kleinsten Wert. Mit den Testwerten zeigt B14 jetzt " + EUR.format(448.8) + ", das ist Lieferant 3.", "ok");
+          var ok = [[5935.36, 5653.71, 5916], [100, 90, 95], [10, 20, 5], [7, 7, 3]].every(function (s) { var r = evalFormel(t, { B12: s[0], D12: s[1], F12: s[2] }); return Math.abs(r.v - Math.min(s[0], s[1], s[2])) < 1e-9; });
+          if (ok) say("<b>Richtig.</b> <code>MIN</code> sucht den kleinsten Wert. Mit den Testwerten zeigt B14 jetzt " + EUR.format(5653.71) + ", das ist StreetStep.", "ok");
           else say("<b>Noch nicht.</b> Die Formel soll mit den drei Bezugspreisen B12, D12 und F12 rechnen und den kleinsten ausgeben, zum Beispiel mit der Funktion MIN.", "no");
         } catch (e) { say("<b>Noch nicht.</b> " + esc(e.m || "Diese Formel kann Excel so nicht lesen."), "no"); }
       });
