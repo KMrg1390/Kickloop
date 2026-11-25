@@ -5,6 +5,7 @@
   --lime:#C7F105; --lime-ink:#3B4F00; --lime-soft:#E9F5B8;
   --lav:#E7E0EC; --lav-ink:#5B4A6E;
   --orange-soft:#FFDFC0; --orange-ink:#8A3A00;
+  --gelb-soft:#FFF08A; --gelb-ink:#5C4B00;
   --display:"Archivo","Arial Narrow",Arial,sans-serif; --body:"Hubballi","Segoe UI",Arial,sans-serif; --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
 }
 @media (prefers-color-scheme:dark){:root{
@@ -13,6 +14,7 @@
   --lime-ink:#D3F542; --lime-soft:#2E3814;
   --lav:#342E3B; --lav-ink:#CDBFE0;
   --orange-soft:#47280F; --orange-ink:#FFB57A;
+  --gelb-soft:#4A4210; --gelb-ink:#FFE866;
 }}
 *{box-sizing:border-box}
 body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:18px;line-height:1.45;padding-inline:clamp(16px,3vw,40px);padding-block:0 48px}
@@ -50,6 +52,7 @@ footer{margin-top:56px;padding-top:18px;border-top:1px solid var(--sand);color:v
 .ucard .stype{font-family:var(--display);font-stretch:100%;font-weight:700;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--lime-ink)}
 /* Übung: Bezeichnung orange hinterlegt (nur das Schild, nicht die ganze Kachel), wie Material grün (2026-11-25) */
 .ucard .stype.uebung{justify-self:start;background:var(--orange-soft);color:var(--orange-ink);border-radius:999px;padding:1px 10px}
+.ucard .stype.quiz{justify-self:start;background:var(--gelb-soft);color:var(--gelb-ink);border-radius:999px;padding:1px 10px}
 /* Hilfe, Zusatz und Material gehören zu einem Schritt und haben keine eigene Nummer */
 .sx{display:grid;gap:8px}
 .sx .ucard{border-style:dashed;padding:10px 14px}
