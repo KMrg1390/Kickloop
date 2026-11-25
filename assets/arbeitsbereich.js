@@ -29,6 +29,11 @@
   var HOME = "/arbeitsbereich/";
   var ICON_AB = "/assets/icon-arbeitsbereich.svg", ICON_WEB = "/assets/icon-webseite.svg";
   var manual = !!(document.currentScript && document.currentScript.getAttribute("data-mode") === "manual");
+  /* Seiten, die bewusst in einem eigenen Tab laufen (z. B. der Excel-Kurs): data-tab="eigen".
+     Sie nehmen dem Arbeitsbereich-Tab den Namen nicht weg. Der Rückweg wechselt in den Arbeitsbereich-Tab (data-zurueck, data-zurueck-titel). */
+  var eigenerTab = !!(document.currentScript && document.currentScript.getAttribute("data-tab") === "eigen");
+  var zurueckHref = (document.currentScript && document.currentScript.getAttribute("data-zurueck")) || HOME;
+  var zurueckTitel = (document.currentScript && document.currentScript.getAttribute("data-zurueck-titel")) || "Arbeitsbereich";
   var path = location.pathname;
   var THEMA_RE = /^\/lf[0-9]+\/[^\/]+\.html$/;
   var isHome = /^\/arbeitsbereich\/?(index\.html)?$/.test(path);
@@ -126,7 +131,8 @@
       try { var u = new URL(document.referrer); if (u.origin === location.origin) ref = u.pathname; } catch (e) {}
       var refIstThema = THEMA_RE.test(ref);
       if (!(thema && thema.href && thema.href === ref)) thema = refIstThema ? { href: ref, titel: "" } : null;
-      if (isHome) links = '<span class="kl-here">Arbeitsbereich</span>';
+      if (eigenerTab) links = '<a class="kl-back" href="' + esc(zurueckHref) + '" target="' + AB + '" title="Wechselt in den Tab Arbeitsbereich">← ' + esc(zurueckTitel) + ' ↗</a>';
+      else if (isHome) links = '<span class="kl-here">Arbeitsbereich</span>';
       else if (isThema || !thema) links = '<a class="kl-back" href="' + HOME + '">← Arbeitsbereich</a>';
       else links = '<a class="kl-back" href="' + esc(thema.href) + '" title="Zurück zum Thema">← ' + esc(thema.titel || "Zurück zum Thema") + '</a>';
       bar.innerHTML = links + '<span class="kl-sp"></span><button type="button" class="kl-ich" title="Dein Name"></button>' +
@@ -145,7 +151,7 @@
 
   function an(titel) {
     modus = "ab";
-    try { window.name = AB; } catch (e) {}
+    if (!eigenerTab) { try { window.name = AB; } catch (e) {} }
     document.documentElement.classList.add("kl-ab");
     document.documentElement.classList.remove("kl-web");
     icon(ICON_AB);
@@ -234,6 +240,7 @@
     knopf.className = "sbtn" + (laden ? " laden" : "");
     knopf.setAttribute("href", href);
     if (ziel) { knopf.setAttribute("target", ziel); knopf.setAttribute("data-schritt", titelVon(k)); }
+    if (a.getAttribute("rel")) knopf.setAttribute("rel", a.getAttribute("rel"));
     if (laden) { knopf.setAttribute("download", a.getAttribute("download") || ""); knopf.setAttribute("data-datei", href.split("/").pop()); }
     knopf.textContent = laden ? "Herunterladen" : ziel === WEB ? "Zur Webseite ↗" : "Starten";
     knopf.setAttribute("aria-label", knopf.textContent.replace(" ↗", "") + ": " + titelVon(k));

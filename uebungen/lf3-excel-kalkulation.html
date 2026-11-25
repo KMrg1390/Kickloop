@@ -1,0 +1,671 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Methodische Vertiefung: Excelkalkulation · Arbeitsbereich Kickloop</title>
+<link rel="stylesheet" href="/assets/schriften.css">
+<link rel="stylesheet" href="/assets/unterseite.css">
+<link rel="stylesheet" href="/assets/arbeitsbereich.css">
+<link rel="icon" href="/assets/icon-arbeitsbereich.svg" type="image/svg+xml">
+<script src="/assets/arbeitsbereich.js" defer data-tab="eigen" data-zurueck="/lf3/angebotsvergleich.html" data-zurueck-titel="Angebotsvergleich"></script>
+<style>
+/* Methodische Vertiefung: Excelkalkulation (2026-11-25). Farben und Schriften kommen aus unterseite.css. */
+main{max-width:980px}
+.kurs{margin-top:22px}
+.chips{display:flex;gap:8px;overflow-x:auto;margin:0;padding:4px 2px 12px;list-style:none;scroll-snap-type:x proximity}
+.chips li{flex:none;scroll-snap-align:start}
+.chip{display:inline-flex;align-items:center;gap:8px;min-height:44px;border:2px solid var(--sand);background:var(--surface);color:var(--ink);border-radius:999px;padding:4px 14px 4px 5px;font:700 .9rem/1.1 var(--display);cursor:pointer;white-space:nowrap}
+.chip i{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:var(--sand-2);font-style:normal;font-size:.9rem}
+.chip.done i{background:#000;color:#C7F105}
+.chip[aria-current="step"]{background:#C7F105;border-color:#000;color:#000}
+.chip[aria-current="step"] i{background:#000;color:#C7F105}
+.chip:disabled{opacity:.55;cursor:not-allowed}
+@media (max-width:700px){.chip span{display:none}.chip{padding:4px}.chip[aria-current="step"]{padding-right:14px}.chip[aria-current="step"] span{display:inline}}
+.karte{background:var(--surface);border:1px solid var(--sand);border-radius:14px;padding:22px 24px;display:grid;gap:16px}
+.karte h2{margin:0;font-size:1.45rem}
+.karte h3{font-size:1rem;margin:0 0 6px}
+.karte p{margin:0;max-width:70ch}
+.kn{font:700 .75rem/1 var(--display);letter-spacing:.1em;text-transform:uppercase;color:var(--lime-ink)}
+.merke{background:var(--lime-soft);border-left:4px solid var(--lime-ink);border-radius:10px;padding:10px 14px;max-width:70ch}
+.merke b{font-family:var(--display)}
+.merke p+p{margin-top:6px}
+.excel{background:var(--paper);border:1px dashed var(--ink-2);border-radius:12px;padding:12px 16px;max-width:70ch}
+.excel ol,.excel ul{margin:0;padding-left:1.3em;display:grid;gap:5px}
+kbd{font-family:var(--mono);font-size:.82em;background:var(--surface);border:1px solid var(--ink-2);border-bottom-width:2px;border-radius:6px;padding:0 6px;white-space:nowrap}
+code,.f{font-family:var(--mono);font-size:.88em;background:var(--sand-2);border-radius:6px;padding:1px 6px;white-space:nowrap}
+.legende{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:.9rem;color:var(--ink-2)}
+.legende span::before{content:"";display:inline-block;width:14px;height:14px;border:1px solid var(--ink-2);border-radius:3px;margin-right:6px;vertical-align:-2px;background:var(--surface)}
+.legende .l-in::before{background:var(--amber-soft)}
+.legende .l-tgt::before{background:var(--lime-soft);border:2px solid var(--lime-ink)}
+.rw{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.rw>div{background:var(--sand-2);border-radius:12px;padding:10px 14px}
+.rw b{display:block;font-family:var(--display);font-size:.95rem}
+.rw span{font-size:.95rem;color:var(--ink-2)}
+/* Excel-Ausschnitt */
+.xl{border:1px solid var(--ink-2);border-radius:10px;overflow:hidden;background:var(--surface)}
+.fx{display:flex;flex-wrap:wrap;align-items:center;gap:8px;border-bottom:1px solid var(--sand);padding:8px;background:var(--sand-2)}
+.fx .nb{font:500 .85rem var(--mono);min-width:56px;text-align:center;background:var(--surface);border:1px solid var(--ink-2);border-radius:6px;padding:11px 8px}
+.fx .sym{font:italic 500 .95rem var(--mono);color:var(--ink-2)}
+.fx input{flex:1 1 200px;min-width:0;font:500 1rem var(--mono);min-height:44px;border:2px solid var(--ink-2);border-radius:8px;padding:6px 10px;background:var(--surface);color:var(--ink)}
+.fx input:disabled{border-color:var(--lime-ink);background:var(--lime-soft);color:var(--ink)}
+.gw{overflow-x:auto}
+table.grid{border-collapse:collapse;width:100%;min-width:560px;font-size:.95rem}
+.grid th{background:var(--sand-2);font:700 .8rem var(--display);color:var(--ink-2);border:1px solid var(--sand);padding:4px 8px}
+.grid th.rn{width:36px;text-align:center}
+.grid td{border:1px solid var(--sand);padding:0;height:44px}
+.grid td.lab{padding:4px 10px;line-height:1.25}
+.grid td.nm{padding:4px 10px;font-weight:700;color:var(--ink)}
+.grid td.rn{background:var(--sand-2);font:700 .8rem var(--display);color:var(--ink-2);text-align:center}
+.grid .c{display:block;width:100%;height:100%;min-height:44px;text-align:right;padding:6px 10px;border:0;background:transparent;color:var(--ink);font:500 .9rem var(--mono);cursor:default;border-radius:0}
+.grid .c.inp{background:var(--amber-soft)}
+.grid .c.tgt{outline:3px solid var(--lime-ink);outline-offset:-3px;background:var(--lime-soft)}
+.grid .c.neu{animation:neu .9s ease-out}
+.grid .c.sel{outline:3px solid var(--ink);outline-offset:-3px;background:var(--amber-soft)}
+.grid .c.klick{cursor:pointer}
+.grid .c.klick:hover{background:var(--sand-2)}
+.grid .c.klick.inp:hover{background:var(--amber-soft);filter:brightness(.97)}
+.grid input.c{font-family:var(--mono);cursor:text}
+.grid input.c.bad{outline:3px solid var(--amber-ink);outline-offset:-3px}
+@keyframes neu{from{background:#C7F105}to{background:var(--lime-soft)}}
+@media (prefers-reduced-motion:reduce){.grid .c.neu{animation:none}}
+.sub{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.fb{border-radius:12px;padding:10px 14px;max-width:70ch}
+.fb:empty{display:none}
+.fb.ok{background:var(--lime-soft);border:2px solid var(--lime-ink)}
+.fb.no{background:var(--amber-soft);border:2px solid var(--amber-ink)}
+.fb b{font-family:var(--display)}
+.tipps{display:grid;gap:8px}
+.tipps p{background:var(--sand-2);border-radius:10px;padding:8px 12px}
+.tipps .t{font-size:.95rem}
+.sbtn{cursor:pointer;font-size:.95rem}
+.sbtn.go{background:#C7F105;color:#000;border-color:#000}
+.sbtn.hell{background:var(--surface);color:var(--ink);border-color:var(--ink-2)}
+.sbtn[disabled]{opacity:.45;cursor:not-allowed}
+.sbtn.klein{min-height:44px;padding:6px 16px}
+a.sbtn{text-decoration:none}
+.erl.gross{padding:10px 14px;background:var(--sand-2);border-radius:12px;max-width:70ch;align-items:flex-start;line-height:1.3}
+.erl.gross input{margin-top:2px;flex:none}
+.nav{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;border-top:1px solid var(--sand);padding-top:14px}
+fieldset{border:0;margin:0;padding:0;display:grid;gap:8px;min-width:0}
+legend{font-weight:700;padding:0;margin-bottom:6px;max-width:70ch}
+.opt{display:flex;align-items:center;gap:10px;min-height:44px;border:2px solid var(--sand);border-radius:12px;padding:6px 12px;background:var(--surface);cursor:pointer}
+.opt input{width:20px;height:20px;accent-color:#3B4F00;margin:0;flex:none}
+.opt:has(input:checked){border-color:var(--ink)}
+.opt.richtig{border-color:var(--lime-ink);background:var(--lime-soft)}
+.opt.falsch{border-color:var(--amber-ink);background:var(--amber-soft)}
+table.tt{border-collapse:collapse;width:100%;min-width:640px;font-size:.95rem}
+.tt th,.tt td{border:1px solid var(--sand);padding:6px 10px;text-align:left;vertical-align:middle}
+.tt th{background:var(--sand-2);font:700 .85rem var(--display)}
+.tt input{width:9.5em;min-height:44px;font:500 1rem var(--mono);border:2px solid var(--ink-2);border-radius:8px;padding:4px 10px;background:var(--surface);color:var(--ink)}
+.tt input.ok{border-color:var(--lime-ink);background:var(--lime-soft)}
+.tt .msg{display:block;font-size:.9rem;color:var(--ink-2);margin-top:4px;max-width:34ch}
+details{background:var(--sand-2);border-radius:12px;padding:0 14px;max-width:70ch}
+summary{min-height:44px;display:flex;align-items:center;font-weight:700;cursor:pointer}
+details[open]{padding-bottom:12px}
+details ul{margin:4px 0 0;padding-left:1.2em;display:grid;gap:4px}
+.merkzettel{border-collapse:collapse;width:100%;min-width:560px}
+.merkzettel th,.merkzettel td{border:1px solid var(--sand);padding:7px 10px;text-align:left}
+.merkzettel th{background:var(--sand-2);font:700 .85rem var(--display)}
+.merkzettel td:nth-child(2){font-family:var(--mono)}
+@media (max-width:640px){.karte{padding:16px}.nav .sbtn{flex:1 1 auto;justify-content:center}}
+@media print{.chips,.nav,.tipps,.fx,.sub{display:none}}
+</style>
+</head><body>
+<noscript><p style="padding:12px 0"><a href="/arbeitsbereich/">← Arbeitsbereich</a></p></noscript>
+<main>
+  <span class="eyebrow">Arbeitsbereich · Lernfeld 3 · Methodische Vertiefung</span>
+  <h1>Excelkalkulation</h1>
+  <p class="lead">Du baust die Excel-Vorlage so um, dass sich der Bezugspreis von selbst ausrechnet. Du änderst später nur noch fünf Felder: Stückpreis, Menge, Rabatt, Skonto und Lieferkosten.</p>
+  <div class="kurs" id="kurs">
+    <ol class="chips" id="chips" aria-label="Schritte des Kurses"></ol>
+    <section class="karte" id="karte" aria-live="off"><p>Der Kurs braucht JavaScript. Öffne die Seite bitte in einem aktuellen Browser.</p></section>
+  </div>
+</main>
+<footer>Kickloop ist ein erfundenes Modellunternehmen für den Unterricht · © Dnk, Mrg · Hermann-Scheer-Schule</footer>
+<script>
+(function () {
+  "use strict";
+  var KEY = "kickloop:excel-kalkulation";
+  var VORLAGE = "/lf3/dateien/Kickloop_Vorlage_Kalkulationsschema.xlsx";
+
+  /* ---------- Rechenmodell der Vorlage (Spalte B, erstes Angebot) ---------- */
+  var INPUTS = ["B4", "B5", "B7", "B9", "B11"];
+  var ORDER = ["B6", "C7", "B8", "C9", "B10", "B12"];
+  var NAMES = { B4: "Listeneinkaufspreis pro Stück", B5: "Bestellmenge", B6: "Listeneinkaufspreis (Gesamtstückzahl)", B7: "Liefererrabatt in Prozent", C7: "Liefererrabatt in Euro", B8: "Zieleinkaufspreis", B9: "Liefererskonto in Prozent", C9: "Liefererskonto in Euro", B10: "Bareinkaufspreis", B11: "Bezugskosten", B12: "Bezugspreis" };
+  var ROWS = [[3, "Name des Lieferanten:"], [4, "Listeneinkaufspreis pro Stück:"], [5, "Bestellmenge:"], [6, "Listeneinkaufspreis (für die Gesamtstückzahl)"], [7, "- Liefererrabatt"], [8, "= Zieleinkaufspreis"], [9, "- Liefererskonto"], [10, "= Bareinkaufspreis"], [11, "+ Bezugskosten (Transport- und Verpackungskosten)"], [12, "= Bezugspreis"]];
+  function model(v) {
+    var m = { B4: v.p, B5: v.q, B7: v.r, B9: v.s, B11: v.v };
+    m.B6 = m.B4 * m.B5; m.C7 = m.B6 * m.B7; m.B8 = m.B6 - m.C7; m.C9 = m.B8 * m.B9; m.B10 = m.B8 - m.C9; m.B12 = m.B10 + m.B11;
+    return m;
+  }
+  /* Testwerte: SC[0] sieht man im Ausschnitt, alle vier dienen der Prüfung (verschiedene Werte, damit Zufallstreffer ausscheiden) */
+  var SC = [{ p: 12.5, q: 40, r: 0.10, s: 0.02, v: 18 }, { p: 7.8, q: 125, r: 0.15, s: 0.03, v: 42.5 }, { p: 249, q: 6, r: 0.05, s: 0.015, v: 9.9 }, { p: 3.35, q: 480, r: 0.20, s: 0.025, v: 57 }];
+  var TESTS = [
+    { id: "t1", spalte: "B", name: "Lieferant 1", v: { p: 12.5, q: 40, r: 0.10, s: 0.02, v: 18 }, hinweis: "" },
+    { id: "t2", spalte: "D", name: "Lieferant 2", v: { p: 11.9, q: 40, r: 0.05, s: 0.03, v: 25 }, hinweis: "" },
+    { id: "t3", spalte: "F", name: "Lieferant 3", v: { p: 13.2, q: 40, r: 0.15, s: 0, v: 0 }, hinweis: "Kein Skonto und frei Haus: Trage 0 % und 0,00 € ein." },
+    { id: "t4", spalte: "B", name: "Stresstest", v: { p: 12.5, q: 100, r: 0.10, s: 0.02, v: 18 }, hinweis: "Ändere in Spalte B nur die Menge (B5) auf 100. Alles andere bleibt wie bei Lieferant 1." }
+  ];
+
+  /* ---------- Formel-Prüfung: ein kleiner Excel-Rechner ---------- */
+  function runden(x, n) { var f = Math.pow(10, n); return (x < 0 ? -1 : 1) * Math.round(Math.abs(x) * f + 1e-9) / f; }
+  function evalFormel(text, env) {
+    var t = String(text).trim();
+    if (t.charAt(0) !== "=") throw { m: "Eine Formel beginnt in Excel immer mit einem Gleichheitszeichen =." };
+    var s = t.slice(1).replace(/\s+/g, "").replace(/[×·]/g, "*").replace(/÷/g, "/").replace(/[–−]/g, "-").toUpperCase();
+    if (!s) throw { m: "Nach dem = fehlt noch etwas." };
+    if (/\./.test(s)) throw { m: "Dezimalzahlen schreibst du in Excel mit Komma, nicht mit Punkt." };
+    var toks = [], re = /(\d+(?:,\d+)?)|(\$?[A-Z]{1,2}\$?\d+)|([A-ZÄÖÜ]+)(?=\()|([-+*\/^();%])|(.)/g, k;
+    while ((k = re.exec(s))) {
+      if (k[1] !== undefined) toks.push({ t: "n", v: parseFloat(k[1].replace(",", ".")) });
+      else if (k[2]) toks.push({ t: "r", v: k[2].replace(/\$/g, "") });
+      else if (k[3]) toks.push({ t: "f", v: k[3] });
+      else if (k[4]) toks.push({ t: "o", v: k[4] });
+      else throw { m: /[A-ZÄÖÜ]/.test(k[5]) ? "„" + k[5] + "“ ist keine Zelle. Zellen schreibst du mit Spalte und Zeile, zum Beispiel B4." : "Das Zeichen „" + k[5] + "“ passt hier nicht in eine Formel." };
+    }
+    var i = 0, refs = [], nums = [];
+    function eat(v) { var q = toks[i]; if (q && q.t === "o" && q.v === v) { i++; return true; } return false; }
+    function expr() { var a = term(); for (;;) { if (eat("+")) a += term(); else if (eat("-")) a -= term(); else return a; } }
+    function term() { var a = unary(); for (;;) { if (eat("*")) a *= unary(); else if (eat("/")) { var b = unary(); if (b === 0) throw { m: "Durch 0 kann man nicht teilen." }; a /= b; } else return a; } }
+    function unary() { if (eat("-")) return -unary(); if (eat("+")) return unary(); var a = post(); if (eat("^")) a = Math.pow(a, unary()); return a; }
+    function post() { var a = atom(); while (eat("%")) a /= 100; return a; }
+    function atom() {
+      var q = toks[i];
+      if (!q) throw { m: "Die Formel ist unvollständig. Am Ende fehlt noch etwas." };
+      if (q.t === "n") { i++; nums.push(q.v); return q.v; }
+      if (q.t === "r") { i++; refs.push(q.v); if (!(q.v in env)) throw { m: "Die Zelle " + q.v + " gibt es in diesem Ausschnitt nicht." }; return env[q.v]; }
+      if (q.t === "f") {
+        i++; eat("(");
+        var args = [];
+        if (!eat(")")) { do { args.push(expr()); } while (eat(";")); if (!eat(")")) throw { m: "Eine Klammer wird nicht geschlossen." }; }
+        return fn(q.v, args);
+      }
+      if (eat("(")) { var a = expr(); if (!eat(")")) throw { m: "Eine Klammer wird nicht geschlossen." }; return a; }
+      throw { m: "Hier passt „" + q.v + "“ nicht hin. Fehlt vor oder nach diesem Zeichen etwas?" };
+    }
+    function fn(name, a) {
+      if (name === "RUNDEN" || name === "ROUND") { if (a.length !== 2) throw { m: "RUNDEN braucht zwei Angaben, getrennt durch Semikolon: =RUNDEN(Zahl;Stellen)." }; return runden(a[0], a[1]); }
+      if (!a.length) throw { m: name + " braucht Angaben in der Klammer." };
+      if (name === "MIN") return Math.min.apply(null, a);
+      if (name === "MAX") return Math.max.apply(null, a);
+      if (name === "SUMME" || name === "SUM") return a.reduce(function (x, y) { return x + y; }, 0);
+      throw { m: "Die Funktion " + name + " kennt diese Übung nicht. Du brauchst hier nur + − * / und Klammern." };
+    }
+    var v = expr();
+    if (i < toks.length) throw { m: "Bei „" + toks[i].v + "“ stimmt etwas nicht. Fehlt ein Rechenzeichen zwischen zwei Zellen?" };
+    return { v: v, refs: refs, nums: nums };
+  }
+  var FALSCH = {
+    B6: [["=B4+B5", "Gesamtpreis heißt: Preis pro Stück mal Menge, also mit Malzeichen (*), nicht plus."], ["=B4", "Hier fehlt die Menge. Der Gesamtpreis gilt für alle bestellten Stücke."]],
+    C7: [["=B4*B7", "Der Rabatt gilt für den Gesamtpreis (B6), nicht nur für ein Stück (B4)."], ["=B7", "Das ist nur der Prozentsatz. In C7 soll der Rabatt in Euro stehen: Prozentsatz mal Gesamtpreis."], ["=B6*(1-B7)", "Das ist schon der Preis nach dem Rabatt. In C7 steht erst der Rabattbetrag in Euro."], ["=B6/B7", "Hier wird geteilt. Der Rabatt ist ein Teil des Gesamtpreises: mal Prozentsatz."], ["=B6*B7%", "Das %-Zeichen brauchst du nicht. B7 ist schon eine Prozentzelle (10 % ist für Excel die Zahl 0,1). Mit dem Zeichen würde nochmal durch 100 geteilt."]],
+    B8: [["=B6+C7", "Der Rabatt macht den Preis kleiner. Er wird abgezogen, nicht addiert."], ["=C7", "Das ist nur der Rabattbetrag. Der Zieleinkaufspreis ist der Listenpreis minus Rabatt."], ["=B6*B7", "Das ist der Rabattbetrag (wie in C7). Der Zieleinkaufspreis ist der Rest nach dem Abzug."]],
+    C9: [["=B6*B9", "Skonto rechnet man vom Zieleinkaufspreis (B8), nicht vom Listenpreis (B6)."], ["=B4*B9", "Skonto gilt für die ganze Rechnung, nicht für ein einzelnes Stück. Und die Basis ist der Zieleinkaufspreis (B8)."], ["=B9", "Das ist nur der Prozentsatz. In C9 soll der Skonto in Euro stehen."], ["=B8*(1-B9)", "Das ist schon der Preis nach Skonto. In C9 steht erst der Skontobetrag in Euro."]],
+    B10: [["=B8+C9", "Skonto ist ein Nachlass fürs schnelle Zahlen. Er wird abgezogen, nicht addiert."], ["=B6-C9", "Du startest beim Zieleinkaufspreis (B8), nicht beim Listenpreis (B6)."], ["=C9", "Das ist nur der Skontobetrag. Der Bareinkaufspreis ist der Zieleinkaufspreis minus Skonto."]],
+    B12: [["=B10-B11", "Bezugskosten kommen dazu (+). Sie werden nicht abgezogen."], ["=B8+B11", "Die Bezugskosten kommen zum Bareinkaufspreis (B10), nicht zum Zieleinkaufspreis."], ["=B6+B11", "Du startest zu weit oben. Die Bezugskosten kommen zum Bareinkaufspreis (B10)."], ["=B10", "Hier fehlen die Bezugskosten (B11)."]]
+  };
+  function pruefeFormel(addr, text) {
+    var allowed = INPUTS.concat(ORDER.slice(0, ORDER.indexOf(addr)));
+    var res0;
+    try { res0 = evalFormel(text, model(SC[0])); } catch (e) { return { ok: false, msg: e.m || "Diese Formel kann Excel so nicht lesen." }; }
+    if (!res0.refs.length) return { ok: false, msg: "In deiner Formel kommt keine Zelle vor. Eine Formel soll mit Zellen rechnen. Nur dann ändert sich das Ergebnis, wenn du später einen Wert änderst." };
+    if (res0.refs.indexOf(addr) >= 0) return { ok: false, msg: "Zirkelbezug: Die Formel steht in " + addr + " und rechnet mit " + addr + " selbst. Excel würde das nicht lösen können." };
+    for (var j = 0; j < res0.refs.length; j++) if (allowed.indexOf(res0.refs[j]) < 0) return { ok: false, msg: "Die Zelle " + res0.refs[j] + " ist an dieser Stelle noch nicht berechnet. Rechne mit den Zellen weiter oben." };
+    var U = [], ok = true, gerundet = false;
+    SC.forEach(function (sc) {
+      var m = model(sc), r = evalFormel(text, m).v;
+      U.push(r);
+      if (Math.abs(r - m[addr]) > 0.0051) ok = false;
+      else if (Math.abs(r - m[addr]) > 1e-9) gerundet = true;
+    });
+    if (ok) return { ok: true, gerundet: gerundet };
+    var wl = FALSCH[addr] || [];
+    for (var w = 0; w < wl.length; w++) {
+      var gleich = SC.every(function (sc, n) { return Math.abs(evalFormel(wl[w][0], model(sc)).v - U[n]) < 1e-6; });
+      if (gleich) return { ok: false, msg: wl[w][1] };
+    }
+    if (res0.nums.some(function (n) { return [1, 2, 100].indexOf(n) < 0; })) return { ok: false, msg: "In deiner Formel steckt eine feste Zahl. Das klappt nur bei diesen einen Werten. Nimm stattdessen die Zelle, in der die Zahl steht." };
+    return { ok: false, msg: "Mit den Testwerten ergibt deine Formel hier " + fmt(addr, U[0]) + ". Richtig wären " + fmt(addr, model(SC[0])[addr]) + ". Schau, welche Zellen du verknüpft hast." };
+  }
+
+  /* ---------- Zahlen schreiben und lesen (deutsch) ---------- */
+  var EUR = new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR" });
+  function fmt(a, x) {
+    if (a === "B5") return String(Math.round(x * 100) / 100).replace(".", ",");
+    if (a === "B7" || a === "B9") return String(Math.round(x * 10000) / 100).replace(".", ",") + "%";
+    return EUR.format(x);
+  }
+  function zero(a) { return a === "B5" ? EUR.format(0) : a === "B7" || a === "B9" ? "0%" : EUR.format(0); }
+  function parseDE(x) {
+    var s = String(x).replace(/[€\s %]/g, "");
+    if (!s) return NaN;
+    if (/^\d{1,3}(\.\d{3})+(,\d+)?$/.test(s)) s = s.replace(/\./g, "").replace(",", ".");
+    else s = s.replace(",", ".");
+    return /^-?\d*\.?\d+$/.test(s) ? parseFloat(s) : NaN;
+  }
+  function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+
+  /* ---------- Zustand (nur in diesem Browser) ---------- */
+  var ST;
+  function leer() { return { cur: 0, xl: {}, sel: [], selOk: false, formel: {}, draft: {}, hint: {}, mc: {}, tests: {}, testOk: {}, guenstig: false, zusatz: "" }; }
+  function laden() { try { var o = JSON.parse(localStorage.getItem(KEY)); if (o && typeof o === "object") { var s = leer(); for (var k in s) if (o[k] !== undefined) s[k] = o[k]; return s; } } catch (e) {} return leer(); }
+  function sichern() { try { localStorage.setItem(KEY, JSON.stringify(ST)); } catch (e) {} }
+  var LV = null;                       /* eigene Werte im Probierfeld, nicht gespeichert */
+  function lv() { if (!LV) LV = JSON.parse(JSON.stringify(SC[0])); return LV; }
+
+  /* ---------- Bausteine ---------- */
+  function q(s, r) { return (r || document).querySelector(s); }
+  function qa(s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); }
+  function say(html, art) { var f = q("#fb"); if (!f) return; f.className = "fb" + (art ? " " + art : ""); f.innerHTML = html; }
+  function xlBox(i, text) {
+    return '<label class="erl gross"><input type="checkbox" data-xl="' + i + '"' + (ST.xl[i] ? " checked" : "") + '> <span>' + text + '</span></label>';
+  }
+  function legende(extra) { return '<p class="legende"><span class="l-in">gelb = hier trägst du etwas ein</span>' + (extra || "") + "</p>"; }
+
+  /* Der Ausschnitt der Vorlage. opt: target, modus ("wahl", "formel", "live"), wahl (Auswahl) */
+  function sheet(opt) {
+    var modus = opt.modus || "", m = model(modus === "live" ? lv() : SC[0]);
+    var eingabenDa = ST.selOk || modus === "live";
+    var h = '<div class="xl' + (modus === "live" ? " live" : "") + '"><div class="fx">';
+    if (modus === "formel") h += '<span class="nb" aria-label="Zelle">' + opt.target + '</span><span class="sym" aria-hidden="true">fx</span><input id="fin" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Formel für Zelle ' + opt.target + '" placeholder="=" value="' + esc(opt.wert || "") + '"' + (opt.fertig ? " disabled" : "") + '>' + (opt.fertig ? "" : '<button type="button" class="sbtn go" id="pruef">Prüfen</button>');
+    else h += '<span class="nb">' + (modus === "wahl" ? "Auswahl" : modus === "live" ? "Probierfeld" : "Vorlage") + '</span><span class="sym" style="font-style:normal;font-family:var(--body)">' + (modus === "wahl" ? "Tippe alle Zellen an, in die du selbst etwas schreibst." : modus === "live" ? "Ändere die gelben Zellen und schau, was passiert." : "Ausschnitt aus deiner Excel-Vorlage") + "</span>";
+    h += '</div><div class="gw"><table class="grid"><thead><tr><th class="rn"></th><th>A</th><th>B</th><th>C</th></tr></thead><tbody>';
+    ROWS.forEach(function (r) {
+      var n = r[0];
+      h += '<tr><td class="rn">' + n + '</td><td class="lab">' + esc(r[1]) + "</td>";
+      if (n === 3) { h += '<td class="nm" colspan="2">Lupine Lighting Systems GmbH</td></tr>'; return; }
+      var zellen = n === 7 ? ["B7", "C7"] : n === 9 ? ["B9", "C9"] : ["B" + n];
+      zellen.forEach(function (a) {
+        var istIn = INPUTS.indexOf(a) >= 0, cls = "c", txt;
+        if (istIn) txt = eingabenDa ? fmt(a, m[a]) : zero(a); else txt = (modus === "live" || ST.formel[a]) ? fmt(a, m[a]) : zero(a);
+        if (istIn && ST.selOk && modus !== "wahl") cls += " inp";
+        if (modus === "wahl" && opt.wahl.indexOf(a) >= 0) cls += " sel";
+        if (modus === "formel" && a === opt.target) cls += " tgt" + (opt.neu ? " neu" : "");
+        if (modus === "wahl" || modus === "formel") cls += " klick";
+        var span = zellen.length === 1 ? ' colspan="2"' : "";
+        var label = a + ", " + NAMES[a] + ", Wert " + txt;
+        if (modus === "live" && istIn) h += "<td" + span + '><input class="c inp" data-a="' + a + '" inputmode="decimal" aria-label="' + esc(NAMES[a]) + '" value="' + esc(a === "B7" || a === "B9" ? String(Math.round(lv()[a === "B7" ? "r" : "s"] * 10000) / 100).replace(".", ",") + " %" : fmt(a, m[a]).replace(/\s*€/, "")) + '"></td>';
+        else h += "<td" + span + '><button type="button" class="' + cls + '" data-a="' + a + '" aria-label="' + esc(label) + '"' + (modus === "wahl" ? ' aria-pressed="' + (opt.wahl.indexOf(a) >= 0) + '"' : "") + (modus === "wahl" || modus === "formel" ? "" : ' tabindex="-1" aria-disabled="true"') + ">" + esc(txt) + "</button></td>";
+      });
+      h += "</tr>";
+    });
+    return h + "</tbody></table></div></div>";
+  }
+  function liveAktualisieren() {
+    var m = model(lv());
+    qa(".xl.live button.c[data-a]").forEach(function (b) { var a = b.getAttribute("data-a"); if (INPUTS.indexOf(a) < 0) b.textContent = fmt(a, m[a]); });
+  }
+  function liveBinden() {
+    qa("input.c[data-a]").forEach(function (inp) {
+      inp.addEventListener("input", function () {
+        var a = inp.getAttribute("data-a"), x = parseDE(inp.value), key = { B4: "p", B5: "q", B7: "r", B9: "s", B11: "v" }[a];
+        if (isNaN(x) || x < 0) { inp.classList.add("bad"); return; }
+        inp.classList.remove("bad");
+        if (a === "B7" || a === "B9") x = /%/.test(inp.value) || x >= 1 ? x / 100 : x;
+        lv()[key] = x;
+        liveAktualisieren();
+      });
+    });
+  }
+  function einfuegen(a) {
+    var inp = q("#fin"); if (!inp || inp.disabled) return;
+    var s = inp.selectionStart, e = inp.selectionEnd, v = inp.value;
+    if (!v) { v = "="; s = e = 1; }
+    if (s == null) { s = e = v.length; }
+    inp.value = v.slice(0, s) + a + v.slice(e);
+    var p = s + a.length; inp.setSelectionRange(p, p); inp.focus();
+  }
+
+  /* ---------- Schritte ---------- */
+  function formelSchritt(c) {
+    var A = c.addr;
+    return {
+      kurz: c.kurz, titel: c.titel,
+      fertig: function () { return !!(ST.formel[A] && ST.xl[c.idx]); },
+      body: function () {
+        var gel = !!ST.formel[A], n = ST.hint[A] || 0, h = "";
+        h += "<p>" + c.warum + "</p>";
+        if (c.merke) h += '<div class="merke">' + c.merke + "</div>";
+        h += '<div class="rw"><div><b>Rechenweg</b><span>' + c.rechenweg + "</span></div><div><b>Ziel</b><span>Zelle <b style=\"display:inline\">" + A + "</b>: " + esc(NAMES[A]) + "</span></div></div>";
+        h += "<h3>1 · Übe die Formel hier</h3>";
+        h += "<p>Schreibe die Formel in die Leiste oben. Du kannst Zellen auch antippen, dann trägt die Übung die Zelle für dich ein. Mit den Testwerten rechnet die Übung für dich nach.</p>";
+        h += sheet({ modus: "formel", target: A, wert: gel ? ST.formel[A] : (ST.draft[A] || ""), fertig: gel, neu: ST.neu === A });
+        h += legende('<span class="l-tgt">grün = hier steht die Formel</span>');
+        h += '<div id="fb" class="fb" role="status" aria-live="polite"></div>';
+        if (!gel) {
+          h += '<div class="tipps">';
+          for (var i = 0; i < Math.min(n, c.tipps.length); i++) h += '<p class="t"><b>Tipp ' + (i + 1) + ":</b> " + c.tipps[i] + "</p>";
+          h += '<div class="sub">';
+          if (n < c.tipps.length) h += '<button type="button" class="sbtn hell klein" id="tipp">Tipp ' + (n + 1) + " anzeigen</button>";
+          else h += '<button type="button" class="sbtn hell klein" id="loes">Lösung anzeigen</button>';
+          h += "</div></div>";
+        } else {
+          h += "<h3>2 · Jetzt in deiner Excel-Datei</h3>";
+          h += '<div class="excel"><ol>' + c.excel.map(function (x) { return "<li>" + x + "</li>"; }).join("") + "</ol></div>";
+          h += '<p>Kontrolle: Mit den Testwerten muss in Excel in <b>' + A + "</b> der Wert <b>" + fmt(A, model(SC[0])[A]) + "</b> stehen.</p>";
+          if (c.nachher) h += c.nachher();
+          h += xlBox(c.idx, "Ich habe die Formel in meiner Excel-Datei eingetragen und sehe " + fmt(A, model(SC[0])[A]) + ".");
+        }
+        return h;
+      },
+      bind: function () {
+        var inp = q("#fin");
+        if (inp && !inp.disabled) {
+          inp.addEventListener("input", function () { ST.draft[A] = inp.value; });
+          var pr = function () {
+            var r = pruefeFormel(A, inp.value);
+            if (!r.ok) { say("<b>Noch nicht.</b> " + esc(r.msg), "no"); return; }
+            ST.formel[A] = inp.value.trim(); ST.neu = A; delete ST.draft[A]; sichern(); render(true);
+            say("<b>Richtig.</b> " + (r.gerundet ? "Du hast zusätzlich gerundet, das ist auch in Ordnung. " : "") + "Mit den Testwerten steht in " + A + " jetzt " + fmt(A, model(SC[0])[A]) + ".", "ok");
+          };
+          q("#pruef").addEventListener("click", pr);
+          inp.addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); pr(); } });
+          var t = q("#tipp"); if (t) t.addEventListener("click", function () { ST.draft[A] = inp.value; ST.hint[A] = (ST.hint[A] || 0) + 1; sichern(); render(); var f = q("#fin"); if (f) f.focus(); });
+          var l = q("#loes"); if (l) l.addEventListener("click", function () { inp.value = c.loesung; ST.draft[A] = c.loesung; sichern(); say("Die Lösung steht in der Leiste. Drücke <b>Prüfen</b> und überlege, warum sie stimmt.", "no"); q("#pruef").focus(); });
+          qa("button.c.klick").forEach(function (b) {
+            b.addEventListener("mousedown", function (e) { e.preventDefault(); });
+            b.addEventListener("click", function () { einfuegen(b.getAttribute("data-a")); ST.draft[A] = q("#fin").value; });
+          });
+        }
+        if (c.bindExtra) c.bindExtra();
+      }
+    };
+  }
+
+  var STEPS = [];
+
+  /* 1 Vorlage */
+  STEPS.push({
+    kurz: "Vorlage", titel: "Die Vorlage öffnen",
+    fertig: function () { return !!ST.xl[0]; },
+    body: function () {
+      return '<p>In der Vorlage steht überall nur <b>0,00 €</b>. Das ändern wir: Am Ende gibst du fünf Werte ein und Excel rechnet den <b>Bezugspreis</b> von allein aus. Das heißt Kalkulationsschema, und du kennst es schon von der Bezugskalkulation auf Papier.</p>' +
+        '<div class="rw"><div><b>Du änderst später nur</b><span>Stückpreis, Menge, Rabatt, Skonto und Lieferkosten</span></div><div><b>Excel rechnet</b><span>Gesamtpreis, Rabatt, Skonto und am Ende den Bezugspreis</span></div><div><b>Dauer</b><span>etwa 30 bis 40 Minuten</span></div></div>' +
+        '<h3>Lade die Vorlage und öffne sie</h3>' +
+        '<div class="sub"><a class="sbtn go" href="' + VORLAGE + '" download>Excel-Vorlage herunterladen</a></div>' +
+        '<div class="excel"><ol><li>Speichere die Datei sofort in IServ unter „Dateien“. Am nächsten PC ist sie sonst weg.</li><li>Öffne sie mit Excel. Das Tabellenblatt <b>Quantitativer Angebotsvergleich</b> ist das erste.</li><li>Du siehst drei Lieferanten nebeneinander: Spalte B (Lupine Lighting Systems GmbH), Spalte D (TALAMP KG) und Spalte F (Lichthaus Berlin OHG).</li></ol></div>' +
+        '<p>Auf dieser Seite siehst du in einem Kasten immer einen kleinen <b>Ausschnitt</b> der Vorlage. Dort übst du jede Formel, und die Übung prüft sie. Danach trägst du sie in deine echte Datei ein.</p>' +
+        xlBox(0, "Ich habe die Vorlage heruntergeladen, in IServ gespeichert und geöffnet.");
+    },
+    bind: function () {}
+  });
+
+  /* 2 Eingabezellen */
+  STEPS.push({
+    kurz: "Eingaben", titel: "Eingabezellen erkennen",
+    fertig: function () { return !!(ST.selOk && ST.xl[1]); },
+    body: function () {
+      var h = "<p>Bevor du Formeln schreibst, brauchst du einen Plan: <b>Welche Zellen füllst du selbst aus</b> (Eingabe) und <b>welche soll Excel berechnen</b> (Formel)? Eine Eingabezelle bekommt später nie eine Formel.</p>";
+      h += '<div class="merke"><b>Merke:</b> Du änderst nur: Stückpreis, Menge, Rabatt, Skonto und Lieferkosten. Alles andere ergibt sich daraus.</div>';
+      h += "<h3>1 · Tippe die fünf Eingabezellen an</h3>";
+      h += sheet({ modus: "wahl", wahl: ST.sel });
+      h += '<div class="sub"><button type="button" class="sbtn go" id="wahlpr"' + (ST.selOk ? " disabled" : "") + ">Prüfen</button></div>";
+      h += '<div id="fb" class="fb" role="status" aria-live="polite"></div>';
+      if (ST.selOk) {
+        h += "<h3>2 · Jetzt in deiner Excel-Datei</h3>";
+        h += '<div class="excel"><ol>' +
+          "<li>Färbe die fünf Eingabezellen <b>gelb</b>: erste Zelle anklicken, mit gedrückter <kbd>Strg</kbd>-Taste die anderen anklicken, dann <b>Start → Füllfarbe</b>. Dann sieht jeder, wo man etwas ändern darf.</li>" +
+          "<li>Die Bestellmenge (B5) steht in der Vorlage im Euro-Format. Markiere B5 und wähle bei <b>Start → Zahlenformat</b> den Eintrag <b>Zahl</b>. Sonst steht bei 40 Stück „40,00 €“.</li>" +
+          "<li>Trage diese <b>Testwerte</b> in Spalte B ein: Stückpreis (B4) <b>12,50</b> · Menge (B5) <b>40</b> · Rabatt (B7) <b>10%</b> · Skonto (B9) <b>2%</b> · Lieferkosten (B11) <b>18</b></li></ol></div>";
+        h += "<p>Mit diesen Testwerten rechnest du jetzt immer weiter. Am Ende muss <b>459,00 €</b> herauskommen.</p>";
+        h += xlBox(1, "Ich habe die fünf Zellen gelb gefärbt, B5 als Zahl formatiert und die Testwerte eingetragen.");
+      }
+      return h;
+    },
+    bind: function () {
+      qa("button.c.klick").forEach(function (b) {
+        b.addEventListener("click", function () {
+          if (ST.selOk) return;
+          var a = b.getAttribute("data-a"), i = ST.sel.indexOf(a);
+          if (i >= 0) ST.sel.splice(i, 1); else ST.sel.push(a);
+          sichern(); render(); var n = q('button.c[data-a="' + a + '"]'); if (n) n.focus();
+        });
+      });
+      var p = q("#wahlpr");
+      if (p) p.addEventListener("click", function () {
+        var fehlt = INPUTS.filter(function (a) { return ST.sel.indexOf(a) < 0; }), zuviel = ST.sel.filter(function (a) { return INPUTS.indexOf(a) < 0; });
+        if (!fehlt.length && !zuviel.length) { ST.selOk = true; sichern(); render(true); say("<b>Genau.</b> Das sind die fünf Zellen, die du selbst ausfüllst. Alles andere berechnet Excel.", "ok"); return; }
+        var t = "";
+        if (zuviel.length) t += "In " + zuviel.join(", ") + " soll Excel rechnen. Dort steht später eine Formel, also keine Eingabe. ";
+        if (fehlt.length) t += (fehlt.length === 5 ? "Du hast noch nichts ausgewählt. " : "") + "Es " + (fehlt.length > 1 ? "fehlen" : "fehlt") + " noch " + fehlt.length + " Zelle" + (fehlt.length > 1 ? "n" : "") + ". Denke an alles, was im Angebot des Lieferanten steht und sich ändern kann.";
+        say("<b>Noch nicht.</b> " + esc(t), "no");
+      });
+    }
+  });
+
+  /* 3 bis 8 Formeln */
+  STEPS.push(formelSchritt({
+    idx: 2, addr: "B6", kurz: "Gesamtpreis", titel: "Listeneinkaufspreis für die Gesamtstückzahl",
+    warum: "Das Angebot nennt den Preis für <b>ein</b> Stück. Du bestellst aber 40 Stück. Der Gesamtpreis soll sich von selbst ändern, wenn sich Preis oder Menge ändern. Dafür brauchst du eine Formel statt einer festen Zahl.",
+    merke: "<p><b>Merke:</b> Eine Formel beginnt in Excel immer mit <kbd>=</kbd>. Danach kommen Zellen und Rechenzeichen: <kbd>+</kbd> plus, <kbd>-</kbd> minus, <kbd>*</kbd> mal, <kbd>/</kbd> geteilt.</p>",
+    rechenweg: "Listeneinkaufspreis pro Stück × Bestellmenge",
+    tipps: ["Du brauchst zwei Zellen aus den gelben Eingaben: den Preis pro Stück und die Menge.", "Preis pro Stück steht in B4, die Menge in B5. Die beiden werden multipliziert.", "Die Formel hat die Form <code>=Zelle*Zelle</code> mit B4 und B5."],
+    loesung: "=B4*B5",
+    excel: ["Klicke in Zelle <b>B6</b>.", "Tippe <kbd>=</kbd>, klicke dann auf Zelle <b>B4</b> (oder tippe B4).", "Tippe <kbd>*</kbd> und klicke auf Zelle <b>B5</b>.", "Drücke <kbd>Enter</kbd>."]
+  }));
+  STEPS.push(formelSchritt({
+    idx: 3, addr: "C7", kurz: "Rabatt", titel: "Liefererrabatt in Euro",
+    warum: "Der Lieferant gewährt 10 % Rabatt. In Zelle B7 steht der Prozentsatz. In Zelle C7 soll stehen, <b>wie viel Euro</b> das sind.",
+    merke: "<p><b>Merke:</b> 10 % speichert Excel als Zahl 0,1. Deshalb kannst du mit der Prozentzelle direkt malnehmen, ohne durch 100 zu teilen.</p>",
+    rechenweg: "Listeneinkaufspreis (Gesamtstückzahl) × Rabattsatz",
+    tipps: ["Der Rabatt ist ein Teil vom Gesamtpreis, den du eben berechnet hast.", "Nimm den Gesamtpreis (B6) mal den Rabattsatz (B7).", "Die Formel hat die Form <code>=Zelle*Zelle</code> mit B6 und B7."],
+    loesung: "=B6*B7",
+    excel: ["Klicke in Zelle <b>C7</b>.", "Tippe <kbd>=</kbd>, klicke auf <b>B6</b>, tippe <kbd>*</kbd>, klicke auf <b>B7</b>.", "Drücke <kbd>Enter</kbd>."]
+  }));
+  STEPS.push(formelSchritt({
+    idx: 4, addr: "B8", kurz: "Ziel-EK", titel: "Zieleinkaufspreis",
+    warum: "Jetzt ziehst du den Rabatt vom Listenpreis ab. Das Ergebnis ist der Preis, den du bezahlen musst, wenn du das Zahlungsziel ausnutzt.",
+    rechenweg: "Listeneinkaufspreis (Gesamtstückzahl) − Liefererrabatt (Euro)",
+    tipps: ["Der Rabatt macht den Preis kleiner. Welches Rechenzeichen brauchst du?", "Gesamtpreis (B6) minus Rabattbetrag in Euro (C7). Nimm nicht den Prozentsatz aus B7.", "Die Formel hat die Form <code>=Zelle-Zelle</code> mit B6 und C7."],
+    loesung: "=B6-C7",
+    excel: ["Klicke in Zelle <b>B8</b>.", "Tippe <kbd>=</kbd>, klicke auf <b>B6</b>, tippe <kbd>-</kbd>, klicke auf <b>C7</b>.", "Drücke <kbd>Enter</kbd>."]
+  }));
+  STEPS.push(formelSchritt({
+    idx: 5, addr: "C9", kurz: "Skonto", titel: "Liefererskonto in Euro",
+    warum: "Zahlst du schnell, zieht der Lieferant zusätzlich 2 % Skonto ab. Wieder steht der Prozentsatz in B9 und in C9 soll der Betrag in Euro stehen.",
+    merke: "<p><b>Achtung, typischer Fehler:</b> Skonto wird vom <b>Zieleinkaufspreis</b> berechnet, also vom Preis <b>nach</b> dem Rabatt. Nicht vom Listenpreis.</p>",
+    rechenweg: "Zieleinkaufspreis × Skontosatz",
+    tipps: ["Überlege, von welchem Preis der Skonto abgezogen wird. Der Rabatt ist da schon abgezogen.", "Nimm den Zieleinkaufspreis (B8) mal den Skontosatz (B9).", "Die Formel hat die Form <code>=Zelle*Zelle</code> mit B8 und B9."],
+    loesung: "=B8*B9",
+    excel: ["Klicke in Zelle <b>C9</b>.", "Tippe <kbd>=</kbd>, klicke auf <b>B8</b>, tippe <kbd>*</kbd>, klicke auf <b>B9</b>.", "Drücke <kbd>Enter</kbd>."]
+  }));
+  STEPS.push(formelSchritt({
+    idx: 6, addr: "B10", kurz: "Bar-EK", titel: "Bareinkaufspreis",
+    warum: "Vom Zieleinkaufspreis ziehst du jetzt den Skonto ab. Das ist der Betrag, den du bei sofortiger Zahlung auf das Konto des Lieferanten überweist.",
+    rechenweg: "Zieleinkaufspreis − Liefererskonto (Euro)",
+    tipps: ["Das Muster kennst du schon aus dem Zieleinkaufspreis.", "Zieleinkaufspreis (B8) minus Skontobetrag in Euro (C9).", "Die Formel hat die Form <code>=Zelle-Zelle</code> mit B8 und C9."],
+    loesung: "=B8-C9",
+    excel: ["Klicke in Zelle <b>B10</b>.", "Tippe <kbd>=</kbd>, klicke auf <b>B8</b>, tippe <kbd>-</kbd>, klicke auf <b>C9</b>.", "Drücke <kbd>Enter</kbd>."]
+  }));
+  STEPS.push(formelSchritt({
+    idx: 7, addr: "B12", kurz: "Bezugspreis", titel: "Bezugspreis: der Endpreis",
+    warum: "Zum Schluss kommen die Bezugskosten (Transport und Verpackung) dazu. Sie stehen als Eingabe in B11. Das Ergebnis ist der Bezugspreis, mit dem du die Angebote vergleichst.",
+    rechenweg: "Bareinkaufspreis + Bezugskosten",
+    tipps: ["Bezugskosten machen die Ware teurer.", "Bareinkaufspreis (B10) plus Bezugskosten (B11).", "Die Formel hat die Form <code>=Zelle+Zelle</code> mit B10 und B11."],
+    loesung: "=B10+B11",
+    excel: ["Klicke in Zelle <b>B12</b>.", "Tippe <kbd>=</kbd>, klicke auf <b>B10</b>, tippe <kbd>+</kbd>, klicke auf <b>B11</b>.", "Drücke <kbd>Enter</kbd>."],
+    nachher: function () {
+      return '<h3>Probier es aus</h3><p>Das ist der Sinn der Formeln: Ändere im Probierfeld die gelben Zellen, zum Beispiel die Menge auf 100. Alles andere rechnet sich von selbst neu.</p>' + sheet({ modus: "live" });
+    },
+    bindExtra: function () { liveBinden(); }
+  }));
+
+  /* 9 Kopieren */
+  var MC = [
+    { id: "q1", frage: "Du kopierst Zelle B6 (<code>=B4*B5</code>) in Zelle D6. Was steht danach in D6?", opt: [["=B4*B5", "Excel übernimmt die Formel nicht Buchstabe für Buchstabe. Es verschiebt die Zellen mit: ein normaler Bezug wandert mit."], ["=D4*D5", ""], ["=C4*C5", "Fast. Von Spalte B nach D sind es zwei Spalten, nicht eine."], ["=D6*D4", "Der Bezug auf sich selbst wäre ein Zirkelbezug. Excel verschiebt nur die Spalte."]], richtig: 1, erkl: "Die Formel wandert mit: B wird zu D, also <code>=D4*D5</code>. Das nennt man <b>relativen Bezug</b>." },
+    { id: "q2", frage: "Du kopierst den Bereich B4:C12 nach F4. In C7 stand <code>=B6*B7</code>. Was steht danach in G7?", opt: [["=B6*B7", "Dann würde Lieferant 3 mit den Zahlen von Lieferant 1 rechnen."], ["=G6*G7", "Die Formel wandert um vier Spalten, von C nach G. Der Bezug in der Formel wandert genauso: B wird zu F."], ["=F6*F7", ""], ["=E6*E7", "E wäre nur zwei Spalten weiter. Von B nach F sind es vier."]], richtig: 2, erkl: "Alles wandert um vier Spalten: B6 wird zu F6, B7 zu F7. Jeder Lieferant rechnet also mit seinen eigenen Zahlen." }
+  ];
+  STEPS.push({
+    kurz: "Kopieren", titel: "Formeln auf die anderen Lieferanten kopieren",
+    fertig: function () { return !!(ST.mc.q1 && ST.mc.q2 && ST.xl[8]); },
+    body: function () {
+      var h = "<p>Du musst nicht alles dreimal schreiben. Du kopierst den fertigen Block aus Spalte B in die Spalten D und F. Damit das klappt, muss Excel beim Kopieren die Zellen <b>mitverschieben</b>.</p>";
+      h += '<div class="merke"><p><b>Merke:</b> Beim Kopieren wandern normale Zellbezüge mit (relativer Bezug). Wer einen Bezug festhalten will, schreibt <kbd>$</kbd> davor, zum Beispiel <code>$B$4</code>. Hier brauchst du das nicht.</p></div>';
+      h += "<h3>1 · Zwei Fragen zum Kopieren</h3>";
+      MC.forEach(function (m) {
+        var gel = !!ST.mc[m.id];
+        h += '<fieldset data-mc="' + m.id + '"><legend>' + m.frage + "</legend>";
+        m.opt.forEach(function (o, i) { h += '<label class="opt' + (gel && i === m.richtig ? " richtig" : "") + '"><input type="radio" name="' + m.id + '" value="' + i + '"' + (gel ? " disabled" : "") + (gel && i === m.richtig ? " checked" : "") + "> <code>" + esc(o[0]) + "</code></label>"; });
+        h += '<div class="sub">' + (gel ? "" : '<button type="button" class="sbtn go klein" data-pruef="' + m.id + '">Antwort prüfen</button>') + '</div><div class="fb' + (gel ? " ok" : "") + '" id="fb-' + m.id + '" role="status" aria-live="polite">' + (gel ? "<b>Richtig.</b> " + m.erkl : "") + "</div></fieldset>";
+      });
+      if (ST.mc.q1 && ST.mc.q2) {
+        h += "<h3>2 · Jetzt in deiner Excel-Datei</h3>";
+        h += '<div class="excel"><ol><li>Markiere in Spalte B und C die Zellen <b>B4 bis C12</b>.</li><li>Kopiere sie mit <kbd>Strg</kbd> + <kbd>C</kbd>.</li><li>Klicke in Zelle <b>D4</b> und füge mit <kbd>Strg</kbd> + <kbd>V</kbd> ein.</li><li>Klicke in Zelle <b>F4</b> und füge noch einmal mit <kbd>Strg</kbd> + <kbd>V</kbd> ein. Mit <kbd>Esc</kbd> beendest du das Kopieren.</li><li>Klicke in D6, E7 und F12 und schau in der Formelleiste: Stehen dort die Zellen der eigenen Spalte?</li></ol></div>';
+        h += "<p>Beim Kopieren sind auch die Testwerte aus Spalte B mitgekommen. Die überschreibst du im nächsten Schritt.</p>";
+        h += xlBox(8, "Ich habe den Block nach D4 und F4 kopiert und die Formeln in den Spalten D und F kontrolliert.");
+      }
+      return h;
+    },
+    bind: function () {
+      qa("button[data-pruef]").forEach(function (b) {
+        b.addEventListener("click", function () {
+          var id = b.getAttribute("data-pruef"), m = MC.filter(function (x) { return x.id === id; })[0];
+          var sel = q('input[name="' + id + '"]:checked'), fb = q("#fb-" + id);
+          if (!sel) { fb.className = "fb no"; fb.innerHTML = "Wähle zuerst eine Antwort."; return; }
+          var i = parseInt(sel.value, 10);
+          if (i === m.richtig) { ST.mc[id] = true; sichern(); render(true); var f2 = q("#fb-" + id); if (f2) { f2.className = "fb ok"; f2.innerHTML = "<b>Richtig.</b> " + m.erkl; } }
+          else { fb.className = "fb no"; fb.innerHTML = "<b>Noch nicht.</b> " + esc(m.opt[i][1]); }
+        });
+      });
+    }
+  });
+
+  /* 10 Testen */
+  function falschGrund(t, x) {
+    var m = model(t.v), v = t.v, richtig = m.B12, g = [];
+    var ziel = m.B6 - m.B6 * v.r;
+    g.push([m.B6 * (1 - v.r) - m.B6 * v.s + v.v, "Es sieht so aus, als hättest du den Skonto vom Listenpreis (B6) berechnet. Er gehört zum Zieleinkaufspreis (B8). Prüfe C9."]);
+    g.push([m.B10, "Die Bezugskosten fehlen oder sind nicht dazugerechnet. Prüfe B12."]);
+    g.push([m.B10 - v.v, "Die Bezugskosten wurden abgezogen statt dazugerechnet. Prüfe B12."]);
+    g.push([ziel + v.v, "Der Skonto fehlt oder wurde nicht abgezogen. Prüfe B10."]);
+    g.push([m.B6 - m.B6 * v.s + v.v, "Der Rabatt wurde nicht abgezogen. Prüfe B8."]);
+    g.push([m.B6 * (1 - v.r - v.s) + v.v, "Rabatt und Skonto wurden zusammengezählt. Skonto rechnet man erst vom Preis nach dem Rabatt."]);
+    g.push([m.B6 + v.v, "Es sieht aus, als wären Rabatt und Skonto nicht abgezogen worden. Prüfe die Eingaben in B7 und B9."]);
+    if (t.id === "t4") g.unshift([model(TESTS[0].v).B12, "Du hast das Ergebnis von Lieferant 1 bekommen. Hast du die Menge in B5 wirklich auf 100 gesetzt? Steckt in einer Zelle vielleicht eine feste Zahl statt einer Formel?"]);
+    for (var i = 0; i < g.length; i++) if (Math.abs(g[i][0] - x) <= 0.011 && Math.abs(g[i][0] - richtig) > 0.011) return g[i][1];
+    return "Vergleiche deine Eingaben Zelle für Zelle mit der Tabelle. Danach prüfe die Formeln in B6 bis B12 mit einem Klick in die Zelle.";
+  }
+  STEPS.push({
+    kurz: "Testen", titel: "Teste deine Kalkulation",
+    fertig: function () { return TESTS.every(function (t) { return ST.testOk[t.id]; }) && ST.guenstig; },
+    body: function () {
+      var h = "<p>Jetzt prüfst du deine echte Excel-Datei. Trage in die gelben Zellen die Werte aus der Tabelle ein und schreibe auf, welchen <b>Bezugspreis</b> Excel in Zeile 12 anzeigt.</p>";
+      h += '<div class="gw"><table class="tt"><thead><tr><th>Angebot</th><th>Stückpreis</th><th>Menge</th><th>Rabatt</th><th>Skonto</th><th>Lieferkosten</th><th>Dein Bezugspreis (Zeile 12)</th></tr></thead><tbody>';
+      TESTS.forEach(function (t) {
+        var v = t.v, ok = !!ST.testOk[t.id];
+        h += "<tr><td><b>" + t.name + "</b><br>Spalte " + t.spalte + "</td><td>" + EUR.format(v.p) + "</td><td>" + v.q + "</td><td>" + fmt("B7", v.r) + "</td><td>" + fmt("B9", v.s) + "</td><td>" + EUR.format(v.v) + '</td><td><input type="text" inputmode="decimal" data-t="' + t.id + '" aria-label="Bezugspreis ' + t.name + '" value="' + esc(ST.tests[t.id] || "") + '"' + (ok ? ' class="ok" disabled' : "") + '> <button type="button" class="sbtn go klein" data-tp="' + t.id + '"' + (ok ? " disabled" : "") + ">" + (ok ? "✓" : "Prüfen") + '</button><span class="msg" id="m-' + t.id + '" role="status" aria-live="polite">' + (ok ? "Stimmt." : (t.hinweis ? esc(t.hinweis) : "")) + "</span></td></tr>";
+      });
+      h += "</tbody></table></div>";
+      h += "<p>Du kannst Euro und Komma mitschreiben, zum Beispiel <code>463,63 €</code>. Excel zeigt zwei Nachkommastellen an.</p>";
+      h += '<details><summary>Mein Ergebnis weicht ab. Was prüfe ich?</summary><ul><li>Steht der <b>Prozentsatz</b> richtig? 10% oder 10, aber nicht 0,10%.</li><li>Steht in einer Eingabezelle noch ein <b>Text</b> oder ein Leerzeichen? Zahlen stehen rechtsbündig in der Zelle.</li><li>Klicke in B6 bis B12 und schau in die <b>Formelleiste</b>: Steht dort eine Formel oder eine feste Zahl?</li><li>In Spalte D und F: Rechnen die Formeln mit der <b>eigenen</b> Spalte? Prüfe zum Beispiel F9.</li><li>Zeigt Excel <b>#####</b>? Dann ist die Spalte zu schmal. Doppelklick auf die Spaltenkante.</li></ul></details>';
+      var drei = TESTS.slice(0, 3).every(function (t) { return ST.testOk[t.id]; });
+      if (drei) {
+        var m = TESTS.slice(0, 3).map(function (t) { return model(t.v).B12; });
+        h += "<h3>Welches Angebot ist am günstigsten?</h3>";
+        h += '<fieldset><legend>Vergleiche die drei Bezugspreise in Zeile 12.</legend>' + ["Lieferant 1 (Spalte B)", "Lieferant 2 (Spalte D)", "Lieferant 3 (Spalte F)"].map(function (n, i) { return '<label class="opt' + (ST.guenstig && i === 2 ? " richtig" : "") + '"><input type="radio" name="g" value="' + i + '"' + (ST.guenstig ? " disabled" : "") + (ST.guenstig && i === 2 ? " checked" : "") + "> " + n + "</label>"; }).join("") + "</fieldset>";
+        h += '<div class="sub">' + (ST.guenstig ? "" : '<button type="button" class="sbtn go klein" id="gpr">Antwort prüfen</button>') + '</div><div id="fb" class="fb' + (ST.guenstig ? " ok" : "") + '" role="status" aria-live="polite">' + (ST.guenstig ? "<b>Richtig.</b> Lieferant 3 hat den höchsten Listenpreis, ist durch 15 % Rabatt und die kostenlose Lieferung mit " + EUR.format(m[2]) + " aber am günstigsten. Das siehst du nur mit der Kalkulation." : "") + "</div>";
+      }
+      return h;
+    },
+    bind: function () {
+      qa("button[data-tp]").forEach(function (b) {
+        function pr() {
+          var id = b.getAttribute("data-tp"), t = TESTS.filter(function (x) { return x.id === id; })[0], inp = q('input[data-t="' + id + '"]'), msg = q("#m-" + id);
+          var x = parseDE(inp.value);
+          ST.tests[id] = inp.value; sichern();
+          if (isNaN(x)) { msg.textContent = "Schreibe eine Zahl, zum Beispiel 463,63"; return; }
+          var soll = model(t.v).B12;
+          if (Math.abs(x - soll) <= 0.011) { ST.testOk[id] = true; sichern(); render(true); return; }
+          msg.textContent = falschGrund(t, x);
+        }
+        b.addEventListener("click", pr);
+      });
+      qa("input[data-t]").forEach(function (inp) {
+        inp.addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); var b = q('button[data-tp="' + inp.getAttribute("data-t") + '"]'); if (b) b.click(); } });
+        inp.addEventListener("input", function () { ST.tests[inp.getAttribute("data-t")] = inp.value; });
+      });
+      var g = q("#gpr");
+      if (g) g.addEventListener("click", function () {
+        var s = q('input[name="g"]:checked');
+        if (!s) { say("Wähle zuerst eine Antwort.", "no"); return; }
+        if (s.value === "2") { ST.guenstig = true; sichern(); render(true); }
+        else say("<b>Noch nicht.</b> Vergleiche die Bezugspreise in Zeile 12, nicht die Listenpreise in Zeile 4.", "no");
+      });
+    }
+  });
+
+  /* 11 Geschafft */
+  STEPS.push({
+    kurz: "Geschafft", titel: "Geschafft: Deine Kalkulation rechnet von selbst",
+    fertig: function () { return true; },
+    body: function () {
+      var h = "<p>Du hast aus der leeren Vorlage ein <b>Rechenwerkzeug</b> gemacht. Für jedes neue Angebot trägst du nur die gelben Zellen ein, Excel liefert den Bezugspreis. Probiere es hier noch einmal aus:</p>";
+      h += sheet({ modus: "live" }) + legende();
+      h += '<h3>Dein Merkzettel</h3><div class="gw"><table class="merkzettel"><thead><tr><th>Zelle</th><th>Formel</th><th>Das rechnet sie aus</th></tr></thead><tbody>' +
+        [["B6", "=B4*B5", "Listeneinkaufspreis für die Gesamtstückzahl"], ["C7", "=B6*B7", "Liefererrabatt in Euro"], ["B8", "=B6-C7", "Zieleinkaufspreis"], ["C9", "=B8*B9", "Liefererskonto in Euro (vom Zieleinkaufspreis)"], ["B10", "=B8-C9", "Bareinkaufspreis"], ["B12", "=B10+B11", "Bezugspreis"]].map(function (r) { return "<tr><td>" + r[0] + "</td><td>" + r[1] + "</td><td>" + r[2] + "</td></tr>"; }).join("") + "</tbody></table></div>";
+      h += '<details><summary>Zusatz für Schnelle: Das günstigste Angebot automatisch finden</summary><p>Schreibe in Zelle <b>B14</b> eine Formel, die den <b>niedrigsten</b> der drei Bezugspreise (B12, D12, F12) anzeigt. Die Funktion heißt <code>MIN</code>, die Zellen trennst du mit Semikolon.</p>' +
+        '<div class="fx" style="border-radius:10px;margin-top:8px"><span class="nb">B14</span><span class="sym">fx</span><input id="zin" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Formel für Zelle B14" placeholder="=" value="' + esc(ST.zusatz || "") + '"><button type="button" class="sbtn go" id="zpr">Prüfen</button></div><div id="fb" class="fb" role="status" aria-live="polite"></div>' +
+        '<p style="margin-top:8px">Ebenfalls praktisch: <code>=RUNDEN(B8*B9;2)</code> rundet einen Betrag auf Cent. Das lohnt sich bei Skontobeträgen mit vielen Nachkommastellen.</p></details>';
+      h += '<div class="finish"><div><b>Zum Schluss</b><p>Speichere deine Datei in IServ, bevor du gehst. Am nächsten PC ist sonst alles weg.</p></div></div>';
+      h += '<div class="sub"><a class="sbtn go" href="/lf3/angebotsvergleich.html" target="kickloop-arbeitsbereich">Zurück zum Angebotsvergleich</a><button type="button" class="sbtn hell klein" id="reset">Kurs von vorn beginnen</button></div>';
+      return h;
+    },
+    bind: function () {
+      liveBinden();
+      var z = q("#zpr");
+      if (z) z.addEventListener("click", function () {
+        var t = q("#zin").value; ST.zusatz = t; sichern();
+        try {
+          var ok = [[459, 463.634, 448.8], [100, 90, 95], [10, 20, 5], [7, 7, 3]].every(function (s) { var r = evalFormel(t, { B12: s[0], D12: s[1], F12: s[2] }); return Math.abs(r.v - Math.min(s[0], s[1], s[2])) < 1e-9; });
+          if (ok) say("<b>Richtig.</b> <code>MIN</code> sucht den kleinsten Wert. Mit den Testwerten zeigt B14 jetzt " + EUR.format(448.8) + ", das ist Lieferant 3.", "ok");
+          else say("<b>Noch nicht.</b> Die Formel soll mit den drei Bezugspreisen B12, D12 und F12 rechnen und den kleinsten ausgeben, zum Beispiel mit der Funktion MIN.", "no");
+        } catch (e) { say("<b>Noch nicht.</b> " + esc(e.m || "Diese Formel kann Excel so nicht lesen."), "no"); }
+      });
+      var r = q("#reset");
+      if (r) r.addEventListener("click", function () {
+        if (r.getAttribute("data-scharf") !== "1") { r.setAttribute("data-scharf", "1"); r.textContent = "Wirklich? Dein Stand auf diesem Gerät wird gelöscht."; return; }
+        ST = leer(); LV = null; sichern(); render(true);
+      });
+    }
+  });
+
+  /* ---------- Anzeige ---------- */
+  function offen() { for (var i = 0; i < STEPS.length; i++) if (!STEPS[i].fertig()) return i; return STEPS.length - 1; }
+  function chips() {
+    var o = offen(), h = "";
+    STEPS.forEach(function (s, i) {
+      var f = s.fertig() && i < STEPS.length - 1;
+      h += '<li><button type="button" class="chip' + (f ? " done" : "") + '" data-i="' + i + '"' + (i === ST.cur ? ' aria-current="step"' : "") + (i > o ? " disabled" : "") + '><i aria-hidden="true">' + (f ? "✓" : i + 1) + "</i><span>" + s.kurz + (f ? '<span class="sr" style="position:absolute;left:-9999px"> (erledigt)</span>' : "") + "</span></button></li>";
+    });
+    q("#chips").innerHTML = h;
+    qa("#chips .chip").forEach(function (b) { b.addEventListener("click", function () { gehe(parseInt(b.getAttribute("data-i"), 10)); }); });
+    var a = q("#chips .chip[aria-current]"); if (a && a.scrollIntoView) { try { a.scrollIntoView({ inline: "center", block: "nearest" }); } catch (e) {} }
+  }
+  function navHTML() {
+    var i = ST.cur, last = i === STEPS.length - 1;
+    return '<div class="nav"><button type="button" class="sbtn hell" id="zur"' + (i === 0 ? " disabled" : "") + ">← Zurück</button>" + (last ? "" : '<button type="button" class="sbtn go" id="weiter"' + (STEPS[i].fertig() ? "" : " disabled") + ">Weiter →</button>") + "</div>";
+  }
+  function navAktualisieren() {
+    var w = q("#weiter"); if (w) w.disabled = !STEPS[ST.cur].fertig();
+    chips();
+  }
+  function render(bleib) {
+    var i = ST.cur, S = STEPS[i], card = q("#karte");
+    card.innerHTML = '<p class="kn">Schritt ' + (i + 1) + " von " + STEPS.length + '</p><h2 id="kt" tabindex="-1">' + S.titel + "</h2>" + S.body() + navHTML();
+    S.bind();
+    qa("input[data-xl]").forEach(function (c) { c.addEventListener("change", function () { ST.xl[c.getAttribute("data-xl")] = c.checked; sichern(); navAktualisieren(); }); });
+    var z = q("#zur"), w = q("#weiter");
+    if (z) z.addEventListener("click", function () { gehe(ST.cur - 1); });
+    if (w) w.addEventListener("click", function () { gehe(ST.cur + 1); });
+    ST.neu = null;
+    chips(); sichern();
+  }
+  function gehe(i) {
+    if (i < 0 || i >= STEPS.length || i > offen()) return;
+    ST.cur = i; render();
+    var h = q("#kt"); if (h) { h.focus({ preventScroll: true }); try { q("#kurs").scrollIntoView({ block: "start" }); } catch (e) {} }
+  }
+
+  ST = laden();
+  if (ST.cur > offen()) ST.cur = offen();
+  render();
+})();
+</script>
+</body></html>

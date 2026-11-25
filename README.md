@@ -13,7 +13,7 @@ Die Seite besteht aus zwei Welten, die in zwei Browser-Tabs laufen:
 
 Regeln für Links:
 
-- Im Arbeitsbereich öffnet alles im selben Tab: **kein** `target="_blank"`.
+- Im Arbeitsbereich öffnet alles im selben Tab: **kein** `target="_blank"`. Einzige Ausnahme: der Excel-Kurs (siehe Tabelle).
 - Schritte, die auf der Webseite spielen (Shop, Warenkorb, Einkauf …), bekommen `target="kickloop-webseite"` **ohne** `rel="noopener"` und das Schild `<span class="wo shop">` bzw. `<span class="wo portal">`.
 - Von der Webseite in den Arbeitsbereich: `target="kickloop-arbeitsbereich"` (grüner Knopf oben rechts und in der Fußleiste).
 - `assets/arbeitsbereich.js` vergibt die Tab-Namen, setzt die grüne Zeile (`assets/arbeitsbereich.css`) und wechselt den Tab. Jede neue Seite des Arbeitsbereichs bindet beide Dateien im Kopf ein.
@@ -65,6 +65,7 @@ Regeln für Links:
 | `uebungen/lf3-bezugsquellen-anfrage.html` | LF 3: Übungen Bezugsquellen und Anfrage |
 | `uebungen/lf3-trainingsraum-bezugsquellen.html` | LF 3: Trainingsraum Bezugsquellen und Anfrage |
 | `uebungen/lf3-angebotsvergleich.html` | LF 3: Übungen Angebotsvergleich |
+| `uebungen/lf3-excel-kalkulation.html` | LF 3: Methodische Vertiefung „Excelkalkulation“ (seit 25.11.2026), Kachel hinter dem Quiz auf `lf3/angebotsvergleich.html`. Interaktiver Kurs in 11 Schritten: Vorlage `lf3/dateien/Kickloop_Vorlage_Kalkulationsschema.xlsx` laden, Eingabezellen erkennen, dann die sechs Formeln (B6, C7, B8, C9, B10, B12) in einem Excel-Ausschnitt eintippen und prüfen lassen, Kopieren auf Spalte D und F, Testfälle mit der echten Datei, Zusatz `MIN`. Die Prüfung rechnet jede Formel mit vier Testwertsätzen nach, gibt Hinweise zu typischen Fehlern und lässt jede richtige Schreibweise gelten. **Öffnet in einem neuen Tab** (`target="_blank"`) und nimmt dem Arbeitsbereich-Tab den Namen nicht weg: `data-tab="eigen"` im Skript-Tag, Rückweg über `data-zurueck`. Stand im Browser unter `kickloop:excel-kalkulation`. Die Vorlage hat auf Blatt 1 noch die Überschrift „Qualitativer Angebotsvergleich“ (Original, nicht geändert). Lösungsdatei bewusst nicht im Repo. |
 
 Links zum Teilen: `https://kickloop.vercel.app/uebungen/<datei>.html`
 
